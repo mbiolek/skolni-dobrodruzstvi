@@ -1,0 +1,13 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 31
+
+Toto je instalovatelná PWA aplikace pro Android a Windows.
+
+1. Nahrajte CELÝ obsah složky (index.html, sw.js, manifest.webmanifest, ikony) na HTTPS hosting, například GitHub Pages nebo Netlify.
+2. Otevřete HTTPS adresu v Chrome nebo Edge.
+3. V nabídce prohlížeče zvolte Nainstalovat aplikaci / Přidat na plochu.
+4. Pro aktualizaci nahraďte soubory na hostingu novou verzí; aplikace nabídne aktualizaci po kontrole.
+5. Rozpoznávání řeči vyžaduje podporovaný prohlížeč, povolený mikrofon a zpravidla internet.
+
+POZOR: Výsledky a profily se ukládají místně v daném prohlížeči na daném zařízení. Data uložená ve staré aplikaci otevřené přes content:// se automaticky nepřenesou na HTTPS adresu. Instalaci nepoužívejte v anonymním režimu. Neodstraňujte data webu.
+
+Otevření index.html přímo ze složky stále umožní většinu offline funkcí, ale NE automatické aktualizace a spolehlivé hlasové rozpoznávání.
