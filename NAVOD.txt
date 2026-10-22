@@ -1,3 +1,7 @@
-ŠKOLNÍ DOBRODRUŽSTVÍ v37
-Nahraj na GitHub VŠECHNY soubory ze ZIP (včetně 40 obrázků avatarů a splash-chest.webp). Pouhé index.html a sw.js nestačí.
-Po aktualizaci aplikaci zavři a znovu otevři.
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 38
+
+Oprava tří grafických prostředí A/B/C. Nová pozadí a výrazně odlišné karty profilů, předmětů a režimů.
+
+NA GITHUB NAHRAJTE: index.html, sw.js, pozadi-a.webp, pozadi-b.webp, pozadi-c.webp.
+Ostatní soubory jsou shodné s verzí 37 a nemusí se znovu nahrávat.
+Neodinstalovávejte aplikaci ani nemažte data webu: výsledky a profily jsou uložené lokálně.
