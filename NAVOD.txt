@@ -1,7 +1,4 @@
-ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 38
-
-Oprava tří grafických prostředí A/B/C. Nová pozadí a výrazně odlišné karty profilů, předmětů a režimů.
-
-NA GITHUB NAHRAJTE: index.html, sw.js, pozadi-a.webp, pozadi-b.webp, pozadi-c.webp.
-Ostatní soubory jsou shodné s verzí 37 a nemusí se znovu nahrávat.
-Neodinstalovávejte aplikaci ani nemažte data webu: výsledky a profily jsou uložené lokálně.
+Školní dobrodružství v39 – aktualizace grafiky.
+Nahrajte do kořene repozitáře VŠECHNY soubory z balíčku (včetně nových karta-*.webp a ikona-*.webp).
+Nemažte data aplikace ani ji neodinstalovávejte – profily a výsledky se ukládají v telefonu.
+Po aktualizaci otevřete aplikaci znovu a přepněte prostředí A, B a C.
