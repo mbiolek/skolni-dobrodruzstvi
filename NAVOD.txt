@@ -1,0 +1,3 @@
+Školní dobrodružství v40 – oprava skutečného propojení obrázků s HTML.
+Na GitHub nahraj všechny soubory z tohoto balíčku do kořene repozitáře.
+Nemaž data aplikace ani ji neodinstalovávej.

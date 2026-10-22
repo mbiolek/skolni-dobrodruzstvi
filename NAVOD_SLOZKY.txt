@@ -1,0 +1,8 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – PŘEHLEDNÉ SLOŽKY (v41)
+
+Nahrajte kompletní obsah tohoto ZIPu do kořene GitHub repozitáře, se zachováním struktury adresářů.
+Před nasazením si ponechte zálohu verze 40.
+POZOR: staré obrázky v kořeni repozitáře je nutné následně odstranit, jinak zůstanou jako nepotřebné duplicity.
+index.html, manifest.webmanifest a sw.js zůstávají v kořeni.
+Adresáře assets/merlin a assets/mapy jsou připravené pro budoucí rozšíření.
+Upozornění: prázdné adresáře se do ZIP/GitHubu neukládají.
