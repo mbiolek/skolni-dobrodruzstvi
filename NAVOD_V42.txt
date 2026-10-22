@@ -1,0 +1,2 @@
+Verze 42: čtyři prostředí včetně D Tajemná pevnost; tři sloupce předmětů i režimů; menší rozestupy; oprava překrývajícího tlačítka. Zachovány původní funkce a klíče localStorage.
+Nahrajte všechny soubory včetně adresáře assets do kořene repozitáře.
