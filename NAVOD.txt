@@ -1,4 +1,3 @@
-Školní dobrodružství v39 – aktualizace grafiky.
-Nahrajte do kořene repozitáře VŠECHNY soubory z balíčku (včetně nových karta-*.webp a ikona-*.webp).
-Nemažte data aplikace ani ji neodinstalovávejte – profily a výsledky se ukládají v telefonu.
-Po aktualizaci otevřete aplikaci znovu a přepněte prostředí A, B a C.
+Školní dobrodružství v40 – oprava skutečného propojení obrázků s HTML.
+Na GitHub nahraj všechny soubory z tohoto balíčku do kořene repozitáře.
+Nemaž data aplikace ani ji neodinstalovávej.
