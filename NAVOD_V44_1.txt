@@ -1,0 +1,1 @@
+Verze 44.1: úpravy výběru režimů a obnovení poslední obrazovky. Po novém spuštění je vyžadován PIN; při obnovení stejné relace přihlášení zůstává aktivní.
