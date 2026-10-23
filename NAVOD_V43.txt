@@ -1,0 +1,8 @@
+VERZE 43 – OPRAVA ROZLOZENI
+- Oprava fialoveho prekryvu tlacitka Zmenit profil
+- Prepinani prostredi A/B/C/D pod tlacitkem Prostredi
+- Tri kompaktni karty predmetu vedle sebe
+- Zachovana vyuka, profily, PIN a ulozena data v prohlizeci
+
+Nahrajte obsah archivu do korene repozitare skolni-dobrodruzstvi.
+Neodinstalovavejte aplikaci ani nemazte data.
