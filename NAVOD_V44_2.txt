@@ -1,0 +1,1 @@
+Verze 44.2: sjednocení obrazovky Matematika a Angličtina; skutečné ikony, pozadí A/B/C/D a kompaktní karty. Nahrát všechny soubory do GitHub repozitáře (přepsat index.html a sw.js). Data a profily nemažte.
