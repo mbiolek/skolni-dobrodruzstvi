@@ -1,0 +1,7 @@
+Školní dobrodružství v44.7 – oprava ikon a synchronizace
+
+Příčina prázdných ikon: pozdější CSS pravidla s background: ... !important přepsala background-image. Nový styl je na konci hlavičky a vrací každému prostředí jeho šest ikon.
+
+Synchronizace: při přijetí cloudu se uloží kontrolní otisk, automatické načítání je povoleno jen při nezměněných místních datech. Při konfliktu se data automaticky nepřepíší.
+
+Nahraj všechny soubory a podsložky ze ZIP do kořene GitHub repozitáře, zachovej strukturu assets/ikony a assets/pozadi. Neodinstalovávej aplikaci. Před aktualizací ověř zálohu v cloudu.

@@ -3,7 +3,7 @@
 'use strict';
 const CONFIG={apiKey:'AIzaSyDqA_N2hJtOeGmp2e3kktNTHATxfanBmRQ',authDomain:'skolni-dobrodruzstvi.firebaseapp.com',projectId:'skolni-dobrodruzstvi',storageBucket:'skolni-dobrodruzstvi.firebasestorage.app',messagingSenderId:'344403270623',appId:'1:344403270623:web:1a9f09d6cd9144a025026a'};
 const PREFIXES=['matematika-karticky-progress-v3','school-','skolni-'];
-const EXCLUDE=new Set(['skolni-firebase-sync-v443','skolni-firebase-sync-v444']);
+const EXCLUDE=new Set(['skolni-firebase-sync-v443','skolni-firebase-sync-v444','skolni-firebase-sync-v447']);
 const META='skolni-firebase-sync-v444';function meta(){try{return JSON.parse(localStorage.getItem(META)||'{}')}catch{return {}}}function setMeta(m){originalSet.call(localStorage,META,JSON.stringify(m))}let poll=null;let lastDirty=0;
 let auth,db,user=null,enabled=false,timer=null,busy=false,remoteUpdate=false;
 const $=id=>document.getElementById(id);
@@ -20,17 +20,17 @@ async function upload(force=false){if(!user||busy||!navigator.onLine)return;busy
  if(!force&&r&&m.revision!==rr){conflict=true;return}
  revision=rr+1;tx.set(ref,{payload:snapshot,updatedAt:firebase.firestore.FieldValue.serverTimestamp(),revision,schema:2,deviceUpdatedAt:new Date().toISOString()});});
  if(conflict){status('Pozor: Na druhém zařízení jsou nové výsledky. Automatické ukládání pozastaveno, aby se nepřepsaly.');return}
- const next=meta();next.revision=revision;next.initialized=true;next.dirty=fingerprint(data())!==fingerprint(snapshot);setMeta(next);enabled=true;status(next.dirty?'Další změny čekají na uložení.':'Automaticky uloženo do cloudu ✓');
+ const next=meta();next.revision=revision;next.initialized=true;next.baseline=fingerprint(snapshot);next.dirty=fingerprint(data())!==fingerprint(snapshot);setMeta(next);enabled=true;status(next.dirty?'Další změny čekají na uložení.':'Automaticky uloženo do cloudu ✓');
  }catch(e){status('Cloud nedostupný, výsledky zůstávají v zařízení. '+e.message)}finally{busy=false}}
 async function download(manual=false){if(!user||busy||!navigator.onLine)return;busy=true;try{const snap=await doc().get();if(!snap.exists||!snap.data().payload){if(manual)status('Cloudová záloha zatím neexistuje.');return}
  const r=snap.data(),payload=r.payload,local=data(),m=meta();if(typeof payload!=='object'||!meaningful(payload)){status('Cloudová záloha neobsahuje profily.');return}
  if(m.initialized&&m.revision===(r.revision||0)&&!m.dirty)return;
- if(fingerprint(local)===fingerprint(payload)){setMeta({...m,initialized:true,revision:r.revision||0,dirty:false});enabled=true;status('Zařízení jsou synchronizována ✓');return}
- if(!manual&&(m.dirty||(!m.initialized&&meaningful(local)))){status('Na tomto zařízení jsou jiné výsledky. Pro bezpečnost vyber ruční načtení nebo nahrání.');return}
+ if(fingerprint(local)===fingerprint(payload)){setMeta({...m,initialized:true,revision:r.revision||0,baseline:fingerprint(payload),dirty:false});enabled=true;status('Zařízení jsou synchronizována ✓');return}
+ if(!manual&&(m.dirty||(m.baseline&&fingerprint(local)!==m.baseline)||(!m.initialized&&meaningful(local)))){status('Na tomto zařízení jsou jiné výsledky. Pro bezpečnost vyber ruční načtení nebo nahrání.');return}
  if(manual&&meaningful(local)&&!confirm('Cloudová data nahradí výsledky na tomto zařízení. Nejdříve se uloží místní záchranná kopie. Pokračovat?'))return;
  const backupKey='skolni-firebase-sync-v443';originalSet.call(localStorage,backupKey,JSON.stringify({at:new Date().toISOString(),payload:local}));remoteUpdate=true;
  for(const [k,v] of Object.entries(payload)){if(PREFIXES.some(p=>k.startsWith(p))&&typeof v==='string'&&!EXCLUDE.has(k))originalSet.call(localStorage,k,v)}
- setMeta({...m,initialized:true,revision:r.revision||0,dirty:false});remoteUpdate=false;enabled=true;status('Nové výsledky načteny. Obnovuji aplikaci…');setTimeout(()=>location.reload(),1000);
+ setMeta({...m,initialized:true,revision:r.revision||0,baseline:fingerprint(payload),dirty:false});remoteUpdate=false;enabled=true;status('Nové výsledky načteny. Obnovuji aplikaci…');setTimeout(()=>location.reload(),1000);
  }catch(e){remoteUpdate=false;status('Cloud nedostupný, místní data zůstávají zachována. '+e.message)}finally{busy=false}}
 function schedule(){if(!enabled||!user||remoteUpdate)return;clearTimeout(timer);timer=setTimeout(()=>upload(false),4000)}
 function startPoll(){clearInterval(poll);poll=setInterval(()=>{if(user&&!busy&&navigator.onLine){if(meta().dirty)upload(false);else download(false)}},20000)}
@@ -41,9 +41,9 @@ document.body.append(panel);$('cloudLogin').onclick=async()=>{try{await auth.sig
 function init(){createUI();if(!window.firebase||!firebase.initializeApp){status('Firebase knihovna se nenačetla. Zkontroluj připojení k internetu.');return}try{const app=firebase.apps.length?firebase.app():firebase.initializeApp(CONFIG);auth=app.auth();db=app.firestore();auth.onAuthStateChanged(async u=>{user=u;enabled=false;clearInterval(poll);$('cloudLogin').hidden=!!u;$('cloudUpload').hidden=!u;$('cloudDownload').hidden=!u;$('cloudLogout').hidden=!u;
  if(!u){status('Přihlas se rodičovským Google účtem.');return}
  status('Připojuji automatickou synchronizaci…');try{const snap=await doc().get(),m=meta();if(!snap.exists){if(meaningful(data())){enabled=true;await upload(true)}else status('Cloud je prázdný. Nejprve vytvoř profil na telefonu.');}
- else if(!m.initialized){if(fingerprint(data())===fingerprint(snap.data().payload||{})){setMeta({...m,initialized:true,revision:snap.data().revision||0,dirty:false});enabled=true;status('Automatická synchronizace je aktivní ✓')}
+ else if(!m.initialized){if(fingerprint(data())===fingerprint(snap.data().payload||{})){setMeta({...m,initialized:true,revision:snap.data().revision||0,baseline:fingerprint(data()),dirty:false});enabled=true;status('Automatická synchronizace je aktivní ✓')}
  else if(!meaningful(data())){await download(false);enabled=true}else{status('První propojení: vyber ručně, která data zachovat. Potom bude synchronizace automatická.')}}
- else{enabled=true;await download(false);status(meta().dirty?'Místní změny čekají na vyřešení.':'Automatická synchronizace je aktivní ✓');if(meta().dirty&&meta().revision===(snap.data().revision||0))schedule()}
+ else{enabled=true;await download(false);if(meta().dirty)status('Místní změny čekají na vyřešení.');if(meta().dirty&&meta().revision===(snap.data().revision||0))schedule()}
  startPoll();}catch(e){status('Připojení ke cloudu selhalo: '+e.message)}
 })}catch(e){status('Firebase chyba: '+e.message)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
