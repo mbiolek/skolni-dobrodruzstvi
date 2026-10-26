@@ -1,0 +1,8 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 44.4 — AUTOMATICKÁ SYNCHRONIZACE
+
+Na GitHub nahrajte POUZE: index.html, firebase-sync.js a sw.js. Ostatní soubory neměňte.
+Po aktualizaci se přihlaste stejným Google účtem na obou zařízeních.
+Pokud aplikace požádá o první propojení, na telefonu se správnými daty zvolte „Nahrát data“, na notebooku „Načíst data“.
+Pak se data po změnách ukládají automaticky; druhé zařízení kontroluje nová data přibližně každých 20 sekund.
+Při souběžných změnách se přenos bezpečně pozastaví a je potřeba ručně rozhodnout, kterou verzi zachovat. Automatické slučování jednotlivých výsledků tato verze neprovádí.
+Offline výuka zůstává dostupná. Neodinstalovávejte aplikaci a nemažte data prohlížeče.
