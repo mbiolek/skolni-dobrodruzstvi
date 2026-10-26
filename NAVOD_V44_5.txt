@@ -1,0 +1,7 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 44.5
+
+V GitHubu nahraj a přepiš index.html, firebase-sync.js, sw.js a všechny soubory ze složky assets/pozadi a assets/ikony (včetně nových ikon -a, -b, -c, -d). Zachovej stejnou strukturu složek.
+
+Novinky: 4 sady tematicky rámovaných ikon (24 souborů), pozadí převzorkovaná na šířku 2560 px, úprava gesta pro návrat z obrazovky a potlačení obnovy tažením, vyloučení změny tématu ze značky změněných cloudových dat.
+
+UPOZORNĚNÍ: Převzorkování původních malých obrázků není totéž jako nová originální kresba ve 4K. Automatická synchronizace vyžaduje připojení a shodný Google účet. Před aktualizací proveď zálohu.
