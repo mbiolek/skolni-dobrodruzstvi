@@ -1,0 +1,16 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ — verze 44.3 (první bezpečný přenos do Firebase)
+
+1) Firebase Console → Authentication → Settings → Authorized domains:
+   Přidejte mbiolek.github.io, pokud již není uvedena.
+2) Nahrajte do kořene GitHub repozitáře: index.html, sw.js a NOVÝ firebase-sync.js.
+   Ostatní soubory zůstávají beze změny. ZIP nerozbalujte přímo v GitHubu.
+3) Po aktualizaci aplikace v telefonu otevřete rodičovský profil a přihlaste se přes Google.
+4) V TELEFONU s původními profily zvolte „Nahrát data z tohoto zařízení“.
+5) V NOTEBOOKU se přihlaste stejným Google účtem a zvolte „Načíst data z cloudu“.
+6) Následné změny se po prvním nahrání/načtení na daném zařízení odesílají po krátké prodlevě.
+   Příchozí změny na druhém zařízení se zatím načítají ručně tlačítkem „Načíst data z cloudu“.
+
+POZOR: První nahrání proveďte z telefonu. Prázdný notebook nesmí přepsat cloudovou zálohu.
+Načtení zálohy přepíše odpovídající místní údaje; předtím se vytvoří lokální záchranná kopie.
+Nemažte data prohlížeče ani neodinstalovávejte aplikaci před ověřením přenosu.
+Pro přihlášení a synchronizaci je nutný internet. Offline výuka funguje jako dosud.
