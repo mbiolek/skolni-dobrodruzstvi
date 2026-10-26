@@ -1,0 +1,20 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 44.6 (SKUTEČNÉ OBRÁZKY Z assets.zip)
+
+Tato verze vychází z 44.5 a obsahuje skutečné soubory dodané uživatelem.
+
+Mapování prostředí:
+A = hradní styl (fantasy)
+B = příroda
+C = škola
+D = hrad (temný)
+
+Každé prostředí má vlastní pozadí a šest vlastních ikon předmětů.
+Obrázky jsou převedeny do WebP se zachováním původního rozlišení.
+Pozor: původní obrázky 1536 × 1024 se nepřevádějí na falešné 4K.
+
+Nahrání na GitHub: nahraj VŠECHNY soubory a podsložky ZIP do kořene repozitáře,
+se zachováním struktury. V případě konfliktu nahraď stejnojmenné soubory.
+Původní profily a data v prohlížeči nemaž, aplikaci neodinstalovávej.
+Po aktualizaci chvíli vyčkej na aktualizaci service workeru a znovu otevři aplikaci.
+
+Převzaté funkce synchronizace a gest z 44.5 nejsou v této verzi nově testovány.
