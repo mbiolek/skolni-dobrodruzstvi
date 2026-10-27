@@ -1,0 +1,6 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 44.8
+
+Nahrajte všechny soubory a složku assets na GitHub do kořene repozitáře, zachovejte strukturu adresářů.
+Prostředí A = Hrad, B = Příroda, C = Škola. Prostředí D zůstává jako starší varianta.
+Nové grafiky jsou v assets/pozadi/ a assets/ikony/.
+Profily a uložené výsledky se nepřepisují. Aplikaci z telefonu neodinstalovávejte.
