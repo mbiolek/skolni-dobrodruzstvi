@@ -1,0 +1,6 @@
+Školní dobrodružství 45.0 – experimentální rozložení ikon.
+Každá ikona je samostatné klikací tlačítko; pod ní je název, označení XP a symbol odznaku.
+XP a odznaky jsou zatím pouze grafické indikátory, nikoli nově zavedený výpočet odměn.
+Čtyři prostředí: Hrad, Příroda, Škola, Hradní styl.
+Nahrajte celý obsah ZIP do kořene repozitáře včetně assets.
+Neodinstalovávejte aplikaci – místní profily a pokrok by se mohly ztratit.
