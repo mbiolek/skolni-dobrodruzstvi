@@ -1,0 +1,5 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 44.9
+Oprava čtyř prostředí: A Hrad, B Příroda, C Škola, D Hradní styl.
+Opravené CSS pro pozadí a všech 24 ikon, sjednocené rozměry karet, odstranění doslovných znaků \\n.
+Nahrajte veškerý obsah ZIP do kořene GitHub repozitáře včetně assets.
+Aplikaci v telefonu neodinstalovávejte; může obsahovat místně uložené výsledky.
