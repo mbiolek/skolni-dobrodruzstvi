@@ -1,0 +1,3 @@
+Školní dobrodružství 45.3 – oprava svislého rolování, konfliktu gest, čitelnosti přihlášení, správy profilů a duplicitní profilové karty.
+Všechny existující klíče uložených profilů, PINů, XP a výsledků zůstávají beze změny.
+Nahrajte obsah ZIP do kořene repozitáře (nikoli vnořenou složku), potom obnovte PWA.
