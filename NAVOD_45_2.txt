@@ -1,0 +1,1 @@
+Verze 45.2: trvalé přihlášení dětského profilu, rodičovský PIN zachován, gesta návratu, karta profilu a přehled odznaků. Odznaky zatím vycházejí ze souhrnných výsledků profilu, nikoliv z výsledků předmětu. Nahrajte celý obsah ZIP včetně assets na GitHub. Aplikaci neodinstalovávejte.
