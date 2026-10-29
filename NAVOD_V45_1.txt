@@ -1,0 +1,7 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 45.1 – TEST
+Předměty jsou čtvercové klikací obrázky (3×2), bez prázdných karet.
+Čtyři prostředí mají samostatné ikony, všechny cesty jsou v assets/ikony.
+Štítky Made with AI byly odstraněny ořezem horního okraje ikon.
+XP a odznaky jsou zatím jen popisky, nejsou to vymyšlené výsledky.
+Nahrajte celý obsah ZIP včetně složky assets do kořene GitHub repozitáře.
+Neodinstalovávejte aplikaci: výsledky a profily mohou být uložené lokálně.
