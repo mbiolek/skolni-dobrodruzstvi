@@ -1,0 +1,5 @@
+Školní dobrodružství 45.4
+Oprava automatického obnovení přihlášeného profilu po obnovení stránky a návratu z pozadí.
+Zachovává stávající profily, výsledky a grafiku.
+Instalace: rozbalit ZIP do repozitáře, git add ., git commit -m "Aktualizace 45.4", git pull --rebase origin main, git push origin main.
+Neodinstalovávat PWA ani nemazat data webu.
