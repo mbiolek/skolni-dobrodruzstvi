@@ -1,0 +1,6 @@
+Školní dobrodružství v45.6
+- Ošetření systémového gesta Zpět pomocí historie PWA.
+- Diagnostický log v rodičovské správě: export TXT a vymazání.
+- Původní profily a výsledky se nemění.
+- Při instalaci nové verze nemažte data aplikace.
+- Poznámka: chování gest je třeba ověřit na skutečném Androidu.
