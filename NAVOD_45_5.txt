@@ -1,0 +1,1 @@
+Verze 45.5: Přihlášení po novém spuštění vyžaduje PIN; během krátkého přepnutí aplikace zůstává relace zachována. Automatický zámek po 15 minutách (volitelné 5/15/30/60 v rodičovské správě). Návrat na poslední stránku po přihlášení. ZIP rozbalte do kořene repozitáře. Nemažte data aplikace ani localStorage.
