@@ -1,0 +1,5 @@
+Školní dobrodružství 45.7
+Oprava gest Androidu: odstraněno dvojité zpracování dotyku, historie obrazovek včetně nabídky předmětu.
+Rozšířený diagnostický log. Zachovány lokální profily a výsledky.
+Aktualizace: rozbalit ZIP do složky repozitáře, git add -A, git commit, git push.
+Neodinstalovávat aplikaci a nemazat data.
