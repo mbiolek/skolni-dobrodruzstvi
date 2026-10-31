@@ -1,0 +1,17 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 45.9
+
+Základ: kompletní verze 45.8.
+Novinka: funkční Vlastivěda pro 5. třídu (5 témat, výuka, procvičování a testy).
+Výsledky testů se ukládají místně, odděleně od dosavadních dat aplikace.
+Soubor vlastiveda.js musí být nahrán do stejné složky jako index.html.
+
+Aktualizace přes Termux (v adresáři repozitáře):
+unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_45_9.zip -d ~/skolni-github
+cd ~/skolni-github
+git add -A
+git commit -m "Vlastiveda 45.9"
+git push origin main
+
+Nemažte data aplikace ani místní úložiště.
+
+Poznámka: Jedná se o novou výukovou část podle zaslaných fotografií. Neobsahuje ještě interaktivní slepé mapy.
