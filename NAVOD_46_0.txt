@@ -1,0 +1,11 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 46.0
+
+Novinky:
+- Vlastivěda: orientační klikací slepá mapa ČR (kraje, města, pohoří, řeky). Body jsou přibližné, nejde o přesnou kartografickou mapu.
+- Čeština: doplňovací diktát s okamžitou zpětnou vazbou.
+- Zachována diagnostika a stávající data/profily; nová lokální statistika mapy a diktátu.
+- Nová verze cache offline PWA.
+
+Aktualizace: rozbalte obsah ZIP do kořene stávajícího GitHub repozitáře, nahraďte existující soubory, přidejte novinky-46.js, potvrďte změny a odešlete na GitHub. Neodinstalovávejte aplikaci a nemažte data prohlížeče.
+
+Poznámka: gesto Androidu nelze webovou aplikací systémově zablokovat. Navigace je zachována z 45.9, rozšířena o mapu; chování je třeba ověřit na telefonu.
