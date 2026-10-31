@@ -1,0 +1,5 @@
+Školní dobrodružství 45.8
+Oprava historie při výběru Výuka/Procvičování/Test: mezikrok se ukládá před otevřením předmětu.
+Doplněna verze na obrazovce profilů, opětovné vykreslení avatarů po obnovení a diagnostika režimů.
+Android systémové gesto a obnovení tažením dolů mohou záviset na prohlížeči.
+Nevymazávejte data aplikace ani ji neodinstalovávejte.
