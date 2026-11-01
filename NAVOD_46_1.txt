@@ -1,0 +1,13 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 46.1
+
+Změny: sjednocení navigace, průhlednější dlaždice, ikonová nabídka Vlastivědy, reálný podklad krajů z dodané fotografie.
+POZOR: Klikací body mapy jsou stále orientační, nikoli přesné hranice krajů.
+
+Nasazení přes Termux:
+cd ~/skolni-github
+unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_46_1.zip -d .
+git add -A
+git commit -m "Skolni dobrodruzstvi 46.1"
+git push origin main
+
+NEODSTRAŇOVAT data aplikace, localStorage ani profily.
