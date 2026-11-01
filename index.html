@@ -253,7 +253,7 @@ body[data-game-theme="d"] #homeScreen .subject.nature .symbol{background:url("./
 body[data-game-theme="d"] #homeScreen .subject.history .symbol{background:url("./assets/ikony/hradni-styl-history.webp") center/contain no-repeat!important;border-radius:12px!important}
 </style>\n
 <style>html,body{overscroll-behavior-y:contain}</style><style id="v461-theme">
-/* v46.2.1: translucent tile surfaces; text/icons remain opaque */
+/* v46.4: translucent tile surfaces; text/icons remain opaque */
 #homeScreen .subject,#homeScreen .v23-extra-grid .subject,#advSubjectMenu .adv-mode,#subjectHub .hub-card{background-color:rgba(237,247,255,.84)!important;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
 #vlastScreen .app{background:rgba(249,252,255,.86)!important;backdrop-filter:blur(5px)}
 #vlastScreen .vl-units button,#vlastScreen .vl-tabs button,#vlastScreen .vl-next,#vlastScreen .vl-answer,#v46map button{background-color:rgba(233,245,255,.84)!important}
@@ -1061,7 +1061,7 @@ refresh();
 // Replace screenshot-derived icon crops with crisp scalable vector symbols.
 const extra={nature:'<path d="M20 99Q10 27 111 19Q110 102 40 109" fill="#58c977" stroke="#20734c" stroke-width="7"/><path d="M27 113Q58 65 100 36" stroke="#efffbd" stroke-width="7" fill="none"/>',history:'<circle cx="70" cy="70" r="52" fill="#2689d9" stroke="#f4c85a" stroke-width="8"/><path d="M52 26L71 42 67 63 84 76 68 93 47 80 33 52Z" fill="#76d16c"/><path d="M95 66L108 77 94 101 80 91Z" fill="#76d16c"/>',music:'<path d="M65 24L111 14V86Q107 104 89 105Q66 106 69 90Q72 74 93 78V38L65 46V102Q61 120 43 120Q19 120 23 103Q26 87 47 91V33Z" fill="#e9b3ff" stroke="#6436b5" stroke-width="6"/>'};
 for(const [key,shape] of Object.entries(extra)){const el=document.querySelector('#homeScreen .subject.'+key+' .symbol');if(el)el.innerHTML='<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">'+shape+'</svg>'}
-})();</script><script>(function(){const key='skolni-dobrodruzstvi-v28-theme';let theme='b';try{theme=localStorage.getItem(key)||'b'}catch(e){}function apply(t){if(!['a','b','c','d'].includes(t))t='b';document.body.dataset.gameTheme=t;document.querySelectorAll('#themeSwitcher button').forEach(b=>{b.classList.toggle('is-selected',b.dataset.theme===t);b.setAttribute('aria-pressed',String(b.dataset.theme===t))});try{localStorage.setItem(key,t)}catch(e){}}document.querySelectorAll('#themeSwitcher button').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.theme)));apply(theme);const version=document.createElement('span');version.textContent='Verze 46.2';version.style.cssText='position:fixed;bottom:9px;right:10px;z-index:10000;background:#153c88;color:#fff;padding:5px 10px;border:1px solid #fff9;border-radius:18px;font:700 12px system-ui;pointer-events:none';document.body.append(version)})();</script><style id="v29Styles">
+})();</script><script>(function(){const key='skolni-dobrodruzstvi-v28-theme';let theme='b';try{theme=localStorage.getItem(key)||'b'}catch(e){}function apply(t){if(!['a','b','c','d'].includes(t))t='b';document.body.dataset.gameTheme=t;document.querySelectorAll('#themeSwitcher button').forEach(b=>{b.classList.toggle('is-selected',b.dataset.theme===t);b.setAttribute('aria-pressed',String(b.dataset.theme===t))});try{localStorage.setItem(key,t)}catch(e){}}document.querySelectorAll('#themeSwitcher button').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.theme)));apply(theme);const version=document.createElement('span');version.textContent='Verze 46.4';version.style.cssText='position:fixed;bottom:9px;right:10px;z-index:10000;background:#153c88;color:#fff;padding:5px 10px;border:1px solid #fff9;border-radius:18px;font:700 12px system-ui;pointer-events:none';document.body.append(version)})();</script><style id="v29Styles">
 #czechScreen .app,#enExtended .v29-shell{max-width:940px;margin:auto} .v29-panel{background:linear-gradient(150deg,#ffffff,#f0f7ff);border:2px solid #c9e4ff;border-radius:22px;padding:20px;margin:16px auto;box-shadow:0 12px 30px #112d6530;color:#20375e}.v29-panel h2{margin:0 0 12px}.v29-actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}.v29-actions button,.v29-main{border:0;border-radius:14px;padding:12px 16px;font-weight:800;background:#1469d7;color:white;cursor:pointer}.v29-actions button.active{background:#6d35ce}.v29-actions button:disabled{opacity:.5}.v29-word{border:2px solid #b9d5ff;background:white;color:#173c75;padding:9px 12px;border-radius:12px;font-size:18px;cursor:pointer;margin:4px}.v29-word.chosen{background:#fff0ad;border-color:#f1b83b}.v29-word.done{background:#dbf9e7;border-color:#3bbd72}.v29-feedback{padding:14px;border-radius:13px;background:#eaf2ff;min-height:50px;line-height:1.5}.v29-quiz{font-size:21px;line-height:2.3}.v29-stat{font-weight:700;color:#365888}.v29-choice{background:white!important;color:#204b85!important;border:2px solid #b6d7ff!important}.v29-input{font-size:20px;padding:13px;width:100%;border-radius:13px;border:2px solid #bdd3ee;max-width:480px}.v29-hide{display:none!important}#enExtended{display:none}#enExtended.on{display:block}#enExtended .v29-panel{max-width:800px}#enExtended select{font-size:17px;padding:10px;border-radius:10px;max-width:100%;margin:6px}#enExtended .v29-main{margin:6px}#czechScreen .v29-panel{max-width:800px}@media(max-width:600px){.v29-panel{padding:13px;margin:10px}.v29-word{font-size:16px;padding:8px}.v29-actions button{padding:10px}}
 </style>
 <section id="czechScreen" class="screen"><div class="topbar"><span class="brand">📖 Český jazyk</span><button data-home class="homebtn">⌂ Domů</button></div><main class="app"><div class="v29-panel"><h1>📖 Slovní druhy</h1><p>Procvičuj věty podobné pracovnímu listu. U každého slova zjistíš nejen správné číslo, ale i <strong>proč</strong> do daného slovního druhu patří.</p><div class="v29-actions"><button id="czLearn">📚 Vysvětlení 10 druhů</button><button id="czPractice" class="active">✏️ Procvičování</button><button id="czTest">🎯 Test (15 otázek)</button><button id="czNumbers">🔢 Čísla slovních druhů</button><button id="czDictations">📝 Pravopis a diktáty</button></div></div><div class="v29-panel v29-hide" id="czGuide"></div><div class="v29-panel" id="czExercise"><div class="v34-top"><div class="v29-stat" id="czProgress"></div><button id="czSettingsBtn" type="button" aria-label="Nastavení slovních druhů">⚙️ Nastavení</button></div><div id="czSettings" class="v34-settings" hidden><label><input type="radio" name="czMode" value="names" checked> Čísla a názvy slovních druhů</label><label><input type="radio" name="czMode" value="numbers"> Pouze čísla 1–10</label><button id="czHelp" type="button">📚 Přehled 10 slovních druhů</button></div><p>Vyber zvýrazněné slovo nebo klepni na jiné slovo ve větě. Pak urči jeho slovní druh.</p><div id="czSentence" class="v29-quiz"></div><div id="czChoices" class="v29-actions"></div><div id="czFeedback" class="v29-feedback" aria-live="polite">Vyber slovo a jeho slovní druh.</div><div id="czReview" class="v35-review" aria-live="polite">Po vyhodnocení si můžeš kdykoliv klepnout na hotové slovo a přečíst vysvětlení.</div><button id="czContinue" class="v29-main" type="button" hidden>Pokračovat na další slovo →</button><div class="v29-actions"><button id="czNew">Nová věta ↻</button></div></div><div id="czNumbersPanel" class="v29-panel v29-hide"><h2>🔢 Poznej číslo slovního druhu</h2><div class="v36-switch"><button id="v36Learn" type="button">📚 Učení – seřazené</button><button id="v36Practice" type="button" class="active">🎯 Procvičování – promíchané</button></div><div id="czNumQuestion" class="v34-big"></div><div id="czNumChoices" class="v34-numgrid"></div><div id="czNumFeedback" class="v29-feedback" aria-live="polite"></div><div id="czNumProgress" class="v29-stat"></div><button id="czNumNext" class="v29-main">Další otázka</button></div><div id="czDictPanel" class="v29-panel v29-hide"><h2>📝 Pravopis a diktáty</h2><label for="czDictType">Procvičování: </label><select id="czDictType"><option value="iy">I / Y</option><option value="sz">S / Z / VZ</option><option value="eje">Ě / JE / MĚ / MNĚ</option><option value="uu">Ú / Ů</option><option value="mix">Vše dohromady</option></select><div id="czDictQuestion" class="v34-big"></div><div id="czDictChoices" class="v34-numgrid"></div><div id="czDictFeedback" class="v29-feedback" aria-live="polite"></div><div id="czDictProgress" class="v29-stat"></div><button type="button" id="v36DictHelp" class="v36-help">💡 Vysvětlit pravidlo</button><div id="v36DictExplain" class="v36-explain" hidden></div><button id="czDictNext" class="v29-main">Další úloha</button></div></main></section>
@@ -1405,7 +1405,7 @@ home.querySelectorAll('.subject').forEach(tile=>{
 </script>
 <script id="v457-diagnostics-navigation">
 (()=>{'use strict';
-const LOG='school-diagnostics-v456',MAX=300,VERSION='46.2.1';
+const LOG='school-diagnostics-v456',MAX=300,VERSION='46.4';
 function record(type,detail=''){
  try{const arr=JSON.parse(localStorage.getItem(LOG)||'[]');arr.push({time:new Date().toISOString(),type,detail:String(detail).slice(0,350)});if(arr.length>MAX)arr.splice(0,arr.length-MAX);localStorage.setItem(LOG,JSON.stringify(arr))}catch(e){console.warn('Diagnostika:',e)}
 }
@@ -1414,7 +1414,7 @@ const $=id=>document.getElementById(id);
 const menu=$('advSubjectMenu'),gate=$('authGate');
 const current=()=>menu?.classList.contains('on')?'subjectMenu':document.querySelector('.screen.visible')?.id||'homeScreen';
 const activePanel=()=>{
- const ids=['v46map','longLesson','game','summary','enGame','enSummary','diagGame','diagResults','orderGame','orderSummary'];
+ const ids=['map462','v46map','longLesson','game','summary','enGame','enSummary','diagGame','diagResults','orderGame','orderSummary'];
  const root=document.querySelector('.screen.visible');
  return ids.find(id=>{const e=$(id);return e&&root?.contains(e)&&!e.classList.contains('hidden')})||'';
 };
@@ -1445,6 +1445,7 @@ function observe(){
 // The mode handler opens the lesson synchronously and closes the menu in the
 // same JS task. MutationObserver alone cannot see that intermediate state.
 // Capture the menu before the original click handler runs.
+document.querySelectorAll('#subjectHub [data-hub-mode]').forEach(button=>button.addEventListener('click',()=>{const hub=$('subjectHub');activeLearningMode={subject:hub?.dataset.subject==='english'?'Angličtina':'Matematika',mode:button.dataset.hubMode};},true));
 document.querySelectorAll('#advSubjectMenu [data-adv-mode]').forEach(button=>{
  button.addEventListener('click',()=>{
   observe();
@@ -1463,10 +1464,10 @@ window.addEventListener('pagehide',()=>record('pagehide',stackInfo()));
 window.addEventListener('pageshow',e=>record('pageshow',e.persisted?'bfcache':'normal')); 
 document.addEventListener('visibilitychange',()=>record(document.hidden?'background':'foreground',stackInfo()));
 const authBox=gate?.querySelector('.authbox');
-if(authBox){const versionLabel=document.createElement('div');versionLabel.id='schoolVersionAtLogin';versionLabel.textContent='Školní dobrodružství · verze 46.2.1';versionLabel.style.cssText='margin:14px auto 0;padding:7px 12px;width:max-content;max-width:100%;border-radius:20px;background:#153c88;color:white;font:700 12px system-ui;position:relative;z-index:2';authBox.append(versionLabel)}
+if(authBox){const versionLabel=document.createElement('div');versionLabel.id='schoolVersionAtLogin';versionLabel.textContent='Školní dobrodružství · verze 46.4';versionLabel.style.cssText='margin:14px auto 0;padding:7px 12px;width:max-content;max-width:100%;border-radius:20px;background:#153c88;color:white;font:700 12px system-ui;position:relative;z-index:2';authBox.append(versionLabel)}
 const admin=$('authAdmin');
 if(admin){const box=document.createElement('section');box.className='authitem';box.innerHTML='<strong>🛠 Diagnostika aplikace · 46.0</strong><p>Zaznamenává navigaci a chyby pouze na tomto zařízení. PINy se neukládají do logu.</p><button type="button" id="diag456Export">Exportovat diagnostiku</button> <button type="button" id="diag456Clear">Smazat log</button><p id="diag456Message" aria-live="polite"></p>';admin.append(box);
- $('diag456Export').onclick=()=>{record('export','user requested');const rows=JSON.parse(localStorage.getItem(LOG)||'[]');const body=['Školní dobrodružství · diagnostika v46.2.1','Export: '+new Date().toISOString(),'User agent: '+navigator.userAgent,'',...rows.map(x=>x.time+' | '+x.type+' | '+x.detail)].join('\n');const blob=new Blob([body],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Skolni_dobrodruzstvi_LOG_'+new Date().toISOString().slice(0,10)+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);$('diag456Message').textContent='Soubor diagnostiky je připraven.'};
+ $('diag456Export').onclick=()=>{record('export','user requested');const rows=JSON.parse(localStorage.getItem(LOG)||'[]');const body=['Školní dobrodružství · diagnostika v46.4','Export: '+new Date().toISOString(),'User agent: '+navigator.userAgent,'',...rows.map(x=>x.time+' | '+x.type+' | '+x.detail)].join('\n');const blob=new Blob([body],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Skolni_dobrodruzstvi_LOG_'+new Date().toISOString().slice(0,10)+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);$('diag456Message').textContent='Soubor diagnostiky je připraven.'};
  $('diag456Clear').onclick=()=>{localStorage.removeItem(LOG);record('log-cleared');$('diag456Message').textContent='Diagnostický záznam byl smazán.'};
 }
 const marker='school-v457-guard';
@@ -1478,14 +1479,14 @@ function restore(target){
  try{
   if(target.screen==='subjectMenu'){
    document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('visible',el.id==='homeScreen'));
-   if(document.getElementById('subjectHub')?.classList.contains('open')){document.getElementById('subjectHub').classList.add('open')}else menu?.classList.add('on');if(target.subject){const title=$('advMenuTitle');if(title)title.textContent=target.subject;}document.body.style.overflow='hidden';
+   if(target.subject?.includes('Matematika')||target.subject?.includes('Angličtina')){document.getElementById('subjectHub')?.classList.add('open')}else menu?.classList.add('on');if(target.subject){const title=$('advMenuTitle');if(title)title.textContent=target.subject;}document.body.style.overflow='hidden';
   }else{
    menu?.classList.remove('on');document.getElementById('subjectHub')?.classList.remove('open');document.body.style.overflow='';
    document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('visible',el.id===target.screen));
   }
   if(target.panel){
    const groups=[['setup','game','summary','longLesson'],['enSetup','enGame','enSummary'],['diagSetup','diagGame','diagResults'],['orderSetup','orderGame','orderSummary']];
-   if(target.panel==='v46map'){const map=$('v46map');if(map){map.hidden=false;const units=$('vlUnits');if(units)units.hidden=true;const work=$('vlWork');if(work)work.hidden=true;}}else if($('v46map'))$('v46map').hidden=true;const group=groups.find(g=>g.includes(target.panel));if(group)group.forEach(id=>$(id)?.classList.toggle('hidden',id!==target.panel));
+   if(target.panel==='map462'){const map=$('map462');if(map){map.hidden=false;$('vlUnits').hidden=true;$('vlWork').hidden=true;}}else if(target.panel==='v46map'){const map=$('v46map');if(map){map.hidden=false;const units=$('vlUnits');if(units)units.hidden=true;const work=$('vlWork');if(work)work.hidden=true;}}else if($('v46map'))$('v46map').hidden=true;const group=groups.find(g=>g.includes(target.panel));if(group)group.forEach(id=>$(id)?.classList.toggle('hidden',id!==target.panel));
   }
   window.scrollTo(0,0);
  }finally{queueMicrotask(()=>{restoring=false})}
@@ -1494,9 +1495,9 @@ function goBack(source){
  observe();
  // A mode (especially Matematika > Výuka) must return to its subject's
  // Výuka/Procvičování/Test selector, not directly to all subjects.
- if(activeLearningMode && !menu?.classList.contains('on') &&
+ if((activeLearningMode || ['mathScreen','englishScreen'].includes(current())) && !menu?.classList.contains('on') &&
     ['mathScreen','englishScreen','diagScreen','orderScreen'].includes(current())){
-  const subject=activeLearningMode.subject;activeLearningMode=null;
+  const subject=activeLearningMode?.subject || (current()==='mathScreen'?'Matematika':'Angličtina');activeLearningMode=null;
   stack=[{screen:'homeScreen',panel:'',subject:''},{screen:'subjectMenu',panel:'',subject}];
   restore(stack[1]);record('back',source+' | learning mode -> '+subject+' menu');return;
  }
@@ -1524,7 +1525,7 @@ window.addEventListener('popstate',()=>{
 // the mutation observer recognizes the transition without a second Back action.
 })();
 </script>
-<script src="./vlastiveda.js"></script><script src="./novinky-46.js"></script><script src="./mapy-46-2.js"></script></body></html><style id="v25-style">
+<style id="v463-navigation">#vlastScreen [hidden]{display:none!important}#vlastScreen .vl-units button{background:rgba(233,246,255,.79)!important}#map462 .map462board{min-width:0!important}#map462 .map462board>svg{pointer-events:auto}</style><script src="./vlastiveda.js"></script><script src="./novinky-46.js"></script><script src="./mapy-46-2.js"></script></body></html><style id="v25-style">
 /* Restore icons in all six subjects, avoiding invalid image variable fallbacks. */
 #homeScreen .subject .symbol{background:linear-gradient(145deg,#ffffffed,#ffffff69)!important;border-radius:23px!important;box-shadow:inset 0 2px 5px #fff,0 5px 12px #163b6b35!important;font-size:49px!important;display:grid!important;place-items:center!important;line-height:1!important;filter:none!important}
 #homeScreen .subject .symbol svg{display:none!important}
