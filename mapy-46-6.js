@@ -1,4 +1,4 @@
-/* 46.6 – pinch zoom, pan and accessible map controls; extends existing 46.2 map */
+/* 46.7 – pinch zoom, pan and accessible map controls; extends existing 46.2 map */
 (()=>{'use strict';
 const css=document.createElement('style');css.textContent=`
 #map462 .map466-viewport{overflow:hidden;position:relative;touch-action:none;overscroll-behavior:contain;border-radius:14px;background:#e5f1fa;min-height:180px}
@@ -23,7 +23,7 @@ for(const container of containers){
  container.before(controls);
  let scale=1,x=0,y=0;const pointers=new Map();let startDist=0,startScale=1,startX=0,startY=0,startMid={x:0,y:0},moved=false;
  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
- const bounds=()=>({w:container.clientWidth,h:layer.getBoundingClientRect().height/scale||container.clientWidth*.6});
+ const bounds=()=>{const w=container.clientWidth||320;const img=layer.querySelector('img');const ratio=img?.naturalWidth&&img?.naturalHeight?img.naturalHeight/img.naturalWidth:618/1050;return {w,h:Math.max(150,w*ratio)};};
  function render(){const b=bounds();x=clamp(x,Math.min(0,b.w-b.w*scale),0);y=clamp(y,Math.min(0,b.h-b.h*scale),0);layer.style.transform=`translate(${x}px,${y}px) scale(${scale})`;container.style.height=(b.h||250)+'px';controls.querySelector('.map466-scale').textContent=Math.round(scale*100)+' %'}
  function zoom(next,atX=container.clientWidth/2,atY=container.clientHeight/2){const old=scale;scale=clamp(next,1,5);x=atX-(atX-x)*scale/old;y=atY-(atY-y)*scale/old;render()}
  controls.children[0].onclick=()=>zoom(scale*1.4);controls.children[2].onclick=()=>zoom(scale/1.4);controls.children[3].onclick=()=>{scale=1;x=y=0;render()};
@@ -33,13 +33,13 @@ for(const container of containers){
  const end=e=>{pointers.delete(e.pointerId);if(pointers.size===1){const p=[...pointers.values()][0];startX=x;startY=y;startMid=p}if(!pointers.size)startDist=0};container.addEventListener('pointerup',end);container.addEventListener('pointercancel',end);
  container.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
  container.addEventListener('wheel',e=>{if(e.ctrlKey){e.preventDefault();const p=pos(e);zoom(scale*(e.deltaY>0?.9:1.1),p.x,p.y)}},{passive:false});
- const observer=new ResizeObserver(()=>render());observer.observe(container);const img=layer.querySelector('img');if(img){img.addEventListener('load',render);img.draggable=false}render();
+ const observer=new ResizeObserver(()=>{if(container.clientWidth>0)requestAnimationFrame(render)});observer.observe(panel);const img=layer.querySelector('img');if(img){img.addEventListener('load',render);img.draggable=false}const showObserver=new MutationObserver(()=>{if(!container.hidden&&!panel.hidden)requestAnimationFrame(render)});showObserver.observe(container,{attributes:true,attributeFilter:['hidden']});showObserver.observe(panel,{attributes:true,attributeFilter:['hidden']});render();
  }
  // Practice with the supplied regional map, rather than a fictional relief for regions.
  const regions=document.getElementById('map462regions');if(regions){regions.setAttribute('opacity','0');}
  const toggle=panel.querySelector('#map464toggle');if(toggle)toggle.addEventListener('click',()=>setTimeout(()=>window.dispatchEvent(new Event('resize')),0));
  // Diagnostic marker without personal information.
- try{const key='school-diagnostics-v456',logs=JSON.parse(localStorage.getItem(key)||'[]');logs.push({time:new Date().toISOString(),type:'map-46.6',detail:'interactive zoom initialized'});localStorage.setItem(key,JSON.stringify(logs.slice(-300)))}catch(e){}
+ try{const key='school-diagnostics-v456',logs=JSON.parse(localStorage.getItem(key)||'[]');logs.push({time:new Date().toISOString(),type:'map-46.7',detail:'interactive zoom initialized'});localStorage.setItem(key,JSON.stringify(logs.slice(-300)))}catch(e){}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,50));else setTimeout(init,50);
 })();
