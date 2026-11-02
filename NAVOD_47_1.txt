@@ -1,0 +1,5 @@
+Verze 47.1 – oprava bílé obrazovky map.
+Příčina: konflikt globální CSS třídy .bar s lištou map.
+Oprava: v atlasu explicitně nastaveny width:100%, height:auto, min-height:0.
+Aktualizována verze a cache service workeru.
+Původní data profilů a výsledky zůstávají v úložišti prohlížeče.
