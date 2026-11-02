@@ -1,0 +1,14 @@
+Školní dobrodružství 47.0 – atlas na celou obrazovku
+
+Vlastivěda → Interaktivní mapy → Otevřít mapy.
+Mapa vyplní dostupnou obrazovku na výšku i na šířku, bez zbytečných karet.
+Ovládání: klepnutí na mapu, posun, + / −, obnovení a Zavřít.
+Otočení telefonu respektuje nastavení automatického otáčení v Androidu.
+Ostatní data a postup dětí nejsou měněny.
+
+Instalace z Termuxu:
+cd ~/skolni-github
+unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_47_0_MAPY_CELA_OBRAZOVKA.zip
+git add -A
+git commit -m "Verze 47.0 - mapy pres celou obrazovku"
+git push origin main
