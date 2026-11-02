@@ -1,0 +1,5 @@
+Školní dobrodružství 48.0 – první etapa přepracování Vlastivědy.
+Nové karty zeměpisu a výuka/slepá mapa/test přímo v SVG mapách.
+Zatím používá původní geografické SVG podklady, nové kartografické podklady nejsou součástí této etapy.
+Původní ostatní předměty a místní data profilů zůstávají zachována.
+Po nahrání na GitHub obnovte stránku a nechte aktualizovat offline cache.
