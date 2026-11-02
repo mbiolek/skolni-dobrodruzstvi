@@ -1,0 +1,13 @@
+VERZE 46.8 – INTERAKTIVNÍ VEKTOROVÉ MAPY ČR
+
+Ve Vlastivědě je nově atlas se čtyřmi vektorovými mapami (pohoří, řeky, barevné kraje, zlaté kraje).
+Mapy jsou lokální a zahrnuté v offline cache. Přibližování a procvičování jsou součástí map.
+
+INSTALACE V TERMUXU:
+cd ~/skolni-github
+unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_46_8_VEKTOROVE_MAPY.zip -d .
+git add -A
+git commit -m "Verze 46.8 - vektorove mapy Vlastiveda"
+git push origin main
+
+Nemazat data aplikace ani localStorage; profily a výsledky zůstanou zachované.
