@@ -1,0 +1,1 @@
+Školní dobrodružství 49.3 – jedna mapa pohoří (17 oblastí), mapa 24 řek s modrou/zelenou/červenou. Pozor: průběh řek je orientační, ručně trasovaný podle dodané mapy, nikoli GIS ověřený. Instalace: unzip -o archiv.zip; git add -A; git commit -m "Verze 49.3"; git push origin main.
