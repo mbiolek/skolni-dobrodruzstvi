@@ -1,0 +1,8 @@
+Školní dobrodružství 50.1
+
+Nový samostatný modul Učivo podle učebnic 5. třídy.
+Matematika, čeština, angličtina (Project 1), přírodověda, vlastivěda: dějiny a zeměpis.
+Výuka s vysvětlením, procvičování, testy po 10 otázkách, lokální historie výsledků.
+Původní hry, mapy a opravy 50.0.2 zachovány.
+Učivo je autorské a vychází z vyfocených názvů kapitol, nikoliv z doslovného přepisu učebnic.
+Poznámka: otázky jsou úvodní sadou, nikoliv úplnou náhradou školní výuky.

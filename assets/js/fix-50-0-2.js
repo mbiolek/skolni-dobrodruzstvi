@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const VERSION='50.0.2', KEY='skolni-dobrodruzstvi-v37-avatar', PROFILE='matematika-karticky-progress-v3-profiles';
+const VERSION='50.1', KEY='skolni-dobrodruzstvi-v37-avatar', PROFILE='matematika-karticky-progress-v3-profiles';
 const get=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
 const profiles=()=>{try{return JSON.parse(localStorage.getItem(PROFILE)||'{}')}catch{return {}}};
 const image=i=>`./assets/avatari/avatar-${Math.floor(i/8)+1}-${i%8+1}.webp`;
