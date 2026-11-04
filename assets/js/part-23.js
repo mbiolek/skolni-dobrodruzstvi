@@ -1,6 +1,6 @@
 
 (()=>{'use strict';
-const LOG='school-diagnostics-v456',MAX=300,VERSION='49.8.1';
+const LOG='school-diagnostics-v456',MAX=300,VERSION='50.0.1';
 function record(type,detail=''){
  try{const arr=JSON.parse(localStorage.getItem(LOG)||'[]');arr.push({time:new Date().toISOString(),type,detail:String(detail).slice(0,350)});if(arr.length>MAX)arr.splice(0,arr.length-MAX);localStorage.setItem(LOG,JSON.stringify(arr))}catch(e){console.warn('Diagnostika:',e)}
 }
@@ -59,7 +59,7 @@ window.addEventListener('pagehide',()=>record('pagehide',stackInfo()));
 window.addEventListener('pageshow',e=>record('pageshow',e.persisted?'bfcache':'normal')); 
 document.addEventListener('visibilitychange',()=>record(document.hidden?'background':'foreground',stackInfo()));
 const authBox=gate?.querySelector('.authbox');
-if(authBox){const versionLabel=document.createElement('div');versionLabel.id='schoolVersionAtLogin';versionLabel.textContent='Školní dobrodružství · verze 49.8.1';versionLabel.style.cssText='margin:14px auto 0;padding:7px 12px;width:max-content;max-width:100%;border-radius:20px;background:#153c88;color:white;font:700 12px system-ui;position:relative;z-index:2';authBox.append(versionLabel)}
+if(authBox){const versionLabel=document.createElement('div');versionLabel.id='schoolVersionAtLogin';versionLabel.textContent='Školní dobrodružství · verze 50.0.1';versionLabel.style.cssText='margin:14px auto 0;padding:7px 12px;width:max-content;max-width:100%;border-radius:20px;background:#153c88;color:white;font:700 12px system-ui;position:relative;z-index:2';authBox.append(versionLabel)}
 const admin=$('authAdmin');
 if(admin){const box=document.createElement('section');box.className='authitem';box.innerHTML='<strong>🛠 Diagnostika aplikace · 46.7</strong><p>Zaznamenává navigaci a chyby pouze na tomto zařízení. PINy se neukládají do logu.</p><button type="button" id="diag456Export">Exportovat diagnostiku</button> <button type="button" id="diag456Clear">Smazat log</button><p id="diag456Message" aria-live="polite"></p>';admin.append(box);
  $('diag456Export').onclick=()=>{record('export','user requested');const rows=JSON.parse(localStorage.getItem(LOG)||'[]');const body=['Školní dobrodružství · diagnostika v46.7','Export: '+new Date().toISOString(),'User agent: '+navigator.userAgent,'',...rows.map(x=>x.time+' | '+x.type+' | '+x.detail)].join('\n');const blob=new Blob([body],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Skolni_dobrodruzstvi_LOG_'+new Date().toISOString().slice(0,10)+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);$('diag456Message').textContent='Soubor diagnostiky je připraven.'};
