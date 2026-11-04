@@ -1,0 +1,6 @@
+
+#v30panel{background:linear-gradient(135deg,#e6f6ff,#f1e9ff);border:3px solid #9bcaff;border-radius:23px;padding:17px;margin:16px 0;color:#183967;box-shadow:0 8px 18px #244d8320}
+#v30panel h2{margin:0 0 7px;font-size:23px}#v30panel p{line-height:1.5}
+#v30panel select,#v30panel input{width:100%;padding:13px;border:2px solid #a7cbe9;border-radius:13px;background:white;color:#183967;font-size:17px;margin:7px 0}
+.v30buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.v30buttons button{background:#167bd0;color:white;border:0;border-radius:13px;padding:13px 6px;font-weight:800;font-size:15px}.v30buttons button:disabled{opacity:.55}.v30card{background:white;border-radius:17px;text-align:center;padding:18px 10px;margin:12px 0;border:2px solid #c6e2fa}.v30big{font-size:clamp(32px,8vw,54px);font-weight:950;letter-spacing:2px;overflow-wrap:anywhere}.v30result{min-height:48px;font-weight:750;line-height:1.5;margin:9px 0}.v30muted{font-size:13px;color:#506b84}#v30speechText{font-size:15px;color:#355b7e;min-height:25px}
+

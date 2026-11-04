@@ -1,0 +1,19 @@
+
+/* Volné svislé rolování v Android Chrome / instalované PWA. */
+html{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior-y:auto!important;-webkit-overflow-scrolling:touch}
+body{height:auto!important;min-height:100dvh!important;overflow-x:hidden!important;overflow-y:visible!important;touch-action:pan-y pinch-zoom!important;overscroll-behavior-y:auto!important}
+body .app,body .screen,body #homeScreen{height:auto!important;max-height:none!important;overflow-y:visible!important;touch-action:pan-y!important}
+/* Přihlašovací brána je vlastní scrollovací vrstva. */
+#authGate:not(.off){position:fixed!important;inset:0!important;height:100dvh!important;max-height:100dvh!important;overflow-x:hidden!important;overflow-y:auto!important;touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior-y:contain!important}
+#authGate .authbox{height:auto!important;max-height:none!important;overflow:visible!important}
+#authGate .authbox h2,#authGate .authbox label,#authGate .authbox p,#authGate #authPinTitle,#authGate #authPinHelp{color:#f8faff!important;text-shadow:0 1px 2px #0009!important}
+#authGate input{color:#142c50!important;text-shadow:none!important}
+/* Správa profilů se musí účastnit běžného toku dokumentu. */
+#authAdmin.authAdmin.on{position:relative!important;inset:auto!important;z-index:1!important;max-height:none!important;overflow:visible!important;background:rgba(255,255,255,.96)!important;color:#173457!important}
+#authAdmin.authAdmin.on h2,#authAdmin.authAdmin.on p,#authAdmin.authAdmin.on strong,#authAdmin.authAdmin.on label{color:#173457!important;text-shadow:none!important}
+#authAdmin.authAdmin.on input{color:#173457!important;background:#fff!important}
+#v452-badges.open{overflow-y:auto!important;touch-action:pan-y!important}
+#v452-badges .box{overflow-y:auto!important;touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important}
+/* Kontrast textu na dlaždicích. */
+body[data-game-theme] #homeScreen .subject .v451-footer>span{color:#fff!important;text-shadow:0 1px 3px #000!important}
+

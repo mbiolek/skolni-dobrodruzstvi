@@ -1,0 +1,38 @@
+
+/* Version 44: dashboard, compact learning cards, readable backgrounds. */
+body[data-game-theme] #homeScreen .app{padding:10px 11px 44px!important;max-width:960px!important}
+body[data-game-theme] #v26-playerbar{margin:2px 0 9px!important;padding:9px 11px!important;border-radius:18px!important;gap:10px!important}
+body[data-game-theme] #v26-playerpic{width:65px!important;height:65px!important;flex-basis:65px!important;border-radius:50%!important;background-position:center 22%!important;border:3px solid white!important}
+body[data-game-theme] #v26-playerbar .v26-playerinfo strong{font-size:17px!important}
+body[data-game-theme] #homeScreen #v24-avatar-open{margin:2px 0 8px!important;min-height:30px!important;padding:6px 11px!important;font-size:11px!important}
+body[data-game-theme] #homeScreen .subject-grid,body[data-game-theme] #homeScreen .v23-extra-grid{gap:7px!important;margin-top:7px!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+body[data-game-theme] #homeScreen .subject{height:128px!important;min-height:128px!important;max-height:128px!important;padding:7px 4px 6px!important;border-radius:16px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;overflow:hidden!important;gap:3px!important}
+body[data-game-theme] #homeScreen .subject .symbol{height:55px!important;max-width:76px!important;width:100%!important;min-width:0!important;margin:0 auto 1px!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important}
+body[data-game-theme] #homeScreen .subject strong{font-size:clamp(10px,2.8vw,15px)!important;line-height:1.12!important;min-height:25px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important}
+body[data-game-theme] #homeScreen .subject small{display:none!important}
+body[data-game-theme] #homeScreen .subject[data-open]::after{font-size:10px!important;padding:3px 11px!important;margin-top:auto!important;line-height:1.1!important}
+body[data-game-theme] #homeScreen .subject .v44-xp{display:block!important;font:800 9px system-ui!important;line-height:1!important;border-radius:8px!important;padding:2px 5px!important;color:#123e86!important;background:#ffffffc9!important;white-space:nowrap!important;margin-top:auto!important}
+body[data-game-theme] #homeScreen .subject[data-open] .v44-xp{margin-top:0!important}
+body[data-game-theme] #homeScreen .home-tip{padding:10px 13px!important;margin:10px 0 0!important;border-radius:17px!important;font-size:12px!important}
+body[data-game-theme] #homeScreen .home-tip div{font-size:12px!important;line-height:1.35!important}
+body[data-game-theme] #advSubjectMenu{min-height:calc(100dvh - 60px)!important;padding:12px 11px 30px!important;background-size:cover!important;background-position:center center!important}
+body[data-game-theme] #advSubjectMenu .adv-menu-inner{max-width:790px!important}
+body[data-game-theme] #advSubjectMenu .adv-menu-head{margin-bottom:7px!important}
+body[data-game-theme] #advSubjectMenu .adv-menu-title{font-size:clamp(23px,5vw,32px)!important;margin:2px 0!important}
+body[data-game-theme] #advSubjectMenu .adv-menu-sub{font-size:13px!important;margin:2px 0 8px!important}
+body[data-game-theme] #advSubjectMenu .adv-menu-cards{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;margin:9px auto!important}
+body[data-game-theme] #advSubjectMenu .adv-mode{height:166px!important;min-height:166px!important;max-height:166px!important;padding:8px 4px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:space-between!important;gap:3px!important;border-radius:15px!important;overflow:hidden!important}
+body[data-game-theme] #advSubjectMenu .adv-mode .adv-art{width:55px!important;height:55px!important;min-height:55px!important;margin:0 auto!important;flex:0 0 55px!important}
+body[data-game-theme] #advSubjectMenu .adv-mode strong{font-size:clamp(12px,3.4vw,18px)!important;line-height:1.1!important;order:1!important}
+body[data-game-theme] #advSubjectMenu .adv-mode .adv-art{order:0!important}
+body[data-game-theme] #advSubjectMenu .adv-mode .adv-desc{font-size:10px!important;line-height:1.13!important;margin:0!important;order:2!important}
+body[data-game-theme] #advSubjectMenu .adv-mode .adv-cta{font-size:12px!important;line-height:1.1!important;padding:7px 2px!important;margin:0!important;order:3!important;width:96%!important;border-radius:10px!important}
+body[data-game-theme] #advSubjectMenu .adv-menu-note{margin-top:12px!important;font-size:11px!important}
+body[data-game-theme="b"] #advSubjectMenu{background:linear-gradient(#b3ecff29,#9edbff2a),url('./assets/pozadi/pozadi-b.webp') center/cover fixed!important}
+body[data-game-theme="a"] #advSubjectMenu{background:linear-gradient(#160d5266,#160d5270),url('./assets/pozadi/pozadi-a.webp') center/cover fixed!important}
+body[data-game-theme="d"] #advSubjectMenu{background:linear-gradient(#07162b6b,#08152b87),url('./assets/pozadi/pozadi-d.webp') center/cover fixed!important}
+body[data-game-theme="c"] #advSubjectMenu{background:url('./assets/pozadi/pozadi-c.webp') center/cover fixed!important}
+body[data-game-theme="c"] #homeScreen .subject{box-shadow:0 3px 8px #598bc438!important}
+@media(min-width:720px){body[data-game-theme] #homeScreen .subject{height:170px!important;min-height:170px!important;max-height:170px!important}body[data-game-theme] #homeScreen .subject .symbol{height:92px!important;max-width:115px!important}body[data-game-theme] #advSubjectMenu .adv-mode{height:235px!important;min-height:235px!important;max-height:235px!important}body[data-game-theme] #advSubjectMenu .adv-mode .adv-art{height:105px!important;width:105px!important;flex-basis:105px!important}}
+@media(max-width:370px){body[data-game-theme] #homeScreen .subject{height:121px!important;min-height:121px!important;max-height:121px!important}body[data-game-theme] #homeScreen .subject .symbol{height:48px!important}body[data-game-theme] #advSubjectMenu .adv-mode{height:155px!important;min-height:155px!important;max-height:155px!important}}
+

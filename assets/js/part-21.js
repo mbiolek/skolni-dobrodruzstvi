@@ -1,0 +1,1 @@
+(function(){document.querySelectorAll('#homeScreen .subject').forEach(function(el){if(el.querySelector('.v44-xp'))return;const badge=document.createElement('span');badge.className='v44-xp';badge.textContent=el.hasAttribute('data-open')?'★ Sbírej XP':'★ Již brzy';el.appendChild(badge);});})();

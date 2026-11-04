@@ -1,0 +1,31 @@
+
+/* Jemně průhledné panely, zachovaný kontrast. */
+body[data-game-theme] .card,body[data-game-theme] .panel,
+body[data-game-theme] .hub-card,body[data-game-theme] .mode-card{
+ backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+}
+#authGate .authbox,#authGate .authbox label,#authGate .authbox h2,#authGate .authbox p{
+ color:#16294d!important
+}
+body[data-skin="maxi"] #authGate .authbox,body[data-skin="maxi"] #authGate .authbox label,
+body[data-skin="maxi"] #authGate .authbox h2,body[data-skin="maxi"] #authGate .authbox p{color:#fff!important}
+#v452-profile{display:flex;align-items:center;gap:12px;padding:12px 15px;margin:10px auto;
+ max-width:820px;border-radius:17px;background:rgba(20,36,65,.78);color:white;
+ box-shadow:0 4px 16px #0004;backdrop-filter:blur(8px)}
+#v452-profile .avatar{font-size:38px;line-height:1.1}
+#v452-profile .info{flex:1;min-width:0}
+#v452-profile strong{display:block;font-size:17px}
+#v452-profile small{color:#e7e9f4}
+#v452-profile.parent{border:2px solid #92d8ff}
+#v452-profile.child{border:2px solid #e2bc71}
+#v452-badges{position:fixed;inset:0;z-index:100500;background:#071426c9;
+ display:none;align-items:center;justify-content:center;padding:16px}
+#v452-badges.open{display:flex}
+#v452-badges .box{width:min(95vw,520px);max-height:85vh;overflow:auto;background:#f5f8ff;
+ color:#17243e;border-radius:19px;padding:19px;box-shadow:0 15px 45px #0008}
+#v452-badges button{padding:9px 13px;border-radius:9px}
+#v452-badges .item{background:#e8edfa;border-radius:12px;padding:11px;margin:9px 0}
+#v452-badges .item.locked{opacity:.72}
+#homeScreen .subject .v451-footer{pointer-events:auto!important}
+#homeScreen .subject .v451-footer .v452-badge-btn{pointer-events:auto!important;cursor:pointer!important}
+

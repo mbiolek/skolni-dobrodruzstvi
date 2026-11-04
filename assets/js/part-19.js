@@ -1,0 +1,4 @@
+(()=>{'use strict';const $=id=>document.getElementById(id);let ready=false;function init(){if(ready)return;ready=true;let l=$('v36Learn'),p=$('v36Practice'),h=$('v36DictHelp'),ex=$('v36DictExplain');if(l&&p){l.addEventListener('click',()=>window.v36CzMode&&window.v36CzMode('learn'));p.addEventListener('click',()=>window.v36CzMode&&window.v36CzMode('practice'))}if(h&&ex)h.addEventListener('click',()=>{window.v36DictShowHelp&&window.v36DictShowHelp();});let d=$('czDictations');if(d)d.addEventListener('click',()=>{ex.hidden=true;h.textContent='💡 Vysvětlit pravidlo'});let typ=$('czDictType');if(typ)typ.addEventListener('change',()=>{ex.hidden=true;h.textContent='💡 Vysvětlit pravidlo'});}
+// Legacy handlers are defined inside another closure; delegate learning controls through a bridge below.
+window.addEventListener('DOMContentLoaded',init);
+})();

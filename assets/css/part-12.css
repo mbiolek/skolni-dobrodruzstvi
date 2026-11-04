@@ -1,0 +1,38 @@
+
+/* v45.2: uživatelské grafiky, cesty výhradně do assets */
+body[data-game-theme="a"]{background-image:url("./assets/pozadi/hrad.webp")!important;background-position:center center!important;background-size:cover!important;background-attachment:fixed!important}
+body[data-game-theme="a"] #authGate{background:linear-gradient(#06152b55,#06152b66),url("./assets/pozadi/hrad.webp") center/cover fixed!important}
+body[data-game-theme="a"] #advSubjectMenu,body[data-game-theme="a"] #subjectHub{background:linear-gradient(#07162988,#071629a0),url("./assets/pozadi/hrad.webp") center/cover fixed!important}
+body[data-game-theme="a"] #homeScreen .subject.czech .symbol{background:url("./assets/ikony/hrad-czech.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="a"] #homeScreen .subject.math .symbol{background:url("./assets/ikony/hrad-math.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="a"] #homeScreen .subject.english .symbol{background:url("./assets/ikony/hrad-english.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="a"] #homeScreen .subject.nature .symbol{background:url("./assets/ikony/hrad-nature.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="a"] #homeScreen .subject.history .symbol{background:url("./assets/ikony/hrad-history.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="a"] #homeScreen .subject.music .symbol{background:url("./assets/ikony/hrad-music.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="a"] #homeScreen .subject{backdrop-filter:blur(4px);border:2px solid #ffffffd9!important;border-radius:16px!important;box-shadow:0 5px 0 #071c3870,0 9px 16px #0005!important}
+body[data-game-theme="a"] #homeScreen .subject .symbol{height:clamp(62px,15vw,115px)!important;max-width:125px!important;width:100%!important}
+body[data-game-theme="b"]{background-image:url("./assets/pozadi/priroda.webp")!important;background-position:center center!important;background-size:cover!important;background-attachment:fixed!important}
+body[data-game-theme="b"] #authGate{background:linear-gradient(#06152b55,#06152b66),url("./assets/pozadi/priroda.webp") center/cover fixed!important}
+body[data-game-theme="b"] #advSubjectMenu,body[data-game-theme="b"] #subjectHub{background:linear-gradient(#07162988,#071629a0),url("./assets/pozadi/priroda.webp") center/cover fixed!important}
+body[data-game-theme="b"] #homeScreen .subject.czech .symbol{background:url("./assets/ikony/priroda-czech.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="b"] #homeScreen .subject.math .symbol{background:url("./assets/ikony/priroda-math.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="b"] #homeScreen .subject.english .symbol{background:url("./assets/ikony/priroda-english.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="b"] #homeScreen .subject.nature .symbol{background:url("./assets/ikony/priroda-nature.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="b"] #homeScreen .subject.history .symbol{background:url("./assets/ikony/priroda-history.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="b"] #homeScreen .subject.music .symbol{background:url("./assets/ikony/priroda-music.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="b"] #homeScreen .subject{backdrop-filter:blur(4px);border:2px solid #ffffffd9!important;border-radius:16px!important;box-shadow:0 5px 0 #071c3870,0 9px 16px #0005!important}
+body[data-game-theme="b"] #homeScreen .subject .symbol{height:clamp(62px,15vw,115px)!important;max-width:125px!important;width:100%!important}
+body[data-game-theme="c"]{background-image:url("./assets/pozadi/skola.webp")!important;background-position:center center!important;background-size:cover!important;background-attachment:fixed!important}
+body[data-game-theme="c"] #authGate{background:linear-gradient(#06152b55,#06152b66),url("./assets/pozadi/skola.webp") center/cover fixed!important}
+body[data-game-theme="c"] #advSubjectMenu,body[data-game-theme="c"] #subjectHub{background:linear-gradient(#07162988,#071629a0),url("./assets/pozadi/skola.webp") center/cover fixed!important}
+body[data-game-theme="c"] #homeScreen .subject.czech .symbol{background:url("./assets/ikony/skola-czech.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="c"] #homeScreen .subject.math .symbol{background:url("./assets/ikony/skola-math.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="c"] #homeScreen .subject.english .symbol{background:url("./assets/ikony/skola-english.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="c"] #homeScreen .subject.nature .symbol{background:url("./assets/ikony/skola-nature.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="c"] #homeScreen .subject.history .symbol{background:url("./assets/ikony/skola-history.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="c"] #homeScreen .subject.music .symbol{background:url("./assets/ikony/skola-music.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="c"] #homeScreen .subject{backdrop-filter:blur(4px);border:2px solid #ffffffd9!important;border-radius:16px!important;box-shadow:0 5px 0 #071c3870,0 9px 16px #0005!important}
+body[data-game-theme="c"] #homeScreen .subject .symbol{height:clamp(62px,15vw,115px)!important;max-width:125px!important;width:100%!important}
+#homeScreen .subject-grid,#homeScreen .v23-extra-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media(max-width:380px){#homeScreen .subject-grid,#homeScreen .v23-extra-grid{gap:5px!important}}
+

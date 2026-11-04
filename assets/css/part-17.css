@@ -1,0 +1,41 @@
+
+:root{--skin-accent:#6553c8;--skin-ink:#26314e;--skin-panel:#fff}
+body[data-skin="maxi"]{--skin-accent:#7140e6;--skin-ink:#f6f5ff;background:radial-gradient(ellipse at 80% 15%,#5532ae,#16256b 55%,#090c37)!important}
+body[data-skin="balanced"]{--skin-accent:#168cce;--skin-ink:#173b72;background:linear-gradient(150deg,#bdeeff,#e4f7e4 58%,#e7ddff)!important}
+body[data-skin="simple"]{--skin-accent:#3974d9;--skin-ink:#263c68;background:linear-gradient(145deg,#f3f8ff,#edf1ff)!important}
+body[data-skin="maxi"] #authGate{background:radial-gradient(circle at 80% 20%,#6c3ab3,#202b79 55%,#100c39)}
+body[data-skin="balanced"] #authGate{background:linear-gradient(140deg,#a8e6ff,#e1f7e7,#e9dcff)}
+body[data-skin="simple"] #authGate{background:linear-gradient(140deg,#f1f7ff,#f6f8ff)}
+body[data-skin="maxi"] #authGate .authbox{background:#18255de8;color:white;border:2px solid #9b78ff}
+body[data-skin="maxi"] #authGate .authbox p{color:#e0ddff}
+body[data-skin="balanced"] #authGate .authbox{background:#ffffffed;border:2px solid #b7e9f9}
+body[data-skin="simple"] #authGate .authbox{background:white;border:1px solid #dce7fa;box-shadow:0 10px 30px #52749b1b}
+body[data-skin="maxi"] .home-hero{background:linear-gradient(110deg,#3030a3,#9632cf)!important;color:white!important}
+body[data-skin="balanced"] .home-hero{background:linear-gradient(115deg,#1596cf,#57cda2)!important;color:white!important}
+body[data-skin="simple"] .home-hero{background:linear-gradient(115deg,#d9eaff,#ece4ff)!important;color:#204475!important}
+body[data-skin="maxi"] .subject{box-shadow:0 6px 0 #3c268c,0 12px 24px #110e5680!important;border:2px solid #ffffff88!important}
+body[data-skin="balanced"] .subject{box-shadow:0 7px 19px #337baf36!important;border:2px solid #ffffff!important}
+body[data-skin="simple"] .subject{box-shadow:0 3px 10px #6b8ba326!important;border:1px solid #dce8fa!important}
+body[data-skin="maxi"] #authGate .userbtn{background:linear-gradient(130deg,#4550c3,#7733bf);color:white;border:2px solid #b6a1ff}
+body[data-skin="balanced"] #authGate .userbtn{background:linear-gradient(135deg,#e0f7ff,#ebf4ff);color:#20476c}
+body[data-skin="simple"] #authGate .userbtn{background:#f0f5fd;color:#25436a}
+.skin-launch{display:inline-flex;align-items:center;gap:6px;justify-content:center;border:0;border-radius:16px;padding:12px 15px;background:var(--skin-accent);color:white;font-weight:800;cursor:pointer;font-size:15px}
+#skinGateButton{margin-top:6px;width:100%}
+#skinHomeButton{margin:12px auto;display:flex;width:min(100%,380px)}
+#skinDialog{position:fixed;inset:0;z-index:100001;background:#121733ba;display:none;align-items:center;justify-content:center;padding:14px}
+#skinDialog.skin-open{display:flex}
+.skin-box{width:min(620px,100%);max-height:90dvh;overflow:auto;border-radius:24px;background:#fff;padding:20px;color:#253451;box-shadow:0 20px 70px #0c18487d}
+.skin-box h2{margin:0 0 6px;font-size:24px}.skin-box p{margin:0 0 15px;color:#576784}
+.skin-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.skin-choice{cursor:pointer;border:3px solid transparent;border-radius:17px;padding:10px 6px;text-align:center;font:inherit;font-weight:800;color:#243554;min-height:150px}
+.skin-choice[aria-pressed="true"]{border-color:#f3b933;outline:2px solid #253b9e}
+.skin-choice span{display:block;font-size:32px;margin:10px 0}
+.skin-choice small{display:block;font-size:12px;font-weight:500;margin-top:6px}
+.skin-choice.maxi{background:linear-gradient(140deg,#20286e,#873ad3);color:white}
+.skin-choice.balanced{background:linear-gradient(140deg,#99dafa,#bdf0c8);color:#153c69}
+.skin-choice.simple{background:linear-gradient(140deg,#f3f8ff,#e5edff);color:#25426e}
+.skin-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}
+.skin-actions button{border:0;border-radius:13px;padding:12px 16px;font:inherit;font-weight:750;cursor:pointer;background:#e8edf8;color:#273a65}
+.skin-actions .skin-save{background:#386cda;color:white}
+@media(max-width:390px){.skin-choices{gap:5px}.skin-choice{padding:8px 3px;font-size:12px}.skin-choice small{font-size:10px}}
+

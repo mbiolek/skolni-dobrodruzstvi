@@ -1,0 +1,12 @@
+
+/* Restore icons in all six subjects, avoiding invalid image variable fallbacks. */
+#homeScreen .subject .symbol{background:linear-gradient(145deg,#ffffffed,#ffffff69)!important;border-radius:23px!important;box-shadow:inset 0 2px 5px #fff,0 5px 12px #163b6b35!important;font-size:49px!important;display:grid!important;place-items:center!important;line-height:1!important;filter:none!important}
+#homeScreen .subject .symbol svg{display:none!important}
+#homeScreen .home-hero .v23-portrait{background-size:cover!important;background-position:center!important;border:3px solid #ffffffb5!important;border-radius:19px!important;box-shadow:0 5px 15px #001a4960!important}
+#v24-avatar-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.v24-avatar-option{font-size:13px!important;min-width:0}
+.v24-avatar-option .pic{background-size:cover!important;background-repeat:no-repeat!important}
+@media(max-width:650px){#homeScreen .home-hero{padding-left:111px!important}#homeScreen .home-hero .v23-portrait{left:13px!important;bottom:auto!important;top:50%!important;transform:translateY(-50%)!important;width:83px!important;height:89px!important}#homeScreen .subject .symbol{font-size:43px!important;width:72px!important;height:70px!important}#v24-avatar-grid{gap:8px}.v24-avatar-option .pic{height:88px!important}}
+/* Keep the learning mode cards legible without excessive vertical height. */
+@media(max-width:650px){.adv-mode{min-height:140px!important;padding:14px!important}.adv-mode .adv-art{width:84px!important;height:84px!important}}
+

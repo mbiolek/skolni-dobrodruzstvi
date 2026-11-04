@@ -1,0 +1,84 @@
+
+
+/* v38: poslední styl má záměrně přednost před staršími pravidly v37 */
+body[data-game-theme="a"]{--v38-text:#fff;--v38-border:#b5a3ff;background:#15104c url('./assets/pozadi/pozadi-a.webp') center top / cover fixed!important}
+body[data-game-theme="b"],body:not([data-game-theme]){--v38-text:#10376e;--v38-border:#fff;background:#b8e8f5 url('./assets/pozadi/pozadi-b.webp') center top / cover fixed!important}
+body[data-game-theme="c"]{--v38-text:#153b70;--v38-border:#e0eafa;background:#f4f9ff url('./assets/pozadi/pozadi-c.webp') center top / cover fixed!important}
+/* Profilové obrazovky: skutečně jiná kompozice a pozadí */
+body[data-game-theme="a"] #authGate{background:linear-gradient(#15104c66,#160b42b0),url('./assets/pozadi/pozadi-a.webp') center / cover fixed!important}
+body[data-game-theme="b"] #authGate{background:linear-gradient(#dcfaff55,#b5e8e077),url('./assets/pozadi/pozadi-b.webp') center / cover fixed!important}
+body[data-game-theme="c"] #authGate{background:url('./assets/pozadi/pozadi-c.webp') center / cover fixed!important}
+body[data-game-theme] #authGate:before,body[data-game-theme] #authGate:after{display:none!important}
+body[data-game-theme="a"] #authGate .authbox{background:linear-gradient(155deg,#281565ef,#38208bed)!important;border:3px solid #d6baff!important;box-shadow:0 12px 0 #100c3d,0 20px 35px #0008!important}
+body[data-game-theme="b"] #authGate .authbox{background:linear-gradient(150deg,#e8f9ffef,#f8fff3f5)!important;border:3px solid #fff!important;box-shadow:0 10px 0 #509cb8,0 18px 35px #124f6a44!important}
+body[data-game-theme="c"] #authGate .authbox{background:#ffffffed!important;border:1px solid #dbe9fb!important;box-shadow:0 12px 35px #7e9fc42b!important}
+body[data-game-theme="a"] #authGate .userbtn{background:linear-gradient(160deg,#3c2db9,#6c25a9)!important;color:#fff!important;border:2px solid #c8aaff!important;box-shadow:0 7px 0 #130a53!important}
+body[data-game-theme="b"] #authGate .userbtn{background:linear-gradient(180deg,#e0f8ff,#fff7e4)!important;border:3px solid #fff!important;box-shadow:0 7px 0 #5c9db6!important}
+body[data-game-theme="c"] #authGate .userbtn{background:#f5f8ff!important;border:1px solid #d8e6fa!important;box-shadow:0 5px 16px #819fc429!important;border-radius:18px!important}
+/* Menu předmětů: tři nezávislé vzhledy */
+body[data-game-theme="a"] #homeScreen .home-hero{background:linear-gradient(90deg,#16104bcc,#6021a5dc),url('./assets/pozadi/pozadi-a.webp') center 30% / cover!important;border:3px solid #d6aeff!important;box-shadow:0 9px 0 #140a57,0 18px 30px #0007!important}
+body[data-game-theme="b"] #homeScreen .home-hero{background:linear-gradient(100deg,#ddf9ffed,#d9fff0c9),url('./assets/pozadi/pozadi-b.webp') center 36% / cover!important;border:3px solid #fff!important;box-shadow:0 8px 0 #5796ba!important}
+body[data-game-theme="c"] #homeScreen .home-hero{background:#ffffffed!important;border:1px solid #e0ebfa!important;box-shadow:0 8px 22px #7e9fc42a!important;border-radius:20px!important}
+body[data-game-theme="a"] #homeScreen .subject{border:3px solid #c4c6ff!important;border-radius:22px!important;box-shadow:0 8px 0 #17104e,0 13px 20px #0008!important;filter:saturate(1.25)}
+body[data-game-theme="a"] #homeScreen .subject.math{background:linear-gradient(145deg,#188cfd,#0431a7)!important}
+body[data-game-theme="a"] #homeScreen .subject.english{background:linear-gradient(145deg,#a33df8,#5014ac)!important}
+body[data-game-theme="a"] #homeScreen .subject.czech{background:linear-gradient(145deg,#ff666d,#ac124a)!important}
+body[data-game-theme="a"] #homeScreen .subject.nature{background:linear-gradient(145deg,#41db5c,#087a42)!important}
+body[data-game-theme="a"] #homeScreen .subject.history{background:linear-gradient(145deg,#ffc64d,#d76b07)!important}
+body[data-game-theme="a"] #homeScreen .subject.music{background:linear-gradient(145deg,#d353fa,#6923b5)!important}
+body[data-game-theme="a"] #homeScreen .subject strong,body[data-game-theme="a"] #homeScreen .subject small{color:#fff!important;text-shadow:0 2px 4px #0009!important}
+body[data-game-theme="a"] #homeScreen .subject .symbol{background:#ffffff24!important;box-shadow:inset 0 0 20px #ffffff55!important}
+body[data-game-theme="b"] #homeScreen .subject{border:3px solid white!important;border-radius:19px!important;box-shadow:0 7px 0 #6a9db5,0 12px 22px #295c8344!important}
+body[data-game-theme="b"] #homeScreen .subject.math{background:linear-gradient(145deg,#50baff,#dff7ff)!important}
+body[data-game-theme="b"] #homeScreen .subject.english{background:linear-gradient(145deg,#9c8fff,#e9e4ff)!important}
+body[data-game-theme="b"] #homeScreen .subject.czech{background:linear-gradient(145deg,#ff9e97,#ffe7dc)!important}
+body[data-game-theme="b"] #homeScreen .subject.nature{background:linear-gradient(145deg,#65df93,#e0ffe9)!important}
+body[data-game-theme="b"] #homeScreen .subject.history{background:linear-gradient(145deg,#ffc15d,#fff0c8)!important}
+body[data-game-theme="b"] #homeScreen .subject.music{background:linear-gradient(145deg,#ca9afc,#f4e3ff)!important}
+body[data-game-theme="c"] #homeScreen .subject{background:#ffffffed!important;border:1px solid #dce7f7!important;border-radius:16px!important;box-shadow:0 7px 18px #7897bd2b!important;min-height:150px!important}
+body[data-game-theme="c"] #homeScreen .subject strong{color:#123a76!important}
+body[data-game-theme="c"] #homeScreen .subject small{color:#536e91!important}
+body[data-game-theme="c"] #homeScreen .subject .symbol{box-shadow:none!important;border-radius:15px!important;background:#eaf3ff!important}
+body[data-game-theme="c"] #homeScreen .subject.czech .symbol{background:#ffebe8!important}
+body[data-game-theme="c"] #homeScreen .subject.english .symbol{background:#eee9ff!important}
+body[data-game-theme="c"] #homeScreen .subject.nature .symbol{background:#e3faeb!important}
+body[data-game-theme="c"] #homeScreen .subject.history .symbol{background:#fff2dc!important}
+body[data-game-theme="c"] #homeScreen .subject.music .symbol{background:#f4e9ff!important}
+/* Výuka / Procvičování / Test: graficky odlišné režimy */
+body[data-game-theme="a"] #advSubjectMenu{background:linear-gradient(#100c48b0,#241060d9),url('./assets/pozadi/pozadi-a.webp') center / cover fixed!important}
+body[data-game-theme="b"] #advSubjectMenu{background:linear-gradient(#d5f6ff66,#b6ebd877),url('./assets/pozadi/pozadi-b.webp') center / cover fixed!important}
+body[data-game-theme="c"] #advSubjectMenu{background:url('./assets/pozadi/pozadi-c.webp') center / cover fixed!important}
+body[data-game-theme="a"] .adv-menu-head{background:#1d1559db!important;border:2px solid #9e8bef!important;color:#fff!important}
+body[data-game-theme="a"] .adv-menu-title,body[data-game-theme="a"] .adv-menu-sub{color:#fff!important;text-shadow:0 2px 4px #0009!important}
+body[data-game-theme="b"] .adv-menu-head{background:#f4fdfff0!important;border:2px solid #fff!important}
+body[data-game-theme="c"] .adv-menu-head{background:#fff!important;border:1px solid #dce9fa!important}
+body[data-game-theme="a"] .adv-mode{border:3px solid #d5bfff!important;border-radius:24px!important;box-shadow:0 9px 0 #120c4b,0 17px 26px #0008!important}
+body[data-game-theme="b"] .adv-mode{border:3px solid white!important;border-radius:21px!important;box-shadow:0 8px 0 #5b9dbb!important}
+body[data-game-theme="c"] .adv-mode{background:#fff!important;border:1px solid #dce7f7!important;border-radius:18px!important;box-shadow:0 8px 25px #7296c533!important}
+body[data-game-theme="c"] .adv-mode strong{color:#163a76!important;text-shadow:none!important}
+body[data-game-theme="c"] .adv-mode .adv-desc{color:#5d7294!important}
+body[data-game-theme="c"] .adv-mode .adv-cta{color:#fff!important;background:linear-gradient(#3098ec,#1470c8)!important;border:0!important;box-shadow:none!important}
+body[data-game-theme="c"] .adv-mode.practice .adv-cta{background:linear-gradient(#aa73ef,#8250c9)!important}
+body[data-game-theme="c"] .adv-mode.test .adv-cta{background:linear-gradient(#34c79b,#169a7b)!important}
+/* Odlišné rozmístění prvků, ne jen změna barev */
+body[data-game-theme="a"] #homeScreen .subject-grid,body[data-game-theme="a"] #homeScreen .v23-extra-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+body[data-game-theme="a"] #homeScreen .subject{flex-direction:column!important;text-align:center!important;min-height:196px!important;justify-content:center!important}
+body[data-game-theme="b"] #homeScreen .subject{flex-direction:row!important;text-align:left!important;min-height:142px!important}
+body[data-game-theme="c"] #homeScreen .subject{flex-direction:column!important;text-align:center!important;min-height:155px!important}
+body[data-game-theme="a"] #themeSwitcher{background:linear-gradient(90deg,#211169,#6428b6)!important}
+body[data-game-theme="b"] #themeSwitcher{background:linear-gradient(90deg,#137bbd,#39a6bb)!important}
+body[data-game-theme="c"] #themeSwitcher{background:#e8f1ff!important;color:#153b75!important;box-shadow:0 2px 12px #8ba9cc33!important}
+body[data-game-theme="c"] #themeSwitcher button{background:#fff!important;color:#214b83!important;border-color:#c4d9f4!important}
+body[data-game-theme="c"] #themeSwitcher button.is-selected{background:#246fc3!important;color:#fff!important}
+@media(max-width:680px){
+ body[data-game-theme="a"] #homeScreen .subject-grid,body[data-game-theme="a"] #homeScreen .v23-extra-grid,body[data-game-theme="b"] #homeScreen .subject-grid,body[data-game-theme="b"] #homeScreen .v23-extra-grid,body[data-game-theme="c"] #homeScreen .subject-grid,body[data-game-theme="c"] #homeScreen .v23-extra-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body[data-game-theme="a"] #homeScreen .subject{min-height:166px!important;flex-direction:column!important;text-align:center!important}
+ body[data-game-theme="b"] #homeScreen .subject{min-height:160px!important;flex-direction:column!important;text-align:center!important}
+ body[data-game-theme="c"] #homeScreen .subject{min-height:145px!important;flex-direction:column!important;text-align:center!important}
+ body[data-game-theme="a"] #authGate .authbox{padding:17px 10px!important}
+ body[data-game-theme="b"] #authGate .authbox{padding:17px 10px!important}
+ body[data-game-theme="c"] #authGate .authbox{padding:17px 10px!important}
+}
+@media(prefers-reduced-motion:no-preference){body[data-game-theme="a"] #homeScreen .subject:hover,body[data-game-theme="b"] #homeScreen .subject:hover{transform:translateY(-3px)!important}}
+
+

@@ -1,0 +1,15 @@
+
+/* v46.4: translucent tile surfaces; text/icons remain opaque */
+#homeScreen .subject,#homeScreen .v23-extra-grid .subject,#advSubjectMenu .adv-mode,#subjectHub .hub-card{background-color:rgba(237,247,255,.84)!important;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+#vlastScreen .app{background:rgba(249,252,255,.86)!important;backdrop-filter:blur(5px)}
+#vlastScreen .vl-units button,#vlastScreen .vl-tabs button,#vlastScreen .vl-next,#vlastScreen .vl-answer,#v46map button{background-color:rgba(233,245,255,.84)!important}
+#vlastScreen .vl-answer.correct{background:#c6f2d1!important}#vlastScreen .vl-answer.incorrect{background:#ffe0e0!important}
+#vlastScreen .vl-units{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+#vlastScreen .vl-units button{min-height:126px;text-align:center!important;padding:14px 8px!important;display:flex;flex-direction:column;justify-content:center;align-items:center}
+#vlastScreen .vl-units button strong{font-size:clamp(13px,3.5vw,18px);line-height:1.3}
+#vlastScreen .vl-units button:before{content:attr(data-icon);display:block;font-size:34px;margin-bottom:7px}
+#v46map .v461-map-image{width:100%;height:auto;display:block;opacity:.95}
+#v46map svg{max-height:none!important;touch-action:manipulation}
+#v46map .note{font-size:12px}
+@media(max-width:390px){#vlastScreen .vl-units button{min-height:116px}}
+

@@ -1,0 +1,15 @@
+
+#mathScreen.v497-topic .hero,#mathScreen.v497-topic .profilebar,#mathScreen.v497-topic #parentDashboard{display:none!important}
+#mathScreen.v497-topic #modes{display:none!important}
+#mathScreen.v497-topic #setup>h2{display:none!important}
+#mathScreen.v497-topic .newbox{display:none!important}
+#mathScreen.v497-topic[data-topic="tail"] .newbox{display:block!important}
+#mathScreen.v497-topic[data-topic="tail"] #setup>:not(.newbox):not(#v497TopicHead){display:none!important}
+#mathScreen.v497-topic #v497TopicHead{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 18px}
+#v497TopicHead h2{font-size:clamp(21px,5vw,30px);margin:0;color:#183b72}
+#v497TopicHead button{background:#e5eeff;border:1px solid #b5c9dc;border-radius:14px;padding:12px;font-weight:700;color:#183b72}
+#mathScreen.v497-topic .math-wrap{padding-top:12px!important}
+#mathScreen.v497-topic #setup{margin-top:0!important}
+#mathScreen.v497-topic #game:not(.hidden){display:block!important}
+#mathScreen.v497-topic #game:not(.hidden)~#setup{display:none!important}
+

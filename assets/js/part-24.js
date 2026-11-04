@@ -1,0 +1,1 @@
+document.querySelectorAll('#homeScreen .subject').forEach(el=>{const key=['math','english','czech','nature','history','music'].find(k=>el.classList.contains(k));const icons={math:'📐',english:'🇬🇧',czech:'📖',nature:'🌿',history:'🌍',music:'🎵'};const icon=el.querySelector('.symbol');if(icon&&key)icon.textContent=icons[key]});

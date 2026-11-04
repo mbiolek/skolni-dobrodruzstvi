@@ -1,0 +1,15 @@
+
+#authGate{position:fixed;inset:0;z-index:99999;background:linear-gradient(145deg,#eef0ff,#fff6e9 55%,#dcf7f2);overflow-y:auto;padding:24px 14px;display:flex;align-items:flex-start;justify-content:center;font-family:system-ui,sans-serif;color:#26314e}
+#authGate.off{display:none}#authGate .authbox{width:min(520px,100%);margin:24px auto;background:white;border-radius:28px;padding:24px;box-shadow:0 16px 50px #5863a42c}
+#authGate h1{font-size:26px;line-height:1.2;margin:5px 0 8px}#authGate p{color:#68718b;font-size:14px;line-height:1.5}#authGate .authusers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+#authGate button,.authAdmin button,#authExit{font:inherit;cursor:pointer;border:0;border-radius:15px;padding:12px 14px;background:#6553c8;color:white;font-weight:700}
+#authGate .userbtn{background:#f1efff;color:#37316e;min-height:94px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;word-break:break-word}#authGate .userbtn span{font-size:28px}
+#authGate input,.authAdmin input{box-sizing:border-box;width:100%;padding:13px;border:2px solid #d8d9ee;border-radius:13px;font:inherit;margin:7px 0 12px;color:#252a44;background:white}
+#authGate .authrow,.authAdmin .authrow{display:flex;gap:9px;flex-wrap:wrap}#authGate .light,.authAdmin .light{background:#eeedfa;color:#5144a0}#authGate .autherr{color:#b42335;min-height:20px;font-weight:600}
+.authAdmin{display:none;max-width:850px;margin:18px auto;padding:20px;background:white;border-radius:24px;box-shadow:0 12px 36px #47518019}.authAdmin.on{display:block}.authAdmin h2{margin:8px 0 15px}.authAdmin .authitem{background:#f5f5ff;border-radius:16px;padding:14px;margin:10px 0}.authAdmin .authitem strong{display:block;margin-bottom:8px}.authAdmin .authitem button{margin:4px}.authAdmin .authnotice{font-size:13px;color:#69718a}
+#authExit{position:fixed;bottom:14px;right:14px;z-index:9000;display:none;box-shadow:0 8px 22px #35366c33;padding:10px 13px;font-size:13px}
+body.child-role #mathScreen .profilebar,body.child-role #mathScreen #parentDashboard,body.child-role #mathScreen #exportData,body.child-role #mathScreen #importData,body.child-role #mathScreen #importFile,body.child-role #mathScreen #profileName,body.child-role #mathScreen #addProfile,body.child-role #mathScreen #deleteProfile,body.child-role #mathScreen #profile{display:none!important}
+body.child-role #enProfile,body.child-role label[for=enProfile],body.child-role #diagProfile,body.child-role label[for=diagProfile],body.child-role #orderProfile{display:none!important}
+body.child-role #vocAdd,body.child-role #vocCz,body.child-role #vocEn,body.child-role #vocList{display:none!important}
+body.parent-role .authAdmin.on ~ *{} 
+.newcards button.voc-correct,.newbox input.voc-correct{background:#c9f5dc!important;border:3px solid #1a9a58!important;color:#155c39!important}.newcards button.voc-wrong,.newbox input.voc-wrong{background:#ffe0e0!important;border:3px solid #db4545!important;color:#9a1c1c!important}.newbox #vocSpeak{margin:0 auto 14px;display:block}.newbox #vocFeedback{font-weight:800;line-height:1.5;min-height:32px}

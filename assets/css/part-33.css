@@ -1,0 +1,38 @@
+
+/* v26: game dashboard + mobile three-card selection, no changes to lessons */
+#v26-playerbar{display:none;align-items:center;gap:11px;padding:11px 13px;margin:0 0 12px;border:2px solid #ffffffd9;border-radius:19px;background:linear-gradient(115deg,#e7f7ff,#eee5ff);box-shadow:0 6px 0 #779ac080,0 10px 19px #243a6d25;color:#193a75}
+body.child-role #v26-playerbar{display:flex}
+#v26-playerpic{flex:0 0 54px;width:54px;height:54px;border-radius:16px;background-image:var(--v24-hero-art);background-size:cover;background-position:center;border:3px solid #fff;box-shadow:0 3px 9px #15386740}
+.v26-playerinfo{flex:1;min-width:0}.v26-playerinfo strong{display:block;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v26-playerinfo small{font-size:11px;font-weight:750;opacity:.8}.v26-progress{height:10px;margin-top:6px;border-radius:30px;background:#bed0ed;overflow:hidden;border:1px solid #fff}.v26-progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd14e,#3a98ff);transition:width .25s}
+.v26-trophy{font-size:27px;line-height:1;text-align:center}.v26-trophy small{display:block;font-size:10px;font-weight:900;margin-top:3px}
+body[data-skin="maxi"] #v26-playerbar{background:linear-gradient(115deg,#163d9b,#7431b5);color:white;border-color:#9cd7ff}
+body[data-skin="balanced"] #v26-playerbar{background:linear-gradient(115deg,#d6f5ff,#d2f7e7)}
+#homeScreen .home-hero{margin-top:8px!important}
+#homeScreen .subject{position:relative}
+#homeScreen .subject[data-open]::after{content:'▶ Hrát';display:block;font-size:11px;font-weight:900;letter-spacing:.2px;border-radius:15px;padding:4px 13px;margin-top:5px;background:#ffffffc9;color:#2254a4;box-shadow:0 2px 5px #18376c24}
+#advSubjectMenu .adv-menu-inner{max-width:880px}
+#advSubjectMenu .adv-menu-cards{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:11px!important}
+#advSubjectMenu .adv-mode{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:space-between!important;text-align:center!important;min-height:210px!important;padding:14px 8px!important;gap:7px!important;grid-template-columns:none!important;grid-template-rows:none!important}
+#advSubjectMenu .adv-mode strong{font-size:clamp(14px,2.4vw,24px)!important;line-height:1.12!important;grid-column:auto!important;grid-row:auto!important;overflow-wrap:anywhere}
+#advSubjectMenu .adv-mode .adv-art{font-size:52px!important;line-height:1.1!important;width:auto!important;height:auto!important;grid-column:auto!important;grid-row:auto!important}
+#advSubjectMenu .adv-mode .adv-desc{font-size:12px!important;line-height:1.2!important;grid-column:auto!important;grid-row:auto!important;margin:0!important}
+#advSubjectMenu .adv-mode .adv-cta{font-size:14px!important;padding:9px 3px!important;width:100%!important;grid-column:auto!important;grid-row:auto!important}
+#advSubjectMenu .adv-menu-title{margin-top:2px!important}
+#advSubjectMenu .adv-menu-head{margin-bottom:6px!important}
+#advSubjectMenu .adv-menu-note{font-size:12px!important;margin-top:14px!important}
+@media(max-width:480px){
+ #advSubjectMenu{padding:12px!important}
+ #advSubjectMenu .adv-menu-inner{padding:0!important}
+ #advSubjectMenu .adv-menu-cards{gap:7px!important}
+ #advSubjectMenu .adv-mode{min-height:185px!important;padding:12px 5px!important;border-radius:17px!important}
+ #advSubjectMenu .adv-mode strong{font-size:clamp(12px,3.4vw,16px)!important}
+ #advSubjectMenu .adv-mode .adv-art{font-size:43px!important}
+ #advSubjectMenu .adv-mode .adv-desc{font-size:10px!important}
+ #advSubjectMenu .adv-mode .adv-cta{font-size:12px!important;padding:9px 1px!important}
+ #advSubjectMenu .adv-menu-title{font-size:30px!important}
+ #advSubjectMenu #advMenuIcon{font-size:40px!important}
+ #v26-playerbar{padding:8px;gap:8px}
+ #v26-playerpic{width:48px;height:48px;flex-basis:48px}
+ #v26-playerbar .v26-playerinfo strong{font-size:15px}
+}
+

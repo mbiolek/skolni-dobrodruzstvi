@@ -1,0 +1,29 @@
+
+/* v45.2: final CSS after all older !important background shorthand declarations. */
+body[data-game-theme="a"] #homeScreen .subject.math .symbol{background-image:url("./assets/ikony/ikona-math-a.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="a"] #homeScreen .subject.english .symbol{background-image:url("./assets/ikony/ikona-english-a.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="a"] #homeScreen .subject.czech .symbol{background-image:url("./assets/ikony/ikona-czech-a.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="a"] #homeScreen .subject.nature .symbol{background-image:url("./assets/ikony/ikona-nature-a.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="a"] #homeScreen .subject.history .symbol{background-image:url("./assets/ikony/ikona-history-a.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="a"] #homeScreen .subject.music .symbol{background-image:url("./assets/ikony/ikona-music-a.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="b"] #homeScreen .subject.math .symbol{background-image:url("./assets/ikony/ikona-math-b.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="b"] #homeScreen .subject.english .symbol{background-image:url("./assets/ikony/ikona-english-b.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="b"] #homeScreen .subject.czech .symbol{background-image:url("./assets/ikony/ikona-czech-b.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="b"] #homeScreen .subject.nature .symbol{background-image:url("./assets/ikony/ikona-nature-b.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="b"] #homeScreen .subject.history .symbol{background-image:url("./assets/ikony/ikona-history-b.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="b"] #homeScreen .subject.music .symbol{background-image:url("./assets/ikony/ikona-music-b.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="c"] #homeScreen .subject.math .symbol{background-image:url("./assets/ikony/ikona-math-c.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="c"] #homeScreen .subject.english .symbol{background-image:url("./assets/ikony/ikona-english-c.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="c"] #homeScreen .subject.czech .symbol{background-image:url("./assets/ikony/ikona-czech-c.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="c"] #homeScreen .subject.nature .symbol{background-image:url("./assets/ikony/ikona-nature-c.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="c"] #homeScreen .subject.history .symbol{background-image:url("./assets/ikony/ikona-history-c.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="c"] #homeScreen .subject.music .symbol{background-image:url("./assets/ikony/ikona-music-c.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="d"] #homeScreen .subject.math .symbol{background-image:url("./assets/ikony/ikona-math-d.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="d"] #homeScreen .subject.english .symbol{background-image:url("./assets/ikony/ikona-english-d.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="d"] #homeScreen .subject.czech .symbol{background-image:url("./assets/ikony/ikona-czech-d.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="d"] #homeScreen .subject.nature .symbol{background-image:url("./assets/ikony/ikona-nature-d.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="d"] #homeScreen .subject.history .symbol{background-image:url("./assets/ikony/ikona-history-d.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+body[data-game-theme="d"] #homeScreen .subject.music .symbol{background-image:url("./assets/ikony/ikona-music-d.webp")!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;}
+#homeScreen .subject .symbol{color:transparent!important}
+/* End v45.2 */
+
