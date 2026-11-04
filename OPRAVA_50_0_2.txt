@@ -1,0 +1,1 @@
+50.0.2: oprava ulozeni a zobrazeni avataru, zobrazovani cisla verze a nasobilky pri rozsahu jedineho cisla (napr. 9-9).
