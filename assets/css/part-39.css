@@ -31,10 +31,10 @@
 .adv-mode .adv-desc{font-size:clamp(10px,2.4vw,14px)!important;line-height:1.2!important;grid-area:auto!important}
 .adv-mode .adv-cta{width:100%!important;font-size:clamp(11px,2.7vw,16px)!important;padding:8px 2px!important;grid-area:auto!important}
 /* D: original supplied fortress scenery */
-body[data-game-theme="d"]{background:linear-gradient(#07102480,#0a1d38a8),url('./assets/pozadi/pozadi-d.webp') center/cover fixed!important;color:#fff!important}
+body[data-game-theme="d"]{background:linear-gradient(#07102480,#0a1d38a8),url('../pozadi/pozadi-d.webp') center/cover fixed!important;color:#fff!important}
 body[data-game-theme="d"] #themeSwitcher{background:linear-gradient(90deg,#0a1534,#263758)!important;color:#ffe3a3!important}
 body[data-game-theme="d"] #themeSwitcher button.is-selected{background:#e9c77d!important;color:#182b49!important}
-body[data-game-theme="d"] #authGate:before{background:linear-gradient(#08152a66,#071426a8),url('./assets/pozadi/pozadi-d.webp') center/cover!important}
+body[data-game-theme="d"] #authGate:before{background:linear-gradient(#08152a66,#071426a8),url('../pozadi/pozadi-d.webp') center/cover!important}
 body[data-game-theme="d"] #authGate:after{content:'✦   ✧   ✦';color:#f5d994!important}
 body[data-game-theme="d"] #authGate .authbox{background:linear-gradient(145deg,#172a43ed,#0c1831f0)!important;border-color:#d7b879!important;box-shadow:0 10px 0 #081021,0 20px 40px #0008!important}
 body[data-game-theme="d"] #authGate h1,body[data-game-theme="d"] #authGate .authbox>p{color:#ffe5b3!important}
@@ -42,7 +42,7 @@ body[data-game-theme="d"] #authGate .userbtn{background:linear-gradient(140deg,#
 body[data-game-theme="d"] #authGate .userbtn strong{color:#fff!important}
 body[data-game-theme="d"] #homeScreen .subject{background:linear-gradient(140deg,#28476df5,#102443f5)!important;border-color:#d6b87c!important;box-shadow:0 6px 0 #07152a,0 12px 22px #0009!important}
 body[data-game-theme="d"] #homeScreen .subject strong,body[data-game-theme="d"] #homeScreen .subject small{color:#fff3d8!important}
-body[data-game-theme="d"] #advSubjectMenu{background:linear-gradient(#07162b99,#08152bc9),url('./assets/pozadi/pozadi-d.webp') center/cover fixed!important;color:#fff!important}
+body[data-game-theme="d"] #advSubjectMenu{background:linear-gradient(#07162b99,#08152bc9),url('../pozadi/pozadi-d.webp') center/cover fixed!important;color:#fff!important}
 body[data-game-theme="d"] .adv-menu-head{background:#162b48ed!important;border:2px solid #d7b879!important;color:#fff!important}
 body[data-game-theme="d"] .adv-menu-title,body[data-game-theme="d"] .adv-menu-sub{color:#ffe4b2!important;text-shadow:0 2px 6px #000!important}
 body[data-game-theme="d"] .adv-mode{border-color:#f0d396!important;box-shadow:0 8px 0 #08152d,0 15px 20px #0008!important}

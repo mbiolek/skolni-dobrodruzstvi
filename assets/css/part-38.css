@@ -1,13 +1,13 @@
 
 
 /* v38: poslední styl má záměrně přednost před staršími pravidly v37 */
-body[data-game-theme="a"]{--v38-text:#fff;--v38-border:#b5a3ff;background:#15104c url('./assets/pozadi/pozadi-a.webp') center top / cover fixed!important}
-body[data-game-theme="b"],body:not([data-game-theme]){--v38-text:#10376e;--v38-border:#fff;background:#b8e8f5 url('./assets/pozadi/pozadi-b.webp') center top / cover fixed!important}
-body[data-game-theme="c"]{--v38-text:#153b70;--v38-border:#e0eafa;background:#f4f9ff url('./assets/pozadi/pozadi-c.webp') center top / cover fixed!important}
+body[data-game-theme="a"]{--v38-text:#fff;--v38-border:#b5a3ff;background:#15104c url('../pozadi/pozadi-a.webp') center top / cover fixed!important}
+body[data-game-theme="b"],body:not([data-game-theme]){--v38-text:#10376e;--v38-border:#fff;background:#b8e8f5 url('../pozadi/pozadi-b.webp') center top / cover fixed!important}
+body[data-game-theme="c"]{--v38-text:#153b70;--v38-border:#e0eafa;background:#f4f9ff url('../pozadi/pozadi-c.webp') center top / cover fixed!important}
 /* Profilové obrazovky: skutečně jiná kompozice a pozadí */
-body[data-game-theme="a"] #authGate{background:linear-gradient(#15104c66,#160b42b0),url('./assets/pozadi/pozadi-a.webp') center / cover fixed!important}
-body[data-game-theme="b"] #authGate{background:linear-gradient(#dcfaff55,#b5e8e077),url('./assets/pozadi/pozadi-b.webp') center / cover fixed!important}
-body[data-game-theme="c"] #authGate{background:url('./assets/pozadi/pozadi-c.webp') center / cover fixed!important}
+body[data-game-theme="a"] #authGate{background:linear-gradient(#15104c66,#160b42b0),url('../pozadi/pozadi-a.webp') center / cover fixed!important}
+body[data-game-theme="b"] #authGate{background:linear-gradient(#dcfaff55,#b5e8e077),url('../pozadi/pozadi-b.webp') center / cover fixed!important}
+body[data-game-theme="c"] #authGate{background:url('../pozadi/pozadi-c.webp') center / cover fixed!important}
 body[data-game-theme] #authGate:before,body[data-game-theme] #authGate:after{display:none!important}
 body[data-game-theme="a"] #authGate .authbox{background:linear-gradient(155deg,#281565ef,#38208bed)!important;border:3px solid #d6baff!important;box-shadow:0 12px 0 #100c3d,0 20px 35px #0008!important}
 body[data-game-theme="b"] #authGate .authbox{background:linear-gradient(150deg,#e8f9ffef,#f8fff3f5)!important;border:3px solid #fff!important;box-shadow:0 10px 0 #509cb8,0 18px 35px #124f6a44!important}
@@ -16,8 +16,8 @@ body[data-game-theme="a"] #authGate .userbtn{background:linear-gradient(160deg,#
 body[data-game-theme="b"] #authGate .userbtn{background:linear-gradient(180deg,#e0f8ff,#fff7e4)!important;border:3px solid #fff!important;box-shadow:0 7px 0 #5c9db6!important}
 body[data-game-theme="c"] #authGate .userbtn{background:#f5f8ff!important;border:1px solid #d8e6fa!important;box-shadow:0 5px 16px #819fc429!important;border-radius:18px!important}
 /* Menu předmětů: tři nezávislé vzhledy */
-body[data-game-theme="a"] #homeScreen .home-hero{background:linear-gradient(90deg,#16104bcc,#6021a5dc),url('./assets/pozadi/pozadi-a.webp') center 30% / cover!important;border:3px solid #d6aeff!important;box-shadow:0 9px 0 #140a57,0 18px 30px #0007!important}
-body[data-game-theme="b"] #homeScreen .home-hero{background:linear-gradient(100deg,#ddf9ffed,#d9fff0c9),url('./assets/pozadi/pozadi-b.webp') center 36% / cover!important;border:3px solid #fff!important;box-shadow:0 8px 0 #5796ba!important}
+body[data-game-theme="a"] #homeScreen .home-hero{background:linear-gradient(90deg,#16104bcc,#6021a5dc),url('../pozadi/pozadi-a.webp') center 30% / cover!important;border:3px solid #d6aeff!important;box-shadow:0 9px 0 #140a57,0 18px 30px #0007!important}
+body[data-game-theme="b"] #homeScreen .home-hero{background:linear-gradient(100deg,#ddf9ffed,#d9fff0c9),url('../pozadi/pozadi-b.webp') center 36% / cover!important;border:3px solid #fff!important;box-shadow:0 8px 0 #5796ba!important}
 body[data-game-theme="c"] #homeScreen .home-hero{background:#ffffffed!important;border:1px solid #e0ebfa!important;box-shadow:0 8px 22px #7e9fc42a!important;border-radius:20px!important}
 body[data-game-theme="a"] #homeScreen .subject{border:3px solid #c4c6ff!important;border-radius:22px!important;box-shadow:0 8px 0 #17104e,0 13px 20px #0008!important;filter:saturate(1.25)}
 body[data-game-theme="a"] #homeScreen .subject.math{background:linear-gradient(145deg,#188cfd,#0431a7)!important}
@@ -45,9 +45,9 @@ body[data-game-theme="c"] #homeScreen .subject.nature .symbol{background:#e3faeb
 body[data-game-theme="c"] #homeScreen .subject.history .symbol{background:#fff2dc!important}
 body[data-game-theme="c"] #homeScreen .subject.music .symbol{background:#f4e9ff!important}
 /* Výuka / Procvičování / Test: graficky odlišné režimy */
-body[data-game-theme="a"] #advSubjectMenu{background:linear-gradient(#100c48b0,#241060d9),url('./assets/pozadi/pozadi-a.webp') center / cover fixed!important}
-body[data-game-theme="b"] #advSubjectMenu{background:linear-gradient(#d5f6ff66,#b6ebd877),url('./assets/pozadi/pozadi-b.webp') center / cover fixed!important}
-body[data-game-theme="c"] #advSubjectMenu{background:url('./assets/pozadi/pozadi-c.webp') center / cover fixed!important}
+body[data-game-theme="a"] #advSubjectMenu{background:linear-gradient(#100c48b0,#241060d9),url('../pozadi/pozadi-a.webp') center / cover fixed!important}
+body[data-game-theme="b"] #advSubjectMenu{background:linear-gradient(#d5f6ff66,#b6ebd877),url('../pozadi/pozadi-b.webp') center / cover fixed!important}
+body[data-game-theme="c"] #advSubjectMenu{background:url('../pozadi/pozadi-c.webp') center / cover fixed!important}
 body[data-game-theme="a"] .adv-menu-head{background:#1d1559db!important;border:2px solid #9e8bef!important;color:#fff!important}
 body[data-game-theme="a"] .adv-menu-title,body[data-game-theme="a"] .adv-menu-sub{color:#fff!important;text-shadow:0 2px 4px #0009!important}
 body[data-game-theme="b"] .adv-menu-head{background:#f4fdfff0!important;border:2px solid #fff!important}

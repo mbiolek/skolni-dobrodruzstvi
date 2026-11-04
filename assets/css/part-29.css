@@ -1,28 +1,28 @@
 
-html,body{overscroll-behavior-y:none!important}body{touch-action:pan-x pan-y pinch-zoom}body[data-game-theme="a"] #homeScreen .subject.math .symbol{background-image:url("./assets/ikony/ikona-math-a.webp")!important}
-body[data-game-theme="a"] #homeScreen .subject.english .symbol{background-image:url("./assets/ikony/ikona-english-a.webp")!important}
-body[data-game-theme="a"] #homeScreen .subject.czech .symbol{background-image:url("./assets/ikony/ikona-czech-a.webp")!important}
-body[data-game-theme="a"] #homeScreen .subject.nature .symbol{background-image:url("./assets/ikony/ikona-nature-a.webp")!important}
-body[data-game-theme="a"] #homeScreen .subject.history .symbol{background-image:url("./assets/ikony/ikona-history-a.webp")!important}
-body[data-game-theme="a"] #homeScreen .subject.music .symbol{background-image:url("./assets/ikony/ikona-music-a.webp")!important}
-body[data-game-theme="b"] #homeScreen .subject.math .symbol{background-image:url("./assets/ikony/ikona-math-b.webp")!important}
-body[data-game-theme="b"] #homeScreen .subject.english .symbol{background-image:url("./assets/ikony/ikona-english-b.webp")!important}
-body[data-game-theme="b"] #homeScreen .subject.czech .symbol{background-image:url("./assets/ikony/ikona-czech-b.webp")!important}
-body[data-game-theme="b"] #homeScreen .subject.nature .symbol{background-image:url("./assets/ikony/ikona-nature-b.webp")!important}
-body[data-game-theme="b"] #homeScreen .subject.history .symbol{background-image:url("./assets/ikony/ikona-history-b.webp")!important}
-body[data-game-theme="b"] #homeScreen .subject.music .symbol{background-image:url("./assets/ikony/ikona-music-b.webp")!important}
-body[data-game-theme="c"] #homeScreen .subject.math .symbol{background-image:url("./assets/ikony/ikona-math-c.webp")!important}
-body[data-game-theme="c"] #homeScreen .subject.english .symbol{background-image:url("./assets/ikony/ikona-english-c.webp")!important}
-body[data-game-theme="c"] #homeScreen .subject.czech .symbol{background-image:url("./assets/ikony/ikona-czech-c.webp")!important}
-body[data-game-theme="c"] #homeScreen .subject.nature .symbol{background-image:url("./assets/ikony/ikona-nature-c.webp")!important}
-body[data-game-theme="c"] #homeScreen .subject.history .symbol{background-image:url("./assets/ikony/ikona-history-c.webp")!important}
-body[data-game-theme="c"] #homeScreen .subject.music .symbol{background-image:url("./assets/ikony/ikona-music-c.webp")!important}
-body[data-game-theme="d"] #homeScreen .subject.math .symbol{background-image:url("./assets/ikony/ikona-math-d.webp")!important}
-body[data-game-theme="d"] #homeScreen .subject.english .symbol{background-image:url("./assets/ikony/ikona-english-d.webp")!important}
-body[data-game-theme="d"] #homeScreen .subject.czech .symbol{background-image:url("./assets/ikony/ikona-czech-d.webp")!important}
-body[data-game-theme="d"] #homeScreen .subject.nature .symbol{background-image:url("./assets/ikony/ikona-nature-d.webp")!important}
-body[data-game-theme="d"] #homeScreen .subject.history .symbol{background-image:url("./assets/ikony/ikona-history-d.webp")!important}
-body[data-game-theme="d"] #homeScreen .subject.music .symbol{background-image:url("./assets/ikony/ikona-music-d.webp")!important}
+html,body{overscroll-behavior-y:none!important}body{touch-action:pan-x pan-y pinch-zoom}body[data-game-theme="a"] #homeScreen .subject.math .symbol{background-image:url("../ikony/ikona-math-a.webp")!important}
+body[data-game-theme="a"] #homeScreen .subject.english .symbol{background-image:url("../ikony/ikona-english-a.webp")!important}
+body[data-game-theme="a"] #homeScreen .subject.czech .symbol{background-image:url("../ikony/ikona-czech-a.webp")!important}
+body[data-game-theme="a"] #homeScreen .subject.nature .symbol{background-image:url("../ikony/ikona-nature-a.webp")!important}
+body[data-game-theme="a"] #homeScreen .subject.history .symbol{background-image:url("../ikony/ikona-history-a.webp")!important}
+body[data-game-theme="a"] #homeScreen .subject.music .symbol{background-image:url("../ikony/ikona-music-a.webp")!important}
+body[data-game-theme="b"] #homeScreen .subject.math .symbol{background-image:url("../ikony/ikona-math-b.webp")!important}
+body[data-game-theme="b"] #homeScreen .subject.english .symbol{background-image:url("../ikony/ikona-english-b.webp")!important}
+body[data-game-theme="b"] #homeScreen .subject.czech .symbol{background-image:url("../ikony/ikona-czech-b.webp")!important}
+body[data-game-theme="b"] #homeScreen .subject.nature .symbol{background-image:url("../ikony/ikona-nature-b.webp")!important}
+body[data-game-theme="b"] #homeScreen .subject.history .symbol{background-image:url("../ikony/ikona-history-b.webp")!important}
+body[data-game-theme="b"] #homeScreen .subject.music .symbol{background-image:url("../ikony/ikona-music-b.webp")!important}
+body[data-game-theme="c"] #homeScreen .subject.math .symbol{background-image:url("../ikony/ikona-math-c.webp")!important}
+body[data-game-theme="c"] #homeScreen .subject.english .symbol{background-image:url("../ikony/ikona-english-c.webp")!important}
+body[data-game-theme="c"] #homeScreen .subject.czech .symbol{background-image:url("../ikony/ikona-czech-c.webp")!important}
+body[data-game-theme="c"] #homeScreen .subject.nature .symbol{background-image:url("../ikony/ikona-nature-c.webp")!important}
+body[data-game-theme="c"] #homeScreen .subject.history .symbol{background-image:url("../ikony/ikona-history-c.webp")!important}
+body[data-game-theme="c"] #homeScreen .subject.music .symbol{background-image:url("../ikony/ikona-music-c.webp")!important}
+body[data-game-theme="d"] #homeScreen .subject.math .symbol{background-image:url("../ikony/ikona-math-d.webp")!important}
+body[data-game-theme="d"] #homeScreen .subject.english .symbol{background-image:url("../ikony/ikona-english-d.webp")!important}
+body[data-game-theme="d"] #homeScreen .subject.czech .symbol{background-image:url("../ikony/ikona-czech-d.webp")!important}
+body[data-game-theme="d"] #homeScreen .subject.nature .symbol{background-image:url("../ikony/ikona-nature-d.webp")!important}
+body[data-game-theme="d"] #homeScreen .subject.history .symbol{background-image:url("../ikony/ikona-history-d.webp")!important}
+body[data-game-theme="d"] #homeScreen .subject.music .symbol{background-image:url("../ikony/ikona-music-d.webp")!important}
 
 /* Exercise text must never inherit pale-on-pale from a theme. */
 

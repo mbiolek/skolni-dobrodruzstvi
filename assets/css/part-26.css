@@ -1,11 +1,11 @@
 
 /* v40: definitive image mapping. Keep actual HTML text visible. */
-body[data-game-theme="a"]{background:#140b40 url('./assets/pozadi/pozadi-a.webp') center top/cover fixed!important}
-body[data-game-theme="b"]{background:#aee4f6 url('./assets/pozadi/pozadi-b.webp') center top/cover fixed!important}
-body[data-game-theme="c"]{background:#eaf5ff url('./assets/pozadi/pozadi-c.webp') center top/cover fixed!important}
-body[data-game-theme="a"] :is(#homeScreen,#authGate,#advSubjectMenu){background:linear-gradient(#160c3c36,#170d4060),url('./assets/pozadi/pozadi-a.webp') center top/cover fixed!important}
-body[data-game-theme="b"] :is(#homeScreen,#authGate,#advSubjectMenu){background:linear-gradient(#c9f8ff38,#b5fff138),url('./assets/pozadi/pozadi-b.webp') center top/cover fixed!important}
-body[data-game-theme="c"] :is(#homeScreen,#authGate,#advSubjectMenu){background:linear-gradient(#f4f9ff4d,#f4f9ff70),url('./assets/pozadi/pozadi-c.webp') center top/cover fixed!important}
+body[data-game-theme="a"]{background:#140b40 url('../pozadi/pozadi-a.webp') center top/cover fixed!important}
+body[data-game-theme="b"]{background:#aee4f6 url('../pozadi/pozadi-b.webp') center top/cover fixed!important}
+body[data-game-theme="c"]{background:#eaf5ff url('../pozadi/pozadi-c.webp') center top/cover fixed!important}
+body[data-game-theme="a"] :is(#homeScreen,#authGate,#advSubjectMenu){background:linear-gradient(#160c3c36,#170d4060),url('../pozadi/pozadi-a.webp') center top/cover fixed!important}
+body[data-game-theme="b"] :is(#homeScreen,#authGate,#advSubjectMenu){background:linear-gradient(#c9f8ff38,#b5fff138),url('../pozadi/pozadi-b.webp') center top/cover fixed!important}
+body[data-game-theme="c"] :is(#homeScreen,#authGate,#advSubjectMenu){background:linear-gradient(#f4f9ff4d,#f4f9ff70),url('../pozadi/pozadi-c.webp') center top/cover fixed!important}
 /* Responsive, readable subject cards: do not hide text or rely on labels embedded in images */
 body[data-game-theme] #homeScreen :is(.subject-grid,.v23-extra-grid){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
 body[data-game-theme] #homeScreen .subject{box-sizing:border-box!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:center!important;gap:6px!important;padding:12px 8px!important;min-height:192px!important;aspect-ratio:auto!important;background-image:none!important;overflow:visible!important;text-align:center!important;position:relative!important}
@@ -19,12 +19,12 @@ body[data-game-theme="a"] #homeScreen .subject strong,body[data-game-theme="a"] 
 body[data-game-theme="b"] #homeScreen .subject{background:linear-gradient(160deg,#e4faff,#ffffffed)!important;border:3px solid white!important;color:#123b70!important;box-shadow:0 7px 0 #669fbc!important}
 body[data-game-theme="c"] #homeScreen .subject{background:#ffffffed!important;border:1px solid #dce7f7!important;color:#173a70!important;box-shadow:0 6px 18px #6486b536!important}
 body[data-game-theme="a"] #homeScreen .subject .symbol{width:130px!important;max-width:130px!important;height:100px!important;background-size:contain!important}
-body[data-game-theme] #homeScreen .subject.math .symbol{background-image:url('./assets/ikony/ikona-math.webp')!important}
-body[data-game-theme] #homeScreen .subject.english .symbol{background-image:url('./assets/ikony/ikona-english.webp')!important}
-body[data-game-theme] #homeScreen .subject.czech .symbol{background-image:url('./assets/ikony/ikona-czech.webp')!important}
-body[data-game-theme] #homeScreen .subject.nature .symbol{background-image:url('./assets/ikony/ikona-nature.webp')!important}
-body[data-game-theme] #homeScreen .subject.history .symbol{background-image:url('./assets/ikony/ikona-history.webp')!important}
-body[data-game-theme] #homeScreen .subject.music .symbol{background-image:url('./assets/ikony/ikona-music.webp')!important}
+body[data-game-theme] #homeScreen .subject.math .symbol{background-image:url('../ikony/ikona-math.webp')!important}
+body[data-game-theme] #homeScreen .subject.english .symbol{background-image:url('../ikony/ikona-english.webp')!important}
+body[data-game-theme] #homeScreen .subject.czech .symbol{background-image:url('../ikony/ikona-czech.webp')!important}
+body[data-game-theme] #homeScreen .subject.nature .symbol{background-image:url('../ikony/ikona-nature.webp')!important}
+body[data-game-theme] #homeScreen .subject.history .symbol{background-image:url('../ikony/ikona-history.webp')!important}
+body[data-game-theme] #homeScreen .subject.music .symbol{background-image:url('../ikony/ikona-music.webp')!important}
 /* Profile cards */
 body[data-game-theme="a"] #authGate .authbox{background:linear-gradient(140deg,#27105fef,#35167fe9)!important;border:3px solid #c7b0ff!important;color:#fff!important}
 body[data-game-theme="b"] #authGate .authbox{background:#f2fcffed!important;border:3px solid #fff!important}
@@ -35,9 +35,9 @@ body[data-game-theme="c"] #authGate .userbtn{background:#f7faff!important;color:
 /* Mode cards retain text and real artwork */
 body[data-game-theme] .adv-mode{background-image:none!important;overflow:visible!important}
 body[data-game-theme] .adv-mode .adv-art{display:block!important;font-size:0!important;background-repeat:no-repeat!important;background-size:contain!important;background-position:center!important;min-width:70px!important;min-height:78px!important}
-body[data-game-theme] .adv-mode.teach .adv-art{background-image:url('./assets/ikony/ikona-teach.webp')!important}
-body[data-game-theme] .adv-mode.practice .adv-art{background-image:url('./assets/ikony/ikona-practice.webp')!important}
-body[data-game-theme] .adv-mode.test .adv-art{background-image:url('./assets/ikony/ikona-test.webp')!important}
+body[data-game-theme] .adv-mode.teach .adv-art{background-image:url('../ikony/ikona-teach.webp')!important}
+body[data-game-theme] .adv-mode.practice .adv-art{background-image:url('../ikony/ikona-practice.webp')!important}
+body[data-game-theme] .adv-mode.test .adv-art{background-image:url('../ikony/ikona-test.webp')!important}
 body[data-game-theme="a"] .adv-mode{background:linear-gradient(135deg,#292097,#7026ae)!important;color:#fff!important;border:3px solid #d4baff!important}
 body[data-game-theme="b"] .adv-mode{background:#e9fafff5!important;color:#163b70!important;border:3px solid white!important}
 body[data-game-theme="c"] .adv-mode{background:#fffffff2!important;color:#163b70!important;border:1px solid #dce7f7!important}

@@ -1,7 +1,7 @@
 
 #v37-splash{position:fixed;inset:0;z-index:200000;background:#09255a;display:flex;align-items:center;justify-content:center;transition:opacity .45s ease;pointer-events:none}
 #v37-splash.v37-hide{opacity:0}
-#v37-splash .v37-splash-img{height:min(89dvh,750px);width:min(92vw,440px);background:url('./assets/uvodni/splash-chest.webp') center/contain no-repeat;border-radius:22px;filter:drop-shadow(0 15px 30px #0007)}
+#v37-splash .v37-splash-img{height:min(89dvh,750px);width:min(92vw,440px);background:url('../uvodni/splash-chest.webp') center/contain no-repeat;border-radius:22px;filter:drop-shadow(0 15px 30px #0007)}
 #v37-splash .v37-splash-title{position:absolute;top:5%;left:0;right:0;text-align:center;color:white;font-size:clamp(22px,5vw,35px);font-weight:1000;text-shadow:0 3px 9px #001a4d}
 #v37-splash .v37-splash-caption{position:absolute;bottom:5%;left:0;right:0;text-align:center;color:#fff;font-size:15px;font-weight:750;text-shadow:0 2px 5px #001a4d}
 #v37-avatar-filters{display:flex;gap:7px;overflow-x:auto;padding:8px 0 12px;scrollbar-width:thin}

@@ -1,14 +1,14 @@
 
 /* Čtvrté prostředí: Hradní styl (v45.2 oprava) */
-body[data-game-theme="d"]{background-image:url("./assets/pozadi/hradni-styl.webp")!important;background-size:cover!important;background-position:center!important;background-attachment:fixed!important}
-body[data-game-theme="d"] #authGate{background:linear-gradient(#06152b55,#06152b66),url("./assets/pozadi/hradni-styl.webp") center/cover fixed!important}
-body[data-game-theme="d"] #advSubjectMenu,body[data-game-theme="d"] #subjectHub{background:linear-gradient(#07162988,#071629a0),url("./assets/pozadi/hradni-styl.webp") center/cover fixed!important}
+body[data-game-theme="d"]{background-image:url("../pozadi/hradni-styl.webp")!important;background-size:cover!important;background-position:center!important;background-attachment:fixed!important}
+body[data-game-theme="d"] #authGate{background:linear-gradient(#06152b55,#06152b66),url("../pozadi/hradni-styl.webp") center/cover fixed!important}
+body[data-game-theme="d"] #advSubjectMenu,body[data-game-theme="d"] #subjectHub{background:linear-gradient(#07162988,#071629a0),url("../pozadi/hradni-styl.webp") center/cover fixed!important}
 body[data-game-theme="d"] #homeScreen .subject{backdrop-filter:blur(4px);border:2px solid #ffffffd9!important;border-radius:16px!important;box-shadow:0 5px 0 #071c3870,0 9px 16px #0005!important}
 body[data-game-theme="d"] #homeScreen .subject .symbol{height:clamp(62px,15vw,115px)!important;max-width:125px!important;width:100%!important}
-body[data-game-theme="d"] #homeScreen .subject.english .symbol{background:url("./assets/ikony/hradni-styl-english.webp") center/contain no-repeat!important;border-radius:12px!important}
-body[data-game-theme="d"] #homeScreen .subject.czech .symbol{background:url("./assets/ikony/hradni-styl-czech.webp") center/contain no-repeat!important;border-radius:12px!important}
-body[data-game-theme="d"] #homeScreen .subject.music .symbol{background:url("./assets/ikony/hradni-styl-music.webp") center/contain no-repeat!important;border-radius:12px!important}
-body[data-game-theme="d"] #homeScreen .subject.math .symbol{background:url("./assets/ikony/hradni-styl-math.webp") center/contain no-repeat!important;border-radius:12px!important}
-body[data-game-theme="d"] #homeScreen .subject.nature .symbol{background:url("./assets/ikony/hradni-styl-nature.webp") center/contain no-repeat!important;border-radius:12px!important}
-body[data-game-theme="d"] #homeScreen .subject.history .symbol{background:url("./assets/ikony/hradni-styl-history.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="d"] #homeScreen .subject.english .symbol{background:url("../ikony/hradni-styl-english.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="d"] #homeScreen .subject.czech .symbol{background:url("../ikony/hradni-styl-czech.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="d"] #homeScreen .subject.music .symbol{background:url("../ikony/hradni-styl-music.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="d"] #homeScreen .subject.math .symbol{background:url("../ikony/hradni-styl-math.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="d"] #homeScreen .subject.nature .symbol{background:url("../ikony/hradni-styl-nature.webp") center/contain no-repeat!important;border-radius:12px!important}
+body[data-game-theme="d"] #homeScreen .subject.history .symbol{background:url("../ikony/hradni-styl-history.webp") center/contain no-repeat!important;border-radius:12px!important}
 

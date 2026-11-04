@@ -1,0 +1,1 @@
+Oprava relativnich cest CSS obrazku po presunu stylu do assets/css. Aktualizovana offline cache. Zachovana struktura a data aplikace.
