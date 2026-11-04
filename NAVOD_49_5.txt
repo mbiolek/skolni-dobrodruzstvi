@@ -1,0 +1,4 @@
+Školní dobrodružství 49.5 – konzervativní revize a úklid.
+Změny: sjednocené označení verze 49.5, aktualizovaná cache PWA, odstraněné odpojené JS moduly a historické návody.
+Mapy, data profilů, ostatní funkční skripty a grafické podklady ponechány.
+Tato revize nezaručuje opravu geografických nepřesností ani úplné otestování uživatelských scénářů.
