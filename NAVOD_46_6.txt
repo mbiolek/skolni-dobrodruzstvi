@@ -1,7 +1,0 @@
-Školní dobrodružství 46.6
-
-Nové: přiblížení a posun výukových i interaktivních map dvěma prsty; tlačítka +, −, Celá mapa. Procvičování klepnutím na body zachováno.
-
-Nahrát celý obsah ZIP do kořene repozitáře GitHub Pages. Neodstraňovat data aplikace ani localStorage: profily a výsledky jsou uloženy v telefonu.
-
-V Termuxu ve složce ~/skolni-github: git add -A && git commit -m "Verze 46.6 - interaktivni mapy" && git push origin main

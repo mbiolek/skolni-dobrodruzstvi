@@ -1,1 +1,0 @@
-Školní dobrodružství 49.4 – oprava neviditelných podkladů map. SVG obsahují podklad přímo v souboru; interaktivní oblasti pohoří a říční trasy zůstávají oddělené. Geometrie řek je stále orientační a vyžaduje geografické ověření.

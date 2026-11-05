@@ -1,1 +1,0 @@
-Školní dobrodružství 49.2 – vodstvo: samostatná vektorová mapa 24 řek podle dodaného obrázku, číslované body a informace o soutocích a úmořích. Tlačítko Mapa 24 řek (SVG) v atlasu Řeky. Geometrie je trasování PNG, nikoli ověřená GIS data. Stávající procvičování 17 řek zachováno.

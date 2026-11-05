@@ -1,1 +1,0 @@
-Verze 49.1 – Řeky a vodstvo: nový čistý SVG podklad, výuka, slepá mapa, test, opakování chyb a místní uložení výsledků. Geografický podklad vychází z původního SVG aplikace; přesnost všech jeho toků nebyla nezávisle ověřena. Ostatní témata zachována.

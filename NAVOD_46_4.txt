@@ -1,4 +1,0 @@
-Školní dobrodružství 46.4 – tři nové barevné výukové mapy ČR.
-Ve Vlastivědě otevřete Slepou mapu ČR; přepínejte Pohoří, Řeky, Kraje/Města. Tlačítko Procvičování zobrazí původní orientační slepou mapu.
-Obrázky jsou PNG, nejsou to skutečná vektorová data. Uložené výsledky ani PIN se nemažou.
-Nasazení: ZIP rozbalit do kořene GitHub Pages repozitáře a nahrát změny.

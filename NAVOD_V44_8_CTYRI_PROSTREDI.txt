@@ -1,4 +1,0 @@
-ŠKOLNÍ DOBRODRUŽSTVÍ 44.8 – oprava čtyř prostředí
-A: Hrad, B: Příroda, C: Škola, D: Hradní styl.
-Nahrajte obsah ZIP včetně assets do kořene GitHub repozitáře.
-Neodinstalovávejte PWA, aby se zachovala místní data.

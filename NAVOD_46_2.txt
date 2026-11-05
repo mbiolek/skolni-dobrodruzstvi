@@ -1,5 +1,0 @@
-ŠKOLNÍ DOBRODRUŽSTVÍ 46.2
-Plastická mapa ČR v SVG, čtyři výukové režimy (pohoří, řeky, kraje, města).
-Poznámka: reliéf je ilustrativní, ne skutečný digitální model terénu. Kraje zobrazují dodanou mapu s hranicemi, jejich klikací body jsou orientační.
-Instalace: rozbalit ZIP do repozitáře, git add -A, git commit -m "Mapy 46.2", git push origin main.
-Nemažte data aplikace ani localStorage.

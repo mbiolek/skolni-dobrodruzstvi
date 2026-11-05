@@ -1,0 +1,18 @@
+SKOLNI DOBRODRUZSTVI 50.2.2 - CISTA INSTALACE
+
+Toto je technicka aktualizace 50.2.1 s novou offline cache a aktualizovanym oznacenim verze.
+Nejde o slibenou kompletni prestavbu 50.3.
+
+Postup Termux (ZIP musi byt ve slozce Download):
+cd ~/skolni-github
+mkdir -p ~/skolni-zaloha
+cp -a . ~/skolni-zaloha/pred-50-2-2
+find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +
+unzip -o ~/storage/downloads/Skolni_50_2_2_CISTA_INSTALACE.zip
+git add -A
+git commit -m "Cista instalace 50.2.2"
+git push origin main
+
+Tento postup maze stare soubory v lokalnim repozitari mimo .git.
+NEMAZE data ulozena v prohlizeci ani ve Firebase/Google cloudu.
+Smazani dat webu provadejte az po overeni nasazeni a pouze pokud je opravdu chcete odstranit.

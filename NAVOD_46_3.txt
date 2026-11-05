@@ -1,1 +1,0 @@
-Verze 46.3: Oprava navratu z matematiky do nabidky predmetu; vypnuta stara duplicitni mapa, nova barevna mapa v samostatne karte. Data profilu se nemazou.

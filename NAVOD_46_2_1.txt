@@ -1,1 +1,0 @@
-Verze 46.2.1: Oprava systémového gesta Zpět z Matematika > Výuka do nabídky Matematika. Zachována data profilů.

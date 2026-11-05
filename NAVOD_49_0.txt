@@ -1,5 +1,0 @@
-Školní dobrodružství 49.0
-Kraje: nově dodaný SVG soubor. Pohoří: 17 dodaných PNG map, výuka s procházením a poznávání podle obrázků (4 možnosti). Řeky: beze změny.
-Stávající profily a uložená data se nemažou.
-Instalace: rozbalit ZIP do kořene GitHub Pages repozitáře, zachovat adresáře a přepsat soubory.
-Poznámka: mapy pohoří jsou PNG, nikoli vektor. Přesnost geografických hranic nebyla nezávisle ověřena.

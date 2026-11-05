@@ -1,4 +1,0 @@
-Verze 46.7 – oprava dvojité obsluhy gesta Zpět a vykreslení map.
-V Termuxu rozbalte ZIP přímo do ~/skolni-github, poté git add -A, git commit a git push.
-Neodinstalovávejte PWA ani nemažte její data: obsahují uložený postup.
-Ověřte: Matematika > Výuka > Zpět (do menu), Vlastivěda > mapa > Zpět (do témat), znovu Zpět (domů).
