@@ -1,0 +1,1 @@
+50.6.1: Oprava chybného označení 50.4.1 v modulu avatarů; oprava časovače automatického zamykání, který se při přihlášení neresetoval; nový klíč PWA cache.
