@@ -1,0 +1,20 @@
+/* 50.4 – samostatná rodičovská správa a Merlin */
+body.parent-role #authAdmin.on{display:none!important}
+body.parent-role.sd54-admin-open #authAdmin.on{display:block!important;position:fixed!important;inset:0!important;overflow-y:auto!important;z-index:2147483000!important;max-width:none!important;margin:0!important;border-radius:0!important;padding:calc(env(safe-area-inset-top) + 65px) max(16px,calc((100vw - 680px)/2)) 90px!important;background:linear-gradient(160deg,#eaf7ff,#fff9ec)!important;color:#173450!important;box-sizing:border-box!important}
+#sd54-admin-close{display:none}body.parent-role.sd54-admin-open #sd54-admin-close{display:block;position:fixed;top:calc(env(safe-area-inset-top) + 8px);left:12px;z-index:2147483100;background:#fff;color:#153b65;border:2px solid #b9d6ed;border-radius:14px;padding:11px 17px;font-weight:800}
+#sd54-admin-open{display:none;position:relative;margin:12px auto 18px;width:min(94%,600px);padding:14px;border-radius:17px;background:#fff;color:#153b65;border:2px solid #a9c9e1;font-weight:800;font-size:17px}
+body.parent-role #sd54-admin-open{display:block}
+#authAdmin .sd54-schools-btn{display:block;width:100%;margin:15px 0;padding:15px;background:#e9f4ff;color:#153b65;border:2px solid #a8cce6;border-radius:15px;font-weight:800}
+body.sd54-admin-open{overflow:hidden!important}
+#sd54-merlin{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));right:10px;z-index:999;display:none;align-items:flex-end;gap:5px;pointer-events:none}
+body.sd54-show-merlin #sd54-merlin{display:flex}
+#sd54-merlin img{width:clamp(95px,24vw,155px);height:auto;object-fit:contain;filter:drop-shadow(0 5px 7px #0006);pointer-events:auto;cursor:pointer}
+#sd54-merlin .sd54-scroll{pointer-events:auto;max-width:min(54vw,270px);background:#fff9e9;color:#3c2c15;border:2px solid #bb9357;border-radius:15px;padding:10px 12px;box-shadow:0 4px 12px #0003;font-size:14px;line-height:1.35}
+#sd54-merlin .sd54-scroll[hidden]{display:none!important}
+#sd54-merlin .sd54-scroll strong{display:block;margin-bottom:3px}
+#sd54-merlin .sd54-scroll button{display:block;margin:7px 0 0 auto;border:0;border-radius:8px;padding:4px 9px;background:#25568a;color:#fff}
+#sd54-merlin-toggle{position:fixed;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:998;border:1px solid #accbe4;border-radius:16px;padding:5px 9px;background:#fff;color:#1b4770;font-size:12px;display:none}
+body.sd54-show-merlin #sd54-merlin-toggle{display:block}
+body.sd52-open #sd54-merlin{z-index:2147483401;bottom:calc(30px + env(safe-area-inset-bottom))}
+body.sd54-admin-open #sd54-merlin,body.sd54-admin-open #sd54-merlin-toggle,body:has(#authGate:not(.off)) #sd54-merlin{display:none!important}
+@media(prefers-reduced-motion:reduce){#sd54-merlin img{animation:none!important}}

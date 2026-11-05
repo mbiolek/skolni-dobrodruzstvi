@@ -1,0 +1,11 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.4
+
+- Rodičovská správa má samostatnou obrazovku otevřenou z hlavní nabídky.
+- Správa škol a měsíčních plánů je uvnitř rodičovské správy.
+- Tlačítko učebnic bylo odebráno z hlavní obrazovky; kapitoly zůstávají u předmětů.
+- Merlin: animovaná chůze, zastavení s pergamenem, textové rady po klepnutí.
+- Sjednoceno označení verze a diagnostiky.
+- Zachovány stávající profily, výsledky, vzhled, matematika, avatary a mapy.
+
+INSTALACE: rozbalit kompletní ZIP do kořene GitHub Pages repozitáře, nepřepisovat adresář .git.
+Upozornění: nové otázkové banky a plně animované rozvinutí pergamenu nejsou součástí této verze.
