@@ -1,0 +1,10 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.3 – ČISTÝ TESTOVACÍ START
+
+- Při prvním spuštění 50.3 se jednorázově vymažou místní data aplikace v tomto prohlížeči (profily, výsledky, plány, nastavení).
+- Synchronizace Google/Firebase je vypnuta a její panel se nenačítá. Staré údaje na serveru se tím NEODSTRAŇUJÍ.
+- Správa škol na úvodní stránce je jen pro rodiče.
+- Opravené promíchání otázek bez opakování v rámci jednoho testu v modulu měsíčních plánů.
+- Aktualizováno označení verze a offline cache.
+- Zachovány stávající moduly matematiky, avatarů a map.
+
+OMEZENÍ: Kompletní nové rozhraní všech předmětů a rozsáhlejší databáze otázek ještě nejsou hotové. V měsíčním plánu lze zkoušet pouze témata, pro která jsou dostupné otázky.
