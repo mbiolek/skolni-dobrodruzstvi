@@ -1,0 +1,14 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.6 – MOUDRÝ MERLIN
+
+- Merlinův klidnější, pomalejší hlasový přednes (0,72) a hlubší výška hlasu (0,78).
+- Přednost českému mužskému hlasu, pokud jej telefon nabízí. Jinak český hlas zařízení.
+- Nápověda přesunuta dolů, aby nepřekrývala nadpisy.
+- Větší Merlin s pergamenem, ovládání přehrání/pauzy/hlasu a rychlosti.
+- Jemnější průsvitné karty v prostředí učiva.
+- Zachována původní výuka, nastavení, profily a výsledky.
+
+POZOR: Toto je hlasová syntéza telefonu, nikoli samostatně vytvořený studiový hlas herce.
+Automatické přehrávání může prohlížeč blokovat do prvního klepnutí.
+
+INSTALACE: Kompletní ZIP rozbalit do složky GitHub Pages, NEODSTRAŇOVAT .git.
+git add -A && git commit -m "Verze 50.6 Moudry Merlin" && git push origin main
