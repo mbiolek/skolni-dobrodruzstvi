@@ -1,0 +1,12 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.5
+
+Novinky:
+- Merlin se po klepnutí zvětší a zobrazí výklad na pergamenu.
+- Automatické předčítání výkladu v modulu učebnic 5. třídy a v měsíčních plánech.
+- Tlačítko ? Nápověda v přihlášeném profilu.
+- Český hlas přes syntézu řeči v telefonu (pokud je dostupná), přehrání, pauza, hlas zapnout/vypnout, rychlost.
+- Průsvitné karty nad pozadím vybraného prostředí v modulech výuky.
+- Původní funkce a data aplikace zůstávají zachovány.
+
+UPOZORNĚNÍ: Automatické spuštění hlasu může mobilní prohlížeč blokovat, dokud uživatel neklepne na tlačítko. Pokud se hlas nespustí, klepněte na Přečíst.
+Instalace: kompletní ZIP rozbalit do složky GitHub Pages, zachovat .git, git add -A; git commit -m "Verze 50.5"; git push origin main.
