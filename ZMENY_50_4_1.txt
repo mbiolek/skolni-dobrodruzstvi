@@ -1,0 +1,7 @@
+Školní dobrodružství 50.4.1
+- Oprava verze v dolním štítku, diagnostice a obrazovkách.
+- Merlinův pergamen se po 6,5 s sám schová, lze jej zavřít tlačítkem.
+- Merlin je menší, bublina je výše nad spodní navigací.
+- Merlin používá animaci čelního pohledu s pergamenem z dodaných GIFů.
+- Obnovená PWA cache.
+- Profily a výsledky nejsou záměrně mazány.

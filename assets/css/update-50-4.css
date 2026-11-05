@@ -18,3 +18,13 @@ body.sd54-show-merlin #sd54-merlin-toggle{display:block}
 body.sd52-open #sd54-merlin{z-index:2147483401;bottom:calc(30px + env(safe-area-inset-bottom))}
 body.sd54-admin-open #sd54-merlin,body.sd54-admin-open #sd54-merlin-toggle,body:has(#authGate:not(.off)) #sd54-merlin{display:none!important}
 @media(prefers-reduced-motion:reduce){#sd54-merlin img{animation:none!important}}
+
+/* 50.4.1: Merlin nezakrývá spodní ovládání a zpráva se sama zavírá */
+body.sd541-merlin-hidden #sd54-merlin{display:none!important}
+#sd54-merlin{bottom:calc(72px + env(safe-area-inset-bottom));right:12px;align-items:flex-end;max-width:calc(100vw - 24px)}
+#sd54-merlin img{width:clamp(58px,15vw,88px);max-height:110px;object-fit:contain}
+#sd54-merlin .sd54-scroll{position:fixed;bottom:calc(188px + env(safe-area-inset-bottom));right:12px;left:auto;width:min(280px,calc(100vw - 24px));max-width:none;max-height:min(180px,35vh);overflow-y:auto;box-sizing:border-box;font-size:13px;padding:12px 14px 10px}
+#sd54-merlin .sd54-scroll button{min-height:34px;padding:6px 14px}
+#sd54-merlin-toggle{display:none!important}
+body.sd52-open #sd54-merlin{bottom:calc(72px + env(safe-area-inset-bottom));z-index:2147483401}
+@media(max-width:420px){#sd54-merlin .sd54-scroll{bottom:calc(176px + env(safe-area-inset-bottom))}}
