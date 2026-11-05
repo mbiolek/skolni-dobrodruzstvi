@@ -1,0 +1,18 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.6.2
+
+Opraveno zobrazení animovaného Merlina. Dříve byl Merlin schovaný pod tlačítkem „? Merlin poradí“, protože se oba prvky překrývaly a tlačítko mělo vyšší vrstvu.
+
+- Merlin nyní stojí nad tlačítkem a je viditelný na hlavní obrazovce i při práci s předměty.
+- Klepnutí na Merlina otevře jeho nápovědu stejně jako tlačítko.
+- Postavička se skryje během přihlášení, v rodičovské správě a při otevřeném dialogu.
+- Nové názvy souborů CSS/JS a nová offline cache zajistí načtení aktualizace.
+- Verze a oprava přihlášení z 50.6.1 zachovány.
+
+NASAZENÍ přes Termux (ve složce projektu):
+cd ~/skolni-github
+unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_50_6_2_MERLIN_VIDITELNY.zip
+git add -A
+git commit -m "50.6.2 Merlin viditelny"
+git push origin main
+
+Po publikování otevři aplikaci v Chrome, případně použij dostupnou výzvu „Aktualizovat“. Není potřeba mazat profily ani data aplikace.
