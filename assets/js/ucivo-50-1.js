@@ -106,7 +106,7 @@ english:{name:'Angličtina – Project 1',topics:[
 ['People – vzhled a popis','Tall znamená vysoký, short malý/krátký, curly hair kudrnaté vlasy.','Co znamená curly hair?','kudrnaté vlasy','rovné vlasy','hnědé oči','krátké nohy'],
 ['Nakupování a oblečení','Clothes znamená oblečení, shoes boty, shop obchod.','Co znamená shoes?','boty','kalhoty','košile','čepice']
 ]}};
-const root=document.createElement('section');root.id='sdCurriculum';root.hidden=true;root.innerHTML=`<div class="sd-wrap"><header class="sd-top"><button type="button" id="sdBack">← Zpět</button><span>Školní dobrodružství · 50.1</span><button type="button" id="sdClose">⌂ Domů</button></header><h1 id="sdTitle">Učivo 5. ročníku</h1><p id="sdSub"></p><div id="sdContent"></div></div>`;document.body.append(root);
+const root=document.createElement('section');root.id='sdCurriculum';root.hidden=true;root.innerHTML=`<div class="sd-wrap"><header class="sd-top"><button type="button" id="sdBack">← Zpět</button><span>Školní dobrodružství · 50.2.1</span><button type="button" id="sdClose">⌂ Domů</button></header><h1 id="sdTitle">Učivo 5. ročníku</h1><p id="sdSub"></p><div id="sdContent"></div></div>`;document.body.append(root);
 let subject=null,topic=null,mode=null,step=0,score=0,wrong=[],questions=[],selected=null;
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function open(){root.hidden=false;document.body.classList.add('sd-open');window.scrollTo(0,0)}
