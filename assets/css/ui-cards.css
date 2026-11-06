@@ -1,0 +1,89 @@
+/* 50.7.2 – One authoritative navigation card stylesheet. */
+:root{
+ --sd-ui-card-top:rgba(229,240,248,.76);
+ --sd-ui-card-bottom:rgba(191,214,231,.61);
+ --sd-ui-card-border:rgba(255,227,166,.95);
+ --sd-ui-card-text:#173959;
+ --sd-ui-card-detail:#365873;
+ --sd-ui-gap:12px;
+ --sd-ui-radius:22px;
+}
+/* Only navigation tile groups. Quiz choices and form actions are intentionally excluded. */
+.sd-ui-grid,
+#sd52 .sd-ui-grid,#sdCurriculum .sd-ui-grid,
+#vlastScreen .sd-ui-grid,#subjectHub .sd-ui-grid,#advSubjectMenu .sd-ui-grid,
+#v496TopicPanel .sd-ui-grid,#czechScreen .sd-ui-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:var(--sd-ui-gap)!important;align-items:stretch!important;margin-block:15px!important;
+}
+@media(min-width:640px){.sd-ui-grid,#sd52 .sd-ui-grid,#sdCurriculum .sd-ui-grid,
+#vlastScreen .sd-ui-grid,#subjectHub .sd-ui-grid,#advSubjectMenu .sd-ui-grid,
+#v496TopicPanel .sd-ui-grid,#czechScreen .sd-ui-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(min-width:1100px){.sd-ui-grid,#sd52 .sd-ui-grid,#sdCurriculum .sd-ui-grid,
+#vlastScreen .sd-ui-grid,#subjectHub .sd-ui-grid,#advSubjectMenu .sd-ui-grid,
+#v496TopicPanel .sd-ui-grid,#czechScreen .sd-ui-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+/* A single look, independent of the subject that rendered it. */
+body .sd-ui-card,
+#sd52 button.sd-ui-card,#sdCurriculum button.sd-ui-card,
+#vlastScreen button.sd-ui-card,#subjectHub button.sd-ui-card,
+#advSubjectMenu button.sd-ui-card,#v496TopicPanel button.sd-ui-card,
+#czechScreen button.sd-ui-card{
+ box-sizing:border-box!important;min-width:0!important;width:100%!important;
+ height:auto!important;min-height:150px!important;max-height:none!important;
+ margin:0!important;padding:12px 9px 14px!important;
+ display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;gap:7px!important;
+ text-align:center!important;border-radius:var(--sd-ui-radius)!important;
+ border:2px solid var(--sd-ui-card-border)!important;
+ background:linear-gradient(148deg,var(--sd-ui-card-top),var(--sd-ui-card-bottom))!important;
+ color:var(--sd-ui-card-text)!important;opacity:1!important;
+ box-shadow:0 5px 0 #17385644,0 10px 18px #09213b36,inset 0 1px 0 #ffffffa8!important;
+ -webkit-backdrop-filter:blur(5px)!important;backdrop-filter:blur(5px)!important;
+ text-shadow:none!important;overflow-wrap:anywhere!important;
+ cursor:pointer!important;transition:transform .17s,background .17s!important;
+}
+body button.sd-ui-card:hover{background:linear-gradient(148deg,rgba(244,250,255,.88),rgba(213,230,243,.75))!important;transform:translateY(-2px)!important}
+body button.sd-ui-card:active{transform:translateY(2px)!important}
+body button.sd-ui-card:focus-visible{outline:3px solid #ffcf5a!important;outline-offset:3px!important}
+body button.sd-ui-card strong,body button.sd-ui-card b,
+body button.sd-ui-card .sd-ui-card__title,
+#sd52 button.sd-ui-card strong,#sdCurriculum button.sd-ui-card strong{
+ color:var(--sd-ui-card-text)!important;font-weight:800!important;
+ font-size:clamp(14px,2.8vw,19px)!important;line-height:1.2!important;
+ margin:0!important;text-shadow:none!important;
+}
+body button.sd-ui-card small,body button.sd-ui-card .adv-desc,
+body button.sd-ui-card .hub-desc,body button.sd-ui-card .sd-ui-card__desc{
+ font-size:clamp(11px,2.05vw,13px)!important;line-height:1.26!important;
+ color:var(--sd-ui-card-detail)!important;font-weight:550!important;
+ margin:0!important;opacity:1!important;text-shadow:none!important;
+}
+.sd-ui-card__icon{
+ width:clamp(55px,12vw,78px)!important;height:clamp(55px,12vw,78px)!important;
+ display:grid!important;place-items:center!important;flex:0 0 auto!important;
+ order:-2!important;margin:0 auto 3px!important;border-radius:17px!important;
+ border:1px solid rgba(246,218,152,.93)!important;
+ background:radial-gradient(circle at 30% 20%,#fff9e5bd,#f5d99553 68%,#263d561c)!important;
+ box-shadow:inset 0 1px 4px #fff9,0 2px 5px #142f4e35!important;
+}
+.sd-ui-card__icon img{width:91%!important;height:91%!important;object-fit:contain!important;border-radius:11px!important}
+/* Legacy labels not part of the single navigation-card API. */
+.sd-ui-card .hub-start,.sd-ui-card .adv-cta,.sd-ui-card .hub-emoji,
+.sd-ui-card .adv-art,.sd-ui-card .sd570-art,.sd-ui-card .sd571-icon{display:none!important}
+/* Home uses the same shared grid and tokens but preserves its six illustrated covers. */
+#homeScreen .sd-ui-grid--covers{margin-block:0!important}
+#homeScreen .sd-ui-cover{border-radius:var(--sd-ui-radius)!important}
+/* Background shows through overlay panels, while readable content remains opaque. */
+#sd52,#sdCurriculum{background:rgba(6,26,54,.48)!important}
+#sd52 .sd52-wrap,#sdCurriculum .sd-wrap{max-width:1060px!important;color:#fff4df!important}
+#sd52 #sd52main>h1,#sd52 #sd52main>p,#sdCurriculum #sdTitle,#sdCurriculum #sdSub{
+ color:#fff5df!important;text-shadow:0 2px 6px #092342!important}
+#sd52 header button,#sdCurriculum .sd-top button{
+ background:rgba(237,246,255,.87)!important;border:2px solid #f0e2be!important;
+ color:#183d5e!important;border-radius:16px!important;min-height:44px!important}
+#sd52 .sd52-panel,#sdCurriculum .sd-lesson{
+ background:rgba(250,253,255,.94)!important;color:#183a5a!important}
+#sd52 .sd52-panel p,#sdCurriculum .sd-lesson p{color:#183a5a!important}
+body.sd52-open #sd54-merlin,body.sd52-open #sd55-help{z-index:2147483399!important}
+@media(max-width:390px){body button.sd-ui-card{min-height:133px!important;padding:9px 6px!important;gap:4px!important}.sd-ui-card__icon{width:55px!important;height:55px!important}.sd-ui-grid{gap:9px!important}}
+@media(prefers-reduced-motion:reduce){body button.sd-ui-card{transition:none!important}}

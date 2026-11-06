@@ -1,0 +1,11 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.7.1
+
+- Nyní skutečně sjednocené navigační karty pro matematiku, češtinu, angličtinu, vlastivědu a přírodovědu.
+- Sjednocená mřížka 2/3/4 ikonových dlaždic podle šířky zařízení.
+- Všechny obrazovky školních plánů a výběru kapitoly měsíce nově používají totožný styl jako ostatní předměty.
+- Každá ikona je součástí tlačítka, původní funkce a testy se nepřepisují.
+- Rodičovské profily, dosavadní výsledky a nastavení zůstávají zachované.
+- Opraven z-index Merlina, aby nepřekrýval výběrové karty ve školním plánu.
+
+Nahrání: Rozbalit ZIP v rootu GitHub Pages, git add/commit/push, v aplikaci aktualizovat na 50.7.1.
+Pozor: Nemazat data webu ani úložiště aplikace, aby zůstaly zachované profily a výsledky.

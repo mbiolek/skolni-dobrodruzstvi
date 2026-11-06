@@ -17,8 +17,8 @@ const root=document.createElement('section');root.id='sd52';root.hidden=true;roo
 const main=()=>document.getElementById('sd52main');
 function show(title,html){root.hidden=false;document.body.classList.add('sd52-open');document.getElementById('sd52header').textContent=title;main().innerHTML=html;root.scrollTop=0;window.scrollTo(0,0)}
 function hide(){root.hidden=true;document.body.classList.remove('sd52-open')}
-const card=(label,action,detail='',attr='')=>`<button class="sd52-card" data-act="${action}" ${attr}><strong>${esc(label)}</strong>${detail?`<small>${esc(detail)}</small>`:''}</button>`;
-const grid=items=>`<div class="sd52-grid">${items.join('')}</div>`;
+const card=(label,action,detail='',attr='')=>window.SDUICards.html({title:label,description:detail,icon:'auto',attrs:`data-act="${esc(action)}" ${attr}`,className:'sd52-card'});
+const grid=items=>window.SDUICards.grid(items,'sd52-grid');
 const planKey=(school,sub,month)=>`${school}|${sub}|${month}`;
 const assigned=()=>db.schools.filter(s=>(db.assignments[active()]||[]).includes(s.id));
 const chosenSchool=()=>db.schools.find(s=>s.id===state.school);

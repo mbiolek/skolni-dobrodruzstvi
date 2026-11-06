@@ -1,0 +1,22 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.7.2 – TECHNICKÁ KONTROLA
+
+1) Navigační karty používají společnou knihovnu:
+   assets/js/ui-cards.js + assets/css/ui-cards.css
+2) Přímo zapojené továrny karet:
+   assets/js/school-plans-50-2.js
+   assets/js/ucivo-50-1.js
+3) Ostatní statické/dynamické nabídky normalizuje jeden společný modul
+   bez nahrazení tlačítek nebo ztráty jejich click handlerů.
+4) Staré výhradně dekorovací soubory 50.7.1 odstraněny.
+5) Původní 50.7.0 dekorování odstraněno; Merlin a avatar zachovány.
+6) Z instalační HTML odstraněna stará automatická localStorage.clear()
+   (původní výsledky se nemažou).
+7) Offline pre-cache: kontrola 266 cest – vše existuje.
+8) JavaScript: node --check na všech souborech – bez syntaktické chyby.
+9) Interaktivní testy v prohlížečovém DOM:
+   navigace Přírodověda, Vlastivěda, Matematika, Český jazyk,
+   Angličtina, učebnicové kapitoly; layout 360/700/1200px = 2/3/4 sloupce;
+   ikony a otevření Nastavení potvrzeny.
+
+Omezení: Přímý test nainstalované PWA na Samsungu nebyl proveden.
+Před aktualizací pro jistotu zálohujte výsledky pomocí funkce v aplikaci.

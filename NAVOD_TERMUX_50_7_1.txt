@@ -1,0 +1,9 @@
+Školní dobrodružství 50.7.1 – Termux
+
+Stáhni ZIP do složky Download (Stažené soubory) v telefonu.
+
+Jedním příkazem:
+cd ~/skolni-github && unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_50_7_1_SJEDNOCENE_KARTY.zip && git add -A && (git diff --cached --quiet || git commit -m "Oprava 50.7.1 - sjednocene karty a ikony") && git push origin main
+
+Otevři PWA na telefonu, zkontroluj verzi 50.7.1. V Chrome je možné pro kontrolu načíst stránku znovu; aktualizace service workeru může vyžadovat nové otevření aplikace.
+NEMAŽ data aplikace ani profilů. V případě problému pošli screenshot.
