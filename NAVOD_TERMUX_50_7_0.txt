@@ -1,0 +1,10 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.7.0
+
+1) Stáhněte soubor Skolni_dobrodruzstvi_50_7_0_MERLIN_AVATAR_KARTY.zip do telefonu (Download).
+2) V Termuxu spusťte jedním řádkem:
+
+cd ~/skolni-github && unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_50_7_0_MERLIN_AVATAR_KARTY.zip && git add -A && (git diff --cached --quiet || git commit -m "Skolni dobrodruzstvi 50.7.0 - Merlin, avatar, karty") && git push origin main
+
+3) Po zveřejnění otevřete PWA, ověřte verzi 50.7.0. Při staré verzi zavřete a znovu otevřete aplikaci / aktualizujte stránku, aby se obnovila cache.
+
+Pozor: Zachovejte data aplikace v telefonu. Nemazat data webu ani PWA, jinak můžete přijít o lokálně uložené profily a výsledky.

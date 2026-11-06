@@ -1,0 +1,22 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.7.0 (6. 11. 2026)
+
+1. MŮJ AVATAR
+- Otevření avatarů funguje také v rodičovském profilu.
+- Dětské profily si zachovávají své avatary; výběr se ukládá pod původními klíči.
+- Při volbě se zobrazuje náhled vybraného avatara.
+
+2. MERLIN
+- Původní animace chůze byla nahrazena Merlinem stojícím čelem.
+- Lucerna se po čase jemně pozvedne; postava neklesá ani neskáče.
+- Nápověda je nyní samostatný kulatý žlutý otazník bez textu.
+- Otevření čteného vysvětlení a předchozí funkce nápovědy zůstávají.
+- Hlasové čtení stále závisí na hlasech dostupných v Androidu; samostatný mužský hlas zatím není součástí verze.
+
+3. KARTY A IKONY
+- Výběry učiva mají jednotné poloprůhledné ikonové dlaždice ve stylu Vlastivědy.
+- Na telefonech dva sloupce, na širších displejích tři, na tabletech čtyři.
+- Tlačítka na obrázkových kartách jsou o něco průhlednější.
+- Jednotlivé předměty, profily, výsledky, učivo a mapy zůstávají zachovány.
+
+INSTALACE: Rozbalit ZIP do kořenové složky GitHub Pages a provést git add / commit / push.
+Po aktualizaci PWA a zobrazení verze 50.7.0 ověřit na telefonu.

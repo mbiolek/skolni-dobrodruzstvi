@@ -1,0 +1,106 @@
+/* Školní dobrodružství 50.7.0 – sjednocení navigačních karet, avatar a Merlin. */
+:root{--sd570-gold:#f5cb61;--sd570-gold-border:#f6e0a1;--sd570-panel:rgba(22,43,70,.64);--sd570-panel-hover:rgba(25,53,87,.82)}
+/* Jedna společná responzivní mřížka: telefon 2, širší displej 3, tablet 4. */
+#homeScreen .subject-grid,
+#advSubjectMenu .adv-menu-cards,
+#subjectHub .hub-cards,
+#v496TopicPanel #v496Topics,
+#vlastScreen #vlUnits,
+#czechScreen .v29-panel > .v29-actions.sd570-navigation{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:clamp(9px,1.6vw,17px)!important;align-items:stretch!important;
+}
+#homeScreen .v23-extra-grid:empty{display:none!important}
+@media(min-width:640px){
+ #homeScreen .subject-grid,#advSubjectMenu .adv-menu-cards,#subjectHub .hub-cards,
+ #v496TopicPanel #v496Topics,#vlastScreen #vlUnits,
+ #czechScreen .v29-panel > .v29-actions.sd570-navigation{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(min-width:1100px){
+ #homeScreen .subject-grid,#advSubjectMenu .adv-menu-cards,#subjectHub .hub-cards,
+ #v496TopicPanel #v496Topics,#vlastScreen #vlUnits,
+ #czechScreen .v29-panel > .v29-actions.sd570-navigation{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+/* Průsvitné grafické dlaždice inspirované rozložením Vlastivědy. */
+#advSubjectMenu .adv-mode,#subjectHub .hub-card,#v496TopicPanel #v496Topics > button,
+#vlastScreen #vlUnits > button,
+#czechScreen .sd570-navigation > button{
+ position:relative!important;min-width:0!important;height:auto!important;max-height:none!important;
+ min-height:146px!important;box-sizing:border-box!important;display:flex!important;
+ flex-direction:column!important;justify-content:center!important;align-items:center!important;
+ gap:6px!important;padding:14px 9px!important;text-align:center!important;
+ border:2px solid var(--sd570-gold-border)!important;border-radius:19px!important;
+ background:linear-gradient(160deg,rgba(35,67,102,.65),rgba(12,31,55,.72))!important;
+ color:#fff4da!important;backdrop-filter:blur(5px)!important;-webkit-backdrop-filter:blur(5px)!important;
+ box-shadow:0 5px 14px rgba(2,11,26,.28),inset 0 1px rgba(255,255,255,.24)!important;
+ text-shadow:0 2px 4px #09192f!important;cursor:pointer!important;
+}
+#advSubjectMenu .adv-mode:hover,#subjectHub .hub-card:hover,#v496TopicPanel #v496Topics > button:hover,
+#vlastScreen #vlUnits > button:hover,#czechScreen .sd570-navigation > button:hover{
+ background:var(--sd570-panel-hover)!important;transform:translateY(-1px)!important;
+}
+#advSubjectMenu .adv-mode:focus-visible,#subjectHub .hub-card:focus-visible,
+#v496TopicPanel #v496Topics > button:focus-visible,#vlastScreen #vlUnits > button:focus-visible,
+#czechScreen .sd570-navigation > button:focus-visible{outline:3px solid #ffdf74!important;outline-offset:3px!important}
+#advSubjectMenu .adv-mode strong,#subjectHub .hub-card b,#vlastScreen #vlUnits strong,
+#czechScreen .sd570-navigation > button{font-size:clamp(13px,2.7vw,19px)!important;color:#fff6df!important;line-height:1.2!important}
+#advSubjectMenu .adv-mode .adv-art{display:grid!important;place-items:center!important;order:-1!important;
+ height:clamp(55px,11vw,84px)!important;width:clamp(55px,11vw,84px)!important;
+ min-height:0!important;flex:0 0 auto!important;background:transparent!important}
+#advSubjectMenu .adv-mode .adv-art img,#subjectHub .hub-emoji img{width:100%!important;height:100%!important;object-fit:contain!important}
+#advSubjectMenu .adv-mode .adv-desc,#subjectHub .hub-card small,#vlastScreen #vlUnits small{
+ color:#f5e6c9!important;font-size:clamp(11px,2vw,13px)!important;line-height:1.25!important}
+#advSubjectMenu .adv-mode .adv-cta,#subjectHub .hub-card .hub-start{display:none!important}
+#subjectHub .hub-card{min-height:150px!important;padding:10px!important}
+#subjectHub .hub-card .hub-emoji{display:grid!important;place-items:center!important;
+ height:clamp(58px,12vw,84px)!important;width:clamp(58px,12vw,84px)!important;order:-1!important}
+#v496TopicPanel #v496Topics > button{font-size:clamp(13px,2.8vw,18px)!important;min-height:118px!important}
+#vlastScreen .app{max-width:1050px!important;background:rgba(243,247,252,.85)!important;
+ backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
+#vlastScreen #vlUnits > button strong,#vlastScreen #vlUnits > button small{display:block!important;text-align:center!important}
+#vlastScreen #vlUnits > button{min-height:150px!important}
+#czechScreen .sd570-navigation > button{min-height:140px!important}
+.sd570-art{display:grid;place-items:center;width:clamp(45px,10vw,72px);height:clamp(45px,10vw,72px);
+ font-size:clamp(30px,6vw,49px);line-height:1;flex:0 0 auto;order:-1;
+ background:radial-gradient(circle at 30% 20%,rgba(255,224,147,.27),rgba(29,51,78,.1));
+ border:1px solid rgba(255,222,150,.42);border-radius:16px;filter:drop-shadow(0 2px 2px #071a27a0)}
+.sd570-art img{height:87%;width:87%;object-fit:contain}
+@media(max-width:370px){#advSubjectMenu .adv-mode,#subjectHub .hub-card,
+ #v496TopicPanel #v496Topics > button,#vlastScreen #vlUnits > button,
+ #czechScreen .sd570-navigation > button{padding:9px 5px!important;min-height:129px!important}}
+/* Průhlednější štítky a tlačítka na kartách – obrázková pozadí zůstávají viditelná. */
+body[data-game-theme] #homeScreen .subject{background:rgba(11,28,47,.45)!important}
+body[data-game-theme] #homeScreen .subject .v451-footer>span{
+ background:rgba(6,22,43,.48)!important;border:1px solid rgba(234,219,168,.38)!important;
+ backdrop-filter:blur(3px)!important;-webkit-backdrop-filter:blur(3px)!important}
+body[data-game-theme] #homeScreen .subject::after{
+ background:linear-gradient(transparent,rgba(6,22,41,.38),rgba(6,22,41,.77))!important}
+/* Kresba Merlina stojí čelem; animována je lucerna, ne postava chůzí / pádem. */
+#sd54-merlin{position:fixed!important;right:14px!important;bottom:calc(130px + env(safe-area-inset-bottom,0px))!important;
+ max-width:175px!important;z-index:2147483402!important;pointer-events:none!important;
+ transform:none!important;animation:none!important}
+#sd54-merlin img{display:block!important;width:clamp(110px,27vw,165px)!important;
+ height:clamp(110px,27vw,165px)!important;max-height:170px!important;
+ object-fit:contain!important;object-position:center bottom!important;
+ pointer-events:auto!important;cursor:pointer!important;transform:none!important;animation:none!important;
+ filter:drop-shadow(0 7px 6px rgba(3,10,24,.65))!important}
+#sd55-help{position:fixed!important;top:auto!important;bottom:calc(74px + env(safe-area-inset-bottom,0px))!important;
+ right:calc(12px + min(13vw,54px))!important;width:52px!important;height:52px!important;
+ display:grid!important;place-items:center!important;border-radius:50%!important;padding:0!important;
+ background:radial-gradient(circle at 35% 20%,#fff4bd,#f4c148 62%,#bc781d)!important;
+ border:3px solid #fff3bd!important;box-shadow:0 4px 14px #030a19a3,inset 0 1px 4px #fff9!important;
+ color:#4b3005!important;font-size:36px!important;font-family:system-ui,sans-serif!important;
+ text-shadow:0 1px #fff6bb!important;font-weight:1000!important;line-height:1!important}
+#sd55-help[hidden],body.sd55-speaking #sd55-help,body.sd570-avatar-open #sd55-help,
+body.sd54-admin-open #sd55-help,body:has(#authGate:not(.off)) #sd55-help{display:none!important}
+body.sd570-avatar-open #sd54-merlin{display:none!important}
+#v24-avatar-dialog{z-index:2147483502!important}
+#v24-avatar-dialog.open{display:flex!important}
+#v24-avatar-grid .v24-avatar-option{color:#173653!important;background:rgba(233,243,253,.92)!important}
+#v24-avatar-grid .v24-avatar-option.selected{border-color:#dca83b!important;box-shadow:0 0 0 3px #f9e2a9 inset!important}
+#v24-avatar-grid .v24-avatar-option .pic{background-size:cover!important;background-position:center!important}
+#v37-avatar-filters button{cursor:pointer!important}
+@media(max-height:520px){#sd54-merlin{bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
+ #sd54-merlin img{width:95px!important;height:95px!important}
+ #sd55-help{bottom:calc(61px + env(safe-area-inset-bottom,0px))!important;width:43px!important;height:43px!important;font-size:29px!important}}
+@media(prefers-reduced-motion:reduce){#sd54-merlin img{animation:none!important}}
