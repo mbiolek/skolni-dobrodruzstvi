@@ -130,7 +130,7 @@
   });
   observer.observe(document.body,{childList:true,subtree:true});
  }
- window.SDUICards=Object.freeze({html,grid,button,decorate,scan,iconFor,version:'50.7.2'});
- window.SDVersion='50.7.2';
+ window.SDUICards=Object.freeze({html,grid,button,decorate,scan,iconFor,version:window.SDApp?.version||'50.7.3'});
+ window.SDVersion=window.SDApp?.version||'50.7.3';
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();

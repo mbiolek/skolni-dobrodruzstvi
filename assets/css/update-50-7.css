@@ -36,3 +36,10 @@ body.sd570-avatar-open #sd54-merlin{display:none!important}
  #sd54-merlin img{width:95px!important;height:95px!important}
  #sd55-help{bottom:calc(61px + env(safe-area-inset-bottom,0px))!important;width:43px!important;height:43px!important;font-size:29px!important}}
 @media(prefers-reduced-motion:reduce){#sd54-merlin img{animation:none!important}}
+
+/* Separate parental choice: ONLY two actual user-supplied Merlin assets. */
+#v24-avatar-dialog.sd-parent-select #v24-avatar-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+#v24-avatar-dialog.sd-parent-select #v37-avatar-filters{display:none!important}
+#v24-avatar-dialog.sd-parent-select .sd-parent-avatar .pic{background-size:contain!important;background-position:center bottom!important;background-repeat:no-repeat!important;background-color:rgba(214,228,242,.5)!important;height:clamp(150px,35vw,230px)!important}
+#authUsers .userbtn .sd-parent-thumb{background-size:contain!important;background-repeat:no-repeat!important;color:transparent!important}
+body.parent-role #v24-avatar-open,body.child-role #v24-avatar-open{display:inline-flex!important}

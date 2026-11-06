@@ -1,0 +1,10 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.7.3 – KONTROLA
+- Viditelná verze 50.7.3 se čte ze assets/js/app-version.js.
+- Staré duplicitní obsluhy avatarů part-16, part-20, fix-50-0-2 odstraněny; ostatní grafické funkce zachovány.
+- Rodič: přesně 2 volby avatarů (modrý animovaný Merlin, fialový Merlin).
+- Děti: 40 existujících avatarů, uložené indexy ponechány.
+- Jednotný styl hlavních nabídek ze sdíleného assets/js/ui-cards.js + assets/css/ui-cards.css.
+- Testovací prohlížeč: stejné computed CSS ve 4 skupinách karet, mřížka 2/3/4 při 360/393/700/1200px, rodič 2 / dítě 40 voleb, verze 50.7.3.
+- Service worker s novým klíčem a updateViaCache:none.
+- Syntax node --check všech JS, kompletnost offline cest, ZIP CRC.
+Poznámka: Neproběhla zkouška skutečné PWA na telefonu ani test hlasu Merlina. Lokální data se nemažou.

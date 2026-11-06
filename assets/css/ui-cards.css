@@ -87,3 +87,20 @@ body button.sd-ui-card .hub-desc,body button.sd-ui-card .sd-ui-card__desc{
 body.sd52-open #sd54-merlin,body.sd52-open #sd55-help{z-index:2147483399!important}
 @media(max-width:390px){body button.sd-ui-card{min-height:133px!important;padding:9px 6px!important;gap:4px!important}.sd-ui-card__icon{width:55px!important;height:55px!important}.sd-ui-grid{gap:9px!important}}
 @media(prefers-reduced-motion:reduce){body button.sd-ui-card{transition:none!important}}
+
+/* 50.7.3: The same glass tile in all subject menus regardless of older theme selectors. */
+html body[data-game-theme] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card,
+html body[data-game-theme] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) .sd-ui-grid > button.sd-ui-card{
+ background:linear-gradient(148deg,rgba(232,244,252,.79),rgba(196,219,232,.66))!important;
+ color:#173959!important;border:2px solid rgba(255,227,166,.95)!important;
+ border-radius:22px!important;box-shadow:0 5px 0 #17385644,0 10px 18px #09213b36,inset 0 1px 0 #ffffffa8!important;
+ font-size:inherit!important;min-height:158px!important;max-width:none!important;
+ align-items:center!important;justify-content:center!important;padding:12px 9px 14px!important;
+ display:flex!important;flex-direction:column!important;text-align:center!important;gap:7px!important;
+}
+html body[data-game-theme] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card :is(strong,b,.sd-ui-card__title){color:#173959!important;text-shadow:none!important}
+html body[data-game-theme] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card :is(small,.sd-ui-card__desc,.adv-desc,.hub-desc){color:#365873!important;text-shadow:none!important;opacity:1!important}
+html body[data-game-theme] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) .sd-ui-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+@media(min-width:640px){html body[data-game-theme] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) .sd-ui-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(min-width:1100px){html body[data-game-theme] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) .sd-ui-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+/* Home-cover tiles intentionally use the illustrated-cover variant from the same module. */

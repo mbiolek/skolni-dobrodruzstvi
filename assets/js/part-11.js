@@ -1,3 +1,10 @@
-
-(()=>{const d=document.getElementById('appVersionDialog');document.getElementById('appVersionTag').onclick=()=>d.classList.add('open');document.getElementById('appVersionClose').onclick=()=>d.classList.remove('open');d.addEventListener('click',e=>{if(e.target===d)d.classList.remove('open')});document.addEventListener('keydown',e=>{if(e.key==='Escape')d.classList.remove('open')})})();
-
+/* Version details dialog; the visible badge is created by the central version module. */
+(()=>{'use strict';
+const dialog=document.getElementById('appVersionDialog');
+if(!dialog)return;
+const close=()=>dialog.classList.remove('open');
+document.getElementById('appVersionTag')?.addEventListener('click',()=>dialog.classList.add('open'));
+document.getElementById('appVersionClose')?.addEventListener('click',close);
+dialog.addEventListener('click',e=>{if(e.target===dialog)close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+})();
