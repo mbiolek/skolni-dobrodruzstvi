@@ -1,0 +1,13 @@
+Školní dobrodružství 50.7.5 — oprava navigace (6. 11. 2026)
+
+- Jediný správce Android gesta Zpět: assets/js/part-23.js.
+- Odstraněn historický zásobník obrazovek, který po zamknutí profilu ponechával czechScreen jako rodiče dalších předmětů.
+- Zpět nyní řeší aktivní menu nebo dialog jako první; teprve potom návrat do předmětů.
+- Čeština: lekce -> nabídka Češtiny -> předměty.
+- Matematika / Angličtina: výuka -> nabídka předmětu -> předměty.
+- Přírodověda / Vlastivěda: vnitřní nabídka -> předměty; mapy se nejprve zavřou.
+- Učebnice a školní plány: vnitřní Zpět využije interní funkci modulu.
+- Při zamknutí nebo obnovení profilu se navigace vrátí na výchozí obrazovku; localStorage se nemaže.
+- Diagnostika zůstává dostupná v rodičovské správě a exportuje verzi 50.7.5.
+
+Poznámka: design karet se v této opravě nemění; řeší se funkční navigace.

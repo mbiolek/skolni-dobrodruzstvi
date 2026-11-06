@@ -17,7 +17,7 @@
  shell.innerHTML='<div class="sd-czech-wrap"><button type="button" class="sd-czech-back" id="sdCzechBack5074">← Zpět na předměty</button><h1>📖 Čeština</h1><p>Vyber si, co chceš dnes dělat</p>'+cards.grid(actions.map(a=>cards.html({title:a.title,description:a.description,icon:a.icon,attrs:'data-czech-action="'+a.action+'"'})),'sd-czech-cards')+'</div>';
  document.body.append(shell);
  const close=()=>{shell.hidden=true;document.body.classList.remove('sd-czech-hub-open')};
- const open=()=>{if(!document.getElementById('authGate')?.classList.contains('off'))return;shell.hidden=false;document.body.classList.add('sd-czech-hub-open');window.scrollTo(0,0)};
+ const open=()=>{if(!document.getElementById('authGate')?.classList.contains('off'))return;document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('visible',s===home));shell.hidden=false;document.body.classList.add('sd-czech-hub-open');window.scrollTo(0,0)};
  shell.querySelector('#sdCzechBack5074').addEventListener('click',close);
  function lesson(button){close();document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('visible',s===czech));
   const b=czech.querySelector('#'+button);if(b)b.click();window.scrollTo(0,0)}

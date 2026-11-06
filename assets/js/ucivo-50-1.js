@@ -129,5 +129,5 @@ root.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;
 const home=document.querySelector('#homeScreen .home-tip')||document.querySelector('#homeScreen .app');/* 50.4: učivo je přístupné z jednotlivých předmětů, nikoli z hlavní nabídky */
 for(const [id,screen] of [['math','mathScreen'],['czech','czechScreen'],['english','englishScreen']]){let node=document.getElementById(screen);if(!node)continue;let b=document.createElement('button');b.type='button';b.className='sd-launch sd-inline';b.textContent='📚 Kapitoly podle učebnice';b.addEventListener('click',()=>topics(id));node.prepend(b)}
 for(const [cls,id] of [['nature','nature'],['history','geography']]){let el=document.querySelector('#homeScreen .v23-extra.'+cls);if(!el)continue;el.removeAttribute('aria-disabled');el.style.cursor='pointer';el.setAttribute('role','button');el.setAttribute('tabindex','0');el.addEventListener('click',()=>topics(id));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();topics(id)}});let small=el.querySelector('small');if(small)small.textContent='Kapitoly 5. ročníku'}
-window.SDCurriculum501={open:subjects,topics,data:DATA};
+window.SDCurriculum501={open:subjects,topics,close,data:DATA};
 })();
