@@ -1,0 +1,104 @@
+/* Školní dobrodružství 50.7.6. A single family of semantic, clickable cards. */
+/* The interface images in theme settings are reference previews, not screenshots used as buttons. */
+#sdCardStyleSelect{flex:0 0 100%;width:100%;display:block;box-sizing:border-box;padding:8px 3px 5px;max-width:950px;margin:6px auto 0;border-top:1px solid #ffffff80;font:inherit}
+#sdCardStyleSelect .sd-card-theme-heading{display:flex;flex-direction:column;gap:3px;text-align:center;margin:4px 0 11px;color:white}
+#sdCardStyleSelect .sd-card-theme-heading strong{font-size:16px}
+#sdCardStyleSelect .sd-card-theme-heading small{font-size:11px;font-weight:600;opacity:.94}
+#sdCardStyleSelect .sd-card-theme-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-option{min-height:0!important;margin:0!important;padding:4px!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;border:2px solid #d6dcf5!important;border-radius:16px!important;box-shadow:0 3px 6px #03152d55!important;background:#0c2547e0!important;color:#fff!important;text-align:left!important;white-space:normal!important;min-width:0!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-option.selected{border-color:#ffe6a3!important;box-shadow:0 0 0 2px #e0b553,0 3px 12px #fce8a666!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-option img{width:100%;height:102px;object-fit:cover;object-position:center 29%;border-radius:11px;filter:saturate(1.1)}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-caption{display:flex;flex-direction:column;padding:6px 5px 4px;gap:2px;width:100%;text-align:left!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-caption strong{font-size:13px;line-height:1.16;color:#fff6dd!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-caption small{font-size:10px;line-height:1.25;color:#e8e6eb!important;opacity:1}
+@media(min-width:720px){#sdCardStyleSelect .sd-card-theme-options{grid-template-columns:repeat(4,minmax(0,1fr))}#themeSwitcher #sdCardStyleSelect .sd-card-style-option img{height:145px}}
+
+/* Shared tokens, overridden by one data attribute only. Scene/wallpaper stays independent. */
+body[data-card-style]{--sd-fc:#fff6db;--sd-sub:#f0e0c7;--sd-card-border:#d8c4ff;--sd-inner:#f6d5ffaa;--sd-shadow:#071020b8;--sd-icon-plate:radial-gradient(circle at 36% 20%,#fff6c9a8,#9988f3a0 52%,#152347aa 100%);--sd-card-bg:linear-gradient(145deg,#7383bca1,#26385ba6 70%,#171e47a0);--sd-outline:2px solid #e5e3ffde;--sd-deco-bg:linear-gradient(135deg,#eac7ff52 0%,transparent 26%,transparent 73%,#ffc87942 100%);--sd-title-plate:transparent;--sd-border-width:2px;--sd-card-radius:27px;--sd-icon-border:#e9d5ab;--sd-card-fancy-font:Georgia,serif}
+body[data-card-style="stone"]{--sd-fc:#291a34;--sd-sub:#e8d2b0;--sd-card-border:#edb86b;--sd-inner:#ffe6b08a;--sd-shadow:#050715e8;--sd-card-bg:radial-gradient(ellipse at 45% 16%,#49445f 0%,#292942 58%,#1c1830 100%);--sd-deco-bg:repeating-linear-gradient(154deg,#ffffff05 0px,#ffffff05 2px,#00000005 3px,#00000005 14px);--sd-title-plate:linear-gradient(165deg,#fff2d3,#c79d6e 92%);--sd-card-radius:27px;--sd-icon-plate:radial-gradient(circle at 36% 21%,#e5cc89 0%,#40385a 46%,#18182d 100%);--sd-icon-border:#f6c77c}
+body[data-card-style="parchment"]{--sd-fc:#452810;--sd-sub:#6c462b;--sd-card-border:#b17e43;--sd-inner:#ffe9c8;--sd-shadow:#180b0dba;--sd-card-bg:radial-gradient(ellipse at 15% 8%,#fff0c7,#ddba7a 78%,#ad8045);--sd-deco-bg:repeating-linear-gradient(90deg,#6d42150b 0px,#6d42150b 1px,transparent 2px,transparent 16px);--sd-title-plate:transparent;--sd-card-radius:19px;--sd-icon-plate:radial-gradient(circle at 38% 21%,#fff0c1,#0f3155 53%,#493029 100%);--sd-icon-border:#b17b37}
+body[data-card-style="guild"]{--sd-fc:#fff4ce;--sd-sub:#f1d6a8;--sd-card-border:#c68b41;--sd-inner:#f8c67b;--sd-shadow:#150904df;--sd-card-bg:repeating-linear-gradient(0deg,#25180c19 0px,#25180c19 3px,transparent 4px,transparent 27px),linear-gradient(90deg,#432310,#925328 19%,#5e311a 48%,#9e582c 81%,#3f2717);--sd-deco-bg:repeating-linear-gradient(85deg,transparent 0,transparent 33px,#dbb37716 35px,#04030112 38px);--sd-title-plate:linear-gradient(155deg,#193c6b,#071b42 83%);--sd-card-radius:20px;--sd-icon-plate:radial-gradient(circle at 31% 16%,#dcb96c,#294873 54%,#142441);--sd-icon-border:#e5b971}
+
+/* Include all known subject menus. Keep the original button DOM and click listeners. */
+html body[data-card-style][data-game-theme] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card,
+html body[data-card-style] button.sd-ui-card{
+ position:relative!important;isolation:isolate!important;min-width:0!important;max-width:none!important;
+ box-sizing:border-box!important;display:flex!important;flex-direction:column!important;
+ justify-content:center!important;align-items:center!important;text-align:center!important;
+ gap:8px!important;min-height:165px!important;margin:0!important;padding:16px 9px 17px!important;
+ color:var(--sd-fc)!important;background:var(--sd-card-bg)!important;
+ border:var(--sd-border-width) solid var(--sd-card-border)!important;
+ border-radius:var(--sd-card-radius)!important;outline:none!important;
+ backdrop-filter:blur(7px) saturate(1.2)!important;-webkit-backdrop-filter:blur(7px) saturate(1.2)!important;
+ box-shadow:0 5px 0 #080f238c,0 11px 17px var(--sd-shadow),inset 0 2px 3px var(--sd-inner)!important;
+ text-shadow:none!important;opacity:1!important;overflow:visible!important;
+ transform:none!important;transition:transform .15s,filter .15s,box-shadow .15s!important;
+ cursor:pointer!important;
+}
+html body[data-card-style] button.sd-ui-card::before{
+ content:""!important;display:block!important;position:absolute!important;inset:5px!important;
+ border:1px solid var(--sd-inner)!important;border-radius:calc(var(--sd-card-radius) - 5px)!important;
+ background:var(--sd-deco-bg)!important;opacity:.76!important;z-index:-1!important;pointer-events:none!important;
+}
+html body[data-card-style] button.sd-ui-card::after{
+ content:"✦"!important;display:grid!important;place-items:center!important;position:absolute!important;
+ top:5px!important;right:9px!important;width:15px!important;height:15px!important;
+ font-size:12px!important;font-family:Georgia,serif!important;color:#ffdb85!important;
+ pointer-events:none!important;opacity:.88!important;z-index:1!important;
+}
+html body[data-card-style] button.sd-ui-card:active{transform:translateY(3px) scale(.99)!important;filter:brightness(.96)!important;box-shadow:0 1px 0 #080f238c,0 4px 7px var(--sd-shadow)!important}
+html body[data-card-style] button.sd-ui-card:hover{filter:brightness(1.08)!important;transform:translateY(-1px)!important;background:var(--sd-card-bg)!important}
+html body[data-card-style] button.sd-ui-card:focus-visible{outline:3px solid #fbd37c!important;outline-offset:4px!important}
+
+html body[data-card-style] button.sd-ui-card .sd-ui-card__icon{
+ width:clamp(58px,13vw,90px)!important;height:clamp(58px,13vw,90px)!important;
+ display:grid!important;place-items:center!important;order:-2!important;flex:0 0 auto!important;
+ border:2px solid var(--sd-icon-border)!important;border-radius:50%!important;
+ background:var(--sd-icon-plate)!important;
+ box-shadow:0 3px 7px #080c2b88,inset 0 2px 9px #ffe5a266,0 0 10px #ffedac3b!important;
+ margin:0 auto 5px!important;padding:5px!important;z-index:1!important;
+}
+html body[data-card-style] button.sd-ui-card .sd-ui-card__icon img{width:97%!important;height:97%!important;object-fit:contain!important;border-radius:50%!important;mix-blend-mode:normal!important;}
+html body[data-card-style] button.sd-ui-card :is(strong,b,.sd-ui-card__title){
+ order:0!important;position:relative!important;z-index:1!important;color:var(--sd-fc)!important;
+ font-family:var(--sd-card-fancy-font)!important;font-size:clamp(15px,2.55vw,21px)!important;
+ font-weight:800!important;line-height:1.16!important;text-align:center!important;
+ text-shadow:0 1px 2px #07122344!important;overflow-wrap:anywhere!important;
+ background:var(--sd-title-plate)!important;padding:4px 3px!important;margin:0!important;
+ border-radius:8px!important;max-width:100%!important;min-width:0!important;
+}
+html body[data-card-style] button.sd-ui-card :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){
+ position:relative!important;z-index:1!important;order:1!important;color:var(--sd-sub)!important;
+ font-weight:650!important;font-size:clamp(11px,2vw,13px)!important;
+ line-height:1.21!important;text-shadow:none!important;margin:0!important;
+}
+html body[data-card-style="glass"] button.sd-ui-card{border-color:#f3dbffb0!important;box-shadow:inset 0 2px 5px #ecdcff93,0 0 13px #a19ef974,0 5px 0 #1d1e4a88,0 14px 17px #0a1649aa!important}
+html body[data-card-style="glass"] button.sd-ui-card::after{content:"✧"!important;font-size:18px!important;top:7px!important}
+html body[data-card-style="stone"] button.sd-ui-card :is(strong,b,.sd-ui-card__title){padding:8px 5px!important;margin-top:4px!important;width:calc(100% - 4px)!important;border:1px solid #8e6430!important;box-shadow:inset 0 1px #fff7b5aa,0 3px 6px #080c17a2!important;text-shadow:none!important}
+html body[data-card-style="stone"] button.sd-ui-card .sd-ui-card__icon{border-radius:38%!important}
+html body[data-card-style="stone"] button.sd-ui-card .sd-ui-card__icon img{border-radius:27%!important}
+html body[data-card-style="stone"] button.sd-ui-card::after{content:"ᚱ"!important;color:#f0c879!important}
+html body[data-card-style="parchment"] button.sd-ui-card .sd-ui-card__icon{box-shadow:0 3px 8px #663c228a,inset 0 2px 9px #fbd881aa!important}
+html body[data-card-style="parchment"] button.sd-ui-card::after{content:"◆"!important;color:#ac3b2b!important;top:auto!important;bottom:6px!important;right:calc(50% - 8px)!important;width:16px!important;font-size:12px!important}
+html body[data-card-style="parchment"] button.sd-ui-card{padding-bottom:25px!important;box-shadow:inset 0 0 0 4px #fcdfa28c,inset 0 0 0 6px #7f542788,0 6px 0 #5b391ed9,0 12px 15px #130d1499!important}
+html body[data-card-style="parchment"] button.sd-ui-card :is(strong,b,.sd-ui-card__title){text-shadow:none!important}
+html body[data-card-style="guild"] button.sd-ui-card :is(strong,b,.sd-ui-card__title){padding:9px 3px!important;width:100%!important;border:1px solid #dfb66e!important;border-radius:5px!important;box-shadow:inset 0 2px #fcda9d33,0 4px 5px #190c08b2!important}
+html body[data-card-style="guild"] button.sd-ui-card .sd-ui-card__icon{border-radius:28% 28% 44% 44%!important;transform:translateY(-3px)!important;border-width:3px!important}
+html body[data-card-style="guild"] button.sd-ui-card .sd-ui-card__icon img{border-radius:18% 18% 34% 34%!important}
+html body[data-card-style="guild"] button.sd-ui-card::after{content:"◆"!important;top:auto!important;bottom:1px!important;right:calc(50% - 7px)!important;color:#f4c266!important}
+html body[data-card-style="guild"] button.sd-ui-card{box-shadow:inset 0 0 0 3px #e5ab5199,inset 0 0 0 6px #442313d9,0 6px 0 #1b1011dc,0 14px 16px #030818bb!important}
+
+/* Do not decorate quiz answer buttons; only the semantic navigation grids. */
+html body[data-card-style] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) .sd-ui-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;
+ gap:clamp(10px,2vw,15px)!important;margin-block:15px!important;
+}
+@media(min-width:640px){html body[data-card-style] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) .sd-ui-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(min-width:1100px){html body[data-card-style] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) .sd-ui-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:390px){html body[data-card-style] button.sd-ui-card{min-height:145px!important;padding:10px 5px 12px!important;gap:3px!important}html body[data-card-style] button.sd-ui-card .sd-ui-card__icon{width:60px!important;height:60px!important}html body[data-card-style="parchment"] button.sd-ui-card{padding-bottom:24px!important}}
+@media(prefers-reduced-motion:reduce){html body[data-card-style] button.sd-ui-card{transition:none!important}}
+
+html body[data-game-theme][data-card-style] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card :is(strong,b,.sd-ui-card__title){color:var(--sd-fc)!important;background:var(--sd-title-plate)!important;font-family:var(--sd-card-fancy-font)!important;text-shadow:none!important;}
+html body[data-game-theme][data-card-style] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){color:var(--sd-sub)!important;font-size:clamp(11px,2vw,13px)!important;font-weight:650!important;text-shadow:none!important;}
+html body[data-game-theme][data-card-style="stone"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card :is(strong,b,.sd-ui-card__title){background:linear-gradient(165deg,#fff2d3,#c79d6e 92%)!important;color:#291a34!important}
+html body[data-game-theme][data-card-style="guild"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card :is(strong,b,.sd-ui-card__title){background:linear-gradient(155deg,#193c6b,#071b42 83%)!important;color:#fff4ce!important}

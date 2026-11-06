@@ -5,7 +5,7 @@
 (()=>{'use strict';
 const KEY='school-diagnostics-v456',MAX=300;
 const $=id=>document.getElementById(id);
-const version=()=>window.SDApp?.version||'50.7.5';
+const version=()=>window.SDApp?.version||'50.7.6';
 function record(type,detail=''){
  try{const a=JSON.parse(localStorage.getItem(KEY)||'[]');a.push({time:new Date().toISOString(),type,detail:String(detail).slice(0,350)});if(a.length>MAX)a.splice(0,a.length-MAX);localStorage.setItem(KEY,JSON.stringify(a))}catch(e){console.warn('Diagnostika:',e)}
 }

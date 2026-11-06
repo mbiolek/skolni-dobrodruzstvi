@@ -1,0 +1,13 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.7.6 – NOVÉ FANTASY KARTY
+
+Čtyři volitelné styly: Kouzelný krystal, Kamenné runy, Pergamen, Hradní cech.
+Výchozí: Kouzelný krystal. Vyber v tlačítku Prostředí → Vzhled karet.
+Styl karet je nezávislý na vybrané tapetě. Ukládá se v lokálních předvolbách zařízení.
+
+Všechna navigační tlačítka zůstávají skutečná tlačítka s původními akcemi.
+Aktuální modul SDUICards zůstává jediným zdrojem výběru ikon a mřížky.
+Kvízové odpovědi nejsou dekorovány.
+Přidány reference čtyř odsouhlasených obrazových návrhů do nabídky.
+Zachována oprava návratové navigace z verze 50.7.5.
+
+Nemaž data aplikace a nemaž PWA, jinak můžeš přijít o uložené profily a výsledky.
