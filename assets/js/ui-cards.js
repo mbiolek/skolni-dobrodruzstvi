@@ -11,7 +11,7 @@
   settings:'ikona-settings.webp',parent:'ikona-parent.webp',search:'ikona-test.webp',
   math:'ikona-math.webp',czech:'ikona-czech.webp',english:'ikona-english.webp',
   nature:'ikona-nature.webp',geography:'ikona-history.webp',music:'ikona-music.webp',
-  generic:'ikona-teach.webp'
+  numbers:'ikona-math.webp',dictation:'ikona-czech.webp',curriculum:'ikona-teach.webp',generic:'ikona-teach.webp'
  });
  const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const iconKey=k=>Object.hasOwn(ICONS,k)?k:'generic';
@@ -130,7 +130,7 @@
   });
   observer.observe(document.body,{childList:true,subtree:true});
  }
- window.SDUICards=Object.freeze({html,grid,button,decorate,scan,iconFor,version:window.SDApp?.version||'50.7.3'});
- window.SDVersion=window.SDApp?.version||'50.7.3';
+ window.SDUICards=Object.freeze({html,grid,button,decorate,scan,iconFor,version:window.SDApp?.version||'50.7.4'});
+ window.SDVersion=window.SDApp?.version||'50.7.4';
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();

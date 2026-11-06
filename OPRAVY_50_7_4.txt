@@ -1,0 +1,7 @@
+Školní dobrodružství 50.7.4
+
+1. Avatar: profil se nyní zjišťuje podle skutečně přihlášené rodičovské/dětské relace i při obnovení PWA. Rodič má pouze dva Merlíny.
+2. Čeština: vstup přes společný modul ikonových karet (8 funkčních voleb) místo samostatné bílé obrazovky; staré výukové funkce zůstaly.
+3. Aktualizace: nové číslo verze a cache service workeru.
+
+UPOZORNĚNÍ: Neodinstalovávat PWA, nevymazávat úložiště ani data aplikace.

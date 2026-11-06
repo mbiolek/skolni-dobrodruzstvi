@@ -20,8 +20,15 @@ const names=[
 ].flat();
 let activeId=null,filter=-1;
 const gate=document.getElementById('authGate');
-function current(){return activeId||localStorage.getItem(ACTIVE_KEY)||null}
-function resolvedId(){const id=current();return id&&gate?.classList.contains('off')?id:null}
+// The parent profile intentionally has no ACTIVE_KEY. Determine identity from the
+// actual authenticated session and role, never from a stale child's ACTIVE_KEY.
+function current(){
+ if(document.body.classList.contains('parent-role'))return 'parent';
+ let live=null;try{live=sessionStorage.getItem('skolni-live-v441')}catch{}
+ if(document.body.classList.contains('child-role'))return (activeId&&activeId!=='parent'?activeId:null)||(live&&live!=='parent'?live:null)||localStorage.getItem(ACTIVE_KEY)||null;
+ return activeId||live||null;
+}
+function resolvedId(){return gate?.classList.contains('off')?current():null} 
 function userName(id){return read(PROFILE_KEY)[id]?.name||id}
 function selectedIndex(id){if(!id)return null;const all=read(AVATAR_KEY);const val=[all[id],all[userName(id)]].find(x=>Number.isInteger(x)&&x>=0&&x<40);return val===undefined?null:val}
 function paint(){
@@ -82,12 +89,21 @@ if(dialog&&grid&&opener){
     localStorage.setItem(AVATAR_KEY,JSON.stringify(map));paint();show()});grid.append(b)});
  }
  function close(){dialog.classList.remove('open');document.body.classList.remove('sd570-avatar-open');replacement.focus()}
- replacement.addEventListener('click',()=>{if(!resolvedId())return;filter=-1;show();dialog.classList.add('open');document.body.classList.add('sd570-avatar-open')});
+ function openAvatar(){
+  if(!gate?.classList.contains('off'))return;
+  // Restore identity even when the login event occurred before this script loaded.
+  if(!activeId)activeId=current();
+  filter=-1;show();
+  dialog.classList.add('open');document.body.classList.add('sd570-avatar-open');
+ }
+ replacement.addEventListener('click',openAvatar);
+ // Delegated fallback survives other modules re-creating the visible button.
+ document.addEventListener('click',e=>{const b=e.target.closest?.('#v24-avatar-open');if(b&&b!==replacement){e.preventDefault();e.stopImmediatePropagation();openAvatar()}},true);
  const done=document.getElementById('v24-avatar-close');if(done){const fresh=done.cloneNode(true);done.replaceWith(fresh);fresh.addEventListener('click',close)}
  dialog.addEventListener('click',e=>{if(e.target===dialog)close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog.classList.contains('open'))close()});
  window.addEventListener('school-account',e=>{activeId=e.detail?.id||null;if(!activeId)close();requestAnimationFrame(paint)});
- window.addEventListener('school-resume-login',()=>requestAnimationFrame(paint));
+ window.addEventListener('school-resume-login',e=>{activeId=e.detail?.id||current();requestAnimationFrame(paint)});
  const users=document.getElementById('authUsers');if(users)new MutationObserver(()=>requestAnimationFrame(paint)).observe(users,{childList:true});
  paint();
 }
