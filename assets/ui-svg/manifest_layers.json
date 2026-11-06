@@ -1,0 +1,34 @@
+{
+  "description": "Školní dobrodružství – interní vrstvy SVG",
+  "stacking": {
+    "main_card": [
+      "layers/components/<theme>/card_frame_back.svg",
+      "layers/components/<theme>/card_inner_glow.svg",
+      "layers/components/<theme>/card_border.svg",
+      "layers/components/<theme>/card_medallion.svg",
+      "layers/icons/<icon>.svg",
+      "layers/text/cards/<theme>/<key>_title.svg",
+      "layers/text/cards/<theme>/<key>_subtitle.svg",
+      "layers/components/<theme>/card_sparkle.svg"
+    ],
+    "topic_card": [
+      "layers/components/<theme>/card_frame_back.svg",
+      "layers/components/<theme>/card_inner_glow.svg",
+      "layers/components/<theme>/card_border.svg",
+      "layers/components/<theme>/card_medallion.svg",
+      "layers/icons/<topic>.svg",
+      "layers/text/topics/<theme>/<topic>_title.svg",
+      "layers/text/topics/<theme>/<topic>_subtitle.svg",
+      "layers/components/<theme>/card_sparkle.svg"
+    ],
+    "nav_button": [
+      "layers/components/<theme>/nav_button_bg.svg",
+      "layers/nav/icon_back.svg nebo icon_home.svg",
+      "layers/nav/text/<theme>/<name>.svg"
+    ],
+    "subject_title": [
+      "layers/components/<theme>/subject_title_bg.svg",
+      "layers/text/subjects/<theme>/<subject>.svg"
+    ]
+  }
+}

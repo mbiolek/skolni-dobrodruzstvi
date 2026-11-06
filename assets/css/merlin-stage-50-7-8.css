@@ -1,0 +1,53 @@
+/* 50.7.8: Merlin = draggable foreground guide; separate animated teaching stage. */
+#sd54-merlin.sd578-stage{
+ position:fixed!important;inset:auto!important;
+ left:var(--sd-merlin-x,calc(100vw - 118px))!important;
+ top:var(--sd-merlin-y,calc(100dvh - 228px))!important;
+ right:auto!important;bottom:auto!important;
+ width:clamp(70px,22vw,112px)!important;height:clamp(98px,31vw,145px)!important;
+ min-width:0!important;max-width:none!important;max-height:none!important;
+ z-index:2147483410!important;display:flex!important;align-items:end!important;
+ pointer-events:none!important;isolation:isolate!important;
+ transition:left .32s ease,top .32s ease!important;
+ animation:none!important;transform:none!important;
+}
+#sd54-merlin.sd578-stage.sd578-dragging{transition:none!important;}
+#sd54-merlin.sd578-stage img{
+ width:100%!important;height:100%!important;max-height:none!important;min-width:0!important;
+ object-fit:contain!important;object-position:center bottom!important;
+ cursor:grab!important;touch-action:none!important;-webkit-user-drag:none!important;
+ user-select:none!important;-webkit-user-select:none!important;pointer-events:auto!important;
+ transform:none!important;animation:none!important;
+ filter:drop-shadow(0 6px 9px #030717b0)!important;
+}
+#sd54-merlin.sd578-stage.sd578-dragging img{cursor:grabbing!important;filter:drop-shadow(0 4px 14px #f2d58d90)!important;}
+#sd54-merlin.sd578-stage img:focus-visible{outline:3px solid #ffdc63!important;border-radius:12px;outline-offset:3px;}
+/* Merlin stays on top of the lesson instead of disappearing on subject modules. */
+body.sd-open:has(#authGate.off):not(.sd55-speaking):not(.sd54-admin-open):not(.sd570-avatar-open) #sd54-merlin.sd578-stage,
+body.sd52-open:has(#authGate.off):not(.sd55-speaking):not(.sd54-admin-open):not(.sd570-avatar-open) #sd54-merlin.sd578-stage,
+body:has(#authGate.off):not(.sd55-speaking):not(.sd54-admin-open):not(.sd570-avatar-open) #sd54-merlin.sd578-stage{
+ display:flex!important;visibility:visible!important;
+}
+body.sd55-speaking #sd54-merlin.sd578-stage,
+body.sd54-admin-open #sd54-merlin.sd578-stage,
+body.sd570-avatar-open #sd54-merlin.sd578-stage,
+body:not(:has(#authGate.off)) #sd54-merlin.sd578-stage{display:none!important;visibility:hidden!important;}
+/* Yellow help follows the guide without covering the guide itself. */
+#sd55-help.sd578-follow{
+ top:var(--sd-merlin-help-y,calc(100dvh - 112px))!important;
+ left:var(--sd-merlin-help-x,calc(100vw - 65px))!important;
+ right:auto!important;bottom:auto!important;
+ width:44px!important;height:44px!important;z-index:2147483420!important;
+ font-size:30px!important;transition:left .32s ease,top .32s ease!important;
+}
+#sd54-merlin.sd578-stage.sd578-dragging~#sd55-help.sd578-follow{transition:none!important;}
+/* Large guide enters the foreground to teach, using the current lesson/narration pipeline. */
+#sd55-modal.sd578-lesson-stage{z-index:2147483500!important;background:transparent!important;}
+#sd55-modal.sd578-lesson-stage .sd55-backdrop{background:rgba(7,18,38,.62)!important;backdrop-filter:blur(2px)!important;}
+#sd55-modal.sd578-lesson-stage .sd55-sheet{width:min(94vw,590px);max-height:94dvh;overflow:auto;align-items:center;gap:0;animation:sd578-stage-appear .42s cubic-bezier(.19,.96,.45,1) both!important;}
+#sd55-modal.sd578-lesson-stage .sd55-sheet>img{width:clamp(126px,37vw,220px)!important;height:clamp(125px,34vw,210px)!important;max-height:none!important;object-fit:contain!important;transform-origin:center bottom;animation:sd578-merlin-come-forward .65s cubic-bezier(.16,1,.3,1) both!important;filter:drop-shadow(0 5px 16px #000a)!important;}
+#sd55-modal.sd578-lesson-stage .sd55-paper{max-height:65dvh;overflow-y:auto;}
+@keyframes sd578-stage-appear{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes sd578-merlin-come-forward{from{opacity:.25;transform:translateY(78px) scale(.49)}to{opacity:1;transform:none}}
+@media(max-height:650px){#sd55-modal.sd578-lesson-stage .sd55-sheet{max-height:94dvh}.sd55-sheet>img{height:100px!important}}
+@media(prefers-reduced-motion:reduce){#sd54-merlin.sd578-stage,#sd55-help.sd578-follow{transition:none!important}#sd55-modal.sd578-lesson-stage .sd55-sheet,#sd55-modal.sd578-lesson-stage .sd55-sheet>img{animation:none!important}}

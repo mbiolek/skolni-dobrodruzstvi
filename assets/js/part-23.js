@@ -3,7 +3,7 @@
  * Neuchovává předchozí předmět v historii. Prohlížeč může při samotném tažení
  * zobrazit vlastní animaci (to webová aplikace nemůže spolehlivě řídit). */
 (()=>{'use strict';
-const NS='sd-navigation-5077', KEY='school-diagnostics-v456', MAX=400;
+const NS='sd-navigation-5078', KEY='school-diagnostics-v456', MAX=400;
 const $=id=>document.getElementById(id);
 const version=()=>window.SDApp?.version||'50.7.7';
 function record(type,detail=''){
@@ -41,7 +41,8 @@ function describe(){
  if(route==='homeScreen')return {route,subject:'',depth:0};
  if(route==='subjectMenu('+subject+')'||route.startsWith('subjectMenu(')||route==='czechMenu'||route==='vlastScreen')return {route,subject:subjectFor(route),depth:1};
  if(route==='mathTopics')return {route,subject:'math',depth:2};
- if((route==='schoolPlans'||route==='curriculum')&&(subject==='nature'||subject==='history'))return {route,subject,depth:1};
+ if(route==='schoolPlans')return {route,subject,depth:1};
+ if(route==='curriculum')return {route,subject,depth:2};
  if(route==='merlinHelp'||route==='avatarDialog'||route==='badgesDialog'||route==='skinDialog')return {route,subject,depth:3};
  return {route,subject:subjectFor(route),depth:2};
 }

@@ -1,0 +1,45 @@
+/* Školní dobrodružství 50.7.8: SVG cards assembled in independent interactive layers. */
+html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered,html body[data-card-style] button.sd-ui-card.sd-layered{
+ position:relative!important;isolation:isolate!important;overflow:hidden!important;display:flex!important;
+ flex-direction:column!important;justify-content:flex-end!important;align-items:center!important;
+ min-width:0!important;min-height:180px!important;padding:114px 12px 20px!important;gap:7px!important;
+ background:transparent!important;border:0!important;border-radius:26px!important;
+ box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ color:var(--sd-fc,#fff8e8)!important;transform:translateZ(0)!important;
+ transition:transform .18s ease,filter .18s ease!important;
+}
+html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered::before,html body[data-card-style] button.sd-ui-card.sd-layered::before,html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered::after,html body[data-card-style] button.sd-ui-card.sd-layered::after{display:none!important;content:none!important}
+.sd-layer-art{position:absolute!important;inset:0!important;z-index:0!important;pointer-events:none!important;display:block!important}
+.sd-layer-art img{position:absolute!important;display:block!important;object-fit:fill!important;pointer-events:none!important;
+  margin:0!important;padding:0!important;max-width:none!important;max-height:none!important;border:0!important;box-shadow:none!important;background:transparent!important}
+.sd-layer-art [data-layer="frame"],.sd-layer-art [data-layer="glow"],.sd-layer-art [data-layer="border"],.sd-layer-art [data-layer="medal"],.sd-layer-art [data-layer="star"]{width:100%!important;height:100%!important;inset:0!important}
+.sd-layer-art [data-layer="frame"]{z-index:0}.sd-layer-art [data-layer="glow"]{z-index:1;animation:sd-light-breathe 4.8s ease-in-out infinite}
+.sd-layer-art [data-layer="border"]{z-index:2}.sd-layer-art [data-layer="medal"]{z-index:3}
+.sd-layer-art [data-layer="icon"]{z-index:4!important;inset:auto!important;top:20%!important;left:34%!important;width:32%!important;height:32%!important;object-fit:contain!important;animation:sd-icon-float 3.8s ease-in-out infinite}
+.sd-layer-art [data-layer="star"]{z-index:6;animation:sd-star-shine 5s ease-in-out infinite}
+.sd-layer-art [data-layer="title"]{z-index:6;top:auto!important;left:7%!important;bottom:13%!important;width:86%!important;height:24%!important;object-fit:contain!important}
+html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered :is(strong,b,.sd-ui-card__title),html body[data-card-style] button.sd-ui-card.sd-layered :is(strong,b,.sd-ui-card__title){z-index:5!important;order:0!important;position:relative!important;display:block!important;
+ font-size:clamp(14px,2.6vw,20px)!important;font-family:Georgia,DejaVu Serif,serif!important;font-weight:750!important;
+ line-height:1.2!important;overflow-wrap:break-word!important;padding:0!important;background:transparent!important;
+ border:0!important;color:var(--sd-fc,#fff8e8)!important;box-shadow:none!important;text-shadow:0 1px 2px #0009!important}
+html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered.sd-has-svg-title :is(strong,b,.sd-ui-card__title),html body[data-card-style] button.sd-ui-card.sd-layered.sd-has-svg-title :is(strong,b,.sd-ui-card__title){color:transparent!important;text-shadow:none!important;max-height:2rem!important}
+html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc),html body[data-card-style] button.sd-ui-card.sd-layered :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){z-index:5!important;order:1!important;position:relative!important;display:block!important;
+ font-size:clamp(10px,1.8vw,13px)!important;line-height:1.25!important;color:var(--sd-sub,#f0ecd5)!important;font-weight:600!important;
+ background:transparent!important;padding:0!important;max-width:100%!important;text-shadow:0 1px 2px #0008!important}
+html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered:hover,html body[data-card-style] button.sd-ui-card.sd-layered:hover{transform:translateY(-3px) scale(1.025)!important;filter:brightness(1.1)!important;background:transparent!important}
+html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered:active,html body[data-card-style] button.sd-ui-card.sd-layered:active{transform:translateY(2px) scale(.97)!important;filter:brightness(1.14)!important}
+html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered:focus-visible,html body[data-card-style] button.sd-ui-card.sd-layered:focus-visible{outline:3px solid #ffe099!important;outline-offset:2px!important}
+.sd-ui-grid:not(.sd-ui-grid--covers){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(8px,1.6vw,15px)!important;align-items:stretch!important}
+.sd-ui-grid:not(.sd-ui-grid--covers)>button.sd-layered{width:100%!important;min-width:0!important}
+.sd-subject-title-svg{display:block;max-width:100%;height:auto;max-height:65px;margin:2px auto 0;object-fit:contain;pointer-events:none}
+.sd-layer-cover strong{display:none!important}
+@keyframes sd-icon-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.025)}}
+@keyframes sd-light-breathe{0%,100%{opacity:.52}50%{opacity:1}}
+@keyframes sd-star-shine{0%,75%,100%{opacity:.6}83%{opacity:1}}
+@media(min-width:640px){.sd-ui-grid:not(.sd-ui-grid--covers){grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(min-width:1100px){.sd-ui-grid:not(.sd-ui-grid--covers){grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:390px){html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered,html body[data-card-style] button.sd-ui-card.sd-layered{min-height:154px!important;padding:99px 7px 13px!important}}
+@media(prefers-reduced-motion:reduce){.sd-layer-art img{animation:none!important}html body[data-card-style] :is(#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel) button.sd-ui-card.sd-layered,html body[data-card-style] button.sd-ui-card.sd-layered{transition:none!important}}
+/* Floating Merlin must not intercept lesson cards or obscure the lower row. */
+body.sd-open #sd54-merlin, body.sd52-open #sd54-merlin{display:none!important}
+body.sd-open #sd55-help, body.sd52-open #sd55-help{bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;width:42px!important;height:42px!important;padding:0!important;border-radius:50%!important;font-size:27px!important;display:grid!important;place-items:center!important;background:#ffcf43!important;color:#30235d!important}

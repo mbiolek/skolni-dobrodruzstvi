@@ -1,0 +1,17 @@
+Školní dobrodružství 50.7.8 – vektorové vrstvy a Merlin v popředí
+
+1) Skutečné dynamické SVG karty z oddělených vrstev: rám, světlo, okraj,
+   medailon, ikona, text a jiskry; přepínání mezi čtyřmi motivy.
+2) Opravené CSS: některá chybná pravidla skrývala celá tlačítka namísto
+   jejich pseudo-elementů. Nyní jsou karty viditelné a klikatelné.
+3) Upravený vstup do výuky a zpětná navigace po otevření Merlina
+   (se zachováním původních dat profilů).
+4) Merlin nad obsahem: přetáhnutí prstem nebo myší, uložení polohy,
+   automatický přesun mimo důležité ovládací prvky, samostatný žlutý otazník.
+5) Po kliknutí se Merlin zvětší a vstoupí do popředí s vysvětlením a
+   stávajícím českým hlasovým předčítáním. Neobsahuje nový syntetizovaný
+   mužský hlas: závisí na dostupných hlasech Androidu.
+6) Data profilů, testů, postupů a výsledků nejsou odstraňována.
+
+Technická poznámka: automatické přemístění omezuje překryv dle dostupného
+rozložení stránky, nelze garantovat bezkoliznost pro každou velikost displeje.
