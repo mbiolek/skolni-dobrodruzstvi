@@ -1,0 +1,14 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.7.7 – OPRAVA HISTORIE NAVIGACE
+
+Příčina: předchozí oprava 50.7.5 ovládala vykreslení po gestu, ale nevytvářela správnou historii prohlížeče. Android při tažení zpět mohl zobrazovat starší předmět jako předchozí položku.
+
+Změny:
+- Domovská stránka je vždy předchozí položkou historie při otevření předmětu.
+- Při otevření předmětu se vytváří položka dřív, než ho původní modul vykreslí.
+- Vnitřní navigace a tlačítka Zpět synchronizují hloubku historie.
+- Gesto v předmětu vrací výhradně na seznam předmětů nebo jeho vlastní menu.
+- Po obnovení přihlášení už starý modul neotvírá automaticky poslední viděný předmět.
+- Starší obrazovky během systémové *animace* Androidu mohou být v nativním náhledu stále vidět, dokud nevyprchá stará historie prohlížeče; webová aplikace tento náhled přímo nekreslí.
+- Nejsou dotčena data, výsledky, Merlin, nové styly karet ani avatary.
+
+Pro dosažení opravy nutno aktualizovat PWA na 50.7.7. Nemaž data aplikace.

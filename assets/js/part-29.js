@@ -10,19 +10,9 @@
   try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}
  }
  function read(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');return s&&Date.now()-s.at<7*86400000?s:null}catch{return null}}
+ // Návrat z pozadí obnovuje profil, nikoli starou obrazovku jiného předmětu.
  function restore(id){const state=read();if(!state||state.id!==id)return;
-  restoring=true;
-  try{
-   if(state.menu&&/Matematika|Angličtina/.test(state.subject)){
-    const which=state.subject.includes('Matematika')?'math':'english';
-    document.querySelector('#homeScreen [data-open="'+which+'"]')?.click();
-   }else if(state.screen&&state.screen!=='homeScreen'){
-    const which=state.screen.replace(/Screen$/,'');
-    const btn=document.querySelector('#homeScreen [data-open="'+which+'"]');
-    if(btn){btn.click();if(menu.classList.contains('on')){document.querySelector('#advSubjectMenu [data-adv-mode="practice"]')?.click()}}
-   }
-   requestAnimationFrame(()=>window.scrollTo(0,Math.max(0,state.scroll||0)));
-  }finally{setTimeout(()=>{restoring=false;snapshot()},400)}
+  // Pokrok a výsledky zůstávají v původním úložišti; nepřepínáme předměty.
  }
  window.addEventListener('school-resume-login',e=>{if(e.detail?.id&&e.detail.id!=='parent')setTimeout(()=>restore(e.detail.id),0)});
  // A previously authenticated local profile can resume after a cold start.
