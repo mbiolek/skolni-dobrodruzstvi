@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-<rect x="24" y="24" width="464" height="464" rx="44" fill="none" stroke="#8b6235" stroke-width="8"/>
-<rect x="38" y="38" width="436" height="436" rx="36" fill="none" stroke="#f7edff" stroke-opacity="0.26" stroke-width="2"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M44 22H470L489 48V462L465 488H43L22 466V47Z" fill="none" stroke="#825226" stroke-width="7"/><rect x="38" y="38" width="436" height="436" rx="25" fill="none" stroke="#fff1ca" stroke-width="3" opacity=".85"/><path d="M25 25h78l-78 78zM489 25h-78l78 78zM25 488h78l-78-78zM489 488h-78l78-78z" fill="#b77c33" stroke="#70481d" stroke-width="3"/><circle cx="46" cy="46" r="6" fill="#f5d582" stroke="#734e21" stroke-width="2"/><circle cx="466" cy="46" r="6" fill="#f5d582" stroke="#734e21" stroke-width="2"/><circle cx="46" cy="466" r="6" fill="#f5d582" stroke="#734e21" stroke-width="2"/><circle cx="466" cy="466" r="6" fill="#f5d582" stroke="#734e21" stroke-width="2"/></svg>

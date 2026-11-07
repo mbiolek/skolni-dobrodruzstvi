@@ -10,7 +10,7 @@
   ['guild','Hradní cech','Dřevo, štíty a smalt']
  ];
  const choices=new Set(OPTIONS.map(x=>x[0]));
- let saved='glass';try{saved=localStorage.getItem(KEY)||'glass'}catch(e){}
+ let saved='guild';try{saved=localStorage.getItem(KEY)||'guild';if(!localStorage.getItem('sd-style-guild-5080-shown')){saved='guild';localStorage.setItem(KEY,'guild');localStorage.setItem('sd-style-guild-5080-shown','1')}}catch(e){}
  if(!choices.has(saved))saved='glass';
  const root=document.body; root.dataset.cardStyle=saved;
  const themes=document.getElementById('themeSwitcher');

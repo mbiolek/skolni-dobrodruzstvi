@@ -1,0 +1,8 @@
+Školní dobrodružství 50.7.9 – úprava SVG karet
+
+- Opraveny vyteklé a překryté názvy v kartách učiva a testů.
+- Výška karet závisí na jejich šířce, text je oddělená responzivní vrstva.
+- Oddělené SVG vrstvy rám/záře/medailon/ikona/dekorace.
+- Názvy a podnázvy jsou samostatné škálovatelné textové vrstvy.
+- Odlišné ikony pro jednotlivá podtémata; zůstává stávající klikací logika.
+- Zachována verze Merlinovy obsluhy, přetahování a profilů.

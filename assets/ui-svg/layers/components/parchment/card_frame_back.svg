@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-<defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%" stop-color="#eedbb6"/>
-    <stop offset="100%" stop-color="#ceb989"/>
-  </linearGradient>
-  <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
-    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity="0.35"/>
-  </filter>
-</defs>
-<rect x="24" y="24" width="464" height="464" rx="44" fill="url(#bg)" filter="url(#shadow)"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3d2"/><stop offset=".45" stop-color="#edddba"/><stop offset="1" stop-color="#c9a87c"/></linearGradient></defs><path d="M44 22H470L489 48V462L465 488H43L22 466V47Z" fill="url(#bg)" stroke="#70441d" stroke-width="6"/><path d="M51 69Q78 40 110 67M407 452Q440 425 462 455M57 411Q90 386 119 412" fill="none" stroke="#85643f" opacity=".26" stroke-width="5"/><path d="M52 55H460V460H52Z" fill="none" stroke="#8e6b40" stroke-opacity=".14" stroke-width="3"/></svg>

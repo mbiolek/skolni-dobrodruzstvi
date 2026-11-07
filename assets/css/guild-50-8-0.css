@@ -1,0 +1,84 @@
+/* 50.8.0: skutečné vrstvené SVG dřevo/kování/štít/stuha/ikona/drahokam. */
+html body[data-card-style="guild"]{--sd-fc:#fff2d0;--sd-sub:#f8e6bd}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered{
+ aspect-ratio:1.05 / 1!important;min-height:150px!important;border-radius:16px!important;
+ overflow:visible!important;filter:drop-shadow(0 5px 5px rgba(2,7,23,.38))!important;
+ background:none!important;
+}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered .sd-layer-art{
+ overflow:visible!important;
+}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="frame"],
+html body[data-card-style="guild"] .sd-layer-art [data-layer="glow"],
+html body[data-card-style="guild"] .sd-layer-art [data-layer="border"],
+html body[data-card-style="guild"] .sd-layer-art [data-layer="medal"],
+html body[data-card-style="guild"] .sd-layer-art [data-layer="banner"],
+html body[data-card-style="guild"] .sd-layer-art [data-layer="gem"],
+html body[data-card-style="guild"] .sd-layer-art [data-layer="star"]{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:fill!important;pointer-events:none!important;
+}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="frame"]{z-index:0!important}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="glow"]{z-index:1!important;animation:sd5080-light 5.2s ease-in-out infinite}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="border"]{z-index:2!important}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="medal"]{z-index:3!important}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="icon"]{
+ z-index:4!important;top:12%!important;left:32%!important;width:36%!important;height:36%!important;object-fit:contain!important;
+ animation:sd5080-icon 4.3s ease-in-out infinite;
+}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="banner"]{z-index:5!important}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="gem"]{z-index:6!important;animation:sd5080-gem 5s ease-in-out infinite}
+html body[data-card-style="guild"] .sd-layer-art [data-layer="star"]{z-index:7!important;opacity:.75!important}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-game-theme][data-card-style="guild"] button.sd-ui-card.sd-layered>.sd-layer-caption{
+ position:absolute!important;z-index:10!important;inset:58% 9% 19%!important;display:flex!important;
+ align-items:center!important;justify-content:center!important;overflow:visible!important;gap:0!important;
+ pointer-events:none!important;
+}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered>.sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-game-theme][data-card-style="guild"] button.sd-ui-card.sd-layered>.sd-layer-caption :is(strong,b,.sd-ui-card__title){
+ color:#fff5d5!important;font-family:Georgia,serif!important;font-weight:750!important;
+ font-size:clamp(14px,4.2vw,25px)!important;line-height:1.1!important;letter-spacing:-.03em!important;
+ text-align:center!important;width:100%!important;max-width:100%!important;
+ overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important;
+ text-shadow:0 2px 2px #3d1f0e,0 -1px 1px #855721!important;
+}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-long-label>.sd-layer-caption,
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-verylong-label>.sd-layer-caption{inset:57% 8% 17%!important}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-long-label .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(13px,3.75vw,22px)!important}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-verylong-label .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(11px,3.1vw,20px)!important}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered .sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc),
+html body[data-game-theme][data-card-style="guild"] button.sd-ui-card.sd-layered .sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){
+ position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
+ overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;
+}
+html body[data-card-style="guild"] .sd-ui-grid:not(.sd-ui-grid--covers){gap:clamp(10px,2vw,16px)!important;row-gap:clamp(12px,2.5vw,20px)!important}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered:active{transform:scale(.975)!important}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered:hover .sd-layer-art [data-layer="icon"]{filter:brightness(1.12) drop-shadow(0 0 4px #fffbb2)!important}
+/* Pro starší různě veliká tlačítka je grafika škálovaná relativně k rozměru, ne pevně v px. */
+html body[data-card-style="guild"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) :is(.sd-ui-grid,.hub-cards,.adv-menu-cards){row-gap:clamp(12px,2.3vw,18px)!important}
+/* Tlačítka pro návrat a domů sladěná se zlatým a pergamenovým provedením. */
+html body[data-card-style="guild"] :is(.hub-back,.adv-back,.v496-back,#v496TopicBack,#en499Back,.homebtn,button[data-home]){
+ background:linear-gradient(#fff9e9,#dfc899)!important;color:#1b3157!important;
+ border:3px solid #d6a449!important;border-radius:25px!important;
+ text-shadow:none!important;box-shadow:inset 0 2px 2px #fff,0 4px 4px #05091a66!important;
+}
+@keyframes sd5080-icon{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@keyframes sd5080-gem{0%,80%,100%{opacity:.86}90%{opacity:1}}
+@keyframes sd5080-light{0%,100%{opacity:.48}50%{opacity:.75}}
+@media(max-width:390px){html body[data-card-style="guild"] button.sd-ui-card.sd-layered>.sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(11px,3.4vw,17px)!important}}
+@media(prefers-reduced-motion:reduce){html body[data-card-style="guild"] .sd-layer-art img{animation:none!important}}
+
+/* Názvy předmětů – samostatná heraldická titulní tabule, žádný obrázek celé obrazovky. */
+html body[data-card-style="guild"] #subjectHub .hub-title,
+html body[data-card-style="guild"] #sd52main>h1,
+html body[data-card-style="guild"] #vlastScreen h1{
+ background-image:url("../ui-svg/layers/components/guild/subject_title_bg.svg")!important;
+ background-repeat:no-repeat!important;background-size:100% 100%!important;background-position:center!important;
+ color:#fff4d6!important;font-family:Georgia,serif!important;text-shadow:0 2px 2px #5e321a!important;
+ min-height:75px!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:10px 30px!important;border:0!important;max-width:100%!important;box-sizing:border-box!important;
+}
+html body[data-card-style="guild"] #sd52 .sd52-wrap>header>button{
+ background:linear-gradient(#fff8e3,#dfbf81)!important;border:3px solid #c18c32!important;border-radius:24px!important;
+ color:#233956!important;box-shadow:inset 0 2px 2px #fff,0 4px 7px #0007!important;
+}

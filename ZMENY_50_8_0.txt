@@ -1,0 +1,20 @@
+Školní dobrodružství 50.8.0 – heraldické SVG karty
+
+Tato verze nahradila jednoduché SVG dekorace skutečnými oddělenými vektorovými kresbami:
+- dřevěná deska s vlákny a spojováním prken,
+- zlaté kování a rohové nýty,
+- vlaječky a ornamenty,
+- horní barevný erb pro každý typ tlačítka,
+- samostatná SVG ikona pro šest základních akcí,
+- modrá tvarovaná stuha,
+- přístupný HTML název, nezávislý na grafice,
+- samostatný barevný drahokam a odlesk.
+
+Karty zůstávají HTML tlačítky se stejnými původními akcemi a daty.
+Téma Hradní cech se při prvním spuštění této verze zapne jednorázově,
+potom už aplikace respektuje uživatelskou změnu v nabídce Prostředí.
+Všechny SVG mohou být animovány nezávisle, zvlášť vrstva erbu, ikony a drahokamu.
+
+Upozornění: jde o nově vektorově nakreslenou podobu podle obrázku.
+Nejde o pixelově identickou kopii náročného původního 3D renderu.
+Nedotčeny profily, výsledky, lekce, Merlin i navigace ze starších verzí.

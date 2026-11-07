@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 68 68">
-
-    <rect x="8" y="14" width="52" height="36" rx="8" fill="#7e35ff" stroke="#4f1d9e" stroke-width="2"/>
-    <circle cx="24" cy="30" r="10" fill="#fff"/>
-    <text x="24" y="34" text-anchor="middle" font-family="DejaVu Sans, Arial" font-size="10" font-weight="700" fill="#4f1d9e">Hi!</text>
-    <path d="M38 20h16v20H38z" fill="#fff"/>
-    <path d="M38 20l16 20M54 20L38 40" stroke="#d63434" stroke-width="3"/>
-    <path d="M46 20v20M38 30h16" stroke="#234fbe" stroke-width="4"/>
-    
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><defs><linearGradient id="iconBG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#425eae"/><stop offset="1" stop-color="#1d2755"/></linearGradient></defs><circle cx="64" cy="64" r="58" fill="url(#iconBG)" stroke="#f6d98d" stroke-width="5"/><circle cx="64" cy="64" r="49" fill="none" stroke="#ffffff" stroke-width="2" opacity=".22"/><path d="M22 49L64 20 106 49V100H22Z" fill="#f3d996" stroke="#97613d" stroke-width="4"/><path d="M55 100V65H76V100" fill="#528cbb"/><path d="M35 59h13v13H35zM82 59h13v13H82z" fill="#6fabe0"/></svg>
