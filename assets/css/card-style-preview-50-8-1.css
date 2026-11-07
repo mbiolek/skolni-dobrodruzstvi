@@ -1,0 +1,24 @@
+/* 50.8.1 – výběr karet má otevřít skutečný živý náhled, nejen vybrat obrázek. */
+#sdCardStyleSelect .sd-card-style-option{position:relative!important;cursor:pointer!important}
+#sdCardStyleSelect .sd-card-style-option::after{content:'Klepni pro ukázku';position:relative;display:block;font:700 11px/1.2 system-ui;color:#f9df9b;padding:1px 5px 7px;text-align:center}
+#sdCardStyleSelect .sd-card-style-option.selected::after{content:'Aktivní vzhled · Zobrazit ukázku'}
+.sd5081-overlay[hidden]{display:none!important}
+body.sd5081-preview-open{overflow:hidden!important}
+.sd5081-overlay{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:rgba(4,9,28,.88);padding:calc(8px + env(safe-area-inset-top)) 8px calc(8px + env(safe-area-inset-bottom));box-sizing:border-box}
+.sd5081-dialog{width:min(100%,630px);max-height:100%;overflow:auto;overscroll-behavior:contain;box-sizing:border-box;background:linear-gradient(160deg,#23365e,#10182e 75%);border:2px solid #e6bf6c;border-radius:18px;box-shadow:0 12px 48px #000c, inset 0 1px 0 #ffe7a144;color:#fff4d5;padding:14px}
+.sd5081-header{display:flex;align-items:flex-start;gap:8px;justify-content:space-between}
+.sd5081-header h2{margin:4px 0 5px;font:bold clamp(22px,5vw,29px)/1.15 Georgia,serif;color:#fff4d6}
+.sd5081-header p{font:500 13px/1.35 system-ui;margin:0 0 12px;color:#e6e4ef}
+.sd5081-kicker{font:800 10px/1.2 system-ui;letter-spacing:.09em;color:#f1ca70}
+.sd5081-close{flex:0 0 auto;display:grid;place-items:center;border:1px solid #e0be75;background:#223554;color:#fff1d0;border-radius:12px;width:38px;height:38px;font-size:21px;cursor:pointer}
+html body[data-card-style] .sd5081-samples.sd-ui-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin:6px 0 10px!important;align-items:stretch!important}
+html body[data-card-style] .sd5081-samples>button.sd-ui-card.sd-layered{width:100%!important;min-width:0!important;min-height:130px!important;max-height:none!important;margin:0!important}
+.sd5081-samples>button.sd-ui-card{touch-action:manipulation}
+.sd5081-action-hint{min-height:30px;font:500 12px/1.3 system-ui;margin:6px 0 10px;color:#e4e8f7}
+.sd5081-actions{position:sticky;bottom:-14px;display:flex;gap:8px;background:linear-gradient(0deg,#121b33 82%,transparent);padding:11px 0 2px}
+.sd5081-actions button{min-height:44px;border-radius:12px;font:750 13px/1.2 system-ui;cursor:pointer;padding:8px 10px}
+.sd5081-cancel{flex:1;background:#283752;color:#fff;border:1px solid #9ba9c7}
+.sd5081-use{flex:1.45;background:linear-gradient(#fff1b3,#dbb05d);color:#192a43;border:2px solid #fff6c7}
+.sd5081-dialog button:focus-visible{outline:3px solid #fff0a0!important;outline-offset:2px}
+@media(max-width:375px){.sd5081-dialog{padding:9px}.sd5081-header h2{font-size:21px}.sd5081-samples.sd-ui-grid{gap:6px!important}.sd5081-actions button{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.sd5081-dialog *{animation:none!important;scroll-behavior:auto!important}}
