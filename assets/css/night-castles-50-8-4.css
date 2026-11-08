@@ -1,0 +1,22 @@
+/* Volitelná pozadí hradů dodaná pro 50.8.4 */
+#themeSwitcher .sd84-night-picker{margin:14px 0 4px;padding:8px;border-top:1px solid #ffffff55;color:#fff}
+#themeSwitcher .sd84-night-picker>strong{display:block;margin:0 0 8px;font-size:15px;color:#ffe5b2}
+#themeSwitcher .sd84-night-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#themeSwitcher .sd84-night-options button{min-height:64px!important;border-radius:12px!important;border:2px solid #d7bd88!important;
+ color:white!important;text-shadow:0 1px 3px #000!important;background-image:linear-gradient(#07152b66,#07152b88),var(--sd84-preview)!important;
+ background-size:cover!important;background-position:center!important;background-color:#1b3c60!important;font-size:13px!important;font-weight:750!important;}
+#themeSwitcher .sd84-night-options button.is-selected{outline:3px solid #fee4a3!important;outline-offset:1px!important;}
+
+html body[data-castle-night="1"]{background:linear-gradient(#07142b44,#07142b66),url('../pozadi/hrad-noc-1-5084.webp') center/cover fixed!important;color:#fff!important;}
+html body[data-castle-night="1"] :is(#authGate,#advSubjectMenu,#subjectHub,#vlastScreen,#czechScreen,#englishScreen,#v496TopicPanel){background:linear-gradient(#07182b44,#07182b77),url('../pozadi/hrad-noc-1-5084.webp') center/cover fixed!important;}
+html body[data-castle-night="1"] :is(#sd52,#sdCurriculum)::before{background:linear-gradient(#07182b44,#07182b77),url('../pozadi/hrad-noc-1-5084.webp') center/cover fixed!important;}
+
+
+html body[data-castle-night="2"]{background:linear-gradient(#07142b44,#07142b66),url('../pozadi/hrad-noc-2-5084.webp') center/cover fixed!important;color:#fff!important;}
+html body[data-castle-night="2"] :is(#authGate,#advSubjectMenu,#subjectHub,#vlastScreen,#czechScreen,#englishScreen,#v496TopicPanel){background:linear-gradient(#07182b44,#07182b77),url('../pozadi/hrad-noc-2-5084.webp') center/cover fixed!important;}
+html body[data-castle-night="2"] :is(#sd52,#sdCurriculum)::before{background:linear-gradient(#07182b44,#07182b77),url('../pozadi/hrad-noc-2-5084.webp') center/cover fixed!important;}
+
+
+html body[data-castle-night="3"]{background:linear-gradient(#07142b44,#07142b66),url('../pozadi/hrad-noc-3-5084.webp') center/cover fixed!important;color:#fff!important;}
+html body[data-castle-night="3"] :is(#authGate,#advSubjectMenu,#subjectHub,#vlastScreen,#czechScreen,#englishScreen,#v496TopicPanel){background:linear-gradient(#07182b44,#07182b77),url('../pozadi/hrad-noc-3-5084.webp') center/cover fixed!important;}
+html body[data-castle-night="3"] :is(#sd52,#sdCurriculum)::before{background:linear-gradient(#07182b44,#07182b77),url('../pozadi/hrad-noc-3-5084.webp') center/cover fixed!important;}

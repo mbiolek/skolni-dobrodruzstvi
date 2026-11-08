@@ -1,0 +1,13 @@
+Školní dobrodružství 50.8.4 – vyříznuté ilustrované karty
+
+- Tři grafické vzhledy využívají samostatné průhledné grafické výřezy z připravených předloh: Kamenné runy, Hradní cech a Kouzelný krystal.
+- Každá ze šesti hlavních karet má vlastní PNG i samostatný SVG obal s vloženou rastrovou ilustrací. SVG obal zajišťuje přesné zobrazení obrázku, obsah uvnitř však není vektorově překreslen.
+- Vzhled lze vybrat v Prostředí → Vzhled karet. Náhled používá stejné grafické soubory jako aplikace.
+- Tlačítka zůstávají skutečné HTML button prvky se svými původními funkcemi, pouze jejich malba je vyměněna.
+- Na obrazovce výběru Vlastivěda jsou vyříznutá horní tlačítka a ozdobný nadpis.
+- Tři dodané noční hrady jsou volitelné v nabídce Prostředí → Nová hradní pozadí.
+- Žlutý otazník Merlina je skrytý; nápověda se nadále otevírá klepnutím na samotnou postavičku.
+- Názvy dalších tematických tlačítek, pro které dodaný grafický výřez neexistuje, používají zachovaný SVG systém a nejsou nahrazovány nesprávnými obrázky.
+- Součástí je obnovená offline cache service workeru.
+
+GitHub Pages: rozbalit ZIP a jeho obsah nahrát do kořenového adresáře repozitáře.

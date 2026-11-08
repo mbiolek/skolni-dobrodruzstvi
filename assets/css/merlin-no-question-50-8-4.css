@@ -1,0 +1,2 @@
+/* Nápověda se otevírá klepnutím přímo na Merlina. Žlutý otazník se nezobrazuje. */
+html body #sd55-help, html body #sd55-help.sd578-follow{display:none!important;visibility:hidden!important;pointer-events:none!important;}

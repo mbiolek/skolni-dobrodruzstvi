@@ -1,0 +1,42 @@
+/* 50.8.4 — obrazové karty vyříznuté z původních transparentních sestav.
+   Přesná výtvarná vrstva + původní klikatelné DOM tlačítko. */
+html body[data-card-style] button.sd-ui-card.sd-layered.sd84-exact-card,
+html body[data-game-theme][data-card-style] button.sd-ui-card.sd-layered.sd84-exact-card{
+  background:transparent!important;border:none!important;border-radius:0!important;
+  overflow:visible!important;isolation:isolate!important;
+  box-shadow:none!important;aspect-ratio:1 / 1.02!important;
+}
+html body button.sd-layered.sd84-exact-card > .sd-layer-art{
+  overflow:visible!important;inset:0!important;display:block!important;
+}
+html body button.sd-layered.sd84-exact-card > .sd-layer-art > img:not(.sd84-exact-picture){display:none!important;visibility:hidden!important;}
+html body button.sd-layered.sd84-exact-card > .sd-layer-art > img.sd84-exact-picture{
+  display:block!important;visibility:visible!important;position:absolute!important;
+  inset:0!important;width:100%!important;height:100%!important;
+  z-index:12!important;object-fit:contain!important;object-position:center center!important;
+  pointer-events:none!important;transform:none!important;animation:none!important;
+  filter:none!important;opacity:1!important;
+}
+html body button.sd-layered.sd84-exact-card > .sd-layer-caption,
+html body[data-game-theme] button.sd-layered.sd84-exact-card > .sd-layer-caption{
+  visibility:hidden!important;pointer-events:none!important;
+}
+html body button.sd-layered.sd84-exact-card:focus-visible{outline:3px solid #ffe39c!important;outline-offset:2px!important;}
+html body button.sd-layered.sd84-exact-card:active{transform:translateY(2px) scale(.97)!important;}
+/* Dokonalý obrázek tlačítka; skutečnou klikací funkci nese původní tlačítko. */
+html body #sd52 header button.sd84-exact-nav{
+  position:relative!important;min-width:0!important;
+  width:clamp(105px,27vw,190px)!important;height:clamp(42px,12vw,80px)!important;
+  min-height:42px!important;max-width:47%!important;padding:0!important;margin:0!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  color:transparent!important;text-shadow:none!important;font-size:0!important;
+  background-color:transparent!important;background-image:var(--sd84-nav-img)!important;
+  background-position:center!important;background-size:contain!important;background-repeat:no-repeat!important;
+}
+html body #sd52main > h1.sd84-exact-title{
+  font-size:0!important;color:transparent!important;text-shadow:none!important;
+  width:100%!important;height:clamp(68px,23vw,130px)!important;margin:0 auto 4px!important;
+  background-image:var(--sd84-title-img)!important;background-size:contain!important;
+  background-repeat:no-repeat!important;background-position:center!important;
+}
+@media(prefers-reduced-motion:reduce){html body button.sd84-exact-card{transition:none!important;}}
