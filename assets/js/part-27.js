@@ -8,7 +8,7 @@ const meter=document.createElement('div');meter.id='sd5086-progress';meter.hidde
 meter.innerHTML='<div class="sd5086-track" role="progressbar" aria-label="Stahování aktualizace" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><small id="sd5086-progress-label">0 %</small>';
 box.insertBefore(meter,actions);
 const track=meter.querySelector('.sd5086-track'),fill=track.querySelector('span'),count=meter.querySelector('small');
-let reg=null,installing=null,hiddenInstall=false,updateRequested=false,refreshing=false,hasController=!!navigator.serviceWorker.controller,lastLogBucket=-1;
+let reg=null,installing=null,hiddenInstall=false,updateRequested=false,refreshing=false,hasController=!!navigator.serviceWorker.controller,lastLogBucket=-1,lastReadyVersion="nová",offeredWorker=null;
 function diagnostic(type,detail){try{window.schoolDiagnostic?.(type,detail)}catch(_){}}
 function hide(){box.style.display='none'}
 function show(text,buttons=[],progress=null){
@@ -31,7 +31,8 @@ function offer(registration){
    show('Aktualizuji aplikaci. Zachovám tvoje profily i výsledky.');
    w.postMessage({type:'SKIP_WAITING'});
  };
- diagnostic('update','download ready '+(window.SDApp?.version||''));
+ if(offeredWorker===w)return;offeredWorker=w;
+ diagnostic('update','download ready '+lastReadyVersion);
  show('Nová verze Školního dobrodružství je stažená. Chceš ji nyní použít?',[
   ['Aktualizovat nyní',ready],['Později',()=>{hiddenInstall=true;hide()},true]
  ]);
@@ -45,6 +46,7 @@ function onProgress(data){
     ['Skrýt průběh',()=>{hiddenInstall=true;hide()},true]
    ],data)}
  } else if(data.stage==='ready'){
+   lastReadyVersion=data.version||'nová';
    diagnostic('update','download completed '+data.version);
    // wait for registration.waiting; statechange event triggers offer().
    if(reg?.waiting)offer(reg);
@@ -68,7 +70,7 @@ navigator.serviceWorker.addEventListener('controllerchange',()=>{
 });
 function watch(worker){
  if(!worker||worker===installing)return;
- installing=worker;hiddenInstall=false;lastLogBucket=-1;
+ installing=worker;offeredWorker=null;hiddenInstall=false;lastLogBucket=-1;
  diagnostic('update','install started');
  if(navigator.serviceWorker.controller)show('Zjištěna nová verze. Připravuji její bezpečné stažení…');
  worker.addEventListener('statechange',()=>{

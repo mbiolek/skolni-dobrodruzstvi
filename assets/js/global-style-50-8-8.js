@@ -21,8 +21,8 @@ function init(){
  const grid=document.createElement('div');grid.className='sd88-wallpaper-grid';ui.append(title,grid);
  function choose(key,save=true){const opt=allowed.get(key);if(!opt)return;
   selection=key;document.body.dataset.wallpaper=key;
-  document.body.style.setProperty('--sd88-scene',`url("./assets/pozadi/${opt[2]}")`);
-  document.body.dataset.gameTheme=opt[3];
+  document.body.style.setProperty('--sd88-scene',`url("${new URL('./assets/pozadi/'+opt[2],document.baseURI).href}")`);
+  // Wallpaper must not mutate the legacy game theme; card style is independent.
   document.body.removeAttribute('data-castle-night');
   grid.querySelectorAll('button').forEach(b=>{const yes=b.dataset.wallpaper===key;b.classList.toggle('is-selected',yes);b.setAttribute('aria-pressed',yes?'true':'false')});
   if(save){try{localStorage.setItem(KEY,key)}catch(_){}}

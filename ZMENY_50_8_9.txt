@@ -1,0 +1,12 @@
+Školní dobrodružství 50.8.9 – stabilizace vzhledu a PWA (8. 11. 2026)
+
+- Výběr grafiky karet a výběr tapety jsou oddělené; prostředí se otevře pouze přes tlačítko Prostředí.
+- Opravené zobrazení tapety na hlavní stránce, v matematice, češtině, angličtině, přírodovědě, vlastivědě i přihlášení.
+- Podklad obrazovek neprůsvitný; při otevření výuky nesvítí pod ní domovská nabídka.
+- Grafika obrázků předmětů se řídí vybraným stylem tlačítek nezávisle na tapetě.
+- Dlouhé názvy karet se nezalamují uprostřed slov, sjednocena čitelnost.
+- Bezpečná instalace PWA: přibližně 200 základních souborů místo celého balíku 900, zbylé ilustrace se ukládají průběžně. Offline funguje hlavní aplikace, některé neotevřené ilustrace vyžadují první načtení online.
+- Aktualizace má skutečný průběh, po přerušení ji lze zopakovat a aktivuje se až po potvrzení.
+- Opravené hlášení čísla stahované verze.
+- Merlinovu nápovědu už nelze zavřít stejným dotykem, kterým se otevřela.
+- Původní profily, PINy, výsledky a výuková data zůstávají zachované.
