@@ -1,0 +1,98 @@
+/* 50.8.7: printed illustrations and their live labels are separate layers.
+ * Never hide the text of a dynamically generated topic. */
+html body[data-card-style] button.sd-ui-card.sd-layered.sd84-exact-card,
+html body[data-game-theme][data-card-style] button.sd-ui-card.sd-layered.sd84-exact-card{
+ position:relative!important;isolation:isolate!important;overflow:visible!important;
+ background:none!important;background-image:none!important;background-color:transparent!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ padding:0!important;min-width:0!important;min-height:0!important;
+ height:auto!important;width:100%!important;aspect-ratio:1/1.02!important;
+}
+html body[data-card-style] button.sd84-exact-card > .sd-layer-art{
+ position:absolute!important;inset:0!important;overflow:visible!important;z-index:0!important;
+ pointer-events:none!important;
+}
+html body[data-card-style] button.sd84-exact-card > .sd-layer-art > img.sd84-exact-picture{
+ display:block!important;visibility:visible!important;position:absolute!important;
+ inset:0!important;width:100%!important;height:100%!important;
+ object-fit:contain!important;filter:none!important;opacity:1!important;
+}
+/* SVG name overlay from 50.8.5 is superseded, not the illustrated button itself. */
+html body button.sd84-exact-card svg.sd85-detail-overlay{display:none!important}
+html body button.sd84-exact-card > .sd-layer-caption{visibility:hidden!important}
+/* An HTML title outside .sd-layer-art avoids legacy SVG/IMG visibility rules. */
+html body[data-card-style] button.sd84-exact-card > .sd87-card-title,
+html body[data-game-theme][data-card-style] button.sd84-exact-card > .sd87-card-title{
+ position:absolute!important;left:9%!important;right:9%!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ min-width:0!important;margin:0!important;padding:0 1%!important;
+ z-index:45!important;opacity:1!important;visibility:visible!important;
+ background:none!important;border:0!important;pointer-events:none!important;
+ text-align:center!important;white-space:normal!important;overflow-wrap:normal!important;
+ line-height:1.1!important;letter-spacing:-.012em!important;
+ font-family:Georgia,'Times New Roman',serif!important;font-weight:800!important;
+ font-size:clamp(17px,4.7vw,27px)!important;
+ text-wrap:balance!important;transform:none!important;
+}
+html body[data-card-style] button.sd84-exact-card > .sd87-card-title.sd87-title-long{
+ font-size:clamp(14px,3.9vw,22px)!important;
+}
+html body[data-card-style] button.sd84-exact-card > .sd87-card-title.sd87-title-verylong{
+ font-size:clamp(12px,3.5vw,20px)!important;line-height:1.08!important;
+}
+/* Precise label panels in the source images differ by theme. */
+html body[data-card-style="stone"] button.sd84-exact-card > .sd87-card-title{
+ bottom:11%!important;height:22%!important;color:#361b36!important;
+ text-shadow:0 1px 1px #ffedcf,0 0 1px #fff0db!important;
+}
+html body[data-card-style="guild"] button.sd84-exact-card > .sd87-card-title{
+ /* Guild's supplied "blank" images still contain baked-in names.
+    An independent enamel plaque hides them before placing the live name. */
+ left:12%!important;right:12%!important;bottom:20%!important;height:23%!important;
+ color:#fff0c9!important;
+ border:2px solid #e6bb6a!important;border-radius:22% / 35%!important;
+ background:linear-gradient(165deg,#174d77 0%,#103b72 24%,#0c2d57 60%,#071b40 100%)!important;
+ box-shadow:inset 0 2px 1px #ffeabb82,inset 0 -2px 2px #030c29,0 2px 2px #352008a8!important;
+ text-shadow:0 2px 3px #060f27,0 0 4px #04112c!important;
+}
+html body[data-card-style="glass"] button.sd84-exact-card > .sd87-card-title{
+ bottom:24%!important;height:22%!important;color:#fff9df!important;
+ text-shadow:0 2px 4px #071939,0 0 7px #0d1a51!important;
+}
+html body[data-card-style="parchment"] button.sd84-exact-card > .sd87-card-title{
+ bottom:23%!important;height:25%!important;color:#4a2918!important;
+ text-shadow:0 1px 1px #fff0cc!important;
+}
+/* Ornate, opaque medal conceals the embedded generic book or puzzle icon. */
+html body[data-card-style] button.sd84-exact-card > .sd87-topic-medallion{
+ position:absolute!important;left:50%!important;top:14%!important;
+ width:39%!important;height:39%!important;aspect-ratio:1!important;
+ transform:translateX(-50%)!important;border-radius:50%!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ margin:0!important;padding:0 3px!important;box-sizing:border-box!important;
+ z-index:40!important;visibility:visible!important;opacity:1!important;
+ pointer-events:none!important;text-align:center!important;
+ background:radial-gradient(circle at 35% 22%,#597bb9 0%,#304c89 30%,#1b2854 77%,#171a3d 100%)!important;
+ border:4px double #f5ca76!important;
+ box-shadow:inset 0 1px 3px #fff0b2,inset 0 -6px 12px #080d32aa,0 2px 0 #885424,0 4px 12px #040d2e99!important;
+ color:#ffefd0!important;font:800 clamp(13px,4vw,26px)/1 Georgia,'Times New Roman',serif!important;
+ text-shadow:0 2px 2px #17122a!important;letter-spacing:-.045em!important;
+}
+html body[data-card-style] button.sd84-exact-card > .sd87-topic-medallion.sd87-glyph-long{
+ font-size:clamp(10px,2.7vw,18px)!important;
+}
+html body[data-card-style] button.sd84-exact-card > .sd87-topic-medallion.sd87-emoji{
+ font-family:'Noto Color Emoji','Segoe UI Emoji',sans-serif!important;
+ font-size:clamp(26px,7vw,42px)!important;
+}
+html body[data-card-style="stone"] button.sd84-exact-card > .sd87-topic-medallion{top:12%!important;width:46%!important;height:46%!important}
+html body[data-card-style="guild"] button.sd84-exact-card > .sd87-topic-medallion{top:1%!important;width:46%!important;height:46%!important}
+html body[data-card-style="glass"] button.sd84-exact-card > .sd87-topic-medallion{top:11%!important;width:44%!important;height:44%!important}
+html body[data-card-style="parchment"] button.sd84-exact-card > .sd87-topic-medallion{top:6%!important;width:47%!important;height:47%!important}
+/* Avoid a permanently positioned guide blocking the first card after a screen switch. */
+@media(max-width:460px){
+ html body button.sd84-exact-card > .sd87-card-title{font-size:clamp(17px,4.7vw,24px)!important}
+ html body button.sd84-exact-card > .sd87-card-title.sd87-title-long{font-size:clamp(14px,3.9vw,20px)!important}
+}
+@media(prefers-reduced-motion:reduce){html body button.sd84-exact-card{transition:none!important}}

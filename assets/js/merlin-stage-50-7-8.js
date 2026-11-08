@@ -51,13 +51,13 @@ function init(){
   if(active||!guide.offsetWidth||!document.getElementById('authGate')?.classList.contains('off')||!modal.hidden)return;
   const {w,h,gw,gh}=dims(),b=bounds(),obs=obstacles(),currentCost=score(pos.x,pos.y,obs);
   // Keep the user's position unless it significantly blocks something usable.
-  if(saved && currentCost<1.3)return;
-  if(!saved && currentCost<.7)return;
+  if(saved && currentCost<.25)return;
+  if(!saved && currentCost<.25)return;
   const xs=[10,Math.max(10,w-gw-10)],ys=[b.ymin,Math.max(b.ymin,h*.42-gh*.5),Math.max(b.ymin,h*.72-gh*.5),b.ymax];
   let best={x:pos.x,y:pos.y,cost:currentCost};
   for(const x of xs)for(const y of ys){let cost=score(x,y,obs);cost+=(Math.abs(x-pos.x)+Math.abs(y-pos.y))/Math.max(w,h)*.08;
    if(cost<best.cost){best={x,y,cost}}}
-  if(best.cost+.25<currentCost){lastAuto=Date.now();apply(best.x,best.y)}
+  if(best.cost+.12<currentCost){lastAuto=Date.now();apply(best.x,best.y)}
  }
  function schedule(){if(queued||active)return;queued=true;window.requestAnimationFrame(()=>{queued=false;choosePosition()})}
  const b=bounds();if(saved)apply(10+saved.x*(b.xmax-10),b.ymin+saved.y*(b.ymax-b.ymin));
@@ -87,6 +87,7 @@ function init(){
  window.addEventListener('resize',()=>{const next=bounds();if(saved){apply(10+saved.x*(next.xmax-10),next.ymin+saved.y*(next.ymax-next.ymin))}else apply(pos.x,pos.y);schedule()},{passive:true});
  window.addEventListener('orientationchange',()=>window.setTimeout(schedule,250),{passive:true});
  window.addEventListener('popstate',()=>window.setTimeout(schedule,100));
+ document.addEventListener('sd87-cards-ready',()=>window.setTimeout(schedule,90));
  document.addEventListener('click',()=>window.setTimeout(schedule,140),true);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)window.setTimeout(schedule,150)});
  // Only observe app-screen visibility changes; do not watch animated SVG layers.

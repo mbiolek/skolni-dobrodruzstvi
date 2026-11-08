@@ -1,0 +1,25 @@
+Školní dobrodružství 50.8.7 — oprava popisků a grafiky podnabídek
+
+VÝCHOZÍ VERZE
+50.8.6 — zachovává systém bezpečné aktualizace s procenty,
+potvrzením přepnutí verze a offline podporou.
+
+OPRAVY
+- Dynamické názvy tlačítek v předmětech, kapitolách, výuce a procvičování.
+- Žádné prázdné nápisové štítky u karet, které nemají vlastní ilustraci s textem.
+- Příprava na test, Test a Moje výsledky mají správně zobrazený název.
+- Vizuální podklady čtyř stylů: Hradní cech, Kamenné runy,
+  Kouzelný krystal a Pergamen.
+- U matematických a vybraných obsahových témat je symbol oddělen od
+  skutečného názvu; neopakuje se jen výchozí kniha.
+- Při přepnutí obrazovky se znovu vyhodnotí překrývání Merlina s tlačítky;
+  přetažení prstem i uložená poloha zůstávají zachovány.
+- Zachována původní funkce tlačítek a data profilů.
+
+KONTROLA
+Kontrola JavaScriptové syntaxe a dynamických DOM štítků v izolovaném
+Chromium testu. Plný test v Android PWA je nutné udělat po nahrání;
+testovací prohlížeč zde blokuje načtení lokální aplikace přes URL.
+
+Aktualizace v Termuxu:
+cd ~/skolni-github && unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_50_8_7_OPRAVA_NAZVU_KARET.zip && git add -A && (git diff --cached --quiet || git commit -m "50.8.7 - oprava nazvu karet") && git push origin main
