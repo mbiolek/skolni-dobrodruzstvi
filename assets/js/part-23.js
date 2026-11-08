@@ -17,6 +17,8 @@ let subject='math', applying=false, syncing=false, rebasing=false, lastRoute='';
 const authenticated=()=>!auth||auth.classList.contains('off');
 function state(skipDialogs=false){
  if(!skipDialogs&&isVisible('sd55-modal'))return 'merlinHelp';
+ // Angličtina má vlastní 2 úrovně (témata a lekce), nikoliv jen domovskou obrazovku.
+ if(isVisible('enUnit499'))return 'englishUnit:'+(document.getElementById('enUnit499').dataset.level||'topics');
  if(!skipDialogs&&$('v24-avatar-dialog')?.classList.contains('open'))return 'avatarDialog';
  if(!skipDialogs&&$('v452-badges')?.classList.contains('open'))return 'badgesDialog';
  if(!skipDialogs&&$('skinDialog')?.classList.contains('skin-open'))return 'skinDialog';
@@ -43,6 +45,7 @@ function describe(){
  const route=state();
  if(route==='homeScreen')return {route,subject:'',depth:0};
  if(route==='subjectMenu('+subject+')'||route.startsWith('subjectMenu(')||route==='czechMenu'||route==='vlastScreen')return {route,subject:subjectFor(route),depth:1};
+ if(route.startsWith('englishUnit:'))return {route,subject:'english',depth:route.endsWith(':lesson')?3:2};
  if(route==='mathTopics')return {route,subject:'math',depth:2};
  if(route==='mathScreen'&&$('mathScreen')?.dataset.topic)return {route,subject:'math',depth:3};
  if(route.startsWith('schoolPlans:')){
@@ -78,6 +81,7 @@ function observeRoute(){
  if(lastRoute!==k){record('navigation',lastRoute+' -> '+k);lastRoute=k;}
 }
 function closeDialogs(){
+ if(isVisible('enUnit499'))window.SDEnglishUnit499?.close?.();
  if(isVisible('sd55-modal'))window.SDMerlin56?.close?.();
  if($('v24-avatar-dialog')?.classList.contains('open'))$('v24-avatar-close')?.click();
  $('v452-badges')?.classList.remove('open');
@@ -124,6 +128,7 @@ function backOne(source='button'){
  applying=true;
  try{
  if(route==='merlinHelp')window.SDMerlin56?.close?.();
+ else if(route.startsWith('englishUnit:'))window.SDEnglishUnit499?.back?.();
  else if(route==='avatarDialog')$('v24-avatar-close')?.click();
  else if(route==='badgesDialog')$('v452-badges')?.classList.remove('open');
  else if(route==='skinDialog')$('skinCancel')?.click();
@@ -190,7 +195,7 @@ function syncFromDom(){
  }
 }
 const obs=new MutationObserver(()=>queueMicrotask(syncFromDom));
-obs.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','data-subject']});
+obs.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','data-subject','data-level']});
 document.addEventListener('sd-route-change',()=>queueMicrotask(syncFromDom));
 
 let popping=false;
@@ -217,6 +222,12 @@ window.addEventListener('popstate',e=>{
   // Browser already moved back exactly one entry. Reconstruct only that entry:
   // Never call history.back() again from a swipe handler.
   if(wanted.depth===0){closeDialogs();showHome()}
+  else if(wanted.route==='englishUnit:topics'){
+    // Gesto z lekce vrací JEN na výběr témat, nikoli na domovskou stránku.
+    window.SDEnglishUnit499?.topics?.();
+  } else if(wanted.route.startsWith('englishUnit:')){
+    window.SDEnglishUnit499?.restore?.(wanted.route.split(':')[1]);
+  }
   else if(previous.route.startsWith('schoolPlans:') && wanted.route.startsWith('schoolPlans:')){
     window.SDSchoolPlans52?.back?.();
   } else if(previous.route.startsWith('curriculum:') && wanted.route.startsWith('curriculum:')){

@@ -1,1 +1,1 @@
-window.SDApp=Object.freeze({version:'50.8.9',build:'2026-11-08.9'});
+window.SDApp=Object.freeze({version:'50.8.10',build:'2026-11-08.10'});

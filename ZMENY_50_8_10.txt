@@ -1,0 +1,11 @@
+Školní dobrodružství – verze 50.8.10 (8. 11. 2026)
+
+Opravy:
+1) Angličtina: vlastní navigace pro seznam témat a vybranou lekci, správná historie pro tlačítko i Android gesto Zpět. Není potřeba přeskočit přímo na výběr předmětů.
+2) Angličtina: nové jednotné záhlaví a návratové tlačítko pro výuku, procvičování a testy, se zvoleným grafickým motivem.
+3) Názvy karet: automatické přizpůsobení velikosti textu prostoru štítku; bez dělení českých slov uprostřed.
+4) Domovská nabídka: šest předmětových dlaždic mění obrázek a rámeček podle zvoleného stylu tlačítek (odděleně od tapety).
+5) PWA aktualizace: verzované CSS/JS, upravený seznam pro offline aktualizaci a nová verze cache.
+
+Uložené profily, PINy, výsledky a lekce se nemění.
+Zůstávají dva nezávislé výběry: Vzhled karet a Tapeta a pozadí.
