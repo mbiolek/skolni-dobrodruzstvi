@@ -96,3 +96,11 @@ html body[data-card-style="parchment"] button.sd84-exact-card > .sd87-topic-meda
  html body button.sd84-exact-card > .sd87-card-title.sd87-title-long{font-size:clamp(14px,3.9vw,20px)!important}
 }
 @media(prefers-reduced-motion:reduce){html body button.sd84-exact-card{transition:none!important}}
+
+/* 50.8.8: no duplicate baked-in guild text; dynamic title occupies one plaque. */
+html body[data-card-style="guild"] button.sd84-exact-card.sd87-dynamic > .sd87-card-title{
+ bottom:19%!important;height:23%!important;left:9%!important;right:9%!important;
+ border:3px solid #f3ce83!important;border-radius:18% / 35%!important;
+ background:linear-gradient(170deg,#225a8c 0%,#123c70 28%,#092750 82%,#091938 100%)!important;
+ box-shadow:inset 0 2px 2px #ffe3a566,inset 0 -3px 2px #040a2f,0 3px 5px #110c12!important;
+}

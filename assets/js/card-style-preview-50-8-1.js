@@ -6,7 +6,8 @@ const OPTIONS={
   glass:['Kouzelný krystal','Průsvitné magické sklo'],
   stone:['Kamenné runy','Vytesané kameny se zlatem'],
   parchment:['Pergamen','Stará mapa a pečetě'],
-  guild:['Hradní cech','Dřevo, štíty a smalt']
+  guild:['Hradní cech','Dřevo, štíty a smalt'],
+  adventure:['Dobrodružné předměty','Jako dlaždice výběru předmětů']
 };
 const SAMPLES=[
   ['Výuka','vyuka'],

@@ -1,0 +1,19 @@
+Školní dobrodružství 50.8.8 – souhrnná oprava
+
+Základ: verze 50.8.7, zachována původní výuková data, profily, Merlin a atomické aktualizace.
+- Opraveny navigační úrovně v Měsíčních plánech a Učivu (témata, kapitoly, cvičení),
+  zpětné gesto se má vracet pouze o jednu obrazovku.
+- Přidán pátý vzhled karet Dobrodružné předměty s vlastními SVG prvky.
+- Tapety jsou samostatnou, uloženou volbou (sedm prostředí) nezávislou na vzhledu karet.
+- Jedna tapeta pro hlavní nabídku, ČJ, ostatní předměty i přihlašovací stránku.
+- Sjednocené rámečky předmětových tlačítek, barevné titulky, zvýšená čitelnost.
+- Vyšší rozlišení titulní obrazovky: skutečný dostupný obrázek nočního hradu
+  místo původního 289 × 516 obrázku truhly.
+- Spouštěcí progress počítá načtení 4 základních obrazových zdrojů a DOM
+  (nepředstírá průběh celé offline instalace; tu samostatně zobrazuje SW).
+- Ponechán Merlin v popředí, přetahování a nápověda, pozice upravena při změnách obrazovek.
+- Rebuild precache seznamu pro v50.8.8.
+
+Na telefonu doporučujeme ověřit zvláště návrat gestem z Vlastivěda/Přírodověda → kapitola
+a Matematiky → Výuka → téma a ověřit styl + tapetu po restartu.
+Nepoužívat Smazat data / odinstalaci pro aktualizaci!

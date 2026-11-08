@@ -1,0 +1,84 @@
+/* 50.8.8 – a complete environment, wallpaper independent from buttons and cards. */
+#themeSwitcher .sd88-obsolete-theme,#themeSwitcher .sd84-night-picker{display:none!important}
+#themeSwitcher{display:flex!important;flex-direction:column!important;align-items:stretch!important;background:#142948e9!important;padding:14px clamp(12px,3vw,24px)!important;gap:12px!important}
+#sdCardStyleSelect,#sd88WallpaperSelect{width:100%;max-width:990px;margin:0 auto!important;box-sizing:border-box}
+.sd88-setting-heading,.sd-card-theme-heading{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:3px 0 8px}
+.sd88-setting-heading strong,#sdCardStyleSelect .sd-card-theme-heading strong{font-size:clamp(18px,4vw,23px)!important;color:#ffe5aa!important}
+.sd88-setting-heading small,#sdCardStyleSelect .sd-card-theme-heading small{font-size:clamp(12px,2.9vw,15px)!important;color:#f5f2e9!important;line-height:1.32}
+.sd88-wallpaper-selector{border-top:1px solid #e5d2ad77;padding-top:12px}
+.sd88-wallpaper-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#themeSwitcher .sd88-wallpaper-button{display:flex;flex-direction:column;padding:5px!important;border:2px solid #dac18e!important;border-radius:14px!important;background:#193556!important;color:#fff!important;min-height:0!important;overflow:hidden!important;box-sizing:border-box!important;min-width:0!important}
+#themeSwitcher .sd88-wallpaper-button img{height:clamp(88px,24vw,152px);width:100%;object-fit:cover;object-position:center 40%;border-radius:9px}
+#themeSwitcher .sd88-wallpaper-button span{padding:7px 3px;font-size:clamp(12px,3.1vw,16px);font-weight:800;white-space:normal;line-height:1.2}
+#themeSwitcher .sd88-wallpaper-button.is-selected{border-color:#ffe7a4!important;box-shadow:0 0 0 2px #f2c76c!important;background:#2c4a74!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-option{min-height:180px!important;justify-content:start!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-option .sd-card-style-caption{min-height:59px;gap:5px;padding:10px 7px!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-caption strong{font-size:clamp(13px,3.6vw,16px)!important;line-height:1.22!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-caption small{font-size:clamp(12px,3vw,14px)!important;line-height:1.26!important}
+#themeSwitcher #sdCardStyleSelect .sd-card-style-option img{height:clamp(105px,25vw,168px)!important;object-fit:cover!important}
+@media(min-width:700px){.sd88-wallpaper-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* All app screens use the chosen wallpaper, including Czech and login.
+   These selectors override older fixed backgrounds and blurring rules. */
+html body[data-wallpaper]{background-image:linear-gradient(#09162b3a,#0b1d366b),var(--sd88-scene)!important;background-size:cover!important;background-position:center!important;background-attachment:fixed!important}
+html body[data-wallpaper] :is(#authGate,#sd52,#sdCurriculum,#subjectHub,#advSubjectMenu,#sdCzechHub5074,#v496TopicPanel,#czechScreen,#englishScreen,#vlastScreen,#enUnit499){
+ background-image:linear-gradient(#081a33a3,#091c31a8),var(--sd88-scene)!important;background-size:cover!important;background-position:center!important;background-attachment:fixed!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html body[data-wallpaper] :is(#sd52,#sdCurriculum)::before{background-image:linear-gradient(#081a33a8,#091c31aa),var(--sd88-scene)!important;background-size:cover!important;background-position:center!important;background-attachment:fixed!important;pointer-events:none!important}
+html body[data-wallpaper] #sdCzechHub5074{background-color:#071932bb!important}
+/* Subject tiles carry their own pictures, but all buttons have the same style-level framing. */
+html body[data-card-style="guild"] #homeScreen .subject{border:3px solid #e9bf76!important;border-radius:16px!important;box-shadow:0 4px 0 #75471d,0 8px 20px #000b!important}
+html body[data-card-style="stone"] #homeScreen .subject{border:3px solid #e9bd76!important;border-radius:15px!important;box-shadow:0 4px 0 #333046,0 8px 20px #000b!important}
+html body[data-card-style="parchment"] #homeScreen .subject{border:3px solid #bf8e56!important;border-radius:12px!important;box-shadow:0 4px 0 #563217,0 8px 20px #000b!important}
+html body[data-card-style="glass"] #homeScreen .subject{border:3px solid #c2a9ff!important;border-radius:23px!important;box-shadow:0 0 12px #83b8f288,0 9px 18px #050924aa!important}
+html body[data-card-style="adventure"] #homeScreen .subject{border:2px solid #d2b98b!important;border-radius:15px!important;box-shadow:0 4px 0 #081528,0 11px 22px #000b!important}
+/* Login and home controls react to exactly the same independent button style. */
+html body[data-card-style] #authGate .authbox{color:#fff4d9!important;background:linear-gradient(140deg,#0b203de9,#162c4bef)!important;border:4px solid var(--sd-card-border,#d7a967)!important;box-shadow:0 12px 35px #000b!important;border-radius:26px!important}
+html body[data-card-style] #authGate h1,html body[data-card-style] #authGate .authbox>p{color:#fff1d1!important;text-shadow:0 2px 4px #050b14!important;opacity:1!important}
+html body[data-card-style] #authGate .userbtn{border:3px solid var(--sd-card-border,#e0b36a)!important;background:var(--sd-card-bg,linear-gradient(#243452,#10213e))!important;color:#fff7df!important;border-radius:20px!important;box-shadow:0 6px 16px #0009!important}
+html body[data-card-style] #authGate .userbtn strong{color:#fff8e2!important;text-shadow:0 2px 3px #000!important}
+html body[data-card-style="glass"] #authGate .userbtn{background:linear-gradient(135deg,#6685b5cd,#25264cae)!important;box-shadow:0 0 14px #aebaff99!important}
+html body[data-card-style="parchment"] #authGate .userbtn{background:linear-gradient(135deg,#e4c38e,#946b41)!important;color:#3a2112!important}
+html body[data-card-style="parchment"] #authGate .userbtn strong{color:#321c0f!important;text-shadow:none!important}
+html body[data-card-style] :is(#authGate button,#homeScreen .topbar button,#themeSwitcher button){font-size:clamp(13px,3.1vw,17px)!important;line-height:1.25!important;text-wrap:pretty;word-break:normal}
+/* Decorative title: same title font and contrast on every subject and chapter. */
+html body[data-card-style] :is(#sd52main>h1,#sdCurriculum #sdTitle,#subjectHub #hubTitle,#sdCzechHub5074 h1,#v496TopicPanel h2,#v496TopicPanel .v496-wrap>h2,#homeScreen .home-hero h1){
+ color:#fff0c8!important;font-family:Georgia,'Times New Roman',serif!important;text-shadow:0 3px 4px #071225,0 0 18px #0b1b30!important;opacity:1!important;line-height:1.2!important}
+html body[data-card-style="guild"] :is(#sd52main>h1,#subjectHub #hubTitle){border-bottom:2px solid #d6a95a;background:linear-gradient(90deg,transparent,#132e51a8,transparent);padding:10px 8px}
+html body[data-card-style="stone"] :is(#sd52main>h1,#subjectHub #hubTitle){border-bottom:2px solid #b99763;background:linear-gradient(90deg,transparent,#34304ea8,transparent);padding:10px 8px}
+html body[data-card-style="parchment"] :is(#sd52main>h1,#subjectHub #hubTitle){border-radius:14px;color:#472a18!important;background:#f0d4aee8;text-shadow:none!important;padding:10px 8px}
+html body[data-card-style="glass"] :is(#sd52main>h1,#subjectHub #hubTitle){border-bottom:2px solid #cbb8f5;background:linear-gradient(90deg,transparent,#5481ae8f,transparent);padding:10px 8px}
+/* Consistent readable text and full-size cards. */
+html body[data-card-style] button.sd84-exact-card > .sd87-card-title{max-width:83%!important;margin:0 auto!important;box-sizing:border-box!important;overflow-wrap:break-word!important;hyphens:auto;white-space:normal!important;line-height:1.03!important}
+html body[data-card-style="adventure"] button.sd84-exact-card > .sd87-card-title{color:#fff5df!important;text-shadow:0 2px 5px #000!important;bottom:10%!important;height:21%!important;font-size:clamp(17px,4vw,24px)!important;line-height:1.07!important}
+html body[data-card-style="adventure"] button.sd84-exact-card > .sd87-topic-medallion{top:12%!important;background:radial-gradient(circle at 35% 25%,#5876b6,#122451 65%)!important}
+html body[data-card-style] #sd54-merlin{max-width:95px!important}
+@media(max-width:480px){html body[data-card-style] #sdCzechHub5074 .sd-czech-cards{gap:10px!important}}
+
+/* Visible title over a parchment/plaque must always win legacy visibility rules. */
+html body[data-card-style="adventure"] button.sd84-exact-card > .sd87-card-title{
+ z-index:51!important;font-family:Georgia,serif!important;color:#ffedcb!important;
+ left:9%!important;right:9%!important;border:0!important;
+ background:transparent!important;box-shadow:none!important;
+ }
+/* Merlin may follow the user but must not cover the Settings selection cards. */
+body.v43-themes-open #sd54-merlin.sd578-stage,body.v43-themes-open #sd55-help{display:none!important}
+/* Long labels stay readable within the preview and subject tiles. */
+#themeSwitcher .sd-card-style-caption small{white-space:normal!important;overflow-wrap:break-word!important}
+
+/* Navigation: identical, legible, environment-sensitive primary controls. */
+html body[data-card-style] :is(#hubBack,#advMenuBack,#v496TopicBack,#sdBack,#sdClose,#sdCzechBack5074,#sdCzechReturn5074,#sd52 .sd52-wrap>header button){
+ box-sizing:border-box!important;min-height:48px!important;padding:11px 16px!important;
+ color:#172e51!important;font-family:system-ui,sans-serif!important;
+ font-size:clamp(15px,3.4vw,20px)!important;font-weight:850!important;
+ border:3px solid #e6c889!important;border-radius:22px!important;
+ background:linear-gradient(165deg,#fff9e8,#e3d0ac)!important;
+ text-shadow:none!important;box-shadow:0 3px 7px #07132177!important;
+}
+html body[data-card-style="glass"] :is(#hubBack,#advMenuBack,#v496TopicBack,#sdBack,#sdClose,#sdCzechBack5074,#sdCzechReturn5074,#sd52 .sd52-wrap>header button){background:linear-gradient(160deg,#c4d7f4,#708ab5)!important;border-color:#c8c4e9!important}
+html body[data-card-style="stone"] :is(#hubBack,#advMenuBack,#v496TopicBack,#sdBack,#sdClose,#sdCzechBack5074,#sdCzechReturn5074,#sd52 .sd52-wrap>header button){background:linear-gradient(145deg,#f8e8c8,#bea481)!important;border-color:#d6ba79!important}
+html body[data-card-style="adventure"] :is(#hubBack,#advMenuBack,#v496TopicBack,#sdBack,#sdClose,#sdCzechBack5074,#sdCzechReturn5074,#sd52 .sd52-wrap>header button){background:linear-gradient(160deg,#1f4270,#0d2549)!important;border-color:#d7ad62!important;color:#fff1d7!important}
+/* Avoid duplicate top-screen titles. Keep the main decorated heading only. */
+html body[data-card-style] #sd52 .sd52-wrap>header #sd52header{font-size:0!important;max-width:0!important;overflow:hidden!important}
+/* Distinguish title text and progress even for long Czech labels. */
+html body[data-card-style] #sd52main>p,html body[data-card-style] #sdCzechHub5074>div>p{color:#f8f0e6!important;text-shadow:0 2px 4px #06162c!important}

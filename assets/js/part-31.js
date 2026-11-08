@@ -15,12 +15,13 @@ document.querySelectorAll('#subjectHub [data-hub-mode="teach"],#subjectHub [data
  b.addEventListener('click',e=>{
   if(hub.dataset.subject==='english')return;
   e.preventDefault();e.stopImmediatePropagation();
-  mode=b.dataset.hubMode;
+  mode=b.dataset.hubMode;panel.dataset.mode=mode;
   hub.classList.remove('open');
   document.getElementById('v496TopicTitle').textContent='Matematika – '+(mode==='teach'?'Výuka':'Procvičování');
   panel.classList.add('open');document.body.style.overflow='hidden';
  },true);
 });
+window.SDMathTopics496={open:(m)=>{const trigger=hub.querySelector('[data-hub-mode="'+(m||panel.dataset.mode||'teach')+'"]');if(trigger){hub.classList.add('open');trigger.click();}},mode:()=>mode};
 const grid=document.getElementById('v496Topics');
 topics.forEach(([label,key])=>{
  const b=document.createElement('button');b.type='button';b.textContent=label;

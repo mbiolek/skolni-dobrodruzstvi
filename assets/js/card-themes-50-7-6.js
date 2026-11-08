@@ -7,7 +7,8 @@
   ['glass','Kouzelný krystal','Průsvitné magické sklo'],
   ['stone','Kamenné runy','Vytesané kameny se zlatem'],
   ['parchment','Pergamen','Stará mapa a pečetě'],
-  ['guild','Hradní cech','Dřevo, štíty a smalt']
+  ['guild','Hradní cech','Dřevo, štíty a smalt'],
+  ['adventure','Dobrodružné předměty','Stejný styl jako výběr předmětů']
  ];
  const choices=new Set(OPTIONS.map(x=>x[0]));
  let saved='guild';try{saved=localStorage.getItem(KEY)||'guild';if(!localStorage.getItem('sd-style-guild-5080-shown')){saved='guild';localStorage.setItem(KEY,'guild');localStorage.setItem('sd-style-guild-5080-shown','1')}}catch(e){}
@@ -32,7 +33,7 @@
  for(const [style,label,sub] of OPTIONS){
   const b=document.createElement('button');b.type='button';b.className='sd-card-style-option';
   b.dataset.cardChoice=style;b.setAttribute('aria-label',label);b.setAttribute('aria-pressed',String(style===saved));
-  const img=document.createElement('img');img.src='./assets/karty/styly/'+style+'-nahled.webp';img.alt='';img.loading='lazy';
+  const img=document.createElement('img');img.src=style==='adventure'?'./assets/ikony/hradni-styl-math.webp':'./assets/karty/styly/'+style+'-nahled.webp';img.alt='';img.loading='lazy';
   const text=document.createElement('span');text.className='sd-card-style-caption';
   const strong=document.createElement('strong');strong.textContent=label;
   const small=document.createElement('small');small.textContent=sub;text.append(strong,small);b.append(img,text);

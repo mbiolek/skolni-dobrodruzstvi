@@ -1,0 +1,12 @@
+#sd88boot[hidden]{display:none!important}
+#sd88boot{position:fixed;inset:0;z-index:2147483600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+ padding:32px 24px;box-sizing:border-box;text-align:center;color:#fff5df;background-image:linear-gradient(#03122680,#041a3598),var(--sd88-scene,url('../pozadi/hrad-noc-3-5084.webp'));background-size:cover;background-position:center;transition:opacity .4s ease;}
+#sd88boot.sd88-complete{opacity:0;pointer-events:none}
+#sd88boot .sd88-emblem{position:relative;width:min(65vw,260px);aspect-ratio:1;border:6px double #fad797;border-radius:50%;background:radial-gradient(circle at 35% 25%,#52769da6,#09162ddd);box-shadow:0 0 45px #e7be70a6,inset 0 0 30px #f4e4a242;display:grid;place-items:center}
+#sd88boot .sd88-emblem>span{font-size:clamp(65px,14vw,110px);filter:drop-shadow(0 4px 6px #000)}
+#sd88boot h1{font-family:Georgia,serif;font-size:clamp(32px,8vw,55px);line-height:1.1;margin:0;color:#ffe6aa;text-shadow:0 5px 9px #001020}
+#sd88boot p{margin:0;color:#ffefd1;font-size:clamp(15px,4vw,21px);font-weight:650;text-shadow:0 2px 5px #000}
+#sd88boot .sd88-meter{width:min(88vw,380px);height:24px;border:3px solid #dab874;border-radius:25px;background:#0d2548bb;overflow:hidden;box-shadow:0 2px 15px #0008}
+#sd88boot .sd88-meter>span{height:100%;width:0%;display:block;background:linear-gradient(90deg,#c0893b,#ffe19c,#f6c65b);transition:width .12s ease}
+#sd88boot .sd88-meter-text{font:700 15px system-ui;letter-spacing:.03em}
+@media(prefers-reduced-motion:reduce){#sd88boot,#sd88boot .sd88-meter>span{transition:none!important}}

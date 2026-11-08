@@ -20,8 +20,11 @@ function state(skipDialogs=false){
  if(!skipDialogs&&$('v24-avatar-dialog')?.classList.contains('open'))return 'avatarDialog';
  if(!skipDialogs&&$('v452-badges')?.classList.contains('open'))return 'badgesDialog';
  if(!skipDialogs&&$('skinDialog')?.classList.contains('skin-open'))return 'skinDialog';
- if(isVisible('sdCurriculum'))return 'curriculum';
- if(isVisible('sd52'))return 'schoolPlans';
+ if(isVisible('sdCurriculum')){
+  const v=window.SDCurriculum501?.location?.();
+  return 'curriculum:'+(v?.topic!=null?(v?.mode!=null?'activity':'lesson'):'topics');
+ }
+ if(isVisible('sd52'))return 'schoolPlans:'+(window.SDSchoolPlans52?.current?.().screen||'subject');
  if(isVisible('sdCzechHub5074'))return 'czechMenu';
  if($('v496TopicPanel')?.classList.contains('open'))return 'mathTopics';
  if(hub?.classList.contains('open'))return 'subjectMenu('+(hub.dataset.subject||subject)+')';
@@ -41,11 +44,22 @@ function describe(){
  if(route==='homeScreen')return {route,subject:'',depth:0};
  if(route==='subjectMenu('+subject+')'||route.startsWith('subjectMenu(')||route==='czechMenu'||route==='vlastScreen')return {route,subject:subjectFor(route),depth:1};
  if(route==='mathTopics')return {route,subject:'math',depth:2};
- if(route==='schoolPlans')return {route,subject,depth:1};
- if(route==='curriculum')return {route,subject,depth:2};
+ if(route==='mathScreen'&&$('mathScreen')?.dataset.topic)return {route,subject:'math',depth:3};
+ if(route.startsWith('schoolPlans:')){
+  const v=window.SDSchoolPlans52?.current?.()||{};
+  const depthMap={subject:1,manage:1,schools:2,search:2,settings:2,'edit-school':2,'edit-plan':3,months:2,repeat:3,month:3,learning:4,quiz:4,finished:5};
+  return {route,subject:v.subject||subject,depth:depthMap[v.screen]||2};
+ }
+ if(route.startsWith('curriculum:')){
+  const v=window.SDCurriculum501?.location?.()||{};
+  return {route,subject:v.subject||subject,depth:route.endsWith('activity')?4:route.endsWith('lesson')?3:2};
+ }
  if(route==='merlinHelp'||route==='avatarDialog'||route==='badgesDialog'||route==='skinDialog'){
   const parent=state(true);
-  const parentDepth=(parent==='homeScreen')?0:(parent==='mathTopics'||parent==='curriculum'||parent==='czechScreen'||parent==='englishScreen'||parent==='mathScreen')?2:1;
+  const parentDepth=parent==='homeScreen'?0:
+   parent.startsWith('curriculum:')?(parent.endsWith('activity')?4:parent.endsWith('lesson')?3:2):
+   parent.startsWith('schoolPlans:')?(({'subject':1,'months':2,'month':3,'repeat':3,'search':2,'schools':2})[parent.split(':')[1]]||2):
+   (parent==='mathTopics'||parent==='czechScreen'||parent==='englishScreen'||parent==='mathScreen')?2:1;
   return {route,subject:subjectFor(parent),depth:parentDepth+1};
  }
  return {route,subject:subjectFor(route),depth:2};
@@ -89,7 +103,7 @@ function showSubject(which){
  closeDialogs();showHome();subject=which||subject;
  if(subject==='czech'){window.SDCzechHub5074?.open?.();}
  else if(subject==='math'||subject==='english'){openHub(subject);}
- else if(subject==='nature'||subject==='history'){window.SDSchoolPlans52?.open?.(subject==='nature'?'nature':'geography');}
+ else if(subject==='nature'||subject==='history'||subject==='geography'){window.SDSchoolPlans52?.open?.(subject==='nature'?'nature':'geography');}
  else { const b=document.querySelector('#homeScreen [data-open="'+subject+'"]');if(b)b.click(); }
 }
 function reset(reason){
@@ -120,7 +134,10 @@ function backOne(source='button'){
  else if(route.startsWith('subjectMenu(')||route==='vlastScreen'){showHome()}
  else if(route==='czechScreen'){showSubject('czech')}
  else if(route==='englishScreen'){showSubject('english')}
- else if(['mathScreen','diagScreen','orderScreen'].includes(route)){showSubject('math')}
+ else if(route==='mathScreen'&&$('mathScreen')?.dataset.topic){
+   showSubject('math');window.SDMathTopics496?.open?.($('v496TopicPanel')?.dataset.mode||'teach');
+  }
+  else if(['mathScreen','diagScreen','orderScreen'].includes(route)){showSubject('math')}
  else if(route==='vlastMap'){
   if($('map462'))$('map462').hidden=true;
   if($('v46map'))$('v46map').hidden=true;
@@ -164,7 +181,7 @@ function syncFromDom(){
  if(!cur)return;
  if(infoKey(next)===infoKey(cur))return;
  const delta=next.depth-cur.depth;
- if(delta>0){pushEntry(next,'inner');record('history','push '+infoKey(next))}
+ if(delta>0 || (delta===0&&next.route!==cur.route&&next.route.startsWith('schoolPlans:'))){pushEntry(next,'inner');record('history','push '+infoKey(next))}
  else if(delta===0){replaceEntry(next,'replace');record('history','replace '+infoKey(next))}
  else { // DOM šel zpět přes tlačítko. Posuneme i browser history na rodičovskou úroveň.
   syncing=true;record('history','button back '+cur.depth+' -> '+next.depth);
@@ -174,6 +191,7 @@ function syncFromDom(){
 }
 const obs=new MutationObserver(()=>queueMicrotask(syncFromDom));
 obs.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','hidden','data-subject']});
+document.addEventListener('sd-route-change',()=>queueMicrotask(syncFromDom));
 
 let popping=false;
 window.addEventListener('popstate',e=>{
@@ -181,6 +199,9 @@ window.addEventListener('popstate',e=>{
  try{
   const wanted=e.state?.[NS]?e.state:null;
   const previous=describe();
+  if(wanted && infoKey(previous)===infoKey(wanted)){
+   record('history','gesture/browser history synchronized '+infoKey(wanted));return;
+  }
   if(rebasing){
    if(wanted?.depth===0){closeDialogs();showHome();replaceEntry(HOME,'root');rebasing=false;record('history','account reset landed at home');}
    else{history.back();}
@@ -193,13 +214,27 @@ window.addEventListener('popstate',e=>{
    showHome();pushEntry(HOME,'root');record('back','home exit cancelled');return;
   }
   subject=wanted.subject||subject;
+  // Browser already moved back exactly one entry. Reconstruct only that entry:
+  // Never call history.back() again from a swipe handler.
   if(wanted.depth===0){closeDialogs();showHome()}
-  else if(wanted.depth===1){showSubject(subject)}
-  else {
-   // Vrátíme obsah aplikace o úroveň, ne stránku starého předmětu v historii.
-   backOne('android-gesture');
-   const actual=describe();
-   if(actual.depth!==wanted.depth||actual.subject!==wanted.subject)replaceEntry(actual,'corrected');
+  else if(previous.route.startsWith('schoolPlans:') && wanted.route.startsWith('schoolPlans:')){
+    window.SDSchoolPlans52?.back?.();
+  } else if(previous.route.startsWith('curriculum:') && wanted.route.startsWith('curriculum:')){
+    $('sdBack')?.click();
+  } else if(previous.route.startsWith('curriculum:') && wanted.route.startsWith('schoolPlans:')){
+    $('sdBack')?.click();
+  } else if(wanted.route.startsWith('schoolPlans:') && wanted.route.endsWith(':subject')){
+    showSubject(subject);
+  } else if(wanted.route==='mathTopics'){
+    showSubject('math');window.SDMathTopics496?.open?.($('v496TopicPanel')?.dataset.mode||'teach');
+  } else if(wanted.depth===1){showSubject(subject)}
+  else {backOne('android-gesture')}
+  // A mistake in an old module may leave us at a different depth. Do not
+  // skip another history entry; keep the browser and visible DOM in sync.
+  const actual=describe();
+  if(infoKey(actual)!==infoKey(wanted)){
+    record('history-mismatch','expected '+infoKey(wanted)+' actual '+infoKey(actual));
+    replaceEntry(actual,'gesture-corrected');
   }
   record('back','android-gesture | '+infoKey(previous)+' -> '+infoKey(describe()));
  }catch(err){record('back-error',err.stack||err.message)}
