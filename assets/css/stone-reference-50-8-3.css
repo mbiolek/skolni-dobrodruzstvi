@@ -1,0 +1,53 @@
+/* Školní dobrodružství 50.8.3 – skutečné vrstvené Kamenné runy podle dodané předlohy. */
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered,
+html body[data-game-theme][data-card-style="stone"] button.sd-ui-card.sd-layered{
+ border:0!important;background:transparent!important;overflow:visible!important;
+ border-radius:0!important;aspect-ratio:1/1.01!important;filter:none!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-art,
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-art img{
+ overflow:visible!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+/* The icon in the reference sits above the parchment plate, not in a small circular badge. */
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered .sd-layer-art [data-layer="icon"]{
+ z-index:4!important;left:11%!important;top:7%!important;width:78%!important;height:59%!important;
+ object-fit:contain!important;
+ animation:sd583-icon-float 4.5s ease-in-out infinite!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered .sd-layer-art [data-layer="banner"]{
+ z-index:6!important;inset:0!important;width:100%!important;height:100%!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered .sd-layer-art [data-layer="star"]{z-index:7!important;}
+/* Text appears on cream parchment, with sufficient room for two lines. */
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered.sd-long-label>.sd-layer-caption,
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered.sd-verylong-label>.sd-layer-caption,
+html body[data-game-theme][data-card-style="stone"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-card-style="stone"] .sd5081-samples>button.sd-ui-card.sd-layered>.sd-layer-caption{
+ z-index:10!important;position:absolute!important;inset:68.5% 11% 13%!important;
+ display:flex!important;justify-content:center!important;align-items:center!important;
+ flex-direction:column!important;overflow:hidden!important;gap:0!important;
+ width:auto!important;height:auto!important;max-width:none!important;padding:0!important;margin:0!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-game-theme][data-card-style="stone"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title){
+ position:static!important;display:block!important;width:100%!important;max-height:100%!important;
+ padding:0!important;margin:0!important;background:none!important;color:#382039!important;
+ font-family:Georgia,'DejaVu Serif',serif!important;font-size:clamp(12px,3.8vw,22px)!important;
+ font-weight:750!important;line-height:1.03!important;letter-spacing:-.035em!important;
+ white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important;
+ text-shadow:0 1px 1px #fff0d0!important;border:0!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered.sd-long-label .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(11px,3.45vw,20px)!important}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered.sd-verylong-label .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(10px,3.08vw,18px)!important}
+/* On these ornate tiles the text plaque is for the title only; descriptions stay accessible via aria-label. */
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){
+ position:absolute!important;width:1px!important;height:1px!important;max-width:1px!important;
+ padding:0!important;margin:0!important;overflow:hidden!important;clip-path:inset(50%)!important;
+}
+@keyframes sd583-icon-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@media(max-width:390px){html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-caption{inset:68.3% 10% 12.5%!important;}}
+@media(prefers-reduced-motion:reduce){html body[data-card-style="stone"] button.sd-ui-card.sd-layered .sd-layer-art [data-layer="icon"]{animation:none!important;}}
+/* Dlouhé názvy na štítku zmenšit podle množství slov. */
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered[data-sd-layer-icon="procvicovani"] .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered[data-sd-layer-icon="zaverecny_test"] .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(11px,3.25vw,19px)!important;}

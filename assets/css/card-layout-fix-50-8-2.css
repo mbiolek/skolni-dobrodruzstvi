@@ -1,0 +1,120 @@
+/* 50.8.2 – oprava konfliktů starých CSS pravidel se samostatnými SVG vrstvami.
+   Zachovává tlačítka a jejich původní click handlery. */
+html body[data-card-style] button.sd-ui-card.sd-layered,
+html body[data-game-theme][data-card-style] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered,
+html body[data-card-style] .sd5081-samples>button.sd-ui-card.sd-layered{
+  background:transparent!important;background-image:none!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  box-shadow:none!important;border:0!important;
+  box-sizing:border-box!important;isolation:isolate!important;
+  padding:0!important;margin:0!important;filter:none!important;
+  text-shadow:none!important;
+}
+html body[data-card-style] button.sd-ui-card.sd-layered::before,
+html body[data-card-style] button.sd-ui-card.sd-layered::after{content:none!important;display:none!important}
+html body[data-card-style] button.sd-ui-card.sd-layered .sd-layer-art,
+html body[data-card-style] button.sd-ui-card.sd-layered .sd-layer-art img{
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  pointer-events:none!important;
+}
+html body[data-card-style] button.sd-ui-card.sd-layered .sd-layer-art{background:transparent!important}
+html body[data-card-style] button.sd-ui-card.sd-layered:focus-visible{outline:3px solid #ffe1a0!important;outline-offset:3px!important}
+html body[data-card-style] button.sd-ui-card.sd-layered:active{transform:scale(.975)!important}
+/* Rámeček je SVG – bez průhledné, rozmazané plochy CSS kolem tlačítka. */
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered,
+html body[data-game-theme][data-card-style="guild"] button.sd-ui-card.sd-layered{
+  overflow:visible!important;filter:none!important;border-radius:0!important;
+  aspect-ratio:1 / 1.04!important;
+}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-game-theme][data-card-style="guild"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-card-style="guild"] .sd5081-samples>button.sd-ui-card.sd-layered>.sd-layer-caption{
+  position:absolute!important;z-index:20!important;
+  top:55.5%!important;bottom:20%!important;left:11%!important;right:11%!important;
+  inset:55.5% 11% 20%!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;overflow:hidden!important;
+  padding:0!important;margin:0!important;width:auto!important;height:auto!important;
+}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-game-theme][data-card-style="guild"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-card-style="guild"] .sd5081-samples>button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title){
+  display:block!important;position:static!important;color:#fff3d4!important;
+  background:none!important;border:0!important;box-shadow:none!important;
+  font-family:Georgia, 'DejaVu Serif', serif!important;
+  font-size:clamp(12px,3.7vw,23px)!important;font-weight:750!important;
+  line-height:1.05!important;letter-spacing:-.035em!important;
+  overflow-wrap:break-word!important;word-break:normal!important;
+  width:100%!important;max-width:100%!important;max-height:100%!important;
+  text-shadow:0 2px 2px #1c1020,0 -1px 1px #a0752b!important;
+  white-space:normal!important;text-align:center!important;padding:0!important;margin:0!important;
+}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-long-label .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(11px,3.4vw,19px)!important}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-verylong-label .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(10px,3.15vw,17px)!important}
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered .sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){
+  position:absolute!important;width:1px!important;height:1px!important;
+  overflow:hidden!important;clip-path:inset(50%)!important;
+}
+/* V dlouhých názvech musí být obě řádky na modré stuze, ne na drahokamu. */
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-long-label>.sd-layer-caption,
+html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-verylong-label>.sd-layer-caption{inset:54% 9% 19.5%!important}
+
+/* Kamenné runy: starší theme CSS vynucovalo téměř černý text na tmavém kameni. */
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-game-theme][data-card-style="stone"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered>.sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-card-style="stone"] .sd5081-samples>button.sd-ui-card.sd-layered>.sd-layer-caption :is(strong,b,.sd-ui-card__title){
+  color:#fff0d2!important;background:none!important;text-shadow:0 2px 4px #0c0c1d!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc),
+html body[data-game-theme][data-card-style="stone"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered>.sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){color:#f2e5c5!important;text-shadow:0 1px 2px #0c0c1d!important}
+/* Vektorový pergamen: tmavě hnědé texty a podnadpisy. */
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered>.sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-game-theme][data-card-style="parchment"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered>.sd-layer-caption :is(strong,b,.sd-ui-card__title){color:#4b2918!important;background:none!important;text-shadow:0 1px 1px #fff0ca!important}
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered>.sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){color:#734b30!important;text-shadow:none!important}
+/* Společné, pružné rozložení textů pro kámen / pergamen / krystal. */
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-card-style="glass"] button.sd-ui-card.sd-layered>.sd-layer-caption{
+  inset:54% 8% 9%!important;overflow:hidden!important;justify-content:center!important;
+  gap:clamp(2px, .65vw, 5px)!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-card-style="glass"] button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title){
+  font-size:clamp(12px,3.55vw,20px)!important;line-height:1.1!important;
+  background:none!important;padding:0!important;margin:0!important;
+  max-width:100%!important;overflow-wrap:break-word!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered .sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc),
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered .sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc),
+html body[data-card-style="glass"] button.sd-ui-card.sd-layered .sd-layer-caption :is(small,.sd-ui-card__desc,.hub-desc,.adv-desc){
+  font-size:clamp(10px,2.4vw,13px)!important;line-height:1.15!important;
+  padding:0!important;margin:0!important;max-width:100%!important;
+}
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered.sd-verylong-label .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered.sd-verylong-label .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(11px,2.95vw,17px)!important}
+/* Zrušení nechtěných stínových hranatých bloků na všech stylech. */
+html body[data-card-style] .sd-ui-grid:not(.sd-ui-grid--covers) {background:transparent!important}
+@media(prefers-reduced-motion:reduce){html body[data-card-style] button.sd-ui-card.sd-layered .sd-layer-art img{animation:none!important}}
+
+/* Text na kamenných, pergamenových a skleněných kartách zůstává s bezpečným odstupem od spodní ozdoby. */
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered.sd-long-label>.sd-layer-caption,
+html body[data-card-style="stone"] button.sd-ui-card.sd-layered.sd-verylong-label>.sd-layer-caption,
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered.sd-long-label>.sd-layer-caption,
+html body[data-card-style="parchment"] button.sd-ui-card.sd-layered.sd-verylong-label>.sd-layer-caption,
+html body[data-card-style="glass"] button.sd-ui-card.sd-layered>.sd-layer-caption,
+html body[data-card-style="glass"] button.sd-ui-card.sd-layered.sd-long-label>.sd-layer-caption,
+html body[data-card-style="glass"] button.sd-ui-card.sd-layered.sd-verylong-label>.sd-layer-caption{
+ inset:50% 10% 15%!important;
+}
+/* Malé telefony: dvouřádkový nápis na stuze nesmí zasahovat do drahokamu. */
+@media (max-width:400px){
+ html body[data-game-theme][data-card-style="guild"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+ html body[data-card-style="guild"] button.sd-ui-card.sd-layered .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(10px,3.38vw,14px)!important;line-height:1.02!important}
+ html body[data-game-theme][data-card-style="guild"] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd-ui-card.sd-layered.sd-long-label .sd-layer-caption :is(strong,b,.sd-ui-card__title),
+ html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-long-label .sd-layer-caption :is(strong,b,.sd-ui-card__title){font-size:clamp(9.5px,3vw,12px)!important;line-height:1.02!important}
+ html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-long-label>.sd-layer-caption,
+ html body[data-card-style="guild"] button.sd-ui-card.sd-layered.sd-verylong-label>.sd-layer-caption{inset:53% 10% 23%!important}
+}

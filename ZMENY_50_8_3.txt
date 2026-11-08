@@ -1,0 +1,7 @@
+Školní dobrodružství 50.8.3 – Kamenné runy podle nové předlohy
+
+- samostatné vektorové vrstvy: popraskaná kamenná deska, zlaté rámy, břečťan, světelná záře, velké ilustrované ikony a světlý štítek na názvy
+- šest detailnějších SVG ilustrací: Výuka, Procvičování, Test, Měsíční plán, Opakování, Závěrečný test
+- ovládání tlačítek, výukové moduly, profilová data a Merlin zůstávají zachované
+- styl lze zvolit v Prostředí → Vzhled karet → Kamenné runy
+- jde o vektorovou reinterpretaci obrázku, nikoli pixelově totožnou kopii

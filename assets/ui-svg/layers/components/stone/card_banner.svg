@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><defs><linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff2d8"/><stop offset=".38" stop-color="#e8caa2"/><stop offset=".8" stop-color="#d8ae7d"/><stop offset="1" stop-color="#ffe3ad"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2=".75" y2="1"><stop stop-color="#fff1b5"/><stop offset=".23" stop-color="#ae7739"/><stop offset=".52" stop-color="#fdd27c"/><stop offset=".81" stop-color="#8f5629"/><stop offset="1" stop-color="#ffe3a0"/></linearGradient>
+<filter id="plaqshadow" x="-.1" y="-.4" width="1.2" height="1.8"><feDropShadow dx="0" dy="9" stdDeviation="6" flood-color="#000" flood-opacity=".5"/></filter></defs><path d="M61 346L99 332H414L451 346L465 370V439L435 459H79L47 435V373Z" fill="url(#metal)" stroke="#4c3427" stroke-width="5" filter="url(#plaqshadow)"/>
+<path d="M67 359L101 344H414L446 359L453 377V433L427 448H86L59 430V378Z" fill="url(#paper)" stroke="#f7db9d" stroke-width="3"/>
+<path d="M99 349L411 348M73 439H438" stroke="#fff1bd" stroke-opacity=".68" stroke-width="3"/>
+<path d="M80 389l7 9 10-2-9 9 3 11-11-7-10 5 5-12-7-8zM432 389l-7 9-10-2 9 9-3 11 11-7 10 5-5-12 7-8z" fill="#ac7842"/>
+<path d="M230 451l25-7 26 7-26 5z" fill="#f8dfa8"/>
+<path d="M111 354L123 359M391 359L401 354" stroke="#a77d50" stroke-width="2" opacity=".55"/></svg>
