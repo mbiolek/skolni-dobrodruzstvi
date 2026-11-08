@@ -28,7 +28,7 @@ const mathSymbols={
 };
 const wordGlyphs=[
  [/map|evrop|cesk|kraj|stat|svet|zeme|kontinent|zemep|geograf/i,'🌍'],
- [/reka|voda|more|ocean|pocasi|klima/i,'≈'],
+ [/reka|voda|more|ocean|pocasi|klima/i,'💧'],
  [/rostlin|strom|les|prirod|ekolog|kvet/i,'🌿'],
  [/zvirat|savc|ptac|hmyz|zoo/i,'🐾'],
  [/histor|dejin|stredovek|prav[eě]k/i,'⌛'],
@@ -69,21 +69,22 @@ function ensureExact(b){
  const art=b.querySelector(':scope > .sd-layer-art');if(!art)return false;
  let picture=art.querySelector(':scope > img.sd84-exact-picture');
  if(!picture){picture=document.createElement('img');picture.className='sd84-exact-picture';picture.alt='';picture.decoding='async';picture.draggable=false;picture.setAttribute('aria-hidden','true');art.appendChild(picture)}
- const url=th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/${exact?'':'blanks/'}${base}.svg`;
+ // Every card has a separate, accessible live label; baked-in labels do not scale on mobile.
+ const url=th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`;
  if(picture.getAttribute('src')!==url)picture.src=url;
  b.classList.add('sd84-exact-card');b.classList.toggle('sd87-dynamic',!exact);
  b.dataset.sd84Key=base;
  // Remove the former SVG overlay: its text was missing on multiple Android screens.
  art.querySelectorAll(':scope > svg.sd85-detail-overlay').forEach(e=>e.remove());
  let label=b.querySelector(':scope > .sd87-card-title');
- if(exact && th!=='adventure'){label?.remove()}else{
+ { // All labels are live DOM text (including six main menu cards).
   if(!label){label=document.createElement('span');label.className='sd87-card-title';label.setAttribute('aria-hidden','true');b.appendChild(label)}
   if(label.textContent!==title)label.textContent=title;
   label.classList.toggle('sd87-title-long',title.length>17);
   label.classList.toggle('sd87-title-verylong',title.length>27);
  }
  let medal=b.querySelector(':scope > .sd87-topic-medallion');
- const glyph=(exact && th!=='adventure')?'':topicGlyph(title,icon);
+ const glyph=exact?'':topicGlyph(title,icon);
  // Specific mathematics/language symbols go on opaque thematic medals,
  // hiding the underlying generic chapter icon rather than overlapping it.
  if(glyph){

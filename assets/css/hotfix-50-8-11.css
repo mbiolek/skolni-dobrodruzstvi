@@ -1,0 +1,135 @@
+/* 50.8.11 – unified card footprint, live legible labels, independent HOME tile art. */
+html body[data-card-style] :is(#sd52,#sdCurriculum,#vlastScreen,#subjectHub,#advSubjectMenu,#v496TopicPanel,#czechScreen,#sdCzechHub5074,#enUnit499,#sd5081Samples) button.sd-ui-card.sd-layered.sd84-exact-card,
+html body[data-card-style] button.sd-ui-card.sd-layered.sd84-exact-card {
+  display:block!important;position:relative!important;box-sizing:border-box!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  aspect-ratio:1/1!important;margin:0!important;padding:0!important;
+  overflow:hidden!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+}
+html body[data-card-style] button.sd84-exact-card>.sd-layer-art{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  overflow:hidden!important;pointer-events:none!important;
+}
+html body[data-card-style] button.sd84-exact-card>.sd-layer-art>img.sd84-exact-picture{
+  position:absolute!important;inset:0!important;display:block!important;
+  width:100%!important;height:100%!important;object-fit:contain!important;
+}
+/* The label is always one independent text layer above the original illustration. */
+html body[data-card-style] button.sd84-exact-card>.sd87-card-title{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  position:absolute!important;box-sizing:border-box!important;z-index:60!important;
+  margin:0!important;padding:1px 4px!important;
+  min-width:0!important;max-width:none!important;
+  overflow:hidden!important;overflow-wrap:normal!important;word-break:normal!important;
+  white-space:normal!important;hyphens:none!important;
+  text-align:center!important;text-wrap:balance!important;
+  font-family:Georgia,'Times New Roman',serif!important;
+  font-weight:800!important;font-size:var(--sd811-font-size,15px)!important;
+  letter-spacing:-.018em!important;line-height:1.02!important;
+  pointer-events:none!important;
+}
+/* Fit text into the exact pale or blue plaque of each illustrated card. */
+html body[data-card-style="stone"] button.sd84-exact-card>.sd87-card-title{
+  left:11%!important;right:11%!important;top:65%!important;bottom:11%!important;height:auto!important;
+  color:#39233a!important;text-shadow:0 1px 1px #fff0d5!important;
+}
+html body[data-card-style="parchment"] button.sd84-exact-card>.sd87-card-title{
+  left:12%!important;right:12%!important;top:52%!important;bottom:19%!important;height:auto!important;
+  color:#42291c!important;text-shadow:0 1px 1px #fff2d4!important;
+}
+html body[data-card-style="glass"] button.sd84-exact-card>.sd87-card-title{
+  left:13%!important;right:13%!important;top:60%!important;bottom:17%!important;height:auto!important;
+  color:#fffbec!important;text-shadow:0 2px 3px #071638,0 0 6px #071638!important;
+}
+html body[data-card-style="guild"] button.sd84-exact-card>.sd87-card-title{
+  left:12%!important;right:12%!important;top:59%!important;bottom:17%!important;height:auto!important;
+  color:#ffedc7!important;border:2px solid #e4ba75!important;border-radius:35% / 35%!important;
+  background:linear-gradient(180deg,#173c6c,#071b3b)!important;
+  box-shadow:inset 0 1px 2px #ffde9f76,0 1px 3px #12121f!important;
+  text-shadow:0 1px 3px #070f2c!important;
+}
+html body[data-card-style="adventure"] button.sd84-exact-card>.sd87-card-title{
+  left:10%!important;right:10%!important;top:70%!important;bottom:10%!important;height:auto!important;
+  color:#fff3d8!important;text-shadow:0 2px 3px #06122e!important;
+}
+/* Medal stays on the card, not on its caption. */
+html body[data-card-style] button.sd84-exact-card>.sd87-topic-medallion{
+  z-index:40!important;max-width:46%!important;max-height:46%!important;
+  box-sizing:border-box!important;
+}
+html body[data-card-style="guild"] button.sd84-exact-card>.sd87-topic-medallion{top:5%!important}
+html body[data-card-style="parchment"] button.sd84-exact-card>.sd87-topic-medallion{top:4%!important}
+html body[data-card-style="adventure"] button.sd84-exact-card>.sd87-topic-medallion{top:14%!important}
+/* Every screen's grid uses uniform cards, no exceptions for a particular subject. */
+html body[data-card-style] :is(#sd52,#sdCurriculum,#vlastScreen,#subjectHub,#advSubjectMenu,#v496TopicPanel,#czechScreen,#sdCzechHub5074,#enUnit499,#sd5081Samples) .sd-ui-grid{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(8px,2.3vw,14px)!important;align-items:stretch!important;
+}
+html body[data-card-style] .sd5081-samples.sd-ui-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+@media(min-width:760px){
+ html body[data-card-style] :is(#sd52,#sdCurriculum,#vlastScreen,#subjectHub,#advSubjectMenu,#v496TopicPanel,#czechScreen,#sdCzechHub5074,#enUnit499) .sd-ui-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+/* HOME: its 6 tile images follow the button style, NOT the wallpaper or old game theme. */
+html body[data-card-style] #homeScreen .subject::before{
+  display:block!important;content:''!important;
+  background-image:var(--sd811-tile-image,var(--sd810-tile-image,var(--tile-image)))!important;
+  background-size:cover!important;background-position:center!important;
+  filter:var(--sd811-tile-filter,none)!important;
+}
+html body[data-card-style] #homeScreen .subject{
+  box-sizing:border-box!important;aspect-ratio:1 / 1!important;
+  border:var(--sd811-tile-border,3px solid #e7be70)!important;
+  border-radius:var(--sd811-tile-radius,17px)!important;
+  box-shadow:var(--sd811-tile-shadow,0 6px 15px #0009)!important;
+  overflow:hidden!important;
+}
+html body[data-card-style] #homeScreen .subject>span:not(.symbol){
+  left:4px!important;right:4px!important;bottom:26px!important;
+}
+html body[data-card-style] #homeScreen .subject strong{
+  font-size:clamp(11px,2.85vw,18px)!important;line-height:1.08!important;
+  overflow-wrap:normal!important;word-break:normal!important;
+  text-wrap:balance!important;
+  text-shadow:0 1px 3px #000,0 2px 7px #000!important;
+}
+html body[data-card-style] #homeScreen .subject .v451-footer>span{
+  background:#071629e9!important;color:#ffefc9!important;font-size:clamp(9px,2.2vw,12px)!important;
+}
+/* Separate character for each of the 5 designs. */
+html body[data-card-style="glass"] #homeScreen .subject{
+ --sd811-tile-filter:saturate(1.18) brightness(1.11);
+ --sd811-tile-border:3px solid #c5d5ff;
+ --sd811-tile-radius:23px;
+ --sd811-tile-shadow:inset 0 0 12px #f5efffbb,0 0 16px #a3aaffac,0 8px 20px #020b31ba;
+}
+html body[data-card-style="stone"] #homeScreen .subject{
+ --sd811-tile-filter:contrast(1.13) saturate(.64) brightness(.88);
+ --sd811-tile-border:4px ridge #b6a082;
+ --sd811-tile-radius:10px;
+ --sd811-tile-shadow:inset 0 0 0 3px #454052,0 5px 0 #443448,0 10px 18px #020b22;
+}
+html body[data-card-style="parchment"] #homeScreen .subject{
+ --sd811-tile-filter:sepia(.55) saturate(.65) brightness(1.14);
+ --sd811-tile-border:4px double #c8985e;
+ --sd811-tile-radius:12px;
+ --sd811-tile-shadow:inset 0 0 0 3px #e8cc9e,0 5px 0 #67452a,0 10px 18px #020b22;
+}
+html body[data-card-style="guild"] #homeScreen .subject{
+ --sd811-tile-filter:contrast(1.07) saturate(1.1);
+ --sd811-tile-border:4px ridge #efc16c;
+ --sd811-tile-radius:18px;
+ --sd811-tile-shadow:inset 0 0 0 3px #693a16,0 5px 0 #654019,0 11px 17px #020b22;
+}
+html body[data-card-style="adventure"] #homeScreen .subject{
+ --sd811-tile-filter:saturate(1.1) brightness(.98);
+ --sd811-tile-border:3px solid #f1d086;
+ --sd811-tile-radius:16px;
+ --sd811-tile-shadow:inset 0 0 0 2px #bd8f42,0 5px 0 #92733d,0 10px 19px #030b21;
+}
+/* Merlin must never obscure a preview's confirm/cancel buttons. */
+body.sd5081-preview-open :is(#sd54-merlin,#sd55-help,.sd578-stage){visibility:hidden!important;pointer-events:none!important}
+@media(max-width:380px){
+ html body[data-card-style] #homeScreen .subject strong{font-size:11px!important}
+}

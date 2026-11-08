@@ -1,0 +1,9 @@
+Školní dobrodružství – verze 50.8.11 (8. 11. 2026)
+
+1. Všechna tlačítka výukových témat a náhledy mají jednotné čtvercové rozměry.
+2. Živé české popisky u každého stylu se automaticky zmenší, neřežou se ani nepřesahují za štítky.
+3. Všech pět grafických prostředí nezávisle mění i úvodní šestici předmětových dlaždic. Volba tapety zůstává samostatná.
+4. Motiv Dobrodružné předměty používá původní hvězdné ilustrace hradu namísto nevhodných zelených ikon.
+5. Merlin nepřekrývá potvrzovací tlačítka při prohlížení náhledů.
+
+Bez změny profilů, uložených výsledků, hesel a lekcí.
