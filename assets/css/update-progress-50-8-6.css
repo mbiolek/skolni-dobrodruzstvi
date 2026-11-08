@@ -1,0 +1,8 @@
+/* Informace o bezpečné aktualizaci Školního dobrodružství 50.8.6 */
+#pwa31bar{z-index:2147483646;border-color:#d4ad63;background:#fffdf4;color:#1b3457}
+#pwa31bar #sd5086-progress{margin:9px 0 3px;display:flex;align-items:center;gap:10px}
+#pwa31bar #sd5086-progress[hidden]{display:none}
+#pwa31bar .sd5086-track{width:100%;height:12px;border-radius:999px;border:1px solid #b7c7db;background:#e3ebf6;overflow:hidden;flex:1}
+#pwa31bar .sd5086-track span{display:block;height:100%;width:0;background:linear-gradient(90deg,#376bd9,#54c5c0);border-radius:inherit;transition:width .18s ease}
+#pwa31bar #sd5086-progress-label{min-width:max-content;font-size:12px;color:#263d61;font-variant-numeric:tabular-nums}
+#pwa31bar button:focus-visible{outline:3px solid #ffcf5a;outline-offset:2px}

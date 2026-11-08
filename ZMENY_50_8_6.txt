@@ -1,0 +1,10 @@
+Školní dobrodružství 50.8.6 – aktualizace bez promíchání souborů
+
+- Průběh stahování se ukazuje v počtu a procentech stažených souborů.
+- Aktualizace se aktivuje pouze po dokončení všech 852 souborů a potvrzení.
+- Staré soubory zůstávají aktivní do okamžiku výměny celého offline balíku.
+- Nový service worker nabízí celý aktuální cache konzistentně (HTML, JS, CSS, SVG).
+- Zobrazení chyby při neúspěšném stahování, možnost opakování.
+- Nová diagnostika update-progress, update-error.
+- Výukovou logiku, Merlina ani profily tato verze nemění.
+- První přechod ze starší verze bez progress UI může mít stále staré chování; další aktualizace již ukazují průběh.
