@@ -1,0 +1,126 @@
+/* 50.8.12 — real HOME images, one centered label, clipping-safe painted plaques. */
+/* Older releases used the decorative ::before layer for artwork; legacy CSS can hide it. */
+html body[data-card-style] #homeScreen :is(button.subject,div.subject)::before{display:none!important;content:none!important;background-image:none!important}
+html body[data-card-style] #homeScreen :is(button.subject,div.subject){
+ position:relative!important;display:block!important;isolation:isolate!important;
+ width:100%!important;aspect-ratio:1 / 1!important;min-height:0!important;max-height:none!important;
+ height:auto!important;padding:0!important;margin:0!important;overflow:hidden!important;
+ background:#132640!important;box-sizing:border-box!important;
+}
+html body[data-card-style] #homeScreen :is(button.subject,div.subject)>img.sd812-home-art{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ border:0!important;border-radius:0!important;margin:0!important;padding:0!important;
+ z-index:0!important;visibility:visible!important;opacity:1!important;
+ filter:var(--sd812-home-filter,none)!important;pointer-events:none!important;
+}
+/* Only a translucent bottom vignette, never pseudo text/duplicate subject names. */
+html body[data-card-style] #homeScreen :is(button.subject,div.subject)::after{
+ display:block!important;content:''!important;position:absolute!important;
+ inset:42% 0 0!important;z-index:1!important;
+ background:linear-gradient(180deg,transparent 0%,#07162940 32%,#061429ce 91%)!important;
+ max-width:none!important;pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen :is(button.subject,div.subject)>.symbol,
+html body[data-card-style] #homeScreen :is(button.subject,div.subject)>.v44-xp{display:none!important}
+html body[data-card-style] #homeScreen :is(button.subject,div.subject)>span:not(.symbol){
+ position:absolute!important;z-index:3!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ left:3px!important;right:3px!important;top:auto!important;bottom:29px!important;
+ height:clamp(22px,6.1vw,38px)!important;min-height:0!important;width:auto!important;
+ overflow:visible!important;margin:0!important;padding:0 2px!important;
+ background:none!important;transform:none!important;pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen :is(button.subject,div.subject)>span:not(.symbol)>strong{
+ display:block!important;width:100%!important;height:auto!important;min-height:0!important;
+ font-family:system-ui,-apple-system,sans-serif!important;
+ font-weight:900!important;font-size:clamp(10px,2.85vw,17px)!important;
+ line-height:1.08!important;text-align:center!important;letter-spacing:-.03em!important;
+ color:#fffaf0!important;white-space:normal!important;
+ overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important;
+ text-shadow:0 1px 3px #020711,0 2px 7px #010719!important;
+}
+html body[data-card-style] #homeScreen .subject .v451-footer{
+ position:absolute!important;left:4px!important;right:4px!important;bottom:5px!important;
+ z-index:4!important;display:flex!important;justify-content:space-between!important;align-items:center!important;
+ min-height:20px!important;gap:2px!important;pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen .subject .v451-footer>span{
+ font-size:clamp(9px,2.15vw,12px)!important;line-height:1.1!important;
+ padding:3px 4px!important;white-space:nowrap!important;
+ color:#fff6da!important;background:#081c36e6!important;border:1px solid #f6d9936b!important;border-radius:12px!important;
+}
+/* Distinct treatment of the five button styles. Artwork and wallpaper remain independent. */
+html body[data-card-style="glass"] #homeScreen .subject{
+ border:3px solid #bfd5ff!important;border-radius:23px!important;
+ box-shadow:0 0 13px #9e9bfa99,0 5px 17px #020d25!important;
+ --sd812-home-filter:saturate(1.23) brightness(1.09);
+}
+html body[data-card-style="stone"] #homeScreen .subject{
+ border:4px ridge #cdb17f!important;border-radius:13px!important;
+ box-shadow:0 5px 0 #3b3047,0 9px 17px #000a!important;
+ --sd812-home-filter:contrast(1.08) brightness(1.07);
+}
+html body[data-card-style="parchment"] #homeScreen .subject{
+ border:4px double #c89459!important;border-radius:12px!important;
+ box-shadow:0 5px 0 #654122,0 9px 17px #000a!important;
+ --sd812-home-filter:sepia(.33) brightness(.94) saturate(.94);
+}
+html body[data-card-style="guild"] #homeScreen .subject{
+ border:4px ridge #eec478!important;border-radius:17px!important;
+ box-shadow:0 5px 0 #68421d,0 10px 18px #000a!important;
+ --sd812-home-filter:sepia(.11) saturate(1.1) brightness(1.07);
+}
+html body[data-card-style="adventure"] #homeScreen .subject{
+ border:3px solid #f0ce83!important;border-radius:17px!important;
+ box-shadow:inset 0 0 2px #ffedb1,0 5px 0 #8e7138,0 10px 19px #020b21!important;
+ --sd812-home-filter:contrast(1.09) saturate(1.16) brightness(1.05);
+}
+/* Live title occupies only the central part of the painted label, not its ornamented edges. */
+html body[data-card-style] button.sd84-exact-card>.sd87-card-title{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ position:absolute!important;box-sizing:border-box!important;z-index:65!important;
+ left:12%!important;right:12%!important;top:66%!important;bottom:13%!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ width:auto!important;min-width:0!important;max-width:none!important;
+ margin:0!important;padding:1px 3px!important;
+ text-align:center!important;text-wrap:balance!important;
+ white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important;
+ hyphens:none!important;overflow:hidden!important;
+ font-family:Georgia,'Times New Roman',serif!important;font-size:var(--sd812-title-size,14px)!important;
+ font-weight:800!important;line-height:1.0!important;letter-spacing:-.025em!important;
+ border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+ transform:none!important;pointer-events:none!important;
+}
+html body[data-card-style="stone"] button.sd84-exact-card>.sd87-card-title{
+ top:65%!important;bottom:13%!important;color:#382232!important;
+ text-shadow:0 1px 1px #fff0d7!important;
+}
+html body[data-card-style="glass"] button.sd84-exact-card>.sd87-card-title{
+ top:62%!important;bottom:18%!important;color:#fff6de!important;text-shadow:0 2px 3px #08162d!important;
+}
+html body[data-card-style="parchment"] button.sd84-exact-card>.sd87-card-title{
+ top:55%!important;bottom:22%!important;color:#402716!important;text-shadow:0 1px 1px #fff1d2!important;
+}
+html body[data-card-style="guild"] button.sd84-exact-card>.sd87-card-title,
+html body[data-card-style="guild"] button.sd84-exact-card.sd87-dynamic>.sd87-card-title{
+ top:63%!important;bottom:18%!important;left:13%!important;right:13%!important;
+ color:#fff2d7!important;text-shadow:0 1px 3px #071529!important;
+ background:linear-gradient(180deg,#234d7c,#102750)!important;
+ border:1px solid #d7ad69!important;border-radius:15px!important;
+}
+html body[data-card-style="adventure"] button.sd84-exact-card>.sd87-card-title{
+ top:71%!important;bottom:12%!important;color:#ffedca!important;text-shadow:0 2px 3px #07152f!important;
+}
+/* Specificity must beat older .sd87-title-long and body[data-game-theme] rules. */
+html body[data-card-style] button.sd84-exact-card > span.sd87-card-title.sd87-card-title{
+ font-size:var(--sd812-title-size,14px)!important;
+ line-height:1.02!important;
+}
+/* Eliminate older fixed sizes for titles; all card instances fill their grid cell. */
+html body[data-card-style] :is(#sd52,#sdCurriculum,#vlastScreen,#subjectHub,#advSubjectMenu,#v496TopicPanel,#czechScreen,#sdCzechHub5074,#enUnit499,#sd5081Samples) button.sd-ui-card.sd-layered.sd84-exact-card{
+ aspect-ratio:1 / 1!important;height:auto!important;max-height:none!important;min-height:0!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;box-sizing:border-box!important;
+}
+@media(max-width:365px){html body[data-card-style] #homeScreen .subject>span:not(.symbol)>strong{font-size:10px!important}}

@@ -1,0 +1,9 @@
+Školní dobrodružství 50.8.12 — oprava karet (8. 11. 2026)
+
+- Šest obrázkových předmětů na úvodní stránce je tvořeno skutečnými IMG elementy. Starší pravidla skrytých CSS pseudo-vrstev je nemohou vymazat.
+- Jednotlivé výtvarné styly mění i ilustrace domovských dlaždic, tapety zůstávají nezávislé.
+- Názvy na tematických kartách se přesně zarovnávají do bezpečné plochy uvnitř štítků; dlouhé názvy se přizpůsobují.
+- Všechny tematické dlaždice zůstávají stejně velké, původní volání lekcí beze změny.
+- Přidané obrázky jsou dekorativní (alt prázdný), ovládání si ponechává původní text pro čtečky.
+
+Profily, výsledky, PINy, úlohy a obsah lekcí se nemění.
