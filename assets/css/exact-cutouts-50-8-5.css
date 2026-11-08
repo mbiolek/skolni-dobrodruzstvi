@@ -1,0 +1,42 @@
+/* 50.8.5 – stejný originální ilustrovaný výřez i při vnitřních tématech.
+   Textové štítky jsou SVG vrstvy s vlastním z-indexem a bez překryvu. */
+html body[data-card-style] button.sd-ui-card.sd-layered.sd84-exact-card,
+html body[data-game-theme][data-card-style] button.sd-ui-card.sd-layered.sd84-exact-card {
+ background:transparent!important;border:0!important;border-radius:0!important;
+ padding:0!important;overflow:visible!important;box-shadow:none!important;
+ isolation:isolate!important;aspect-ratio:1/1.01!important;
+ min-height:0!important;max-height:none!important;filter:none!important;
+}
+html body button.sd84-exact-card > .sd-layer-art {inset:0!important;overflow:visible!important;pointer-events:none!important;}
+html body button.sd84-exact-card > .sd-layer-art > img.sd84-exact-picture {
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ display:block!important;visibility:visible!important;object-fit:contain!important;
+ z-index:15!important;filter:none!important;transform:none!important;opacity:1!important;
+ pointer-events:none!important;
+}
+html body button.sd84-exact-card > .sd-layer-art > img:not(.sd84-exact-picture){display:none!important}
+html body button.sd84-exact-card > .sd-layer-caption{visibility:hidden!important;pointer-events:none!important}
+html body button.sd84-exact-card > .sd-layer-art > svg.sd85-detail-overlay {
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ z-index:16!important;display:block!important;overflow:visible!important;
+ pointer-events:none!important;opacity:1!important;transform:none!important;
+}
+html body button.sd84-exact-card:active{transform:scale(.976)!important}
+html body button.sd84-exact-card:focus-visible{outline:3px solid #ffe6a5!important;outline-offset:3px!important}
+/* Titulky a popisy mezi obrazovkami. */
+#v496TopicPanel .v496-wrap > h2.sd85-visible-heading{color:#fff4db!important;text-shadow:0 2px 5px #071024,0 0 12px #071024!important;opacity:1!important}
+#v496TopicPanel .v496-wrap > p.sd85-visible-heading{color:#f3e7d1!important;text-shadow:0 2px 4px #071024!important;opacity:1!important}
+@media (max-width:400px){
+ html body button.sd-ui-card.sd-layered.sd84-exact-card{min-height:0!important}
+}
+@media(prefers-reduced-motion:reduce){html body button.sd84-exact-card{transition:none!important}}
+/* Starší CSS používalo selektory s ID #sd52, proto níže ID specifita převáží
+   nad historickými rámečky a neprůhlednými čtverci. */
+html body[data-card-style] :is(#sd52,#sdCurriculum,#vlastScreen,#subjectHub,#advSubjectMenu,#v496TopicPanel,#czechScreen,#sdCzechHub5074,#enUnit499,#sd5081Samples) button.sd-ui-card.sd-layered.sd84-exact-card,
+html body[data-game-theme][data-card-style] :is(#sd52,#sdCurriculum,#vlastScreen,#subjectHub,#advSubjectMenu,#v496TopicPanel,#czechScreen,#sdCzechHub5074,#enUnit499,#sd5081Samples) button.sd-ui-card.sd-layered.sd84-exact-card {
+ background:none!important;background-color:transparent!important;background-image:none!important;
+ border:0 none transparent!important;border-radius:0!important;
+ box-shadow:none!important;padding:0!important;margin:0!important;
+ min-height:0!important;overflow:visible!important;filter:none!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}

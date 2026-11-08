@@ -1,0 +1,13 @@
+Školní dobrodružství 50.8.5 – sjednocení přesných karet a navigace Merlina
+
+- Základ vychází z originálního ZIPu 50.8.4 uživatele.
+- Výuka a Procvičování zůstávají původní přesné grafické výřezy.
+- Karta Test a Moje výsledky dostává odpovídající ilustrovaný rám; název a tematická grafika se doplní oddělenou SVG vrstvou.
+- Vnitřní podtémata matematiky, češtiny a angličtiny používají stejný vizuální renderer jako hlavní nabídka, ne šedý zástupný rám.
+- Doplňující názvy, které ve výřezech nejsou, jsou vykresleny ve vektorových SVG vrstvách nad původní ilustrovanou kartou.
+- Nové transparentní výřezy Pergamenu jsou odvozené z dodané grafické předlohy.
+- Odstraněna pevně nastavená hloubka 3 u Merlinovy nápovědy v historii; hloubka odpovídá skutečné rodičovské obrazovce.
+- V podnabídce matematických témat zvýšen kontrast nadpisu a pokynů.
+- Původní HTML tlačítka, jejich akce, uložené profily, výsledky i Merlin zůstávají zachovány.
+
+Poznámka: Obsah ilustrovaných SVG obalů je ve skutečnosti vložená rastrová kresba. Vektorové jsou doplňované textové štítky.

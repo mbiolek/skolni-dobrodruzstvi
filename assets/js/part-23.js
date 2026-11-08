@@ -15,11 +15,11 @@ const activeScreen=()=>document.querySelector('.screen.visible')?.id||'homeScree
 const hub=$('subjectHub'),adv=$('advSubjectMenu'),auth=$('authGate');
 let subject='math', applying=false, syncing=false, rebasing=false, lastRoute='';
 const authenticated=()=>!auth||auth.classList.contains('off');
-function state(){
- if(isVisible('sd55-modal'))return 'merlinHelp';
- if($('v24-avatar-dialog')?.classList.contains('open'))return 'avatarDialog';
- if($('v452-badges')?.classList.contains('open'))return 'badgesDialog';
- if($('skinDialog')?.classList.contains('skin-open'))return 'skinDialog';
+function state(skipDialogs=false){
+ if(!skipDialogs&&isVisible('sd55-modal'))return 'merlinHelp';
+ if(!skipDialogs&&$('v24-avatar-dialog')?.classList.contains('open'))return 'avatarDialog';
+ if(!skipDialogs&&$('v452-badges')?.classList.contains('open'))return 'badgesDialog';
+ if(!skipDialogs&&$('skinDialog')?.classList.contains('skin-open'))return 'skinDialog';
  if(isVisible('sdCurriculum'))return 'curriculum';
  if(isVisible('sd52'))return 'schoolPlans';
  if(isVisible('sdCzechHub5074'))return 'czechMenu';
@@ -43,7 +43,11 @@ function describe(){
  if(route==='mathTopics')return {route,subject:'math',depth:2};
  if(route==='schoolPlans')return {route,subject,depth:1};
  if(route==='curriculum')return {route,subject,depth:2};
- if(route==='merlinHelp'||route==='avatarDialog'||route==='badgesDialog'||route==='skinDialog')return {route,subject,depth:3};
+ if(route==='merlinHelp'||route==='avatarDialog'||route==='badgesDialog'||route==='skinDialog'){
+  const parent=state(true);
+  const parentDepth=(parent==='homeScreen')?0:(parent==='mathTopics'||parent==='curriculum'||parent==='czechScreen'||parent==='englishScreen'||parent==='mathScreen')?2:1;
+  return {route,subject:subjectFor(parent),depth:parentDepth+1};
+ }
  return {route,subject:subjectFor(route),depth:2};
 }
 const entry=(info,type='screen')=>({[NS]:true,route:info.route,subject:info.subject,depth:info.depth,type});
