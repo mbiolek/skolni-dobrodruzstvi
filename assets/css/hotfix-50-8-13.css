@@ -1,0 +1,35 @@
+/* 50.8.13 — visually unify card size and lift painted labels a bit higher. */
+/* Hard-lock every exact study card to the same square footprint in all curriculum grids. */
+html body[data-card-style] :is(#sd52,#sdCurriculum,#vlastScreen,#subjectHub,#advSubjectMenu,#v496TopicPanel,#czechScreen,#sdCzechHub5074,#enUnit499,#sd5081Samples) .sd-ui-grid:not(.sd-ui-grid--covers){
+ align-items:stretch!important;grid-auto-rows:1fr!important;
+}
+html body[data-card-style] :is(#sd52,#sdCurriculum,#vlastScreen,#subjectHub,#advSubjectMenu,#v496TopicPanel,#czechScreen,#sdCzechHub5074,#enUnit499,#sd5081Samples) .sd-ui-grid:not(.sd-ui-grid--covers) > button.sd-ui-card.sd-layered.sd84-exact-card{
+ display:block!important;align-self:stretch!important;justify-self:stretch!important;
+ inline-size:100%!important;block-size:auto!important;width:100%!important;height:auto!important;
+ min-height:0!important;max-height:none!important;aspect-ratio:1 / 1!important;
+ margin:0!important;box-sizing:border-box!important;
+}
+html body[data-card-style] button.sd84-exact-card > .sd-layer-art,
+html body[data-card-style] button.sd84-exact-card > .sd-layer-art > img.sd84-exact-picture{
+ inset:0!important;width:100%!important;height:100%!important;
+}
+/* Global fine-tuning of title plaque position. */
+html body[data-card-style] button.sd84-exact-card > .sd87-card-title{
+ justify-content:flex-start!important;padding-top:1px!important;
+}
+/* Adventure cards on mobile needed the strongest lift. */
+html body[data-card-style="adventure"] button.sd84-exact-card > .sd87-card-title{
+ left:13%!important;right:13%!important;top:68.5%!important;bottom:14.5%!important;
+ line-height:.98!important;
+}
+/* Keep two-line labels comfortably inside the parchment plaque. */
+html body[data-card-style="adventure"] button.sd84-exact-card > .sd87-card-title.sd87-title-long,
+html body[data-card-style="adventure"] button.sd84-exact-card > .sd87-card-title.sd87-title-verylong{
+ top:67.5%!important;bottom:14.8%!important;line-height:.96!important;
+}
+/* Small harmonization for the other skins so the plaque sits a touch higher too. */
+html body[data-card-style="stone"] button.sd84-exact-card > .sd87-card-title{top:63.8%!important;bottom:14.2%!important;}
+html body[data-card-style="glass"] button.sd84-exact-card > .sd87-card-title{top:60.8%!important;bottom:19.2%!important;}
+html body[data-card-style="parchment"] button.sd84-exact-card > .sd87-card-title{top:54.0%!important;bottom:23.0%!important;}
+html body[data-card-style="guild"] button.sd84-exact-card > .sd87-card-title,
+html body[data-card-style="guild"] button.sd84-exact-card.sd87-dynamic > .sd87-card-title{top:61.8%!important;bottom:19.0%!important;}

@@ -1,0 +1,5 @@
+Školní dobrodružství 50.8.13 — jemné doladění karet (8. 11. 2026)
+
+- sjednocena vizuální velikost studijních karet v mřížce
+- popisky na kartách posunuty mírně výše
+- dobrodružný styl má užší a výše usazený textový štítek pro lepší vycentrování
