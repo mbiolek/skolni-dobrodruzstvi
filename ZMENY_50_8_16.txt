@@ -1,0 +1,9 @@
+Školní dobrodružství 50.8.16 — předměty v jednotlivých prostředích a funkční aktualizace
+
+- Domovská obrazovka: vlastní karty pro Krystal, Dobrodružné předměty, Pergamen a Hradní cech (6 předmětů v každém stylu).
+- Zachováno ovládání karet, XP, Odznaky a označení Brzy.
+- Hradní cech: odstraněny původní napevno zapsané názvy z SVG ilustrací, aby se nepřekrývaly s HTML názvy.
+- Pergamen: odstraněn chybný znak v obrázku Závěrečného testu.
+- Aktualizátor: přidán skutečně nový sw.js (předchozí balíček 50.8.15 jej neobsahoval).
+- Precache omezen na důležité soubory a obrázky, aby instalace neselhávala při stovkách těžkých map.
+- Uživatelská data a přihlašovací profily se nemažou; zůstávají v úložišti prohlížeče.
