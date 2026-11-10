@@ -1,0 +1,39 @@
+/* 50.8.15 – domovské karty v dobrodružném / hradním prostředí používají nové malované ikony */
+#homeScreen .subject.sd815-art-card{position:relative;overflow:hidden}
+#homeScreen .subject.sd815-art-card > img.sd815-home-art{display:none}
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card{
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  border-radius:28px !important;
+  min-height:180px;
+  aspect-ratio:1/1;
+  isolation:isolate;
+}
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card > *{position:relative;z-index:2}
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card > img.sd815-home-art{
+  display:block !important;
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+}
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card > .symbol,
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card > .sd815-home-copy{
+  display:none !important;
+}
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card[aria-disabled="true"]{cursor:default}
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card .v451-footer,
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card .sd-ui-footer,
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card .subject-footer,
+body[data-game-theme="d"] #homeScreen .subject.sd815-art-card .card-footer{
+  position:absolute !important;
+  left:6px !important;
+  right:6px !important;
+  bottom:6px !important;
+  z-index:4 !important;
+}

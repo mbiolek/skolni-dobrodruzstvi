@@ -1,0 +1,6 @@
+Školní dobrodružství 50.8.15 — začlenění fantasy tlačítek do prostředí (10. 11. 2026)
+
+- do domovské obrazovky byly přidány nové malované fantasy karty pro Matematiku, Češtinu, Angličtinu, Přírodopis, Vlastivědu a Hudební výchovu
+- nové karty se zobrazují v dobrodružném / hradním prostředí
+- zachováno klikání i spodní štítky XP / Brzy / Odznaky
+- Přírodověda na domovské kartě byla přejmenována na Přírodopis
