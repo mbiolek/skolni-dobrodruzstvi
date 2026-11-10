@@ -1,0 +1,9 @@
+Školní dobrodružství 50.8.18 – Matematika 5. třída · Fulnek
+
+Přidána nová samostatná část Matematiky. Vstup z úvodní nabídky Matematiky, výběru témat nebo nastavení Matematiky.
+10 kapitol podle zaslaných fotografií učebnice ze stran 52–63.
+Výuka s příklady a vysvětlením; procvičování 5/10/15 úloh; průřezový test 15 úloh; opakování chyb; osobní statistiky.
+Názorné úsečky a mnohoúhelníky jako SVG obrázky vytvářené při každé úloze.
+Nové otázky jsou originální, přizpůsobené úrovni učebnice; nejsou přepisem fotografovaných stran.
+Uložení je oddělené podle již přihlášeného lokálního profilu. Nepřepisují se stávající výsledky, výuka, avatary ani PINy.
+Aktualizační služba: sw.js verze 50.8.18 (včetně offline souborů nového modulu).

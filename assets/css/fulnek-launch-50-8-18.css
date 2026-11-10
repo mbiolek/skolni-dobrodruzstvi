@@ -1,0 +1,9 @@
+/* Only the new button is added; existing layout and handlers remain unchanged. */
+#subjectHub .sd518-fulnek-hub{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;line-height:1.25;box-sizing:border-box;border:2px solid #e5c47f;border-radius:20px;background:linear-gradient(155deg,#304e83,#0c2347)!important;color:#fff0c8!important;min-height:220px;padding:14px;white-space:normal;overflow:hidden;}
+#subjectHub .sd518-fulnek-hub b{font-family:Georgia,serif;text-align:center;font-size:clamp(17px,3.8vw,23px);white-space:normal;overflow-wrap:anywhere}
+#subjectHub .sd518-fulnek-hub .hub-emoji{font-size:35px;display:block}
+#subjectHub .sd518-fulnek-hub small{font-size:13px;line-height:1.3;text-align:center;white-space:normal}
+#subjectHub .sd518-fulnek-hub .hub-start{font-size:13px;text-align:center;color:#ffe2a1}
+#subjectHub:not([data-subject="math"]) .sd518-fulnek-hub{display:none!important}
+#v496Topics .sd518-fulnek-topic{border:2px solid #f0cf93;border-radius:15px;color:#fff3dc;background:#19385e;white-space:normal;font-weight:750;min-height:75px;padding:12px}
+#setup .sd518-fulnek-setup{display:block;margin:12px auto;padding:13px 17px;border:2px solid #f1cb74;border-radius:16px;background:#203b66;color:#ffedc2;font-weight:750;max-width:100%;white-space:normal}
