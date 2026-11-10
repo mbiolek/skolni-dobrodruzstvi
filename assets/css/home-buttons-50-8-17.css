@@ -1,0 +1,52 @@
+/* 50.8.17 — jednotný renderer všech pěti motivů na úvodní obrazovce.
+   Stone = vytvořené zlaté kamenné ilustrace, Adventure = fotografické dobrodružné karty. */
+html body[data-card-style] #homeScreen .subject.sd817-themed{
+ position:relative!important;display:block!important;isolation:isolate!important;
+ width:100%!important;min-width:0!important;max-width:none!important;min-height:0!important;height:auto!important;
+ aspect-ratio:1/1!important;box-sizing:border-box!important;
+ margin:0!important;padding:0!important;border:0!important;border-radius:20px!important;
+ background:transparent!important;background-image:none!important;box-shadow:none!important;overflow:hidden!important;
+ text-align:center!important;transform:none!important;
+}
+html body[data-card-style] #homeScreen .subject.sd817-themed::before,
+html body[data-card-style] #homeScreen .subject.sd817-themed::after{
+ display:none!important;content:none!important;background:none!important;
+}
+/* Hide obsolete images, decorative SVGs and text while retaining the original click handler and status badges. */
+html body[data-card-style] #homeScreen .subject.sd817-themed > :not(img.sd817-home-art):not(.v451-footer):not(div.sd817-photo-title){display:none!important}
+html body[data-card-style] #homeScreen .subject.sd817-themed > img.sd817-home-art{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+ object-fit:contain!important;object-position:center!important;
+ padding:0!important;margin:0!important;border:0!important;border-radius:0!important;
+ z-index:3!important;visibility:visible!important;opacity:1!important;filter:none!important;pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen .subject.sd817-themed > .v451-footer{
+ display:flex!important;position:absolute!important;left:5px!important;right:5px!important;bottom:4px!important;
+ z-index:6!important;min-height:20px!important;align-items:center!important;justify-content:space-between!important;
+ gap:2px!important;pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen .subject.sd817-themed > .v451-footer > span{
+ display:inline-flex!important;position:static!important;width:auto!important;height:auto!important;
+ padding:3px 4px!important;font-size:clamp(9px,2.1vw,12px)!important;line-height:1.05!important;
+ white-space:nowrap!important;border:1px solid #e4c59092!important;border-radius:13px!important;
+ background:#09152be8!important;color:#fff8dd!important;text-shadow:0 1px 2px #050b16!important;
+}
+/* The photographic Adventure images have no baked-in subject labels; render exactly one. */
+html body[data-card-style="adventure"] #homeScreen .subject.sd817-photo-mode > .sd817-photo-title{
+ display:flex!important;position:absolute!important;left:5%!important;right:5%!important;bottom:17%!important;
+ height:auto!important;max-height:28%!important;min-height:0!important;align-items:center!important;justify-content:center!important;
+ z-index:5!important;margin:0!important;padding:0 2px!important;background:none!important;
+ color:#fffaf0!important;font-family:system-ui,-apple-system,sans-serif!important;
+ font-size:clamp(11px,2.5vw,16px)!important;font-weight:800!important;line-height:1.1!important;
+ text-align:center!important;white-space:normal!important;overflow-wrap:normal!important;
+ text-shadow:0 1px 3px #000,0 2px 6px #000!important;pointer-events:none!important;
+}
+html body[data-card-style]:not([data-card-style="adventure"]) #homeScreen .subject.sd817-themed > .sd817-photo-title{display:none!important}
+html body[data-card-style] #homeScreen :is(.subject-grid,.v23-extra-grid){
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ column-gap:8px!important;row-gap:8px!important;align-items:stretch!important;
+}
+html body[data-card-style] #homeScreen .subject.sd817-themed:focus-visible{
+ outline:3px solid #fff1b7!important;outline-offset:2px!important;
+}

@@ -1,0 +1,8 @@
+Školní dobrodružství 50.8.17 – oprava prohozených motivů na domovské obrazovce
+
+- Kamenné runy: nové zlatě orámované kamenné předmětové ikony, shodné s grafickou rodinou vnitřních karet
+- Dobrodružné předměty: fotografické dobrodružné předmětové ikony s jedním čitelným názvem
+- odstavena stará duplicitní grafika úvodních karet
+- všechny karty mají jednotný čtvercový rozměr; štítky XP / Odznaky / Brzy zůstávají
+- opravena verze a soupis offline souborů v Service Workeru pro aktualizaci na 50.8.17
+- bez zásahu do účtů, PINů, výsledků a výukového obsahu
