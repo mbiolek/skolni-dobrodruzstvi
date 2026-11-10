@@ -64,7 +64,7 @@ function decorate(btn,group='generic'){
 const GROUPS=[
  ['#sd52 .sd52-grid','school'],['#sd52 .sd-ui-grid','school'],['#sdCurriculum .sd-grid','curriculum'],['#sdCurriculum .sd-ui-grid','curriculum'],
  ['#vlastScreen #vlUnits','geography'],['#subjectHub .hub-cards','hub'],['#advSubjectMenu .adv-menu-cards','adventure'],
- ['#v496TopicPanel #v496Topics','math'],['#czechScreen .v29-panel > .v29-actions','czech'],
+ ['#v496TopicPanel #v496Topics','math'],['#czechScreen .app > .v29-panel:not([id]) > .v29-actions','czech'],
  ['#sdCzechHub5074 .sd-ui-grid','czech'],['#enUnit499 #en499topics','english'],['#homeScreen .subject-grid','cover']];
 const selectors=GROUPS.map(i=>i[0]).join(',');
 function cover(el){if(!el.classList.contains('subject')||el.classList.contains('sd-layer-cover'))return;

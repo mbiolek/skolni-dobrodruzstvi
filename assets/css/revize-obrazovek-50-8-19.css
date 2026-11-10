@@ -1,0 +1,69 @@
+/* 50.8.19: cíl: oddělené stránky a fantasy pozadí bez zásahu do výsledků. */
+/* Aktivita s výběrem SLOV nikdy nesmí používat velké fantasy karty. */
+html body[data-card-style] #czechScreen #czChoices{
+ display:flex!important;flex-wrap:wrap!important;align-items:flex-start!important;
+ justify-content:flex-start!important;gap:8px!important;
+ grid-template-columns:none!important;min-height:0!important;
+}
+html body[data-card-style] #czechScreen #czChoices > button.v29-choice{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:0 0 auto!important;aspect-ratio:auto!important;width:auto!important;
+ min-width:0!important;height:auto!important;min-height:40px!important;
+ padding:8px 12px!important;margin:0!important;
+ border:2px solid #b9d5ff!important;border-radius:12px!important;
+ font:700 clamp(15px,3.6vw,19px)/1.22 system-ui,sans-serif!important;
+ color:#173c75!important;background:#fff!important;max-width:100%!important;white-space:normal!important;
+ box-shadow:none!important;text-align:center!important;
+}
+html body[data-card-style] #czechScreen #czSentence > button.v29-word.chosen{background:#fff0ad!important;border-color:#f1b83b!important}
+html body[data-card-style] #czechScreen #czSentence > button.v29-word.done{background:#dbf9e7!important;border-color:#3bbd72!important}
+/* Oprava nesmí zakrýt zelenou/červenou zpětnou vazbu při vyhodnocení. */
+html body[data-card-style] #czechScreen :is(#czChoices > button.v29-choice,#czSentence > button.v29-word).v34-correct{
+ background:#d9f7e3!important;border-color:#26965b!important;color:#134d30!important;
+}
+html body[data-card-style] #czechScreen :is(#czChoices > button.v29-choice,#czSentence > button.v29-word).v34-wrong{
+ background:#ffe2e3!important;border-color:#d34b58!important;color:#7d2434!important;
+}
+/* Každý z režimů je samostatný panel; skryté režimy zůstávají skutečně skryté. */
+html body #czechScreen :is(#czGuide,#czExercise,#czNumbersPanel,#czDictPanel).v29-hide{display:none!important}
+html body[data-card-style] #czechScreen .app{max-width:840px!important;margin:0 auto!important}
+html body[data-card-style] #czechScreen .app > .v29-panel:not([id]) > .v29-actions{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:10px!important;
+}
+/* Angličtina – zobrazení nočního hradu i uvnitř výuky / testu. */
+html body[data-card-style] #enUnit499{
+ background-color:#061932!important;
+ background-image:linear-gradient(180deg,rgba(3,12,27,.56),rgba(3,17,36,.77)),var(--sd88-scene,url('../pozadi/hrad-noc-3-5084.webp'))!important;
+ background-position:center center!important;background-repeat:no-repeat!important;
+ background-size:cover!important;background-attachment:local!important;
+ color:#f6ecd8!important;
+}
+html body[data-card-style] #enUnit499 .enbox{
+ background:linear-gradient(180deg,rgba(10,27,54,.86),rgba(9,27,49,.91))!important;
+ border:2px solid rgba(215,175,108,.76)!important;
+ color:#f6ecd8!important;
+ box-shadow:0 14px 38px #020a19b8!important;
+}
+html body[data-card-style] #enUnit499 :is(#en499title,#en499content){color:#f9efdc!important}
+html body[data-card-style] #enUnit499 #en499title{
+ text-shadow:0 2px 4px #010b19!important;
+}
+html body[data-card-style] #enUnit499 #en499content :is(p,h3,.enmuted){color:#f8f0e1!important}
+html body[data-card-style] #enUnit499 #en499content .enword{background:#102a4bdb;color:#f8f0e1;border-color:#b6a07999}
+html body[data-card-style] #enUnit499 #en499content .enfeedback{color:#fff1d0!important}
+/* Nabídka témat je před hradem přímo, bez velkého bílého listu. */
+html body[data-card-style] #enUnit499[data-level="topics"] .enbox{
+ background:transparent!important;border:0!important;box-shadow:none!important;padding:8px 2px 22px!important;
+}
+html body[data-card-style] #enUnit499 #en499topics{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:clamp(10px,2.8vw,18px)!important;
+ align-items:stretch!important;
+}
+html body[data-card-style] #enUnit499 #en499topics button.sd-ui-card{
+ width:100%!important;min-width:0!important;aspect-ratio:1/1!important;
+}
+@media (min-width:700px){
+ html body[data-card-style] #enUnit499 #en499topics{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
