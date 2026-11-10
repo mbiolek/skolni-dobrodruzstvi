@@ -1,0 +1,6 @@
+Školní dobrodružství 50.8.14 — sjednocení domovských a vnitřních karet (9. 11. 2026)
+
+- hlavní obrazovka převedena na stejný vrstvený systém karet jako zbytek aplikace
+- stejné prostředí nyní používá stejnou grafickou rodinu na domovské i vnitřních obrazovkách
+- sjednoceny i spodní tři předměty na domovské obrazovce
+- staré obrázkové pozadí domovských karet se už v novém režimu nepoužívá

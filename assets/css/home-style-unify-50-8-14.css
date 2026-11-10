@@ -1,0 +1,38 @@
+/* 50.8.14 — unify home cards with the same layered visuals. */
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card{
+ position:relative!important;display:block!important;overflow:hidden!important;
+ padding:0!important;margin:0!important;isolation:isolate!important;
+ background:none!important;box-shadow:none!important;
+}
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card::before,
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card::after,
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card > img.sd812-home-art,
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card > span:not(.sd-layer-caption):not(.sd-layer-art):not(.v451-footer),
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card > .sd-subject-title-svg{display:none!important;content:none!important}
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card > .sd-layer-art,
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card > .sd-layer-art > img{display:block!important;visibility:visible!important}
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card > .sd-layer-caption{
+ position:absolute!important;inset:56% 5% 6%!important;z-index:8!important;display:flex!important;
+ flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;
+ pointer-events:none!important;overflow:hidden!important;
+}
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card .sd-layer-caption > strong,
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card .sd-layer-caption > .sd-ui-card__title{
+ display:block!important;width:100%!important;margin:0!important;padding:0!important;text-align:center!important;
+ font-size:clamp(13px,3.6vw,20px)!important;line-height:1.12!important;font-weight:800!important;
+ white-space:normal!important;overflow-wrap:break-word!important;
+}
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card .sd-layer-caption > small,
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card .sd-layer-caption > .sd-ui-card__desc{
+ display:block!important;width:100%!important;margin:0!important;padding:0!important;text-align:center!important;
+ font-size:clamp(9px,2.25vw,12px)!important;line-height:1.16!important;white-space:normal!important;overflow-wrap:break-word!important;
+}
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card .v451-footer{
+ position:absolute!important;left:4px!important;right:4px!important;bottom:5px!important;z-index:14!important;
+ display:flex!important;justify-content:space-between!important;align-items:center!important;gap:2px!important;pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen .subject.sd814-unified-home-card .v451-footer>span{
+ font-size:clamp(9px,2.15vw,12px)!important;line-height:1.1!important;padding:3px 4px!important;white-space:nowrap!important;
+ color:#fff6da!important;background:#081c36e6!important;border:1px solid #f6d9936b!important;border-radius:12px!important;
+}
+html body[data-card-style] #homeScreen .v23-extra-grid .subject.sd814-unified-home-card[aria-disabled="true"]{opacity:.92!important}

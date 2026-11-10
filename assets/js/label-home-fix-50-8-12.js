@@ -9,6 +9,7 @@ const assetURL=(theme,kind)=>new URL('./assets/ikony/'+THEMES[theme]+'-'+kind+'.
 function ensureHome(){
  const th=THEMES[document.body.dataset.cardStyle]?document.body.dataset.cardStyle:'adventure';
  document.querySelectorAll('#homeScreen .subject').forEach(tile=>{
+  if(tile.classList.contains('sd814-unified-home-card')||tile.classList.contains('sd-layered')){tile.querySelector(':scope > img.sd812-home-art')?.remove();return;}
   const kind=KINDS.find(k=>tile.classList.contains(k));if(!kind)return;
   let img=tile.querySelector(':scope > img.sd812-home-art');
   if(!img){img=document.createElement('img');img.className='sd812-home-art';img.alt='';img.draggable=false;img.decoding='async';img.setAttribute('aria-hidden','true');tile.insertBefore(img,tile.firstChild)}

@@ -3,7 +3,7 @@
    Názvy jsou skutečný vektorově vykreslený DOM text, nikoli pevně umístěný bitmapový snímek. */
 (()=>{'use strict';
 const PATH='./assets/ui-svg/layers/';
-const THEMES={glass:'crystal',crystal:'crystal',stone:'stone',parchment:'parchment',guild:'guild'};
+const THEMES={glass:'crystal',crystal:'crystal',stone:'stone',parchment:'parchment',guild:'guild',adventure:'stone'};
 const ICONS={teach:'vyuka',practice:'procvicovani',test:'test',search:'test',results:'moje_vysledky',month:'mesicni_plan',repeat:'opakovani',settings:'nastaveni',parent:'nastaveni',generic:'vyuka',curriculum:'vyuka',math:'nasobeni',czech:'slovni_druhy',english:'a_an',nature:'priroda',geography:'mapa_a_kompas',music:'noty',numbers:'numbers_0_100',dictation:'pravopis_a_diktaty',
  mul:'nasobeni',div:'deleni',mix:'nasobeni_a_deleni',decimal:'desitkova_soustava',powers:'nasobky_deseti',longdiv:'pisemne_deleni'};
 const svgKeys=new Set(['vyuka','procvicovani','test','mesicni_plan','opakovani','zaverecny_test','moje_vysledky','nastaveni','nasobeni','deleni','nasobeni_a_deleni','desitkova_soustava','nasobky_deseti','pisemne_deleni','slovni_druhy','cisla_slovnich_druhu','pravopis_a_diktaty','kapitoly_podle_ucebnice','a_an','there_is_there_are','numbers_0_100','rodina_a_jidlo','skola','dum_a_nabytek','historie','mapa_a_kompas','priroda','pokusy','rocni_obdobi','zvirata','rostliny','noty','rytmus','pisne','nastroje']);
