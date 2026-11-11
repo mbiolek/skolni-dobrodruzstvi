@@ -1,0 +1,16 @@
+Školní dobrodružství – opravná verze 50.8.23
+
+Příčina zamrznutí na 0 %: ve 50.8.22 se přehled XP aktualizoval přes MutationObserver
+na stejných textových uzlech, které sám měnil. To způsobovalo nekonečnou
+mikroúlohovou smyčku a zablokování hlavního vlákna prohlížeče.
+
+Opravy:
+- odstranění cyklického MutationObserveru v přehledu XP,
+- přepisování hodnot pouze při skutečné změně,
+- aktualizace čísel při návratu do aplikace, přechodu mezi obrazovkami či změně profilu,
+- pojistka úvodní obrazovky, aby neblokovala přihlášení kvůli chybným obrázkům,
+- nová cache 50.8.23 a automatické nasazení kritické opravy v Service Workeru,
+- odstranění doslovných znaků \n mimo HTML elementy.
+
+Zůstává: XP, body úspěchu, měsíční plány Fulnek za září a listopad.
+Profily a historie se neodstraňují ani nepřepisují.

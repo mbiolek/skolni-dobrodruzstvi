@@ -1,4 +1,4 @@
-/* 50.8.22 — XP a body úspěchu na úvodní stránce + předvyplněný měsíční plán Fulnek. */
+/* 50.8.23 — opravené XP a body úspěchu na úvodní stránce + předvyplněný měsíční plán Fulnek. */
 (()=>{'use strict';
 const DBKEY='sd52_schools_plans_v1';
 const ACTIVE='matematika-karticky-progress-v3-active';
@@ -228,7 +228,7 @@ function installHomeSummary(){
 function updateHomeStats(){
  const {by,total}=collectStats();
  const home=document.getElementById('homeScreen'); if(!home)return;
- const set=(sel,val)=>{const el=home.querySelector(sel); if(el)el.textContent=val};
+ const set=(sel,val)=>{const el=home.querySelector(sel); if(el&&el.textContent!==val)el.textContent=val};
  set('[data-sd822="xp"]', String(total.xp));
  set('[data-sd822="points"]', String(total.points));
  set('[data-sd822="success"]', `${total.success} %`);
@@ -251,8 +251,12 @@ function installHooks(){
   const t=e.target.closest('#sd52 button,#sdCurriculum button,#mathScreen button,#czechScreen button,#englishScreen button,#vlastScreen button');
   if(t)setTimeout(updateHomeStats,60);
  });
- const mo=new MutationObserver(()=>updateHomeStats());
- const home=document.getElementById('homeScreen'); if(home)mo.observe(home,{childList:true,subtree:true});
+ // 50.8.23: žádný MutationObserver nad ukazateli XP.
+ // Původní pozorování childList vyvolávalo nekonečnou zpětnovazební
+ // smyčku: přepis textContent -> DOM mutace -> updateHomeStats -> ...
+ // a blokovalo i DOMContentLoaded a dokončení úvodní animace.
+ document.addEventListener('sd-route-change',()=>updateHomeStats());
+ window.addEventListener('storage',e=>{if(e.key===DBKEY||e.key===ACTIVE)updateHomeStats()});
 }
 
 function boot(){
@@ -261,5 +265,5 @@ function boot(){
  installHooks();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();
-window.SDHomeXpFulnek50822=Object.freeze({refresh:updateHomeStats,seed:seedFulnek,version:'50.8.22'});
+window.SDHomeXpFulnek50822=Object.freeze({refresh:updateHomeStats,seed:seedFulnek,version:'50.8.23'});
 })();
