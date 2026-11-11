@@ -1,0 +1,12 @@
+Školní dobrodružství 50.8.21 — RESPONZIVNÍ KARTY (11. 11. 2026)
+
+- Oprava rozložení na hlavní stránce: 3 karty vedle sebe × 2 řady na mobilu.
+- Zachování stejného stylu tlačítek napříč grafickými prostředími.
+- Velké, skutečné textové názvy předmětů, čitelné XP/odznaky a jasné označení Brzy.
+- Popisky a XP jsou odděleny od obrázků, nedochází k jejich překrývání.
+- Nové podrobnější ilustrace v prostředích Pergamen a Hradní cech, na základě stávajících obrázků aplikace.
+- Společná responzivní pravidla pro navigační nabídky s 2/3/4 sloupci podle displeje; při šesti kartách na standardním mobilu 3 × 2.
+- Testové odpovědi, profily, výuka a postup dítěte nejsou měněny.
+- Aktualizace verze a service workeru na 50.8.21.
+
+INSTALACE: ZIP rozbalit do stejné složky jako předchozí verzi, všechno přepsat, git add/commit/push.
