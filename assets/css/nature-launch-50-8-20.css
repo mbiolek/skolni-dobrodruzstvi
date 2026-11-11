@@ -1,0 +1,3 @@
+/* Unlock the nature subject in all graphical themes without altering other cards. */
+#homeScreen .subject.nature[role="button"]{opacity:1!important;filter:none!important;cursor:pointer!important;pointer-events:auto!important}
+#homeScreen .subject.nature[role="button"]:focus-visible{outline:3px solid #9debd0!important;outline-offset:3px}

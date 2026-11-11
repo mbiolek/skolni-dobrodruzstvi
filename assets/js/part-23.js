@@ -165,6 +165,7 @@ lastRoute=infoKey(describe());record('startup',version()+' '+location.pathname+'
 document.addEventListener('click',e=>{
  if(applying||!authenticated())return;
  const t=e.target.closest?.('#homeScreen [data-open],#homeScreen .v23-extra.nature,#homeScreen .v23-extra.history,#homeScreen .subject.nature,#homeScreen .subject.history');if(!t)return;
+ if(t.classList.contains('nature')&&window.SDNatureFulnekLaunch50820)return;
  if(e.target.closest('.v452-badge-btn,.v451-footer,.v44-xp'))return;
  const next=t.dataset.open || (t.classList.contains('nature')?'nature':t.classList.contains('history')?'history':null);
  if(!['math','english','czech','nature','history','music'].includes(next))return;
