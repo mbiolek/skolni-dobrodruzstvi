@@ -16,6 +16,7 @@ const hub=$('subjectHub'),adv=$('advSubjectMenu'),auth=$('authGate');
 let subject='math', applying=false, syncing=false, rebasing=false, lastRoute='';
 const authenticated=()=>!auth||auth.classList.contains('off');
 function state(skipDialogs=false){
+ if(!skipDialogs&&document.body.classList.contains('sd54-admin-open'))return 'parentAdmin';
  if(!skipDialogs&&isVisible('sd55-modal'))return 'merlinHelp';
  // Angličtina má vlastní 2 úrovně (témata a lekce), nikoliv jen domovskou obrazovku.
  if(isVisible('enUnit499'))return 'englishUnit:'+(document.getElementById('enUnit499').dataset.level||'topics');
@@ -44,13 +45,14 @@ const subjectFor=(route)=>{
 function describe(){
  const route=state();
  if(route==='homeScreen')return {route,subject:'',depth:0};
+ if(route==='parentAdmin')return {route,subject:'',depth:1};
  if(route==='subjectMenu('+subject+')'||route.startsWith('subjectMenu(')||route==='czechMenu'||route==='vlastScreen')return {route,subject:subjectFor(route),depth:1};
  if(route.startsWith('englishUnit:'))return {route,subject:'english',depth:route.endsWith(':lesson')?3:2};
  if(route==='mathTopics')return {route,subject:'math',depth:2};
  if(route==='mathScreen'&&$('mathScreen')?.dataset.topic)return {route,subject:'math',depth:3};
  if(route.startsWith('schoolPlans:')){
   const v=window.SDSchoolPlans52?.current?.()||{};
-  const depthMap={subject:1,manage:1,schools:2,search:2,settings:2,'edit-school':2,'edit-plan':3,months:2,repeat:3,month:3,learning:4,quiz:4,finished:5};
+  const depthMap={subject:1,manage:1,schools:2,search:2,settings:2,'edit-school':2,'edit-plan':3,months:2,repeat:3,month:3,learning:4,quiz:4,finished:5,'overview-months':1,'overview-subjects':2};
   return {route,subject:v.subject||subject,depth:depthMap[v.screen]||2};
  }
  if(route.startsWith('curriculum:')){
@@ -88,6 +90,7 @@ function closeDialogs(){
  if($('skinDialog')?.classList.contains('skin-open'))$('skinCancel')?.click();
  window.SDCzechHub5074?.close?.();
  if(isVisible('sd52'))window.SDSchoolPlans52?.close?.();
+ document.body.classList.remove('sd54-admin-open');
  if(isVisible('sdCurriculum'))window.SDCurriculum501?.close?.();
 }
 function showHome(){
@@ -127,13 +130,14 @@ function backOne(source='button'){
  if(!authenticated()){record('back',source+' | authentication');return 'handled'}
  applying=true;
  try{
- if(route==='merlinHelp')window.SDMerlin56?.close?.();
+ if(route==='parentAdmin')document.body.classList.remove('sd54-admin-open');
+ else if(route==='merlinHelp')window.SDMerlin56?.close?.();
  else if(route.startsWith('englishUnit:'))window.SDEnglishUnit499?.back?.();
  else if(route==='avatarDialog')$('v24-avatar-close')?.click();
  else if(route==='badgesDialog')$('v452-badges')?.classList.remove('open');
  else if(route==='skinDialog')$('skinCancel')?.click();
- else if(route==='curriculum')$('sdBack')?.click();
- else if(route==='schoolPlans')$('sd52')?.querySelector('[data-act="back"]')?.click();
+ else if(route.startsWith('curriculum:'))$('sdBack')?.click();
+ else if(route.startsWith('schoolPlans:'))window.SDSchoolPlans52?.back?.();
  else if(route==='czechMenu'){window.SDCzechHub5074?.close?.();showHome()}
  else if(route==='mathTopics'){showSubject('math')}
  else if(route.startsWith('subjectMenu(')||route==='vlastScreen'){showHome()}
@@ -222,7 +226,7 @@ window.addEventListener('popstate',e=>{
   subject=wanted.subject||subject;
   // Browser already moved back exactly one entry. Reconstruct only that entry:
   // Never call history.back() again from a swipe handler.
-  if(wanted.depth===0){closeDialogs();showHome()}
+  if(wanted.depth===0){document.body.classList.remove('sd54-admin-open');closeDialogs();showHome()}
   else if(wanted.route==='englishUnit:topics'){
     // Gesto z lekce vrací JEN na výběr témat, nikoli na domovskou stránku.
     window.SDEnglishUnit499?.topics?.();
@@ -237,6 +241,7 @@ window.addEventListener('popstate',e=>{
     $('sdBack')?.click();
   } else if(wanted.route.startsWith('schoolPlans:') && wanted.route.endsWith(':subject')){
     showSubject(subject);
+  } else if(wanted.route==='parentAdmin'){showHome();document.body.classList.add('sd54-admin-open')
   } else if(wanted.route==='mathTopics'){
     showSubject('math');window.SDMathTopics496?.open?.($('v496TopicPanel')?.dataset.mode||'teach');
   } else if(wanted.depth===1){showSubject(subject)}

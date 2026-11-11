@@ -1,0 +1,11 @@
+Školní dobrodružství – verze 50.8.25
+• Hlavní výběr 6 předmětů na telefonu: 2 sloupce a 3 řady, větší obrázky a čitelné názvy.
+• XP a body zobrazeny bez překryvu názvů; Přírodověda a Vlastivěda nejsou chybně zamčené.
+• Měsíční plán Fulnek: nejprve měsíc (září/listopad), poté předmět (matematika/čeština/vlastivěda), potom výuka/procvičování/test.
+• Doplněno 62 příkladů a otázek na učivo z dodaných plánů (ne jen jedna otázka).
+• Správa škol načítá aktuálně přiřazená data bez staré kopie; dostupná také rodiči.
+• Oprava chyby ReferenceError URL v modulu Přírodovědy.
+• Rodičovská správa je samostatný krok historie: gesto Zpět se vrátí na domovskou stránku.
+• Úprava umístění Merlina na hlavní stránce, aby nezakrýval profil.
+• Úspěšná odpověď ve školním plánu zezelená a přejde automaticky dál.
+• Profily, PINy, výsledky a původní výukové moduly se nemazaly.

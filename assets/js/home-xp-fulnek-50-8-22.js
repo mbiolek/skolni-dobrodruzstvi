@@ -156,6 +156,7 @@ function seedFulnek(){
   if(!db.assignments[id].includes(FULNEK_ID))db.assignments[id].push(FULNEK_ID);
  }
  jsonSet(DBKEY,db);
+ window.SDSchoolPlans52?.reloadDb?.();
  safeSet(SEED_KEY,'done');
 }
 
@@ -220,7 +221,7 @@ function installHomeSummary(){
   if(after&&after.parentNode)after.parentNode.insertBefore(panel, after.nextSibling);
   else home.prepend(panel);
   panel.querySelector('.sd822-plan-btn')?.addEventListener('click',()=>{
-   if(window.SDSchoolPlans52?.open)window.SDSchoolPlans52.open('math');
+   if(window.SDSchoolPlans52?.openOverview)window.SDSchoolPlans52.openOverview();
   });
  }
 }
@@ -236,7 +237,12 @@ function updateHomeStats(){
   const key=Object.keys(HOME_MAP).find(k=>card.classList.contains(k)); if(!key)return;
   const subject=HOME_MAP[key]; const s=by[subject]||{xp:0,points:0};
   let footer=card.querySelector('.v451-footer'); if(!footer)return;
-  const spans=footer.querySelectorAll('span'); if(spans[0])spans[0].textContent=`★ ${s.xp} XP`; if(spans[1])spans[1].textContent=card.matches('button')?`🏅 ${s.points} bodů`:'🔒 Brzy';
+  const spans=footer.querySelectorAll('span');
+  const locked=key==='music';
+  const xp=locked?'★ 0 XP':`★ ${s.xp} XP`;
+  const points=locked?'🔒 Brzy':`🏅 ${s.points} bodů`;
+  if(spans[0]&&spans[0].textContent!==xp)spans[0].textContent=xp;
+  if(spans[1]&&spans[1].textContent!==points)spans[1].textContent=points;
   card.dataset.sd822Xp=String(s.xp); card.dataset.sd822Points=String(s.points);
  });
 }

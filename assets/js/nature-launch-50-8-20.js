@@ -1,7 +1,7 @@
 /* 50.8.20 – bezpečné otevření nové přírodovědy bez přepsání ostatních předmětů. */
 (()=>{'use strict';
-const URL=new URL('./prirodoveda-fulnek/index.html',document.baseURI).href;
-function open(){location.assign(URL)}
+const NATURE_PAGE=new window.URL('./prirodoveda-fulnek/index.html',document.baseURI).href;
+function open(){location.assign(NATURE_PAGE)}
 function install(){
  const home=document.getElementById('homeScreen');if(!home)return;
  // Older versions attach direct click handlers to the nature tile, sometimes even as
