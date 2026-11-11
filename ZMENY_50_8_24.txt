@@ -1,0 +1,8 @@
+Školní dobrodružství – verze 50.8.24
+
+- Zahrnuje opravu nekonečného aktualizování XP z verze 50.8.23.
+- Nová samostatná záchranná stránka obnova.html pro případ zamrzlé úvodní obrazovky.
+- Záchranná stránka maže jen mezipaměť aplikace / Service Worker a nemaže localStorage.
+- Přidáno nové verzování a mezipaměť 50.8.24 pro čisté načtení opravených skriptů.
+- Zachována výuka podle měsíčních plánů Fulnek – září a listopad.
+- Zachováno skóre XP a body úspěchu na domovské stránce.

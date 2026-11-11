@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#183354">
+<title>Záchranná obnova – Školní dobrodružství</title>
+<style>
+:root{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0,#38478e 0,transparent 55%),linear-gradient(135deg,#09192d,#15294b);color:#f8f4e7;display:flex;justify-content:center;align-items:center;padding:20px}
+main{width:min(100%,580px);border:2px solid #e0be7a;border-radius:26px;background:#102745;padding:28px 24px;box-shadow:0 20px 50px #0008}
+h1{font-size:clamp(24px,6vw,32px);line-height:1.15;margin:0 0 12px;color:#ffdfa0}
+p{line-height:1.5}.detail{color:#cfddf6;font-size:.92rem}.notice{background:#263e62;border-radius:14px;padding:12px;margin:16px 0}
+button,a{display:block;text-decoration:none;text-align:center;width:100%;border-radius:15px;font:700 1.06rem system-ui;min-height:48px;padding:12px;cursor:pointer}
+button{border:0;background:#f8dc97;color:#162b46}button:disabled{opacity:.5;cursor:default}a{margin-top:12px;color:#f4e8cc;border:1px solid #8399bd;background:#1b3658}
+#status{white-space:pre-wrap;background:#07182d;color:#d5ebff;padding:12px;border-radius:12px;min-height:55px;font-size:.9rem;line-height:1.4}
+small{color:#cfddf6;display:block;margin-top:12px}
+</style>
+</head>
+<body>
+<main>
+<h1>Oprava spuštění aplikace</h1>
+<p>Pokud se Školní dobrodružství zastaví na 0 %, může za to stará uložená verze v mezipaměti prohlížeče.</p>
+<p class="notice"><strong>Bezpečné pro uložené výsledky:</strong> Toto tlačítko odstraní pouze dočasnou mezipaměť aplikace a její Service Worker. Nesmaže profily, PINy ani výsledky uložené v localStorage.</p>
+<button id="repair" type="button">Opravit načítání</button>
+<a href="./index.html">Otevřít aplikaci bez opravy</a>
+<p id="status" role="status" aria-live="polite">Připraveno k opravě.</p>
+<small>Po opravě se aplikace otevře znovu. Musíš být připojený k internetu, protože soubory se znovu stáhnou.</small>
+</main>
+<script>
+(()=>{'use strict';
+ const btn=document.getElementById('repair'),status=document.getElementById('status');
+ btn.addEventListener('click', async()=>{
+   btn.disabled=true;
+   status.textContent='Probíhá bezpečná obnova mezipaměti…';
+   const info=[];
+   try{
+     if('serviceWorker' in navigator){
+       const regs=await navigator.serviceWorker.getRegistrations();
+       let count=0;
+       for(const reg of regs){
+         if(new URL(reg.scope).pathname.startsWith(new URL('./',location.href).pathname)){
+           if(await reg.unregister())count++;
+         }
+       }
+       info.push('Service Worker: odregistrováno '+count);
+     }
+     if('caches' in window){
+       const keys=await caches.keys();
+       const our=keys.filter(k=>k.startsWith('skolni-dobrodruzstvi-')||k.startsWith('sd-lazy-assets-'));
+       const results=await Promise.all(our.map(k=>caches.delete(k)));
+       info.push('Mezipaměť: odstraněno '+results.filter(Boolean).length+' položek');
+     }
+     info.push('Osobní data: ponechána.');
+     status.textContent=info.join('\n')+'\nOtevírám opravenou aplikaci…';
+     setTimeout(()=>location.replace('./index.html?obnova=1&v=50824'),850);
+   }catch(err){
+     btn.disabled=false;
+     status.textContent=info.join('\n')+'\nObnova se nedokončila: '+(err?.message||String(err))+'\nZkus to znovu nebo otevři v Chromu.';
+   }
+ });
+})();
+</script>
+</body>
+</html>

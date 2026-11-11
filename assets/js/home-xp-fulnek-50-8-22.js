@@ -265,5 +265,5 @@ function boot(){
  installHooks();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();
-window.SDHomeXpFulnek50822=Object.freeze({refresh:updateHomeStats,seed:seedFulnek,version:'50.8.23'});
+window.SDHomeXpFulnek50822=Object.freeze({refresh:updateHomeStats,seed:seedFulnek,version:'50.8.24'});
 })();
