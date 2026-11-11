@@ -1,0 +1,9 @@
+Školní dobrodružství – verze 50.8.26
+
+Novinky a úpravy:
+- na hlavní stránce je nově kompaktní lišta se 2 tlačítky: Mapa dobrodružství a Měsíční plán
+- velký panel s XP a body byl schován pod ikonu mapy, aby byla domovská stránka volnější
+- přidána samostatná obrazovka Mapa dobrodružství s XP, body úspěchu, úspěšností, milníky a odznaky
+- mapa ukazuje také přehled výsledků podle jednotlivých předmětů
+- v měsíčním plánu se při zobrazení učiva odstraňují duplicitní témata
+- aktualizováno číslování verze na 50.8.26
