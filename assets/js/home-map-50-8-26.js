@@ -19,11 +19,11 @@ function jsonGet(key,fb){try{const v=JSON.parse(localStorage.getItem(key)||'null
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function norm(x){return String(x||'').toLocaleLowerCase('cs').normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
 function pct(n,d){return d?Math.round((n/d)*100):0}
-function activeId(){return safeGet(ACTIVE,'parent')||'parent'}
+function activeId(){if(document.body.classList.contains('parent-role'))return 'parent';if(document.body.classList.contains('child-role')){try{return sessionStorage.getItem('skolni-live-v441')||safeGet(ACTIVE,'parent')||'parent'}catch{}}return safeGet(ACTIVE,'parent')||'parent'}
 function profiles(){const p=jsonGet(PROFILES,{});return p&&typeof p==='object'?p:{}}
 function activeName(){const id=activeId();const p=profiles();return p[id]?.name||p.parent?.name||'zařízení'}
 
-function collectStats(){
+function collectStats(filter='all'){
  const by={};
  const ensure=sub=>by[sub]??={xp:0,points:0,correct:0,total:0,attempts:0};
  const add=(sub,correct,total,kind='practice')=>{
@@ -39,11 +39,11 @@ function collectStats(){
  const results=db?.results||{};
  for(const [k,arr] of Object.entries(results)){
   if(!k.startsWith(id+'|')||!Array.isArray(arr))continue;
-  const sub=k.split('|')[1];
+  const parts=k.split('|');const school=parts.length>=3?parts[1]:'legacy';const sub=parts.length>=3?parts[2]:parts[1];if(filter!=='all'&&school!==filter)continue;
   arr.forEach(r=>add(sub,r.score,r.total,r.kind||'practice'));
  }
  const name=activeName();
- try{
+ if(filter==='all')try{
   for(let i=0;i<localStorage.length;i++){
    const key=localStorage.key(i)||'';
    if(!key.startsWith(CURR_KEY_PREFIX+name+'_'))continue;
@@ -82,16 +82,18 @@ function ensureMapScreen(){
  root.id='sd826Map'; root.className='screen'; root.hidden=true;
  root.innerHTML='<div class="sd826-wrap"><header class="sd826-top"><button type="button" data-sd826="back">← Zpět</button><strong>🗺️ Mapa dobrodružství</strong><button type="button" data-sd826="home">⌂ Domů</button></header><main class="sd826-main"></main></div>';
  document.body.append(root);
+ root.addEventListener('change',e=>{if(e.target.id==='sd827MapFilter'){root.dataset.filter=e.target.value;renderMap()}});
  root.addEventListener('click',e=>{
   const btn=e.target.closest('[data-sd826]'); if(!btn)return;
-  if(btn.dataset.sd826==='back' || btn.dataset.sd826==='home') closeMap();
+  if(btn.dataset.sd826==='back' || btn.dataset.sd826==='home') (window.SDNavigation?.back?.() ?? closeMap());
  });
  return root;
 }
 function renderMap(){
  const root=ensureMapScreen();
  const main=root.querySelector('.sd826-main');
- const {by,total}=collectStats();
+ const choices=window.SDSchoolContext827?.assignedSchools?.()||[];const filter=(root.dataset.filter||'all');const filtered=filter==='all'||choices.some(s=>s.id===filter)?filter:'all';root.dataset.filter=filtered;
+ const {by,total}=collectStats(filtered);
  const name=activeName();
  const next=nextMilestone(total.xp);
  const lv=levelFor(total.xp);
@@ -108,10 +110,12 @@ function renderMap(){
    return `<li class="${state}"><span class="sd826-dot"></span><div><b>${label}</b><small>${m} XP</small></div></li>`;
  }).join('');
  const badges=total.badges.length ? total.badges.map(b=>`<span class="sd826-badge">${esc(b)}</span>`).join('') : '<span class="sd826-empty">Odznaky se začnou odemykat po prvních úkolech.</span>';
+ const chooser=choices.length?`<label class="sd827-map-filter">Zobrazit výsledky <select id="sd827MapFilter"><option value="all" ${filtered==='all'?'selected':''}>Všechny školy a starší výsledky</option>${choices.map(s=>`<option value="${esc(s.id)}" ${filtered===s.id?'selected':''}>${esc(s.city||s.name)}</option>`).join('')}</select></label>`:'';
  const note=activeId()==='parent'
   ? '<p class="sd826-note">Jsi v rodičovském profilu. Mapa ukazuje souhrnný rodičovský pohled. Nejzajímavější postup uvidíš po přepnutí do dětského profilu.</p>'
   : '<p class="sd826-note">XP získáváš za správné odpovědi, body úspěchu za splněná procvičování a testy. Mapa slouží jako přehled budoucího herního postupu.</p>';
  main.innerHTML=`
+  ${chooser}
   <section class="sd826-hero">
    <div class="sd826-hero-left">
     <h1>${esc(name)}</h1>
@@ -142,12 +146,14 @@ function openMap(){
  renderMap();
  const root=ensureMapScreen();
  root.hidden=false; root.classList.add('visible');
+ document.dispatchEvent(new Event('sd-route-change'));
  document.body.classList.add('sd826-map-open');
  window.scrollTo(0,0);
 }
 function closeMap(){
  const root=ensureMapScreen();
  root.hidden=true; root.classList.remove('visible');
+ document.dispatchEvent(new Event('sd-route-change'));
  document.body.classList.remove('sd826-map-open');
 }
 function patchHomePanel(){

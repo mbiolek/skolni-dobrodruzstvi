@@ -16,7 +16,7 @@ function jsonGet(key,fb){try{const v=JSON.parse(localStorage.getItem(key)||'null
 function jsonSet(key,val){return safeSet(key,JSON.stringify(val))}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function norm(x){return String(x||'').toLocaleLowerCase('cs').normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
-function activeId(){return safeGet(ACTIVE,'parent')||'parent'}
+function activeId(){if(document.body.classList.contains('parent-role'))return 'parent';if(document.body.classList.contains('child-role')){try{return sessionStorage.getItem('skolni-live-v441')||safeGet(ACTIVE,'parent')||'parent'}catch{}}return safeGet(ACTIVE,'parent')||'parent'}
 function profiles(){const p=jsonGet(PROFILES,{});return p&&typeof p==='object'?p:{}}
 function activeName(){const id=activeId();const p=profiles();return p[id]?.name||p.parent?.name||'zařízení'}
 
@@ -152,8 +152,8 @@ function seedFulnek(){
  const ps=profiles();
  for(const [id,p] of Object.entries(ps)){
   if(id==='parent')continue;
-  db.assignments[id]??=[];
-  if(!db.assignments[id].includes(FULNEK_ID))db.assignments[id].push(FULNEK_ID);
+  // Jen nový profil dostane výchozí školu. Nikdy nevracet školu, kterou rodič odebral.
+  if(!Array.isArray(db.assignments[id]))db.assignments[id]=[FULNEK_ID];
  }
  jsonSet(DBKEY,db);
  window.SDSchoolPlans52?.reloadDb?.();
@@ -178,7 +178,7 @@ function collectStats(){
  const results=db?.results||{};
  for(const [k,arr] of Object.entries(results)){
   if(!k.startsWith(id+'|')||!Array.isArray(arr))continue;
-  const sub=k.split('|')[1];
+  const parts=k.split('|');const sub=parts.length>=3?parts[2]:parts[1];
   arr.forEach(r=>add(sub,r.score,r.total,r.kind||'practice'));
  }
  const name=activeName();

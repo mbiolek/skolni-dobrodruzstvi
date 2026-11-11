@@ -17,6 +17,7 @@ let subject='math', applying=false, syncing=false, rebasing=false, lastRoute='';
 const authenticated=()=>!auth||auth.classList.contains('off');
 function state(skipDialogs=false){
  if(!skipDialogs&&document.body.classList.contains('sd54-admin-open'))return 'parentAdmin';
+ if(isVisible('sd826Map')&&$('sd826Map').classList.contains('visible'))return 'progressMap';
  if(!skipDialogs&&isVisible('sd55-modal'))return 'merlinHelp';
  // Angličtina má vlastní 2 úrovně (témata a lekce), nikoliv jen domovskou obrazovku.
  if(isVisible('enUnit499'))return 'englishUnit:'+(document.getElementById('enUnit499').dataset.level||'topics');
@@ -45,7 +46,7 @@ const subjectFor=(route)=>{
 function describe(){
  const route=state();
  if(route==='homeScreen')return {route,subject:'',depth:0};
- if(route==='parentAdmin')return {route,subject:'',depth:1};
+ if(route==='parentAdmin'||route==='progressMap')return {route,subject:'',depth:1};
  if(route==='subjectMenu('+subject+')'||route.startsWith('subjectMenu(')||route==='czechMenu'||route==='vlastScreen')return {route,subject:subjectFor(route),depth:1};
  if(route.startsWith('englishUnit:'))return {route,subject:'english',depth:route.endsWith(':lesson')?3:2};
  if(route==='mathTopics')return {route,subject:'math',depth:2};
@@ -83,6 +84,7 @@ function observeRoute(){
  if(lastRoute!==k){record('navigation',lastRoute+' -> '+k);lastRoute=k;}
 }
 function closeDialogs(){
+ if(document.body.classList.contains('sd826-map-open'))window.SDHomeMap50826?.close?.();
  if(isVisible('enUnit499'))window.SDEnglishUnit499?.close?.();
  if(isVisible('sd55-modal'))window.SDMerlin56?.close?.();
  if($('v24-avatar-dialog')?.classList.contains('open'))$('v24-avatar-close')?.click();
@@ -131,6 +133,7 @@ function backOne(source='button'){
  applying=true;
  try{
  if(route==='parentAdmin')document.body.classList.remove('sd54-admin-open');
+ else if(route==='progressMap')window.SDHomeMap50826?.close?.();
  else if(route==='merlinHelp')window.SDMerlin56?.close?.();
  else if(route.startsWith('englishUnit:'))window.SDEnglishUnit499?.back?.();
  else if(route==='avatarDialog')$('v24-avatar-close')?.click();

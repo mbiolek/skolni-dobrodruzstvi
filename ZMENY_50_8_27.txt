@@ -1,0 +1,17 @@
+Školní dobrodružství 50.8.27 – úprava rozhraní, škol a navigace
+
+• Samostatné tlačítko výběru avatara je skryto; avatar ve hráčské kartě otevírá jeho výběr.
+• Nad předměty je vodorovná fantasy karta Měsíční plán; Mapa dobrodružství je malá.
+• Při více přiřazených školách přibývá přepínač v profilu. Jediná škola se vybírá automaticky.
+• Měsíční plány, testy i výsledky školních testů jsou oddělené podle školy a profilu.
+• Rodič může ve Správě škol přiřazovat školy a zvolit výchozí školu pro dítě.
+• Olomouc používá jen skutečně zadané plány; chybějící plány se nepřevádějí z Fulneku.
+• Merlin předčítá měsíční Výuku bez otevření dialogu, který rozbíjel Android historii.
+• Zachována struktura návratu: Výuka → měsíc/předmět → výběr předmětů → výběr měsíců.
+• Zvýšen kontrast zadání násobilky a tlačítka vysvětlení.
+• Karta mapy nabízí celkové i školou filtrované XP a body.
+• Starší (před verzí 50.8.27) výsledky nejsou mazány; zobrazují se v souhrnu jako neurčená škola.
+
+POZNÁMKA: Samostatné moduly procvičování mimo měsíční plány zůstávají obecné.
+Výuka Olomouc vyžaduje, aby rodič doplnil tamní měsíční plány.
+• Merlin používá běžné tempo a přirozenou výšku hlasu bez zvukové modulace; odstraněno nastavení přednesu.
