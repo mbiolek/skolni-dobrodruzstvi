@@ -1,0 +1,57 @@
+/* 50.8.22 — přehled XP + sjednocení vzhledu úvodních karet. */
+#homeScreen .sd822-progress{
+ display:block; margin:10px 0 12px; padding:12px 12px 10px;
+ border-radius:24px; border:2px solid rgba(236,241,255,.72);
+ background:linear-gradient(180deg,rgba(17,40,77,.84),rgba(10,26,54,.88));
+ box-shadow:0 10px 20px rgba(0,0,0,.22); color:#fff7ea;
+}
+#homeScreen .sd822-head{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+#homeScreen .sd822-head strong{font-size:18px;line-height:1.15}
+#homeScreen .sd822-head small{font-size:12px;color:#d9e3ff}
+#homeScreen .sd822-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#homeScreen .sd822-stat{padding:10px 8px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,235,199,.28);text-align:center}
+#homeScreen .sd822-stat span{display:block;font-size:11px;color:#f1e7cf;line-height:1.15}
+#homeScreen .sd822-stat b{display:block;font-size:19px;line-height:1.15;margin-top:4px;color:#fff}
+#homeScreen .sd822-plan-btn{margin-top:10px;width:100%;border:none;border-radius:16px;padding:11px 12px;font:inherit;font-weight:800;background:linear-gradient(180deg,#fff8e9,#ead7a8);color:#173252;box-shadow:0 3px 0 rgba(81,59,18,.28);cursor:pointer}
+@media (max-width:420px){
+ #homeScreen .sd822-grid{gap:6px}
+ #homeScreen .sd822-stat{padding:8px 6px}
+ #homeScreen .sd822-stat b{font-size:17px}
+}
+
+/* Karty na úvodní stránce jako jeden celek bez odděleného tmavého pruhu pod názvem. */
+html body[data-card-style] #homeScreen .subject.sd821-card{
+ position:relative!important; aspect-ratio:1/1!important; overflow:hidden!important;
+ padding:0!important; border-radius:20px!important; isolation:isolate!important;
+}
+html body[data-card-style] #homeScreen .subject.sd821-card > .sd821-visual{
+ position:absolute!important; inset:0!important; width:100%!important; height:100%!important;
+ aspect-ratio:auto!important; border-radius:0!important; background:transparent!important; z-index:1!important;
+}
+html body[data-card-style] #homeScreen .subject.sd821-card > .sd821-visual > img{object-fit:cover!important}
+html body[data-card-style] #homeScreen .subject.sd821-card > .sd821-label{
+ position:absolute!important; left:8px!important; right:8px!important; bottom:42px!important; z-index:3!important;
+ min-height:0!important; padding:0!important; background:none!important; border:0!important;
+ color:#fff9ea!important; text-shadow:0 2px 4px rgba(0,0,0,.9),0 4px 10px rgba(0,0,0,.75)!important;
+ font-size:clamp(13px,3.25vw,18px)!important; line-height:1.08!important;
+}
+html body[data-card-style="parchment"] #homeScreen .subject.sd821-card > .sd821-label,
+html body[data-card-style="guild"] #homeScreen .subject.sd821-card > .sd821-label,
+html body[data-card-style="stone"] #homeScreen .subject.sd821-card > .sd821-label,
+html body[data-card-style="glass"] #homeScreen .subject.sd821-card > .sd821-label{
+ color:#fff9ea!important; text-shadow:0 2px 4px rgba(0,0,0,.92),0 4px 10px rgba(0,0,0,.78)!important;
+}
+html body[data-card-style] #homeScreen .subject.sd821-card > .v451-footer{
+ position:absolute!important; left:6px!important; right:6px!important; bottom:5px!important; z-index:4!important;
+ width:auto!important; min-height:0!important; padding:0!important; background:none!important;
+}
+html body[data-card-style] #homeScreen .subject.sd821-card > .v451-footer > span{
+ min-height:22px!important; padding:4px 6px!important; border-radius:999px!important;
+ background:rgba(9,21,43,.82)!important; border:1px solid rgba(232,190,111,.84)!important;
+ box-shadow:0 1px 4px rgba(0,0,0,.26)!important; font-size:clamp(10px,2.6vw,12px)!important;
+}
+@media (max-width:370px){
+ html body[data-card-style] #homeScreen .subject.sd821-card > .sd821-label{bottom:44px!important;font-size:12px!important}
+ html body[data-card-style] #homeScreen .subject.sd821-card > .v451-footer{left:4px!important;right:4px!important;bottom:4px!important}
+ html body[data-card-style] #homeScreen .subject.sd821-card > .v451-footer > span{padding:3px 4px!important;font-size:10px!important}
+}

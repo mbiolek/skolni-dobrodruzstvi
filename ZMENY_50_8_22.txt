@@ -1,0 +1,9 @@
+Školní dobrodružství 50.8.22
+
+- Na úvodní stránku přidán přehled: Celkem XP, Body úspěchu a Úspěšnost.
+- U každé hlavní karty předmětu se nyní zobrazují skutečné XP a body místo obecných popisků.
+- Domovské karty byly upraveny tak, aby název nenarušoval vzhled karty samostatným pruhem.
+- Přidán rychlý vstup „Fulnek – měsíční plán a školní učivo“.
+- Do měsíčních plánů byl předvyplněn profil školy ZŠ T. G. Masaryka Fulnek.
+- Doplněny měsíční plány pro 5. ročník: září a listopad (ČJ, matematika, vlastivěda).
+- K učivu byly rozšířeny kapitoly a otázky, aby šlo témata z měsíčních plánů opravdu procvičovat.
