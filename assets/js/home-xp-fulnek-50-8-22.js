@@ -135,7 +135,8 @@ function mergeTopics(){
 
 function seedFulnek(){
  const db=jsonGet(DBKEY,{schools:[],assignments:{},plans:{},results:{}});
- db.schools??=[];db.assignments??={};db.plans??={};db.results??={};
+ db.schools??=[];db.assignments??={};db.plans??={};db.results??={};db.archivedSchools??={};
+ if(db.archivedSchools[FULNEK_ID])return; // Výslovně archivovanou školu již nikdy automaticky neobnovovat.
  let school=db.schools.find(s=>s.id===FULNEK_ID);
  if(!school){
   school={id:FULNEK_ID,name:schoolName,city:'Fulnek',grade:'5. třída'};

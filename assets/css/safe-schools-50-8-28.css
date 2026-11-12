@@ -1,0 +1,23 @@
+/* 50.8.28 – škola je vždy jasně identifikována, bezpečná archivace a jediný obrázek na kartě. */
+#sd52 .sd828-school-list{display:grid;grid-template-columns:1fr;gap:12px;margin:16px 0 24px}
+#sd52 .sd828-school-item{padding:16px;border:2px solid #b9cfe2;border-radius:20px;background:#f9fcff;color:#173550;box-shadow:0 4px 8px #061d331f}
+#sd52 .sd828-school-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start}
+#sd52 .sd828-school-top strong{font-size:20px;overflow-wrap:anywhere}
+#sd52 .sd828-school-item p{font-size:15px;margin:8px 0;line-height:1.4}
+#sd52 .sd828-school-item small{display:block;font-size:12px;color:#395773;line-height:1.35}
+#sd52 .sd828-school-duplicate{font-size:12px;font-weight:800;background:#fff1cc;color:#66440b;border:1px solid #d2a13d;border-radius:999px;padding:5px 9px}
+#sd52 .sd828-school-edit{width:100%;min-height:50px;margin-top:10px;padding:11px 13px;border:2px solid #295782;border-radius:13px;background:#dceafa;color:#153657;font-weight:850}
+#sd52 .sd828-archive-box{border:2px solid #c09a72}
+#sd52 button.sd828-archive-button{display:block;width:100%;padding:12px;margin:10px 0;border:2px solid #a36532;border-radius:14px;background:#fff0dc;color:#6f2d15;font-weight:850}
+#sd52 .sd828-archived{display:grid;gap:6px;margin:9px 0;padding:12px;border:1px solid #bbd1e1;border-radius:12px;background:#f2f8ff}
+#sd52 .sd828-archived small{color:#537084}
+#sd52 .sd828-archived button{min-height:40px;border-radius:10px;border:1px solid #316b53;background:#e1ffef;color:#14503a;font-weight:800}
+#sd52 .sd52-person .sd52-check{display:flex;align-items:flex-start;gap:8px;line-height:1.35}
+#sd52 .sd52-person .sd52-check span{flex:1}
+#sd52 .sd52-person .sd52-check small{font-size:11px}
+#sd52 .sd52-person select{max-width:100%;white-space:normal}
+@media(min-width:670px){#sd52 .sd828-school-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Older topic badges are not allowed to cover the complete illustration. */
+html body button.sd84-exact-card > .sd87-topic-medallion{display:none!important}
+/* Keep the school management overlay full-viewport even as the Android browser animates Back. */
+html body #sd52:not([hidden]){isolation:isolate;contain:paint;touch-action:pan-y}

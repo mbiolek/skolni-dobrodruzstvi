@@ -3,9 +3,9 @@
 const SUBJECTS={math:'Matematika',czech:'Český jazyk',english:'Angličtina',nature:'Přírodověda',geography:'Vlastivěda'};
 const MONTHS=['Září','Říjen','Listopad','Prosinec','Leden','Únor','Březen','Duben','Květen','Červen'];
 const DBKEY='sd52_schools_plans_v1', ACTIVE='matematika-karticky-progress-v3-active',PROFILES='matematika-karticky-progress-v3-profiles';
-const state={screen:'',subject:'math',school:null,month:0,selected:[],quiz:[],pos:0,correct:0,answers:[],settings:{count:10},origin:''};
+const state={screen:'',subject:'math',school:null,month:0,selected:[],quiz:[],pos:0,correct:0,answers:[],settings:{count:10},origin:'',manageParent:false};
 let db;try{db=JSON.parse(localStorage.getItem(DBKEY)||'{}')}catch{db={}};
-if(!db||typeof db!=='object')db={};db.schools??=[];db.assignments??={};db.plans??={};db.results??={};
+if(!db||typeof db!=='object')db={};db.schools??=[];db.assignments??={};db.plans??={};db.results??={};db.archivedSchools??={};
 const save=()=>localStorage.setItem(DBKEY,JSON.stringify(db));
 const active=()=>document.body.classList.contains('parent-role')?'parent':(document.body.classList.contains('child-role')?(sessionStorage.getItem('skolni-live-v441')||localStorage.getItem(ACTIVE)||'parent'):(localStorage.getItem(ACTIVE)||'parent'));
 const isParent=()=>active()==='parent';
@@ -21,7 +21,7 @@ const card=(label,action,detail='',attr='')=>window.SDUICards.html({title:label,
 const grid=items=>window.SDUICards.grid(items,'sd52-grid');
 const planKey=(school,sub,month)=>`${school}|${sub}|${month}`;
 function reloadDb(){try{const data=JSON.parse(localStorage.getItem(DBKEY)||'{}');if(data&&typeof data==='object'){
-  db=data;db.schools??=[];db.assignments??={};db.plans??={};db.results??={};
+  db=data;db.schools??=[];db.assignments??={};db.plans??={};db.results??={};db.archivedSchools??={};
  }}catch(e){console.warn('Měsíční plány: synchronizace',e)}}
 const selectedSchool=()=>window.SDSchoolContext827?.activeSchoolId?.()||null;
 const schoolName=()=>{const v=chosenSchool();return v?.city||v?.name||'Nepřiřazená škola'};
@@ -47,8 +47,58 @@ function months(){state.screen='months';const s=chosenSchool();show('Měsíční
 function month(i){state.month=i;state.screen='month';const p=uniq(db.plans[planKey(state.school,state.subject,i)]||[]);show(MONTHS[i],`<h1>${esc(MONTHS[i])} · ${esc(title())}</h1><p>${esc(chosenSchool()?.city||'')}</p>${p.length?`<div class="sd52-panel"><h2>Učivo měsíce</h2>${p.map(t=>`<p>• ${esc(t)}</p>`).join('')}</div>`:'<p>Rodič pro tento měsíc zatím nepřidal témata.</p>'}${p.length?grid([card('Výuka','month-learning','Vysvětlení vybraných témat'),card('Procvičování','month-practice','Otázky bez opakování'),card('Závěrečný test','month-test','Vyhodnocení znalostí')]):''}`)}
 function repeat(){state.screen='repeat';state.selected=[];show('Opakování měsíců',`<h1>Opakování · ${esc(title())}</h1><p>Označ měsíce, které chceš společně zopakovat.</p><div class="sd52-panel">${MONTHS.map((m,i)=>{let n=(db.plans[planKey(state.school,state.subject,i)]||[]).length;return `<label class="sd52-check"><input type="checkbox" data-month="${i}" ${n?'':'disabled'}> ${esc(m)} <small>${n?`(${n} témat)`:'bez plánu'}</small></label>`}).join('')}</div>`+grid([card('Spustit procvičování','repeat-practice'),card('Závěrečný test','repeat-test')]))}
 function settings(){state.screen='settings';show('Nastavení',`<h1>Nastavení · ${esc(title())}</h1><div class="sd52-panel"><label>Počet otázek <select id="sd52count">${[5,10,15,20,30].map(n=>`<option value="${n}" ${state.settings.count===n?'selected':''}>${n}</option>`).join('')}</select></label><p>Otázky se v jednom testu neopakují. Pokud je v databázi méně různých otázek, test bude kratší.</p></div>${card('Uložit nastavení','save-settings')}`)}
-function schoolManage(){if(!isParent()){show('Rodičovský režim','<h1>Správa je dostupná pouze rodiči</h1>');return}state.screen='manage';const ps=profiles();show('Správa škol',`<h1>Správa škol a měsíčních plánů</h1><p>Školy se zobrazují pouze dětem, kterým je přiřadíš.</p><div class="sd52-panel"><h2>Přidat školu</h2><form id="sd52add"><label>Název školy<input name="name" required placeholder="ZŠ ..."></label><label>Město<input name="city" required placeholder="Fulnek"></label><label>Třída<input name="grade" placeholder="5.B"></label><button type="submit">Přidat školu</button></form></div><h2>Moje školy</h2>`+grid(db.schools.map(s=>card(s.city||s.name,'edit-school',`${s.name} · ${s.grade||''}`,`data-id="${esc(s.id)}"`)))+`<div class="sd52-panel"><h2>Přiřazení škol dětem</h2>${Object.entries(ps).filter(([id])=>id!=='parent').map(([id,p])=>`<div class="sd52-person"><strong>${esc(p.name||id)}</strong>${db.schools.map(s=>`<label class="sd52-check"><input type="checkbox" data-assign="${esc(id)}" data-school="${esc(s.id)}" ${(db.assignments[id]||[]).includes(s.id)?'checked':''}> ${esc(s.city||s.name)} – ${esc(s.name)}</label>`).join('')}<label class="sd52-default-label">Výchozí škola <select data-default-profile="${esc(id)}">${(db.assignments[id]||[]).map(sid=>db.schools.find(s=>s.id===sid)).filter(Boolean).map(s=>`<option value="${esc(s.id)}" ${window.SDSchoolContext827?.defaultSchoolId?.(id)===s.id?'selected':''}>${esc(s.city||s.name)}</option>`).join('')}</select></label></div>`).join('')||'<p>Nejdříve vytvoř dětský profil.</p>'}</div>`)}
-function editSchool(id){state.school=id;state.screen='edit-school';const s=chosenSchool();show('Úprava školy',`<h1>${esc(s?.name)}</h1><p>${esc(s?.city)} · ${esc(s?.grade)}</p><h2>Vyber předmět a měsíc</h2><label>Předmět<select id="sd52sub">${Object.entries(SUBJECTS).map(([k,v])=>`<option value="${k}" ${state.subject===k?'selected':''}>${esc(v)}</option>`).join('')}</select></label><label>Měsíc<select id="sd52month">${MONTHS.map((m,i)=>`<option value="${i}">${m}</option>`).join('')}</select></label>${card('Upravit měsíční plán','edit-plan')}${card('Odstranit školu','delete-school','S potvrzením')}`)}
+function schoolStats(id){
+ const plans=Object.entries(db.plans||{}).filter(([key,topics])=>key.startsWith(id+'|')&&Array.isArray(topics)&&topics.length);
+ const topics=plans.reduce((n,[,x])=>n+x.length,0);
+ const people=Object.entries(db.assignments||{}).filter(([,ids])=>Array.isArray(ids)&&ids.includes(id)).map(([pid])=>pid);
+ const results=Object.entries(db.results||{}).filter(([key])=>key.includes('|'+id+'|')).reduce((n,[,a])=>n+(Array.isArray(a)?a.length:0),0);
+ return {plans:plans.length,topics,people,results};
+}
+const schoolTag=s=>s.id==='zstgm_fulnek_5_2026'?'Přednastavené učivo Fulnek':'Ručně přidaný záznam';
+const schoolLabel=s=>`${s.city||''} · ${s.name} · ${s.grade||'bez třídy'}`;
+const schoolShortId=s=>s.id==='zstgm_fulnek_5_2026'?'Přednastavený záznam':`Záznam ${String(s.id).slice(-6)}`;
+function schoolTile(s){const st=schoolStats(s.id),dupe=db.schools.some(other=>other.id!==s.id&&norm(other.city)===norm(s.city));
+ return `<article class="sd828-school-item"><div class="sd828-school-top"><strong>${esc(s.name)}</strong>${dupe?'<span class="sd828-school-duplicate">Stejné město jako další škola</span>':''}</div>
+ <p><b>Město:</b> ${esc(s.city||'neuvedeno')} · <b>Třída:</b> ${esc(s.grade||'neuvedena')}</p>
+ <small>${esc(schoolTag(s))} · ${esc(schoolShortId(s))}</small>
+ <p>${st.plans} měsíčních plánů, ${st.topics} témat · ${st.people.length} přiřazených profilů · ${st.results} záznamů výsledků</p>
+ <button class="sd828-school-edit" type="button" data-act="edit-school" data-id="${esc(s.id)}">Spravovat tuto konkrétní školu</button></article>`;
+}
+function schoolManage(fromParent){if(!isParent()){show('Rodičovský režim','<h1>Správa je dostupná pouze rodiči</h1>');return}
+ if(fromParent===true)state.manageParent=true;
+ if(fromParent===false)state.manageParent=false;
+ reloadDb();state.screen='manage';const ps=profiles();const archived=Object.values(db.archivedSchools||{});
+ show('Správa škol',`<h1>Správa škol a měsíčních plánů</h1><p>Každá škola je samostatný záznam. Dva záznamy „Fulnek“ <b>neznamenají stejné uložené plány</b>; podle počtu témat a původu poznáš, který používáš.</p>
+ <div class="sd52-panel"><h2>Přidat školu</h2><form id="sd52add"><label>Název školy<input name="name" required placeholder="ZŠ ..."></label><label>Město<input name="city" required placeholder="Fulnek"></label><label>Třída<input name="grade" placeholder="5.B"></label><button type="submit">Přidat školu</button></form></div>
+ <h2>Moje školy (${db.schools.length})</h2><div class="sd828-school-list">${db.schools.map(schoolTile).join('')||'<p>Zatím žádná škola.</p>'}</div>
+ <div class="sd52-panel"><h2>Přiřazení škol dětem</h2>${Object.entries(ps).filter(([id])=>id!=='parent').map(([id,p])=>`<div class="sd52-person"><strong>${esc(p.name||id)}</strong>${db.schools.map(s=>`<label class="sd52-check"><input type="checkbox" data-assign="${esc(id)}" data-school="${esc(s.id)}" ${(db.assignments[id]||[]).includes(s.id)?'checked':''}> <span>${esc(s.city||s.name)} – ${esc(s.name)} <small>(${esc(schoolShortId(s))})</small></span></label>`).join('')}<label class="sd52-default-label">Výchozí škola <select data-default-profile="${esc(id)}">${(db.assignments[id]||[]).map(sid=>db.schools.find(s=>s.id===sid)).filter(Boolean).map(s=>`<option value="${esc(s.id)}" ${window.SDSchoolContext827?.defaultSchoolId?.(id)===s.id?'selected':''}>${esc(s.city||s.name)} – ${esc(schoolShortId(s))}</option>`).join('')}</select></label></div>`).join('')||'<p>Nejdříve vytvoř dětský profil.</p>'}</div>
+ ${archived.length?`<div class="sd52-panel"><h2>Archivované školy (${archived.length})</h2><p>Archivace nic nevymaže: učivo a výsledky zůstávají uložené a školu lze obnovit.</p>${archived.map(record=>`<div class="sd828-archived"><b>${esc(schoolLabel(record.school))}</b><small>${esc(schoolShortId(record.school))}</small><button type="button" data-act="restore-school" data-id="${esc(record.school.id)}">Obnovit školu</button></div>`).join('')}</div>`:''}`);
+}
+function editSchool(id){reloadDb();state.school=id;state.screen='edit-school';const s=chosenSchool();if(!s)return schoolManage();
+ const st=schoolStats(id);
+ show('Úprava školy',`<h1>${esc(s.name)}</h1><div class="sd52-panel"><p><b>Město:</b> ${esc(s.city||'neuvedeno')} · <b>Třída:</b> ${esc(s.grade||'neuvedena')}</p><p><b>${esc(schoolTag(s))}</b> · ${esc(schoolShortId(s))}</p><p>${st.plans} uložených měsíčních plánů, ${st.topics} témat, ${st.results} záznamů výsledků</p></div>
+ <h2>Upravovat učivo této školy</h2><label>Předmět<select id="sd52sub">${Object.entries(SUBJECTS).map(([k,v])=>`<option value="${k}" ${state.subject===k?'selected':''}>${esc(v)}</option>`).join('')}</select></label><label>Měsíc<select id="sd52month">${MONTHS.map((m,i)=>`<option value="${i}">${m}</option>`).join('')}</select></label>${card('Upravit měsíční plán','edit-plan')}
+ <div class="sd52-panel sd828-archive-box"><h2>Archivovat pouze tuto školu</h2><p>Pokud máš Fulnek dvakrát, ověř si, zda je to přednastavená škola, nebo tvůj ruční záznam. Archivace pouze <b>skryje vybraný záznam</b>; nesmaže učivo ani výsledky.</p><button type="button" data-act="prepare-archive" class="sd828-archive-button">Zkontrolovat archivaci této školy</button></div>`);
+}
+function prepareArchive(){state.screen='confirm-archive';const s=chosenSchool();if(!s)return schoolManage();const st=schoolStats(s.id);
+ show('Bezpečná archivace',`<h1>Opravdu archivovat tuto školu?</h1><div class="sd52-panel"><h2>${esc(s.name)}</h2><p>${esc(s.city||'')} · ${esc(s.grade||'')} · <strong>${esc(schoolTag(s))}</strong></p><p>${st.plans} měsíčních plánů a ${st.topics} témat; ${st.people.length} přiřazených profilů.</p><p><strong>Ostatní školy zůstanou beze změny.</strong> Všechna témata a výsledky tohoto záznamu zůstanou v databázi a lze ho později obnovit.</p><label>Pro potvrzení opiš slovo ARCHIVOVAT<input id="sd828-archive-confirm" autocomplete="off" placeholder="ARCHIVOVAT"></label><button type="button" data-act="archive-school" class="sd828-archive-button">Archivovat tento konkrétní záznam</button><button type="button" data-act="cancel-archive">Zrušit a vrátit se</button></div>`);
+}
+function archiveSchool(){const input=document.getElementById('sd828-archive-confirm');if((input?.value||'').trim().toUpperCase()!=='ARCHIVOVAT'){input?.focus();return}
+ const s=chosenSchool();if(!s)return schoolManage();const people=schoolStats(s.id).people;
+ db.archivedSchools??={};db.archivedSchools[s.id]={school:{...s},assignedTo:people,archivedAt:new Date().toISOString()};
+ db.schools=db.schools.filter(x=>x.id!==s.id);
+ for(const pid of people){db.assignments[pid]=(db.assignments[pid]||[]).filter(sid=>sid!==s.id);
+  for(const prefix of ['sd827_default_school_','sd827_active_school_'])try{if(localStorage.getItem(prefix+pid)===s.id)localStorage.removeItem(prefix+pid)}catch{}}
+ try{save()}catch(e){db.schools.push(s);delete db.archivedSchools[s.id];for(const pid of people){db.assignments[pid]??=[];if(!db.assignments[pid].includes(s.id))db.assignments[pid].push(s.id)}alert('Archivaci se nepodařilo bezpečně uložit. Škola zůstává aktivní.');return}
+ state.school=null;window.SDSchoolContext827?.refresh?.();schoolManage();
+}
+function restoreSchool(id){const item=db.archivedSchools?.[id];if(!item)return;
+ if(!confirm(`Obnovit školu ${item.school.name} (${item.school.city||''})?`))return;
+ db.schools.push(item.school);
+ for(const pid of item.assignedTo||[])if(profiles()[pid]){db.assignments[pid]??=[];if(!db.assignments[pid].includes(id))db.assignments[pid].push(id)}
+ delete db.archivedSchools[id];try{save()}catch(e){alert('Obnovení se nepodařilo uložit.');return}
+ window.SDSchoolContext827?.refresh?.();schoolManage();
+}
 function editPlan(){state.subject=document.getElementById('sd52sub').value;state.month=Number(document.getElementById('sd52month').value);state.screen='edit-plan';const key=planKey(state.school,state.subject,state.month);const topics=db.plans[key]||[];show('Úprava měsíčního plánu',`<h1>${esc(MONTHS[state.month])} · ${esc(title())}</h1><p>Jedno téma na každý řádek. Můžeš zadat názvy kapitol, slovíček nebo gramatiky.</p><textarea id="sd52plan" rows="11" placeholder="Např. a/an&#10;čísla&#10;there is / there are">${esc(topics.join('\n'))}</textarea>${card('Uložit plán','save-plan')}`)}
 const ALIASES={english:{'a/an':['a/an','člen','article'],'numbers':['čísla','cisla','numbers','number'],'time':['čas','hodiny','time','clock'],'there is':['there is','there are','there'],'family':['rodina','family'],'days':['dny','days'],'months':['měsíce','months']}};
 function catalog(){const sub=state.subject;const data=window.SDCurriculum501?.data;const topics=data?.[sub]?.topics||[];return topics.map((t,i)=>({id:`${sub}:${i}`,name:t[0],info:t[1],q:t[2],correct:t[3],choices:t.slice(3,7),search:norm(t[0]+' '+t[1])}));}
@@ -59,16 +109,16 @@ function selectedTopics(){return catalog().filter(t=>state.selected.includes(t.i
 function learning(topics,back){state.origin=(back==='month'&&state.origin==='overview')?'overview':back;state.screen='learning';show('Výuka',`<h1>Výuka · ${esc(title())}</h1>${topics.length?topics.map(t=>`<article class="sd52-panel"><h2>${esc(t.name)}</h2><p>${esc(t.info)}</p></article>`).join(''):'<p>Pro vybraná témata zatím nejsou k dispozici výkladové materiály.</p>'}`)}
 function quiz(topics,kind){const unique=new Map();topics.forEach(t=>{if(t.q&&t.choices.length===4&&t.choices.some(c=>String(c)===String(t.correct)))unique.set(norm(t.q),t)});const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};state.quiz=shuffle([...unique.values()]).slice(0,state.settings.count).map(t=>({...t,choices:shuffle([...t.choices])}));state.pos=0;state.correct=0;state.answers=[];state.kind=kind;state.screen='quiz';if(!state.quiz.length){state.screen='no-questions';show('Chybějící otázky','<h1>Pro vybraná témata zatím nejsou připravené ověřené otázky.</h1><p>Zkus jiná témata. Test nebude opakovat stejné otázky ani vytvářet náhodné nesmyslné odpovědi.</p>'+card('Zpět k předmětu','subject'));return}drawQuiz()}
 function drawQuiz(){if(state.pos>=state.quiz.length){const k=`${active()}|${state.school||'general'}|${state.subject}`;db.results[k]??=[];db.results[k].push({date:new Date().toISOString(),kind:state.kind,score:state.correct,total:state.quiz.length});db.results[k]=db.results[k].slice(-40);save();state.screen='finished';show('Výsledky',`<h1>Výsledek: ${state.correct}/${state.quiz.length}</h1><p>Výsledek je uložený k dětskému profilu.</p>${state.answers.filter(a=>!a.ok).map(a=>`<article class="sd52-panel"><strong>${esc(a.q)}</strong><p>Správně: ${esc(a.correct)}</p></article>`).join('')||'<p>Všechny odpovědi správně.</p>'}${card('Zpět k předmětu','subject')}`);return}const q=state.quiz[state.pos];show(state.kind==='test'?'Závěrečný test':'Procvičování',`<h1>${esc(q.name)}</h1><p>Otázka ${state.pos+1} z ${state.quiz.length}</p><div class="sd52-panel"><h2>${esc(q.q)}</h2>${q.choices.map((v,i)=>`<button class="sd52-choice" data-act="answer" data-choice="${i}">${esc(v)}</button>`).join('')}<div id="sd52feedback"></div></div>`)}
-function runTopics(terms,kind){const topics=catalog().filter(t=>terms.some(w=>matchTopic(t,w)));if(kind==='learning')learning(topics,'subject');else quiz(topics,kind)}
-function runMonth(kind){const bank=String(chosenSchool()?.city||'').toLowerCase()==='fulnek'?(window.SDFulnekBank825?.[state.subject]?.[state.month]||[]):[];
+function runTopics(terms,kind,back='subject'){const topics=catalog().filter(t=>terms.some(w=>matchTopic(t,w)));if(kind==='learning')learning(topics,back);else quiz(topics,kind)}
+function runMonth(kind){const bank=state.school==='zstgm_fulnek_5_2026'?(window.SDFulnekBank825?.[state.subject]?.[state.month]||[]):[];
  if(bank.length){const questions=bank.map(t=>({name:t[0],info:t[1],q:t[2],correct:t[3],choices:t.slice(3,7)}));
   if(kind==='learning')learning(questions,'month');else quiz(questions,kind);
- }else runTopics(currentMonthTerms(),kind)
+ }else runTopics(currentMonthTerms(),kind,'month')
 }
-function runRepeat(kind){const banks=String(chosenSchool()?.city||'').toLowerCase()==='fulnek'?state.selected.flatMap(m=>window.SDFulnekBank825?.[state.subject]?.[m]||[]):[];
+function runRepeat(kind){const banks=state.school==='zstgm_fulnek_5_2026'?state.selected.flatMap(m=>window.SDFulnekBank825?.[state.subject]?.[m]||[]):[];
  if(banks.length){const questions=banks.map(t=>({name:t[0],info:t[1],q:t[2],correct:t[3],choices:t.slice(3,7)}));
   if(kind==='learning')learning(questions,'repeat');else quiz(questions,kind)
- }else runTopics(repeatTerms(),kind)
+ }else runTopics(repeatTerms(),kind,'repeat')
 }
 
 function currentMonthTerms(){return uniq(db.plans[planKey(state.school,state.subject,state.month)]||[])}
@@ -78,7 +128,9 @@ function handle(act,b){if(act==='home'){hide();return}if(act==='back'){
  if(state.screen==='overview-subjects'){overview();return}
  if(state.origin==='overview'&&state.screen==='month'){overviewSubjects(state.month);return}
  if(state.origin==='overview'&&['learning','quiz','finished','no-questions'].includes(state.screen)){month(state.month);return}
- if(state.screen==='manage'||state.screen==='subject'){hide()}
+ if(state.screen==='manage'){hide();if(state.manageParent)document.body.classList.add('sd54-admin-open')}
+ else if(state.screen==='confirm-archive')editSchool(state.school);
+ else if(state.screen==='subject'){hide()}
  else if(['month','repeat'].includes(state.screen))months();
  else if(state.screen==='edit-plan')editSchool(state.school);
  else if(state.screen==='edit-school')schoolManage();
@@ -87,11 +139,11 @@ function handle(act,b){if(act==='home'){hide();return}if(act==='back'){
 if(act==='overview-month')return overviewSubjects(Number(b.dataset.index));
 if(act==='overview-subject'){state.subject=b.dataset.subject;state.origin='overview';return month(state.month)}
 if(act==='subject')return subjectMenu(state.subject);
-if(act==='manage')return schoolManage();if(act==='choose-school'){state.school=b.dataset.id;return state.origin==='repeat'?repeat():months()}
+if(act==='manage')return schoolManage(false);if(act==='choose-school'){state.school=b.dataset.id;return state.origin==='repeat'?repeat():months()}
 if(act==='school-select')return schoolSelect('months');if(act==='repeat-select')return schoolSelect('repeat');if(act==='month')return month(Number(b.dataset.index));if(act==='repeat')return repeat();if(act==='settings')return settings();if(act==='search')return search();if(act==='find')return find();
 if(act==='save-settings'){state.settings.count=Number(document.getElementById('sd52count').value);return subjectMenu(state.subject)}
-if(act==='edit-school')return editSchool(b.dataset.id);if(act==='edit-plan')return editPlan();if(act==='save-plan'){db.plans[planKey(state.school,state.subject,state.month)]=uniq(document.getElementById('sd52plan').value.split('\n').map(s=>s.trim()).filter(Boolean));save();return editSchool(state.school)}
-if(act==='delete-school'){if(!confirm('Opravdu odstranit tuto školu a její plány?'))return;db.schools=db.schools.filter(s=>s.id!==state.school);Object.keys(db.assignments).forEach(k=>db.assignments[k]=db.assignments[k].filter(x=>x!==state.school));Object.keys(db.plans).filter(k=>k.startsWith(state.school+'|')).forEach(k=>delete db.plans[k]);save();return schoolManage()}
+if(act==='edit-school')return editSchool(b.dataset.id);if(act==='prepare-archive')return prepareArchive();if(act==='cancel-archive')return editSchool(state.school);if(act==='archive-school')return archiveSchool();if(act==='restore-school')return restoreSchool(b.dataset.id);if(act==='edit-plan')return editPlan();if(act==='save-plan'){db.plans[planKey(state.school,state.subject,state.month)]=uniq(document.getElementById('sd52plan').value.split('\n').map(s=>s.trim()).filter(Boolean));save();return editSchool(state.school)}
+// Odstraňování je nahrazeno bezpečnou archivací, která ponechává učivo i výsledky.
 if(act==='curriculum'){hide();if(window.SDCurriculum501?.topics)window.SDCurriculum501.topics(state.subject,'schoolPlans');return}
 if(act==='month-learning')return runMonth('learning');if(act==='month-practice')return runMonth('practice');if(act==='month-test')return runMonth('test');
 if(act==='repeat-practice'||act==='repeat-test'){state.selected=[...root.querySelectorAll('[data-month]:checked')].map(e=>Number(e.dataset.month));return runRepeat(act==='repeat-test'?'test':'practice')}
@@ -101,8 +153,11 @@ if(act==='answer'){if(b.disabled)return;const q=state.quiz[state.pos],choice=q.c
 if(act==='next'){state.pos++;return drawQuiz()}}
 root.addEventListener('click',e=>{const b=e.target.closest('button[data-act]');if(b)handle(b.dataset.act,b)});
 root.addEventListener('change',e=>{const t=e.target;if(t.matches('[data-assign]')){const id=t.dataset.assign,s=t.dataset.school;db.assignments[id]??=[];db.assignments[id]=t.checked?uniq([...db.assignments[id],s]):db.assignments[id].filter(x=>x!==s);save();window.SDSchoolContext827?.refresh?.();schoolManage()}if(t.matches('[data-default-profile]')){window.SDSchoolContext827?.setDefault?.(t.dataset.defaultProfile,t.value)}});
-root.addEventListener('submit',e=>{if(e.target.id!=='sd52add')return;e.preventDefault();const f=new FormData(e.target);db.schools.push({id:'school_'+Date.now()+'_'+Math.floor(Math.random()*10000),name:String(f.get('name')).trim(),city:String(f.get('city')).trim(),grade:String(f.get('grade')).trim()});save();schoolManage()});
-function install(){for(const [id,screen] of [['math','mathScreen'],['czech','czechScreen'],['english','englishScreen']]){const el=document.getElementById(screen);if(!el)continue;const b=document.createElement('button');b.className='sd52-launch';b.textContent='📅 Výuka · Měsíční plán · Školní test · Nastavení';b.onclick=()=>subjectMenu(id);el.prepend(b)}const home=document.getElementById('homeScreen');if(home){const admin=document.getElementById('authAdmin');if(admin){const b=document.createElement('button');b.type='button';b.className='sd54-schools-btn';b.textContent='🏫 Správa škol a měsíčních plánů';b.onclick=()=>{document.body.classList.remove('sd54-admin-open');schoolManage()};admin.insertBefore(b,admin.firstChild.nextSibling)}}if(home){for(const [cls,id] of [['nature','nature'],['history','geography']]){const tile=home.querySelector('.v23-extra.'+cls);if(tile){tile.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();subjectMenu(id)},true)}}}const old=home?.querySelector('.sd-launch');if(old)old.style.display='none';const badge=document.createElement('div');badge.className='sd52-version';badge.textContent='Školní dobrodružství · 50.4.1';badge.style.display='none';document.body.append(badge)}
+root.addEventListener('submit',e=>{if(e.target.id!=='sd52add')return;e.preventDefault();const f=new FormData(e.target);const name=String(f.get('name')).trim(),city=String(f.get('city')).trim(),grade=String(f.get('grade')).trim();
+ if(db.schools.some(s=>norm(s.name)===norm(name)&&norm(s.city)===norm(city))){alert('Stejná škola už v seznamu existuje. Otevři její kartu ve Správě škol.');return}
+ if(db.schools.some(s=>norm(s.city)===norm(city))&&!confirm('V tomto městě už je škola. Opravdu chceš přidat další samostatný záznam?'))return;
+ db.schools.push({id:'school_'+Date.now()+'_'+Math.floor(Math.random()*10000),name,city,grade});save();schoolManage()});
+function install(){for(const [id,screen] of [['math','mathScreen'],['czech','czechScreen'],['english','englishScreen']]){const el=document.getElementById(screen);if(!el)continue;const b=document.createElement('button');b.className='sd52-launch';b.textContent='📅 Výuka · Měsíční plán · Školní test · Nastavení';b.onclick=()=>subjectMenu(id);el.prepend(b)}const home=document.getElementById('homeScreen');if(home){const admin=document.getElementById('authAdmin');if(admin){const b=document.createElement('button');b.type='button';b.className='sd54-schools-btn';b.textContent='🏫 Správa škol a měsíčních plánů';b.onclick=()=>{document.body.classList.remove('sd54-admin-open');schoolManage(true)};admin.insertBefore(b,admin.firstChild.nextSibling)}}if(home){for(const [cls,id] of [['nature','nature'],['history','geography']]){const tile=home.querySelector('.v23-extra.'+cls);if(tile){tile.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();subjectMenu(id)},true)}}}const old=home?.querySelector('.sd-launch');if(old)old.style.display='none';const badge=document.createElement('div');badge.className='sd52-version';badge.textContent='Školní dobrodružství · 50.4.1';badge.style.display='none';document.body.append(badge)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
-window.SDSchoolPlans52={open:subjectMenu,openOverview,manage:schoolManage,reloadDb,close:hide,back:()=>handle('back'),current:()=>({screen:state.screen,subject:state.subject,origin:state.origin})};
+window.SDSchoolPlans52={open:subjectMenu,openOverview,manage:schoolManage,reloadDb,close:hide,back:()=>handle('back'),current:()=>({screen:state.screen,subject:(['overview-months','overview-subjects'].includes(state.screen)?'school':(['manage','edit-school','edit-plan','confirm-archive'].includes(state.screen)?'admin':state.subject)),origin:state.origin,school:state.school,manageParent:state.manageParent})};
 })();

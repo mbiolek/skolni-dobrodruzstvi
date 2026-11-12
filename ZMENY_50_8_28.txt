@@ -1,0 +1,10 @@
+Školní dobrodružství 50.8.28
+- Odstraněny dodatečné kulaté štítky s ikonami překrývající původní obrázek karet.
+- Opravená historie měsíčního plánu: stabilní identita návratu ze školního přehledu bez chybného přepisu posledním předmětem.
+- Správa škol: každá škola jasně zobrazuje název, město, třídu, původ a počet plánů/témat.
+- Dvě školy Fulnek se již nedají snadno zaměnit; přednastavená škola je výslovně označená.
+- Opravené cesty Zpět mezi Rodičovskou správou a Správou škol včetně gesta.
+- Bezpečná archivace místo nevratného smazání školy; uložená témata a výsledky zůstávají zachované; školu lze obnovit.
+- Upozornění při vytváření další školy ve stejném městě a blokace naprosto shodného záznamu.
+- Oprava automatického vytváření přednastavené školy po její archivaci.
+Poznámka: aplikace si uchovává profily, PINy a místní výsledky. Z lokálního úložiště nic nemažte.

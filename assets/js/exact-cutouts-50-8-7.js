@@ -83,16 +83,9 @@ function ensureExact(b){
   label.classList.toggle('sd87-title-long',title.length>17);
   label.classList.toggle('sd87-title-verylong',title.length>27);
  }
- let medal=b.querySelector(':scope > .sd87-topic-medallion');
- const glyph=exact?'':topicGlyph(title,icon);
- // Specific mathematics/language symbols go on opaque thematic medals,
- // hiding the underlying generic chapter icon rather than overlapping it.
- if(glyph){
-  if(!medal){medal=document.createElement('span');medal.className='sd87-topic-medallion';medal.setAttribute('aria-hidden','true');b.appendChild(medal)}
-  if(medal.textContent!==glyph)medal.textContent=glyph;
-  medal.classList.toggle('sd87-glyph-long',glyph.length>=6);
-  medal.classList.toggle('sd87-emoji',/\p{Extended_Pictographic}/u.test(glyph));
- }else medal?.remove();
+ // 50.8.28: prevent a second medallion from covering the existing illustration.
+ b.querySelectorAll(':scope > .sd87-topic-medallion').forEach(e=>e.remove());
+ const glyph='';
  const sig=[th,base,title,glyph].join('|');
  const changed=b.dataset.sd87Sig!==sig;
  b.dataset.sd87Sig=sig;

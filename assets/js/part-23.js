@@ -53,7 +53,7 @@ function describe(){
  if(route==='mathScreen'&&$('mathScreen')?.dataset.topic)return {route,subject:'math',depth:3};
  if(route.startsWith('schoolPlans:')){
   const v=window.SDSchoolPlans52?.current?.()||{};
-  const depthMap={subject:1,manage:1,schools:2,search:2,settings:2,'edit-school':2,'edit-plan':3,months:2,repeat:3,month:3,learning:4,quiz:4,finished:5,'overview-months':1,'overview-subjects':2};
+  const depthMap={subject:1,manage:2,schools:2,search:2,settings:2,'edit-school':3,'edit-plan':4,'confirm-archive':4,months:2,repeat:3,month:3,learning:4,quiz:4,finished:5,'overview-months':1,'overview-subjects':2};
   return {route,subject:v.subject||subject,depth:depthMap[v.screen]||2};
  }
  if(route.startsWith('curriculum:')){
@@ -244,7 +244,7 @@ window.addEventListener('popstate',e=>{
     $('sdBack')?.click();
   } else if(wanted.route.startsWith('schoolPlans:') && wanted.route.endsWith(':subject')){
     showSubject(subject);
-  } else if(wanted.route==='parentAdmin'){showHome();document.body.classList.add('sd54-admin-open')
+  } else if(wanted.route==='parentAdmin'){window.SDSchoolPlans52?.close?.();showHome();document.body.classList.add('sd54-admin-open')
   } else if(wanted.route==='mathTopics'){
     showSubject('math');window.SDMathTopics496?.open?.($('v496TopicPanel')?.dataset.mode||'teach');
   } else if(wanted.depth===1){showSubject(subject)}
