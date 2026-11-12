@@ -1,0 +1,62 @@
+/* 50.8.29 – wallpaper and card style apply to the FIRST screen too.
+   Older 50.8.16/17/21 overlays must not cover the current picture. */
+html body[data-wallpaper] #homeScreen{
+ background-color:#0c1d35!important;
+ background-image:linear-gradient(180deg,rgba(3,15,34,.32),rgba(4,18,38,.58)),var(--sd88-scene)!important;
+ background-position:center top!important;background-size:cover!important;
+ background-repeat:no-repeat!important;
+ background-attachment:scroll!important;
+}
+html body[data-wallpaper] #homeScreen::before,
+html body[data-wallpaper] #homeScreen::after{
+ background:none!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd829-card{
+ isolation:isolate!important;position:relative!important;overflow:hidden!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd829-card > :is(img.sd815-home-art,img.sd816-home-art,img.sd817-home-art,.sd817-photo-title){
+ display:none!important;visibility:hidden!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd829-card > span.sd821-visual{
+ display:block!important;opacity:1!important;visibility:visible!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd829-card > span.sd821-visual img{
+ display:block!important;opacity:1!important;visibility:visible!important;
+}
+/* The plan card is built from the same active artwork family as the subject cards. */
+html body[data-card-style] #homeScreen .sd827-plan-card{
+ background-color:#152b49!important;
+ border-color:#bdb3da!important;
+ transition:background-image .12s ease,border-color .12s ease!important;
+}
+html body[data-card-style="glass"] #homeScreen .sd827-plan-card{
+ background-image:linear-gradient(105deg,#1b2d60b6,#30477794),url('../ui-exact-50-8-4/glass/blanks/mesicni_plan.svg')!important;
+ border-color:#beb2f6!important;
+}
+html body[data-card-style="stone"] #homeScreen .sd827-plan-card{
+ background-image:linear-gradient(105deg,#1629479c,#182f4979),url('../ui-exact-50-8-4/stone/blanks/mesicni_plan.svg')!important;
+ border-color:#c9ac76!important;
+}
+html body[data-card-style="parchment"] #homeScreen .sd827-plan-card{
+ background-image:linear-gradient(105deg,#6b4b2d70,#704d2c4a),url('../ui-exact-50-8-4/parchment/blanks/mesicni_plan.svg')!important;
+ border-color:#d1a768!important;
+}
+html body[data-card-style="guild"] #homeScreen .sd827-plan-card{
+ background-image:linear-gradient(105deg,#152039b2,#182e5480),url('../ui-exact-50-8-4/guild/blanks/mesicni_plan.svg')!important;
+ border-color:#dfb663!important;
+}
+html body[data-card-style="adventure"] #homeScreen .sd827-plan-card{
+ background-image:linear-gradient(105deg,#11213aa6,#132b437a),url('../ikony/hradni-styl-math.webp')!important;
+ border-color:#c7ac7b!important;
+}
+/* Map chip & school switch react to the selected button design without dominating home. */
+html body[data-card-style="glass"] #homeScreen .sd827-map-chip{background:linear-gradient(#d9e5fa,#9daee2)!important;border-color:#bdb7f0!important;color:#183157!important}
+html body[data-card-style="stone"] #homeScreen .sd827-map-chip{background:linear-gradient(#e7dfce,#b9aa92)!important;border-color:#ad905e!important;color:#292b3f!important}
+html body[data-card-style="parchment"] #homeScreen .sd827-map-chip{background:linear-gradient(#f9e5bc,#d6ba80)!important;border-color:#ac8044!important;color:#4a301a!important}
+html body[data-card-style="guild"] #homeScreen .sd827-map-chip{background:linear-gradient(#f2e0b3,#c7a66e)!important;border-color:#996e35!important;color:#392b17!important}
+html body[data-card-style="adventure"] #homeScreen .sd827-map-chip{background:linear-gradient(#2d4664,#112d4c)!important;border-color:#c4a063!important;color:#fff1d9!important}
+html body[data-card-style="glass"] #sd827SchoolSwitch{border-color:#c1b6f0;background:rgba(31,39,84,.8)}
+html body[data-card-style="stone"] #sd827SchoolSwitch{border-color:#bca77b;background:rgba(26,33,50,.83)}
+html body[data-card-style="parchment"] #sd827SchoolSwitch{border-color:#c79a5e;background:rgba(51,38,35,.83)}
+html body[data-card-style="guild"] #sd827SchoolSwitch{border-color:#ddbb72;background:rgba(18,39,73,.85)}
+html body[data-card-style="adventure"] #sd827SchoolSwitch{border-color:#bb9f70;background:rgba(22,32,51,.84)}

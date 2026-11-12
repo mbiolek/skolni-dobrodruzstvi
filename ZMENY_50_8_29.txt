@@ -1,0 +1,9 @@
+Školní dobrodružství 50.8.29 — úvodní stránka a prostředí
+
+1. Pozadí první stránky reaguje na volbu Tapeta a pozadí.
+2. Všech šest domovských karet používá jediný renderer a aktuální vzhled karet.
+3. Odstraněn starý souběžný renderer 50.8.17, který soutěžil o zobrazení obrázků.
+4. Vodorovná karta Měsíční plán a malé tlačítko Mapy dobrodružství barevně reagují na styl karet.
+5. Žádné změny profilů, škol, výsledků nebo herního postupu.
+
+Poznámka: Volba tapety a volba vzhledu karet jsou dvě nezávislá nastavení.
