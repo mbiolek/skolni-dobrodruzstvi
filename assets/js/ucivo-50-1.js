@@ -114,16 +114,53 @@ function close(){root.hidden=true;document.body.classList.remove('sd-open')}
 function leaveToSubject(){close();if(origin==='schoolPlans'){window.SDSchoolPlans52?.open?.(subject)}else if(subject){const b=document.querySelector('#homeScreen [data-open="'+subject+'"]');if(b)b.click()}}
 function subjects(){subject=null;topic=null;mode=null;open();$('sdTitle').textContent='Učivo podle učebnic 5. třídy';$('sdSub').textContent='Vyber předmět. Původní hry a procvičování zůstávají zachované.';$('sdContent').innerHTML=window.SDUICards.grid(Object.entries(DATA).map(([id,s])=>window.SDUICards.html({title:s.name,description:s.topics.length+' kapitol',icon:id,attrs:`data-sub="${id}"`,className:'sd-card'})),'sd-grid')}
 function topics(id,source='direct'){if(!DATA[id]){console.warn('Učivo: neznamy predmet',id);return}origin=source;subject=id;topic=null;mode=null;open();$('sdTitle').textContent=DATA[id].name;$('sdSub').textContent='Vyber konkrétní kapitolu.';$('sdContent').innerHTML=window.SDUICards.grid(DATA[id].topics.map((t,i)=>window.SDUICards.html({title:(i+1)+'. '+t[0],description:'Výuka · Procvičování · Test',icon:'teach',attrs:`data-topic="${i}"`,className:'sd-card'})),'sd-grid')}
-function lesson(i){topic=i;mode=null;open();let t=DATA[subject].topics[i];$('sdTitle').textContent=t[0];$('sdSub').textContent=DATA[subject].name;$('sdContent').innerHTML=`<article class="sd-lesson"><h2>Výuka – vysvětlení</h2><p>${esc(t[1])}</p><div class="sd-hint">Přečti si pravidlo a vyzkoušej otázky. Při chybě se ukáže správná odpověď a vysvětlení.</div></article>${window.SDUICards.grid([window.SDUICards.html({title:"Procvičování",description:"S nápovědou a opravou chyb",icon:"practice",attrs:"data-mode=\"practice\"",className:"sd-card"}),window.SDUICards.html({title:"Test",description:"10 otázek, vyhodnocení a výsledky",icon:"test",attrs:"data-mode=\"test\"",className:"sd-card"}),window.SDUICards.html({title:"Moje výsledky",description:"Uložené na tomto zařízení",icon:"results",attrs:"data-mode=\"results\"",className:"sd-card"})],"sd-grid")}`}
+function lesson(i){topic=i;mode=null;open();let t=DATA[subject].topics[i];$('sdTitle').textContent=t[0];$('sdSub').textContent=DATA[subject].name;$('sdContent').innerHTML=`<article class="sd-lesson"><h2>Výuka – vysvětlení</h2><p>${esc(t[1])}</p><div class="sd-hint">Přečti si pravidlo a vyzkoušej otázky. Při chybě se ukáže správná odpověď a vysvětlení.</div></article>${window.SDUICards.grid([window.SDUICards.html({title:"Procvičování",description:"Z kapitoly i souvisejícího učiva",icon:"practice",attrs:"data-mode=\"practice\"",className:"sd-card"}),window.SDUICards.html({title:"Test",description:"10 různých otázek, včetně opakování příbuzného učiva",icon:"test",attrs:"data-mode=\"test\"",className:"sd-card"}),window.SDUICards.html({title:"Moje výsledky",description:"Uložené na tomto zařízení",icon:"results",attrs:"data-mode=\"results\"",className:"sd-card"})],"sd-grid")}`}
 function profile(){try{return localStorage.getItem('sd_curriculum_profile')||document.querySelector('.v23-profile-name')?.textContent?.trim()||document.querySelector('.v24-name')?.textContent?.trim()||'zařízení'}catch{return 'zařízení'}}
 function key(){return 'sd_curriculum_v501_'+profile()+'_'+subject+'_'+topic}
 function result(){let v;try{v=JSON.parse(localStorage.getItem(key())||'[]')}catch{v=[]}return Array.isArray(v)?v:[]}
-function save(){try{let a=result();a.push({date:new Date().toISOString(),score,total:questions.length,mode});localStorage.setItem(key(),JSON.stringify(a.slice(-40)))}catch{}}
+function save(){try{let a=result();a.push({date:new Date().toISOString(),score,total:questions.length,mode,reviewQuestions:questions.filter(x=>x.review).length});localStorage.setItem(key(),JSON.stringify(a.slice(-40)))}catch{}}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function start(m){mode=m;step=0;score=0;wrong=[];const t=DATA[subject].topics[topic];questions=[{q:t[2],a:t[3],choices:shuffle(t.slice(3,7))}];open();drawQuestion()}
-function drawQuestion(){if(step>=questions.length){save();let percent=Math.round(score/questions.length*100);$('sdTitle').textContent=mode==='test'?'Výsledek testu':'Hotovo';$('sdSub').textContent=DATA[subject].topics[topic][0];$('sdContent').innerHTML=`<article class="sd-lesson"><h2>${score} / ${questions.length} správně (${percent} %)</h2><p>${percent>=80?'Výborně, kapitolu zvládáš.':'Doporučujeme zopakovat vysvětlení a chybné otázky.'}</p><p>Výsledek se ukládá na tomto zařízení.</p><button class="sd-action" data-again>Opakovat</button><button class="sd-action" data-lesson>Vrátit se ke kapitole</button></article>`;return}
-const q=questions[step];selected=null;$('sdTitle').textContent=DATA[subject].topics[topic][0];$('sdSub').textContent=`${mode==='test'?'Test':'Procvičování'} · Otázka ${step+1} z ${questions.length} · Správně ${score}`;$('sdContent').innerHTML=`<article class="sd-lesson"><div class="sd-progress"><span style="width:${step/questions.length*100}%"></span></div><h2>${esc(q.q)}</h2><div class="sd-choices">${q.choices.map((c,i)=>`<button type="button" data-answer="${i}">${esc(c)}</button>`).join('')}</div><div id="sdFeedback" aria-live="polite"></div><button class="sd-action" id="sdNext" hidden>${step+1===questions.length?'Vyhodnotit':'Další otázka →'}</button></article>`}
-function answer(i){if(selected!==null)return;selected=i;const q=questions[step],chosen=q.choices[i],ok=String(chosen)===String(q.a);if(ok)score++;else wrong.push(step);$('sdFeedback').innerHTML=`<div class="sd-feedback ${ok?'good':'bad'}">${ok?'Správně!':'Správná odpověď: '+esc(q.a)}<p>${esc(DATA[subject].topics[topic][1])}</p></div>`;document.querySelectorAll('#sdCurriculum [data-answer]').forEach(b=>{b.disabled=true;if(String(q.choices[Number(b.dataset.answer)])===String(q.a))b.classList.add('correct');else if(Number(b.dataset.answer)===i)b.classList.add('incorrect')});$('sdNext').hidden=false}
+/* 50.8.32: Dosavadní modul spouštěl vždy jedinou otázku ze zvolené kapitoly.
+ * Kapitola zůstává první; další otázky jsou výslovně označené
+ * jako opakování navazujících kapitol téhož předmětu. */
+function chapterQuiz(){
+ const source=DATA[subject]?.topics||[];
+ const chosen=source[topic];if(!chosen)return [];
+ const title=chosen[0];
+ const order=[topic];
+ for(let radius=1;radius<source.length;radius++){
+  if(topic+radius<source.length)order.push(topic+radius);
+  if(topic-radius>=0)order.push(topic-radius);
+ }
+ const seen=new Set(),selected=[];
+ const append=(q,answer,options,detail,name,review)=>{
+  const id=String(q??'').trim().toLocaleLowerCase('cs');
+  if(!id||seen.has(id)||!Array.isArray(options)||options.length!==4||!options.some(x=>String(x)===String(answer)))return;
+  seen.add(id);selected.push({q,a:answer,choices:shuffle(options),info:detail||'',topicName:name||'',review:!!review});
+ };
+ for(const i of order){
+  const t=source[i];
+  append(t[2],t[3],t.slice(3,7),t[1],t[0],i!==topic);
+  if(selected.length>=10)break;
+ }
+ // Zeměpisná část Vlastivědy má pouze 8 kapitol. Doplníme ji ověřenými
+ // obecnými otázkami o ČR z existující banky, nikoliv otázkami jiné školy.
+ if(subject==='geography'&&selected.length<10){
+  const bank=window.SDFulnekBank825?.geography||{};
+  for(const row of [...(bank['0']||[]),...(bank['2']||[])]){
+   append(row[2],row[3],row.slice(3,7),row[1],row[0],true);
+   if(selected.length>=10)break;
+  }
+ }
+ return selected;
+}
+function start(m){
+ mode=m;step=0;score=0;wrong=[];questions=chapterQuiz();
+ open();drawQuestion();
+}
+function drawQuestion(){if(!questions.length){$('sdTitle').textContent='Chybí otázky';$('sdContent').innerHTML='<article class="sd-lesson"><h2>Pro tuto kapitolu zatím nejsou připravené otázky.</h2><button class="sd-action" data-lesson>← Zpět ke kapitole</button></article>';return}if(step>=questions.length){save();let percent=Math.round(score/questions.length*100);$('sdTitle').textContent=mode==='test'?'Výsledek testu':'Hotovo';$('sdSub').textContent=DATA[subject].topics[topic][0];$('sdContent').innerHTML=`<article class="sd-lesson"><h2>${score} / ${questions.length} správně (${percent} %)</h2><p>${percent>=80?'Výborně, kapitolu zvládáš.':'Doporučujeme zopakovat vysvětlení a chybné otázky.'}</p><p>Otázky ze zvolené kapitoly jsou doplněné o opakování navazujících témat. Výsledek se ukládá na tomto zařízení.</p><button class="sd-action" data-again>Opakovat</button><button class="sd-action" data-lesson>Vrátit se ke kapitole</button></article>`;return}
+const q=questions[step];selected=null;$('sdTitle').textContent=DATA[subject].topics[topic][0];$('sdSub').textContent=`${mode==='test'?'Test':'Procvičování'} · Otázka ${step+1} z ${questions.length} · Správně ${score}`;$('sdContent').innerHTML=`<article class="sd-lesson"><div class="sd-progress"><span style="width:${step/questions.length*100}%"></span></div>${q.review?`<p class="sd832-note">Opakování souvisejícího učiva: ${esc(q.topicName)}</p>`:''}<h2>${esc(q.q)}</h2><div class="sd-choices">${q.choices.map((c,i)=>`<button type="button" data-answer="${i}">${esc(c)}</button>`).join('')}</div><div id="sdFeedback" aria-live="polite"></div><button class="sd-action" id="sdNext" hidden>${step+1===questions.length?'Vyhodnotit':'Další otázka →'}</button></article>`}
+function answer(i){if(selected!==null)return;selected=i;const q=questions[step],chosen=q.choices[i],ok=String(chosen)===String(q.a);if(ok)score++;else wrong.push(step);$('sdFeedback').innerHTML=`<div class="sd-feedback ${ok?'good':'bad'}">${ok?'Správně!':'Správná odpověď: '+esc(q.a)}<p>${esc(q.info||DATA[subject].topics[topic][1])}</p></div>`;document.querySelectorAll('#sdCurriculum [data-answer]').forEach(b=>{b.disabled=true;if(String(q.choices[Number(b.dataset.answer)])===String(q.a))b.classList.add('correct');else if(Number(b.dataset.answer)===i)b.classList.add('incorrect')});$('sdNext').hidden=false}
 function results(){mode='results';let r=result();$('sdTitle').textContent='Moje výsledky';$('sdSub').textContent=DATA[subject].topics[topic][0];$('sdContent').innerHTML=`<article class="sd-lesson"><h2>Poslední pokusy</h2>${r.length?r.slice().reverse().slice(0,15).map(x=>`<p>${new Date(x.date).toLocaleDateString('cs-CZ')} · ${x.mode==='test'?'Test':'Procvičování'} · <b>${x.score}/${x.total}</b></p>`).join(''):'<p>Zatím žádné výsledky.</p>'}<button class="sd-action" data-lesson>← Zpět ke kapitole</button></article>`}
 root.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.sub)topics(b.dataset.sub);else if(b.dataset.topic!==undefined)lesson(+b.dataset.topic);else if(b.dataset.mode==='results')results();else if(b.dataset.mode)start(b.dataset.mode);else if(b.dataset.answer!==undefined)answer(+b.dataset.answer);else if(b.id==='sdNext'){step++;drawQuestion()}else if(b.hasAttribute('data-again'))start(mode);else if(b.hasAttribute('data-lesson'))lesson(topic);else if(b.id==='sdClose')close();else if(b.id==='sdBack'){if(mode!==null)lesson(topic);else if(topic!==null)topics(subject,origin);else if(subject!==null)leaveToSubject();else close()}});
 // Nový modul je doplňkový a nepřepisuje původní ovládání ani opravné skripty 50.0.2.

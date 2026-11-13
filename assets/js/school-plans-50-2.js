@@ -131,8 +131,40 @@ function learning(topics,back){
  show('Výuka',`<h1>Výuka · ${esc(title())}</h1>${sections||'<p>Pro vybraná témata zatím nejsou k dispozici výkladové materiály.</p>'}`);
 }
 function quiz(topics,kind){const unique=new Map();topics.forEach(t=>{if(t.q&&t.choices.length===4&&t.choices.some(c=>String(c)===String(t.correct)))unique.set(norm(t.q),t)});const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};state.quiz=shuffle([...unique.values()]).slice(0,state.settings.count).map(t=>({...t,choices:shuffle([...t.choices])}));state.pos=0;state.correct=0;state.answers=[];state.kind=kind;state.screen='quiz';if(!state.quiz.length){state.screen='no-questions';show('Chybějící otázky','<h1>Pro vybraná témata zatím nejsou připravené ověřené otázky.</h1><p>Zkus jiná témata. Test nebude opakovat stejné otázky ani vytvářet náhodné nesmyslné odpovědi.</p>'+card('Zpět k předmětu','subject'));return}drawQuiz()}
-function drawQuiz(){if(state.pos>=state.quiz.length){const k=`${active()}|${state.school||'general'}|${state.subject}`;db.results[k]??=[];db.results[k].push({date:new Date().toISOString(),kind:state.kind,score:state.correct,total:state.quiz.length});db.results[k]=db.results[k].slice(-40);save();state.screen='finished';show('Výsledky',`<h1>Výsledek: ${state.correct}/${state.quiz.length}</h1><p>Výsledek je uložený k dětskému profilu.</p>${state.answers.filter(a=>!a.ok).map(a=>`<article class="sd52-panel"><strong>${esc(a.q)}</strong><p>Správně: ${esc(a.correct)}</p></article>`).join('')||'<p>Všechny odpovědi správně.</p>'}${card('Zpět k předmětu','subject')}`);return}const q=state.quiz[state.pos];show(state.kind==='test'?'Závěrečný test':'Procvičování',`<h1>${esc(q.name)}</h1><p>Otázka ${state.pos+1} z ${state.quiz.length}</p><div class="sd52-panel"><h2>${esc(q.q)}</h2>${q.choices.map((v,i)=>`<button class="sd52-choice" data-act="answer" data-choice="${i}">${esc(v)}</button>`).join('')}<div id="sd52feedback"></div></div>`)}
-function runTopics(terms,kind,back='subject'){const topics=catalog().filter(t=>terms.some(w=>matchTopic(t,w)));if(kind==='learning')learning(topics,back);else quiz(topics,kind)}
+function drawQuiz(){if(state.pos>=state.quiz.length){const k=`${active()}|${state.school||'general'}|${state.subject}`;db.results[k]??=[];db.results[k].push({date:new Date().toISOString(),kind:state.kind,score:state.correct,total:state.quiz.length,additionalReview:state.quiz.filter(q=>q.additionalReview).length});db.results[k]=db.results[k].slice(-40);save();state.screen='finished';show('Výsledky',`<h1>Výsledek: ${state.correct}/${state.quiz.length}</h1><p>Výsledek je uložený k dětskému profilu.</p>${state.answers.filter(a=>!a.ok).map(a=>`<article class="sd52-panel"><strong>${esc(a.q)}</strong><p>Správně: ${esc(a.correct)}</p></article>`).join('')||'<p>Všechny odpovědi správně.</p>'}${card('Zpět k předmětu','subject')}`);return}const q=state.quiz[state.pos];show(state.kind==='test'?'Závěrečný test':'Procvičování',`<h1>${esc(q.name)}</h1><p>Otázka ${state.pos+1} z ${state.quiz.length}</p><div class="sd52-panel">${q.additionalReview?`<p class="sd832-extra-note">Doplňkové obecné procvičování z předmětu ${esc(title())}; není součástí plánu vybrané školy.</p>`:''}<h2>${esc(q.q)}</h2>${q.choices.map((v,i)=>`<button class="sd52-choice" data-act="answer" data-choice="${i}">${esc(v)}</button>`).join('')}<div id="sd52feedback"></div></div>`)}
+/* 50.8.32: Když plán obsahuje jen jednu dostupnou otázku, procvičování
+ * ji doplní označeným obecným opakováním daného předmětu. Měsíční TEST
+ * doplňkovými otázkami nerozšiřujeme, aby nemíchal osnovy škol. */
+function buildReview(topics){
+ const source=catalog();
+ const used=new Set(topics.map(x=>norm(x.q)));
+ const extras=[];
+ const start=source.findIndex(x=>used.has(norm(x.q)));
+ const order=[];
+ if(start>=0){for(let r=1;r<source.length;r++){if(start+r<source.length)order.push(start+r);if(start-r>=0)order.push(start-r)}}
+ else order.push(...source.map((_,i)=>i));
+ for(const i of order){const t=source[i];const id=norm(t.q);if(!id||used.has(id)||t.choices?.length!==4||!t.choices.some(x=>String(x)===String(t.correct)))continue;
+  used.add(id);extras.push({...t,additionalReview:true});if(used.size>=Math.max(5,state.settings.count))break;
+ }
+ // Zeměpisná Vlastivěda má pouze osm samostatných otázek. K dispozici
+ // máme také všeobecné otázky o ČR z již existující banky.
+ if(state.subject==='geography'&&used.size<Math.max(5,state.settings.count)){
+  const bank=window.SDFulnekBank825?.geography||{};
+  for(const row of [...(bank['0']||[]),...(bank['2']||[])]){
+   const id=norm(row[2]);if(used.has(id))continue;
+   const opts=row.slice(3,7);if(opts.length!==4||!opts.some(x=>String(x)===String(row[3])))continue;
+   used.add(id);extras.push({name:row[0],info:row[1],q:row[2],correct:row[3],choices:opts,additionalReview:true});
+   if(used.size>=Math.max(5,state.settings.count))break;
+  }
+ }
+ return extras;
+}
+function runTopics(terms,kind,back='subject'){
+ const topics=catalog().filter(t=>terms.some(w=>matchTopic(t,w)));
+ if(kind==='learning')return learning(topics,back);
+ if(kind==='practice'&&topics.length>0&&topics.length<Math.max(5,state.settings.count))return quiz([...topics,...buildReview(topics)],kind);
+ return quiz(topics,kind);
+}
 function runMonth(kind){const bank=state.school==='zstgm_fulnek_5_2026'?(window.SDFulnekBank825?.[state.subject]?.[state.month]||[]):[];
  if(bank.length){const questions=bank.map(t=>({name:t[0],info:t[1],q:t[2],correct:t[3],choices:t.slice(3,7)}));
   if(kind==='learning')learning(questions,'month');else quiz(questions,kind);

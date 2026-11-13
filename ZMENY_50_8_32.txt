@@ -1,0 +1,8 @@
+Školní dobrodružství 50.8.32 – kontrola počtu otázek
+
+- Kapitoly podle učebnice: každé procvičování / test má nově až 10 různých ověřených otázek ze zvolené a souvisejících kapitol téhož předmětu. Žádné původní otázky se nemažou.
+- U Vlastivědy – zeměpisné části jsou ze souvisejících kapitol 8 otázek a 2 doplňkové všeobecné otázky.
+- U Měsíčních plánů: pokud procvičování najde jen několik odpovídajících otázek, doplní označené obecné procvičování daného předmětu. Test měsíčního plánu obsahuje jen ověřené otázky pro jeho témata; jiné osnovy se do testu nepřidávají.
+- Opraveno vysvětlení chyby: používá text skutečně zobrazené otázky, nikoliv první kapitoly.
+- Profily, přiřazení škol, výuka ani dosavadní výsledky se nemažou.
+- Samostatná Přírodověda Fulnek: v procvičování se už nedublují stejné 3 otázky dvakrát; doplní se unikátní otázky z tematické skupiny (7 až 10 otázek podle skupiny).
