@@ -106,7 +106,30 @@ function matchTopic(t,query){const n=norm(query);if(!n)return false;if(t.search.
 function search(){state.screen='search';show('Příprava na školní test',`<h1>Příprava na školní test</h1><p>Zadej více témat oddělených čárkou nebo každé na nový řádek. Například: a/an, čísla, hodiny.</p><textarea id="sd52query" rows="4" placeholder="1. a/an\n2. čísla\n3. čas, hodiny"></textarea>${card('Vyhledat témata','find')}<div id="sd52found"></div>`)}
 function find(){const q=document.getElementById('sd52query').value.replace(/(^|\n)\s*\d+[.)]\s*/g,'$1').split(/[,;\n]+/).map(s=>s.trim()).filter(Boolean);const matches=catalog().filter(t=>q.some(w=>matchTopic(t,w)));state.selected=matches.map(t=>t.id);const area=document.getElementById('sd52found');area.innerHTML=`<h2>Nalezená témata (${matches.length})</h2>${matches.length?matches.map(t=>`<label class="sd52-check"><input type="checkbox" data-topic-id="${esc(t.id)}" checked> ${esc(t.name)}</label>`).join('')+grid([card('Výuka','search-learning'),card('Procvičování','search-practice'),card('Spustit test','search-test')]):'<p>Pro zadané názvy zatím nemáme odpovídající obsah. Rodič může téma přidat do měsíčního plánu, ale otázky musí být nejdříve připravené.</p>'}`}
 function selectedTopics(){return catalog().filter(t=>state.selected.includes(t.id))}
-function learning(topics,back){state.origin=(back==='month'&&state.origin==='overview')?'overview':back;state.screen='learning';show('Výuka',`<h1>Výuka · ${esc(title())}</h1>${topics.length?topics.map(t=>`<article class="sd52-panel"><h2>${esc(t.name)}</h2><p>${esc(t.info)}</p></article>`).join(''):'<p>Pro vybraná témata zatím nejsou k dispozici výkladové materiály.</p>'}`)}
+/* 50.8.31: Jedno téma = jedna výuková karta, obsahuje všechny jeho různé poznatky.
+ * Původní seznam otázek se nemění, pouze jejich výukové zobrazení. */
+function groupLearning(topics){
+ const groups=new Map();
+ for(const topic of topics){
+  const title=String(topic?.name||'Učivo').trim()||'Učivo';
+  const info=String(topic?.info||'').trim();
+  const key=norm(title).replace(/\s+/g,' ').trim();
+  if(!groups.has(key))groups.set(key,{name:title,points:[],seen:new Set()});
+  const group=groups.get(key);
+  const fingerprint=norm(info).replace(/\s+/g,' ').trim();
+  if(fingerprint&&!group.seen.has(fingerprint)){
+   group.seen.add(fingerprint);
+   group.points.push(info);
+  }
+ }
+ return [...groups.values()];
+}
+function learning(topics,back){
+ state.origin=(back==='month'&&state.origin==='overview')?'overview':back;
+ state.screen='learning';
+ const sections=groupLearning(topics).map(g=>`<article class="sd52-panel sd831-lesson"><h2>${esc(g.name)}</h2>${g.points.length>1?`<ul class="sd831-lesson-points">${g.points.map(info=>`<li>${esc(info)}</li>`).join('')}</ul>`:`<p>${esc(g.points[0]||'Vysvětlení této kapitoly se připravuje.')}</p>`}</article>`).join('');
+ show('Výuka',`<h1>Výuka · ${esc(title())}</h1>${sections||'<p>Pro vybraná témata zatím nejsou k dispozici výkladové materiály.</p>'}`);
+}
 function quiz(topics,kind){const unique=new Map();topics.forEach(t=>{if(t.q&&t.choices.length===4&&t.choices.some(c=>String(c)===String(t.correct)))unique.set(norm(t.q),t)});const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};state.quiz=shuffle([...unique.values()]).slice(0,state.settings.count).map(t=>({...t,choices:shuffle([...t.choices])}));state.pos=0;state.correct=0;state.answers=[];state.kind=kind;state.screen='quiz';if(!state.quiz.length){state.screen='no-questions';show('Chybějící otázky','<h1>Pro vybraná témata zatím nejsou připravené ověřené otázky.</h1><p>Zkus jiná témata. Test nebude opakovat stejné otázky ani vytvářet náhodné nesmyslné odpovědi.</p>'+card('Zpět k předmětu','subject'));return}drawQuiz()}
 function drawQuiz(){if(state.pos>=state.quiz.length){const k=`${active()}|${state.school||'general'}|${state.subject}`;db.results[k]??=[];db.results[k].push({date:new Date().toISOString(),kind:state.kind,score:state.correct,total:state.quiz.length});db.results[k]=db.results[k].slice(-40);save();state.screen='finished';show('Výsledky',`<h1>Výsledek: ${state.correct}/${state.quiz.length}</h1><p>Výsledek je uložený k dětskému profilu.</p>${state.answers.filter(a=>!a.ok).map(a=>`<article class="sd52-panel"><strong>${esc(a.q)}</strong><p>Správně: ${esc(a.correct)}</p></article>`).join('')||'<p>Všechny odpovědi správně.</p>'}${card('Zpět k předmětu','subject')}`);return}const q=state.quiz[state.pos];show(state.kind==='test'?'Závěrečný test':'Procvičování',`<h1>${esc(q.name)}</h1><p>Otázka ${state.pos+1} z ${state.quiz.length}</p><div class="sd52-panel"><h2>${esc(q.q)}</h2>${q.choices.map((v,i)=>`<button class="sd52-choice" data-act="answer" data-choice="${i}">${esc(v)}</button>`).join('')}<div id="sd52feedback"></div></div>`)}
 function runTopics(terms,kind,back='subject'){const topics=catalog().filter(t=>terms.some(w=>matchTopic(t,w)));if(kind==='learning')learning(topics,back);else quiz(topics,kind)}

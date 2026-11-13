@@ -2,3 +2,10 @@
 
 /* 50.3: rodičovská správa je viditelná jen rodiči */
 .sd503-parent-only[hidden]{display:none!important}
+
+/* 50.8.31: Stejnojmenné výkladové body na jediné kartě */
+#sd52 .sd831-lesson > h2{margin-bottom:12px}
+#sd52 .sd831-lesson-points{margin:0;padding:0 0 0 1.1em;display:grid;gap:11px;line-height:1.55}
+#sd52 .sd831-lesson-points li{padding-left:3px;overflow-wrap:anywhere}
+#sd52 .sd831-lesson-points li::marker{color:#5474a1}
+#sd52 .sd831-lesson > p{margin:4px 0 0}
