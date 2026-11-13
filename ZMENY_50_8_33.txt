@@ -1,0 +1,19 @@
+Školní dobrodružství – verze 50.8.33
+
+Společné pravidlo: správná odpověď se zeleně označí a přibližně za 0,9 s
+následuje další otázka nebo vyhodnocení dokončené série.
+
+Upravené moduly:
+- Měsíční plán / procvičování a testy (zachovaný automatický přechod, jednotné zelené označení)
+- Kapitoly podle učebnic 5. třídy všech předmětů
+- Angličtina – témata, slovíčka, čísla, dny a měsíce
+- Matematika – základní počítání, písemné dělení, závorky, diagnostické testy
+- Matematika Fulnek – písemné příklady
+- Čeština – slovní druhy (stávající přechod), doplňovací diktáty
+- Vlastivěda – testy, procvičování a zeměpisná mapa
+- Přírodověda Fulnek – testy a procvičování
+- Samostatné interaktivní mapy – již funkční automatické přechody zůstaly
+
+Při chybné odpovědi zůstává stávající možnost opravy nebo manuální pokračování.
+Automatické časovače se nespouští po odchodu z obrazovky.
+Profily, PINy, školy, plány ani uložené výsledky se nemažou.

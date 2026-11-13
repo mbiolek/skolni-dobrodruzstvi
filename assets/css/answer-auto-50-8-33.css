@@ -1,0 +1,13 @@
+/* 50.8.33 — společná indikace správné odpovědi ve všech prostředích. */
+html body :is(button,input,.vl-answer,.enanswer,.eng-option,.order-choice,.diag-answer,.v29-choice,.sd52-choice,.n-choice,.voc-answer,.sd-choices button,.enrow .enanswer).sd833-correct,
+html body :is(button,input,.vl-answer,.enanswer,.eng-option,.order-choice,.diag-answer,.v29-choice,.sd52-choice,.n-choice,.voc-answer,.sd-choices button,.enrow .enanswer).correct,
+html body :is(button,input,.vl-answer,.enanswer,.eng-option,.order-choice,.diag-answer,.v29-choice,.sd52-choice,.n-choice,.voc-answer,.sd-choices button,.enrow .enanswer).enright{
+ background:#bcf5ca!important;color:#0b4827!important;border:3px solid #13844e!important;
+ box-shadow:0 0 0 3px rgba(25,164,87,.26)!important;opacity:1!important;
+}
+html body input.sd833-correct{background:#d2f8db!important;color:#164a2e!important}
+html body :is(.f-feedback,.n-feedback,.vl-feedback,.enfeedback,.feedback,.lessonfeedback,.order-good,.diag-good).sd833-good{
+ background:#d5f9df!important;color:#104b2b!important;border:2px solid #27834f!important;
+}
+html body .sd833-visual-good{outline:5px solid #32bd72!important;outline-offset:1px!important;border-radius:16px!important}
+html body :is(button,.sd52-choice,.enanswer).sd833-correct:disabled{opacity:1!important;filter:none!important}

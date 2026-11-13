@@ -1,0 +1,23 @@
+/* 50.8.34 – přesné karty pro prostředí Dobrodružná cesta. */
+html body[data-card-style='adventure'] #homeScreen .subject.sd834-adventure-complete-card{
+ position:relative!important;
+ aspect-ratio:393 / 486!important;
+ border:0!important;
+ border-radius:28px!important;
+ background:none!important;
+ box-shadow:none!important;
+ padding:0!important;
+ overflow:hidden!important;
+}
+html body[data-card-style='adventure'] #homeScreen .subject.sd834-adventure-complete-card > .sd821-visual{
+ position:absolute!important;inset:0!important;display:block!important;z-index:0!important;
+}
+html body[data-card-style='adventure'] #homeScreen .subject.sd834-adventure-complete-card > .sd821-visual > img{
+ width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;display:block!important;
+}
+html body[data-card-style='adventure'] #homeScreen .subject.sd834-adventure-complete-card > .sd821-label,
+html body[data-card-style='adventure'] #homeScreen .subject.sd834-adventure-complete-card > .v451-footer{display:none!important}
+html body[data-card-style='adventure'] button.sd834-adventure-complete-nav > .sd87-card-title{display:none!important}
+html body[data-card-style='adventure'] button.sd834-adventure-complete-nav.sd84-exact-card > .sd-layer-art > img.sd84-exact-picture{
+ object-fit:contain!important;object-position:center!important;
+}

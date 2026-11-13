@@ -1,0 +1,16 @@
+Školní dobrodružství – verze 50.8.34
+
+Audit všech prostředí a navigačních karet:
+- sjednocené rozměry karet v přehledech předmětů, výuky, procvičování a testů
+- zvolený vzhled prostředí se nově důsledně drží i na dalších obrazovkách
+- odstraněny konkurenční staré vrstvy, které způsobovaly jiné motivy, různé velikosti a ořezávání
+- popisky jsou jen jednou, jsou vystředěné a už se nepřekrývají
+- oprava artefaktů typu „Moje výsledky t“ a podobných zbytkových znaků
+- domovské karty předmětů zůstávají v jednom aktivním rendereru bez duplikátů
+
+Dobrodružná cesta – doplněno podle dodaných předloh:
+- Výuka / Procvičování / Test používají přímo referenční obrázkové karty
+- Matematika, Angličtina, Čeština a Přírodověda na domovské stránce používají přesné dodané karty
+- u těchto přesných karet se skryjí duplicitní textové vrstvy a nepřekrývají se s obrázkem
+
+Profily, školy, výsledky ani uložený postup se nemažou.

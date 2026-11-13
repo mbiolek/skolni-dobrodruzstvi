@@ -68,7 +68,7 @@ function answer(i){if(!quiz||quiz.selected!==null)return;const q=quiz.list[quiz.
  if(correct&&quiz.kind==='repeat')db.mistakes=db.mistakes.filter(m=>m.qid!==q.id);
  if(!correct&&!db.mistakes.some(m=>m.qid===q.id))db.mistakes.push({qid:q.id,at:new Date().toISOString()});db.mistakes=db.mistakes.slice(-100);save();
  root.querySelectorAll('.n-choice').forEach((el,j)=>{el.disabled=true;if(quiz.choices[j]===q.answer)el.classList.add('correct');if(i===j&&!correct)el.classList.add('wrong')});
- const area=document.getElementById('n-answer-feedback');if(area)area.innerHTML=`<div class="n-feedback ${correct?'yes':'no'}"><strong>${correct?'Správně!':'Správná odpověď: '+esc(q.answer)}</strong><p>${esc(q.explain)}</p></div><div class="n-actions">${btn(quiz.pos+1===quiz.list.length?'Vyhodnotit':'Další otázka →','next')}</div>`;
+ const area=document.getElementById('n-answer-feedback');if(area)area.innerHTML=`<div class="n-feedback ${correct?'yes':'no'}"><strong>${correct?'Správně!':'Správná odpověď: '+esc(q.answer)}</strong><p>${esc(q.explain)}</p></div><div class="n-actions">${btn(quiz.pos+1===quiz.list.length?'Vyhodnotit':'Další otázka →','next')}</div>`;if(correct){const anchor=root.querySelector('[data-act="next"]');window.SDAutoAnswer833?.afterCorrect(anchor,()=>next(),950,()=>view==='quiz'&&quiz?.selected!==null)}
 }
 function hint(){if(!quiz||quiz.kind==='test'||quiz.selected!==null)return;const t=dbTopic(quiz.list[quiz.pos].topic),el=document.getElementById('n-hint-area');if(el)el.innerHTML=`<div class="n-hint"><strong>Merlin radí:</strong> ${esc(t.steps[0])}</div>`;}
 function next(){if(!quiz||quiz.selected===null)return;quiz.pos++;if(quiz.pos>=quiz.list.length)finish();else showQuestion()}
