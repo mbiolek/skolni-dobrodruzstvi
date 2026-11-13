@@ -1,0 +1,8 @@
+Školní dobrodružství 50.8.30 – oprava prostředí a popisků
+- Zastaven starý druhý vykreslovač domovských karet.
+- Šest domovských karet mění svůj obrázek podle aktivního vzhledu karet (Krystal, Runy, Pergamen, Cech, Dobrodružství).
+- Odstraněny staré překryvné vrstvy uvnitř domovských karet, bez změny klikacích akcí.
+- Výběr tapety se používá i na úvodu, noční hrad je správně zobrazen také na domově.
+- U hradního cechu odstraněn druhý modrý rámeček pod nápisem: text leží na jediném původním štítku obrázku.
+- Cache a číslo verze 50.8.30.
+- Neměněny profily, PIN, školy, úkoly ani výsledky.
