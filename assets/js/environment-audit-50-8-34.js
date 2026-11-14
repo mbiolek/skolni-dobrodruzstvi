@@ -32,6 +32,13 @@ function extractDesc(btn){
 }
 function normalizeTitle(btn){
  const titleText=extractTitle(btn); if(!titleText) return;
+ // 50.8.37: illustrated adventure cards contain their own printed captions.
+ // Do not reinsert the second label after exact-cutouts removes it.
+ if(cardStyle()==='adventure' && btn.classList.contains('sd835-picture-card')){
+  btn.querySelectorAll(':scope > .sd87-card-title').forEach(n=>n.remove());
+  btn.setAttribute('aria-label',titleText);
+  return;
+ }
  const labels=[...btn.querySelectorAll(':scope > .sd87-card-title')];
  let live=labels.shift();
  labels.forEach(n=>n.remove());

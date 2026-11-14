@@ -1,0 +1,105 @@
+/* 50.8.37 – one caption per printed card; uniform tactile press in ALL environments.
+   Load AFTER 50.8.36. Do not affect answer selection or correctness colors. */
+
+/* Stronger than earlier 50.8.7 / 50.8.12 / 50.8.34 title rules.
+   The original caption remains available to screen readers through aria-label.
+   The illustrated 50.8.35 PNG/WebP already contains the text. */
+html body[data-card-style='adventure'][data-card-style='adventure'] button.sd-ui-card.sd-layered.sd84-exact-card.sd835-picture-card > :is(
+ .sd87-card-title,.sd-layer-caption,.sd87-topic-medallion,
+ .sd-ui-card__title,.sd-ui-card__desc,.sd-ui-card__icon,
+ strong,b,small,.hub-start,.adv-cta,.adv-art
+),
+html body[data-game-theme][data-card-style='adventure'] button.sd-ui-card.sd-layered.sd84-exact-card.sd835-picture-card > :is(
+ .sd87-card-title,.sd-layer-caption,.sd87-topic-medallion,
+ .sd-ui-card__title,.sd-ui-card__desc,.sd-ui-card__icon,
+ strong,b,small,.hub-start,.adv-cta,.adv-art
+){
+ display:none!important;visibility:hidden!important;opacity:0!important;
+ pointer-events:none!important;
+}
+html body[data-card-style='adventure'] button.sd-ui-card.sd-layered.sd84-exact-card.sd835-picture-card::before,
+html body[data-card-style='adventure'] button.sd-ui-card.sd-layered.sd84-exact-card.sd835-picture-card::after{
+ display:none!important;content:none!important;
+}
+
+/* Remove Android/Chrome's native rectangular tap flash from all card themes. */
+html body[data-card-style] :is(
+ #homeScreen button.subject,
+ #homeScreen .subject[role='button'],
+ button.sd-ui-card.sd-layered,
+ button.sd84-exact-card,
+ button.sd834-nav-card,
+ button.sd84-exact-nav
+){
+ -webkit-tap-highlight-color:transparent!important;
+ touch-action:manipulation!important;
+ transform-origin:center center!important;
+ transition:transform 145ms ease,filter 145ms ease!important;
+}
+
+/* Matching the already approved 50.8.36 press: no blue tint; 3px inset.
+   All styles EXCEPT adventure (which already has the tested 50.8.36 rules). */
+html body[data-card-style]:not([data-card-style='adventure']) :is(
+ #homeScreen button.subject,
+ #homeScreen .subject[role='button'],
+ button.sd-ui-card.sd-layered,
+ button.sd84-exact-card,
+ button.sd834-nav-card,
+ button.sd84-exact-nav
+):active,
+html body[data-game-theme][data-card-style]:not([data-card-style='adventure']) :is(
+ #homeScreen button.subject,
+ #homeScreen .subject[role='button'],
+ #subjectHub button.sd-ui-card.sd-layered,
+ #advSubjectMenu button.sd-ui-card.sd-layered,
+ #vlastScreen button.sd-ui-card.sd-layered,
+ #czechScreen button.sd-ui-card.sd-layered,
+ #sdCzechHub5074 button.sd-ui-card.sd-layered,
+ #enUnit499 button.sd-ui-card.sd-layered,
+ #v496TopicPanel button.sd-ui-card.sd-layered,
+ #sd52 button.sd-ui-card.sd-layered,
+ #sdCurriculum button.sd-ui-card.sd-layered
+):active{
+ transform:translateY(3px) scale(.985)!important;
+ filter:drop-shadow(0 2px 2px rgba(0,9,21,.30))!important;
+}
+
+/* A higher-specificity rule for nav grids: 50.8.34 explicitly used transform:none. */
+html body[data-card-style]:not([data-card-style='adventure']) :is(
+ #subjectHub .hub-cards,
+ #advSubjectMenu .adv-menu-cards,
+ #sdCzechHub5074 .sd-czech-cards,
+ #vlastScreen #vlUnits,
+ #v496TopicPanel #v496Topics,
+ #enUnit499 #en499topics,
+ #sd52 .sd52-grid,
+ #sdCurriculum .sd-grid
+) > button.sd834-nav-card.sd84-exact-card:active{
+ transform:translateY(3px) scale(.985)!important;
+ filter:drop-shadow(0 2px 2px rgba(0,9,21,.30))!important;
+}
+
+/* On touchscreen, stale hover states must not lift the button or light it blue. */
+@media(hover:none){
+ html body[data-card-style]:not([data-card-style='adventure']) :is(
+ #homeScreen button.subject,
+ #homeScreen .subject[role='button'],
+ button.sd-ui-card.sd-layered,
+ button.sd84-exact-card,
+ button.sd834-nav-card
+ ):hover:not(:active){
+ transform:none!important;
+ filter:none!important;
+ }
+}
+
+/* Keyboard focus remains visible. */
+html body[data-card-style] :is(button.sd-ui-card.sd-layered,button.sd84-exact-card,#homeScreen button.subject):focus-visible{
+ outline:2px solid #ffdfa3!important;
+ outline-offset:2px!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body[data-card-style] :is(#homeScreen button.subject,button.sd-ui-card.sd-layered,button.sd84-exact-card,button.sd834-nav-card){
+ transition:none!important;
+ }
+}

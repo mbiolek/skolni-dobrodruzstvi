@@ -1,0 +1,7 @@
+Školní dobrodružství – 50.8.37
+- V Dobrodružné cestě se už do obrázkových karet nepřidává druhý popisek.
+- Původní text zůstává pro přístupnost a přepínání prostředí.
+- Opraven také druhý skript, který popisky chybně znovu přidával.
+- Ve všech pěti prostředích se sjednocuje lehký 3D stisk bez modré obdélníkové záře.
+- Ostatní prostředí si ponechávají vlastní výtvarný styl a čitelný živý text.
+- Bez zásahu do profilů, škol, XP, uložených výsledků a otázek.

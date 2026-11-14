@@ -105,7 +105,13 @@ function ensureExact(b){
  // Remove the former SVG overlay: its text was missing on multiple Android screens.
  art.querySelectorAll(':scope > svg.sd85-detail-overlay').forEach(e=>e.remove());
  let label=b.querySelector(':scope > .sd87-card-title');
- { // All labels are live DOM text (including six main menu cards).
+ if(image835){
+  // 50.8.37: The title is already painted in the 50.8.35 asset.
+  // Never create a second DOM title. Keep the source caption (hidden by
+  // exact-card CSS) so switching to any other environment remains possible.
+  b.querySelectorAll(':scope > .sd87-card-title').forEach(n=>n.remove());
+ }else{
+  // Other environments still require an independently positioned live title.
   if(!label){label=document.createElement('span');label.className='sd87-card-title';label.setAttribute('aria-hidden','true');b.appendChild(label)}
   if(label.textContent!==title)label.textContent=title;
   label.classList.toggle('sd87-title-long',title.length>17);
