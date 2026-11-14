@@ -1,0 +1,13 @@
+Školní dobrodružství 50.8.35 (14. 11. 2026)
+
+- Dobrodružné prostředí: 27 nových samostatných průhledných ilustrovaných karet v jednotném stříbřitém rámu.
+- Matematika, Angličtina, Čeština, Přírodověda, Vlastivěda, Hudební výchova na úvodní stránce.
+- Výuka, Procvičování, Test, Moje výsledky, Fulnek/Olomouc, český jazyk, matematické kapitoly a další tematická tlačítka.
+- Karty jsou lehce vystouplé a stiskem se pohybují dolů, nikoliv přebarvují celý čtverec.
+- Odstranění předchozího překryvného skriptu (černé pozadí a dva popisky).
+- Jeden popisek přímo na obrázku, bez druhé modré vrstvy; skutečné XP jsou nadále dynamické.
+- Sjednocený poměr stran a velikost, bez ořezů okrajů; 2 sloupce na mobilu.
+- Při změně vzhledu zpět na jiný styl se vracejí původní obrázky.
+- Upravená inkrementální cache pro verzi 50.8.35.
+
+Uživatelská data, školy, PINy, XP ani výsledky se nemažou.

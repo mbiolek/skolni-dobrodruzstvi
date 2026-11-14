@@ -19,7 +19,8 @@ function apply(){
   if(!visual){visual=document.createElement('span');visual.className='sd821-visual';visual.setAttribute('aria-hidden','true');card.prepend(visual)}
   let image=visual.querySelector('img');
   if(!image){visual.replaceChildren();image=document.createElement('img');visual.append(image)}
-  const wanted=`./assets/ikony/home-50-8-21/${st}-${slug}.webp`;
+  const wanted=st==='adventure'?`./assets/ikony/cards-50-8-35/${slug==='prirodopis'?'prirodoveda':slug}.webp`:`./assets/ikony/home-50-8-21/${st}-${slug}.webp`;
+  card.classList.toggle('sd835-home-art',st==='adventure');
   if(image.getAttribute('src')!==wanted)image.setAttribute('src',wanted);
   image.alt='';image.decoding='async';image.draggable=false;
   let label=card.querySelector(':scope > .sd821-label');

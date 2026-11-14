@@ -39,6 +39,31 @@ const wordGlyphs=[
  [/cis|pocit|aritmet/i,'123'],
  [/kalend|mesic|plan/i,'▦']
 ];
+/* 50.8.35: illustrated menu art includes its own Czech label – never overlay another title. */
+const ART835={
+ 'vyuka':'vyuka','procvicovani':'procvicovani','test':'test',
+ 'moje vysledky':'moje-vysledky','nasobeni':'nasobeni','deleni':'deleni',
+ 'nasobeni + deleni':'nasobeni-deleni','nasobeni a deleni':'nasobeni-deleni',
+ 'desitkova soustava':'desitkova-soustava','nasobky deseti':'nasobky-deseti',
+ 'pisemne deleni':'pisemne-deleni','deleni se zbytkem':'deleni-se-zbytkem',
+ 'poradi operaci a zavorky':'poradi-operaci-a-zavorky',
+ 'poradi operaci a zavorek':'poradi-operaci-a-zavorky',
+ 'animovana skola deleni':'animovana-skola-deleni',
+ 'cisla slovnich druhu':'cisla-slovnich-druhu',
+ 'pravopis a diktaty':'pravopis-a-diktaty',
+ 'kapitoly podle ucebnice':'kapitoly-podle-ucebnice',
+ 'mesicni plan':'mesicni-plan','nastaveni':'nastaveni',
+ 'mapa dobrodruzstvi':'mapa-dobrodruzstvi',
+ 'matematika':'matematika','anglictina':'anglictina','cestina':'cestina',
+ 'prirodoveda':'prirodoveda','vlastiveda':'vlastiveda','hudebni vychova':'hudebni-vychova'
+};
+function art835(label){
+ const x=clean(label).replace(/[‐‑–—·]/g,' ').replace(/\s+/g,' ').trim();
+ if(/matematika.*5\.?\s*trida.*fulnek|5\.?\s*trida.*fulnek.*matematika/.test(x))return 'matematika-fulnek';
+ if(/matematika.*5\.?\s*trida.*olomouc|5\.?\s*trida.*olomouc.*matematika/.test(x))return 'matematika-olomouc';
+ if(x==='nasobeni deleni'||x==='nasobeni a deleni')return 'nasobeni-deleni';
+ return ART835[x]||null;
+}
 function chooseBase(label,icon){const x=clean(label),i=icon||'';
  if(/vysled|pokrok|statistik|odmen/.test(x)||i==='moje_vysledky')return 'zaverecny_test';
  if(/mesic|kalendar|plan/.test(x))return 'mesicni_plan';
@@ -70,9 +95,12 @@ function ensureExact(b){
  let picture=art.querySelector(':scope > img.sd84-exact-picture');
  if(!picture){picture=document.createElement('img');picture.className='sd84-exact-picture';picture.alt='';picture.decoding='async';picture.draggable=false;picture.setAttribute('aria-hidden','true');art.appendChild(picture)}
  // Every card has a separate, accessible live label; baked-in labels do not scale on mobile.
- const url=th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`;
+ const image835=th==='adventure'?art835(title):null;
+ const url=image835?`./assets/ikony/cards-50-8-35/${image835}.webp`:(th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`);
  if(picture.getAttribute('src')!==url)picture.src=url;
  b.classList.add('sd84-exact-card');b.classList.toggle('sd87-dynamic',!exact);
+ b.classList.toggle('sd835-picture-card',!!image835);
+ if(image835){b.setAttribute('aria-label',title);b.dataset.sd835Image=image835}else{delete b.dataset.sd835Image}
  b.dataset.sd84Key=base;
  // Remove the former SVG overlay: its text was missing on multiple Android screens.
  art.querySelectorAll(':scope > svg.sd85-detail-overlay').forEach(e=>e.remove());

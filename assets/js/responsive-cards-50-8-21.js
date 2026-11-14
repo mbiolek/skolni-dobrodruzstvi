@@ -12,7 +12,8 @@ function paint(){
   card.classList.add('sd821-card');
   let visual=card.querySelector(':scope > .sd821-visual');
   if(!visual){visual=document.createElement('span');visual.className='sd821-visual';visual.setAttribute('aria-hidden','true');visual.append(document.createElement('img'));card.prepend(visual)}
-  const img=visual.querySelector('img');const src=`./assets/ikony/home-50-8-21/${style}-${slug}.webp`;
+  const img=visual.querySelector('img');const src=style==='adventure'?`./assets/ikony/cards-50-8-35/${slug==='prirodopis'?'prirodoveda':slug}.webp`:`./assets/ikony/home-50-8-21/${style}-${slug}.webp`;
+  card.classList.toggle('sd835-home-art',style==='adventure');
   if(img.getAttribute('src')!==src){img.src=src;img.decoding='async';img.alt='';img.draggable=false}
   let label=card.querySelector(':scope > .sd821-label');
   if(!label){label=document.createElement('span');label.className='sd821-label';label.setAttribute('aria-hidden','true');visual.after(label)}
