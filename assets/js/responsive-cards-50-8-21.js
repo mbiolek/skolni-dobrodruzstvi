@@ -2,6 +2,7 @@
 (()=>{'use strict';
 const DATA={math:['matematika','Matematika'],english:['anglictina','Angličtina'],czech:['cestina','Čeština'],nature:['prirodopis','Přírodopis'],history:['vlastiveda','Vlastivěda'],music:['hudebni-vychova','Hudební výchova']};
 const STYLES=new Set(['glass','stone','adventure','parchment','guild']);
+/* 50.8.38: pouze počítá rozložení; úvodní obrázky vykresluje výhradně home-appearance. */
 const CARD_SELECTOR='#homeScreen .subject-grid .subject,#homeScreen .v23-extra-grid .subject';
 const GRID_SELECTOR='.sd-ui-grid:not(.sd-ui-grid--covers),#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,#v496TopicPanel #v496Topics,#enUnit499 #en499topics,#sd52 .sd52-grid,#sdCurriculum .sd-grid';
 function paint(){
@@ -30,7 +31,7 @@ function layout(){
  });
 }
 let queued=false;
-function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;paint();layout()})}
+function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;layout()})}
 function boot(){schedule();
  document.addEventListener('sd-card-style-change',schedule);
  document.addEventListener('sd88-wallpaper-changed',schedule);

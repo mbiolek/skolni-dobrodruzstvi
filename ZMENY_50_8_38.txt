@@ -1,0 +1,12 @@
+Školní dobrodružství 50.8.38 – sjednocení první stránky s nabídkami předmětů
+
+- Předměty na hlavní obrazovce používají stejné přesné SVG šablony jako nabídky Výuka/Procvičování/Test uvnitř předmětů v prostředích Kámen, Pergamen, Hradní cech a Sklo.
+- V Dobrodružné cestě jsou použité již dodané obrázkové karty stejné rodiny jako uvnitř předmětů.
+- Stejné poměry stran, jednotná mobilní mřížka 2 sloupce, obrázky bez ořezu.
+- Odstranění dalších rámečků, gradientů a vizuálních vrstev z úvodních karet.
+- Jediný zdroj názvu: v Dobrodružné cestě pouze nápis v obrázku, ostatní styly jeden živý nadpis na původním štítku.
+- Údaje XP a body úspěchu zůstávají dynamické a viditelné; kliknutí a přiřazení škol se nemění.
+- Oprava konfliktu: responzivní skript již nepřepisuje obrázky výběru předmětů jinou sadou.
+- Jemný 3D stisk bez modrého překrytí.
+
+Data profilů, škol a výsledků zůstávají v zařízení a není nutné je mazat.

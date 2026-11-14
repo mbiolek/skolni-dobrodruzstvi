@@ -1,0 +1,145 @@
+/* 50.8.38 — Výběr předmětů používá stejnou geometrii a stejnou rodinu
+   šablon jako karty Výuka / Procvičování / Test uvnitř předmětů.
+   Zdroj obrázku určuje home-appearance-50-8-30.js; zde žádné jiné
+   podkladové obrázky, dodatečné obruby ani falešné grafické vrstvy. */
+html body[data-card-style] #homeScreen .app .sd825-home-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(10px,2vw,16px)!important;
+  padding:0 1px!important;
+  margin:14px 0 18px!important;
+  align-items:stretch!important;
+  box-sizing:border-box!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card{
+  display:block!important;position:relative!important;isolation:isolate!important;
+  width:100%!important;min-width:0!important;max-width:none!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  aspect-ratio:1/1.02!important;
+  margin:0!important;padding:0!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;background-image:none!important;background-color:transparent!important;
+  box-shadow:none!important;outline:none!important;
+  overflow:visible!important;clip-path:none!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+  transition:transform 125ms ease,filter 125ms ease!important;
+  transform-origin:center center!important;
+  filter:drop-shadow(0 5px 5px rgba(0,9,21,.35))!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card::before,
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card::after{
+  display:none!important;content:none!important;background:none!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-visual{
+  position:absolute!important;inset:0!important;
+  display:block!important;visibility:visible!important;opacity:1!important;
+  width:100%!important;height:100%!important;min-height:0!important;
+  max-width:none!important;aspect-ratio:auto!important;
+  margin:0!important;padding:0!important;border:0!important;
+  background:transparent!important;border-radius:0!important;
+  overflow:visible!important;transform:none!important;
+  pointer-events:none!important;z-index:0!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-visual > img{
+  position:absolute!important;inset:0!important;
+  display:block!important;visibility:visible!important;opacity:1!important;
+  width:100%!important;height:100%!important;
+  min-width:0!important;max-width:none!important;max-height:none!important;
+  object-fit:contain!important;object-position:center center!important;
+  background:transparent!important;border:0!important;border-radius:0!important;
+  filter:none!important;transform:none!important;
+}
+/* Unused old renderer content must not obscure the illustration. */
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card > :not(.sd821-visual):not(.sd821-label):not(.v451-footer){
+  display:none!important;
+}
+/* Shared title placement with exact-cutouts menu cards (blanks already include
+   the illustrated text plaque). No independently painted colored plaque. */
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-label{
+  position:absolute!important;
+  display:flex!important;visibility:visible!important;opacity:1!important;
+  left:9%!important;right:9%!important;top:auto!important;
+  width:auto!important;max-width:none!important;min-width:0!important;
+  margin:0!important;padding:0 1%!important;
+  min-height:0!important;max-height:none!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;background-image:none!important;
+  align-items:center!important;justify-content:center!important;text-align:center!important;
+  line-height:1.06!important;letter-spacing:-.015em!important;
+  font-family:Georgia,'Times New Roman',serif!important;
+  font-size:clamp(12px,3.55vw,21px)!important;font-weight:800!important;
+  text-wrap:balance!important;white-space:normal!important;overflow-wrap:anywhere!important;
+  pointer-events:none!important;z-index:4!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.6)!important;
+}
+html body[data-card-style='stone'] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-label{
+  bottom:11%!important;height:22%!important;color:#351c36!important;
+  text-shadow:0 1px 1px #ffedcf!important;
+}
+html body[data-card-style='guild'] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-label{
+  bottom:18.8%!important;height:22%!important;left:12%!important;right:12%!important;
+  color:#fff0c9!important;text-shadow:0 2px 3px #050e25!important;
+}
+html body[data-card-style='glass'] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-label{
+  bottom:23.2%!important;height:21.8%!important;color:#fff9df!important;
+  text-shadow:0 2px 4px #071939,0 0 7px #0d1a51!important;
+}
+html body[data-card-style='parchment'] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-label{
+  bottom:21.8%!important;height:24.2%!important;color:#4a2918!important;
+  text-shadow:0 1px 1px #fff0cc!important;
+}
+/* Adventure images contain their own exact text. No second HTML label. */
+html body[data-card-style='adventure'] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-label{
+  display:none!important;visibility:hidden!important;opacity:0!important;
+}
+/* Dynamic XP + achievement counts remain separate and unobstructed. */
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card > .v451-footer{
+  display:flex!important;visibility:visible!important;opacity:1!important;
+  position:absolute!important;left:5%!important;right:5%!important;
+  bottom:1.5%!important;top:auto!important;
+  width:auto!important;max-width:none!important;height:auto!important;min-height:0!important;
+  margin:0!important;padding:0!important;
+  gap:2px!important;z-index:7!important;
+  align-items:center!important;justify-content:space-between!important;flex-wrap:nowrap!important;
+  background:none!important;border:0!important;pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card > .v451-footer > span{
+  display:inline-flex!important;position:static!important;
+  align-items:center!important;justify-content:center!important;
+  flex:0 1 auto!important;max-width:49%!important;min-width:0!important;
+  min-height:20px!important;width:auto!important;height:auto!important;
+  margin:0!important;padding:3px 4px!important;
+  box-sizing:border-box!important;
+  color:#fff!important;background:#0b1833f0!important;
+  border:1px solid #d7b985!important;border-radius:16px!important;
+  box-shadow:0 1px 3px #0009!important;
+  font:800 clamp(8px,2.55vw,12px)/1.05 system-ui,sans-serif!important;
+  white-space:nowrap!important;text-shadow:0 1px 2px #000!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card:not(:active){
+  transform:none!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card:active{
+  background:transparent!important;
+  transform:translateY(3px) scale(.985)!important;
+  filter:drop-shadow(0 2px 2px rgba(0,9,21,.3))!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card:focus-visible{
+  outline:2px solid #ffedb5!important;outline-offset:3px!important;
+}
+@media(min-width:700px){
+ html body[data-card-style] #homeScreen .app .sd825-home-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:20px!important;
+ }
+ html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card > .sd821-label{
+  font-size:clamp(17px,2.1vw,25px)!important;
+ }
+ html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card > .v451-footer > span{
+  font-size:clamp(12px,1.4vw,16px)!important;padding:5px 8px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd838-home-card{transition:none!important}
+}
