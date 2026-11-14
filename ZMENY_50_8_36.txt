@@ -1,0 +1,8 @@
+Školní dobrodružství 50.8.36 – oprava 3D stisku tlačítek
+
+- Odstraněno systémové modré zvýraznění dotyku (Android).
+- Vypnuta stará modrá/skleněná výplň, která překrývala obrázková tlačítka při aktivaci a focusu.
+- Zachován jemný efekt fyzického promáčknutí tlačítka bez měnění barev obrázku.
+- Další textové vrstvy nad obrázky předmětových a tematických karet jsou skryté.
+- Klávesnicové zaostření je nadále viditelné.
+- Nezasahuje do otázek, profilů, škol ani výsledků.

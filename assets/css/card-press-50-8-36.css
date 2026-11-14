@@ -1,0 +1,72 @@
+/* 50.8.36 – no Android blue tap flash or inherited glass/blue rectangle.
+   Artwork contains the only visible title; only the image moves on press.
+   Put this AFTER every older card stylesheet. */
+html body[data-card-style='adventure'] :is(button.sd835-picture-card,#homeScreen .subject.sd835-home-art),
+html body[data-card-style='adventure'] :is(button.sd835-picture-card,#homeScreen .subject.sd835-home-art):is(:hover,:active,:focus,:focus-visible),
+html body[data-game-theme][data-card-style='adventure'] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd835-picture-card,
+html body[data-game-theme][data-card-style='adventure'] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd835-picture-card:is(:hover,:active,:focus,:focus-visible),
+html body[data-game-theme][data-card-style='adventure'] #homeScreen .subject.sd835-home-art,
+html body[data-game-theme][data-card-style='adventure'] #homeScreen .subject.sd835-home-art:is(:hover,:active,:focus,:focus-visible){
+ -webkit-tap-highlight-color:transparent!important;
+ background:transparent!important;
+ background-color:transparent!important;
+ background-image:none!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ outline:none!important;
+ backdrop-filter:none!important;
+ -webkit-backdrop-filter:none!important;
+ opacity:1!important;
+ text-shadow:none!important;
+ touch-action:manipulation!important;
+ -webkit-appearance:none!important;
+ appearance:none!important;
+ /* Baked titles are part of the image, not additional HTML text. */
+ font-size:0!important;
+ color:transparent!important;
+ transition:transform 120ms ease,filter 120ms ease!important;
+}
+/* The clickable rectangles remain transparent; decorative pseudo-elements are forbidden. */
+html body[data-card-style='adventure'] :is(button.sd835-picture-card,#homeScreen .subject.sd835-home-art)::before,
+html body[data-card-style='adventure'] :is(button.sd835-picture-card,#homeScreen .subject.sd835-home-art)::after{
+ content:none!important;display:none!important;
+}
+/* Remove every redundant label/background layer; only full artwork survives. */
+html body[data-card-style='adventure'] button.sd835-picture-card > :not(.sd-layer-art){
+ display:none!important;visibility:hidden!important;
+}
+html body[data-card-style='adventure'] #homeScreen .subject.sd835-home-art > :not(.sd821-visual):not(.v451-footer){
+ display:none!important;visibility:hidden!important;
+}
+/* Keep the real artwork and dynamic XP/counts visible. */
+html body[data-card-style='adventure'] button.sd835-picture-card > .sd-layer-art,
+html body[data-card-style='adventure'] button.sd835-picture-card > .sd-layer-art > img.sd84-exact-picture,
+html body[data-card-style='adventure'] #homeScreen .subject.sd835-home-art > .sd821-visual,
+html body[data-card-style='adventure'] #homeScreen .subject.sd835-home-art > .sd821-visual > img{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ background:transparent!important;filter:none!important;
+ -webkit-tap-highlight-color:transparent!important;
+}
+html body[data-card-style='adventure'] #homeScreen .subject.sd835-home-art > .v451-footer{
+ display:flex!important;visibility:visible!important;
+ font-size:12px!important;color:white!important;
+}
+/* Touch feedback: card moves down into its own soft shadow, not a blue square. */
+html body[data-card-style='adventure'] :is(button.sd835-picture-card,#homeScreen .subject.sd835-home-art):not(:active){
+ transform:none!important;
+ filter:drop-shadow(0 6px 5px rgba(0,9,21,.38))!important;
+}
+html body[data-card-style='adventure'] :is(button.sd835-picture-card,#homeScreen .subject.sd835-home-art):active,
+html body[data-game-theme][data-card-style='adventure'] :is(#subjectHub,#advSubjectMenu,#vlastScreen,#czechScreen,#sdCzechHub5074,#enUnit499,#v496TopicPanel,#sd52,#sdCurriculum) button.sd835-picture-card:active,
+html body[data-game-theme][data-card-style='adventure'] #homeScreen .subject.sd835-home-art:active{
+ transform:translateY(3px) scale(.985)!important;
+ filter:drop-shadow(0 2px 2px rgba(0,9,21,.30))!important;
+}
+/* Prevent sticky touch-hover color and movement. Real keyboard focus remains accessible. */
+html body[data-card-style='adventure'] :is(button.sd835-picture-card,#homeScreen .subject.sd835-home-art):focus-visible{
+ outline:2px solid #ffe2a6!important;outline-offset:2px!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body[data-card-style='adventure'] :is(button.sd835-picture-card,#homeScreen .subject.sd835-home-art){transition:none!important}
+}
