@@ -1,0 +1,8 @@
+/* Nenápadný školní vstup mezi plánem a předměty, pouze pokud je aktivní Olomouc. */
+.sd844-entry{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:70px;margin:14px auto 18px;padding:12px 15px;border:1.5px solid #d5bc81;border-radius:18px;background:linear-gradient(145deg,#193759f2,#0d2343f2);color:#fff;text-decoration:none;text-align:left;box-sizing:border-box;box-shadow:0 3px 0 #091427,0 5px 12px #0008;transition:transform .13s,box-shadow .13s;-webkit-tap-highlight-color:transparent}
+.sd844-entry:active{transform:translateY(2px);box-shadow:0 1px 0 #091427}
+.sd844-entry>span:first-child{font-size:32px;flex:none}.sd844-entry>span:nth-child(2){display:grid;gap:3px;min-width:0;flex:1}.sd844-entry strong{font:800 clamp(15px,3.8vw,21px)/1.2 system-ui,sans-serif}.sd844-entry small{font:500 clamp(11px,2.7vw,14px)/1.25 system-ui,sans-serif;color:#f1e3ca}.sd844-entry>span:last-child{font-size:24px;color:#f1d59d}
+.sd844-entry[hidden]{display:none!important}
+#subjectHub .sd844-entry{max-width:720px;margin:12px auto 20px}
+#sdCzechHub5074 .sd844-entry{max-width:720px;margin:12px auto 20px}
+@media(min-width:680px){#homeScreen .sd844-entry{max-width:680px}}

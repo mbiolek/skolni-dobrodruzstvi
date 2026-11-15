@@ -1,7 +1,14 @@
 /* 50.8.20 – bezpečné otevření nové přírodovědy bez přepsání ostatních předmětů. */
 (()=>{'use strict';
 const NATURE_PAGE=new window.URL('./prirodoveda-fulnek/index.html',document.baseURI).href;
-function open(){location.assign(NATURE_PAGE)}
+function open(){
+ // Olomouc uses a separate school-specific branch; never open Fulnek material there.
+ if(window.SDOlomoucEntry844?.isOlomouc?.()){
+  location.assign(new window.URL('./olomouc-sesity/index.html#nature',document.baseURI).href);
+  return;
+ }
+ location.assign(NATURE_PAGE);
+}
 function install(){
  const home=document.getElementById('homeScreen');if(!home)return;
  // Older versions attach direct click handlers to the nature tile, sometimes even as
@@ -22,5 +29,5 @@ function install(){
  },true);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
-window.SDNatureFulnekLaunch50820=Object.freeze({open,version:'50.8.20'});
+window.SDNatureFulnekLaunch50820=Object.freeze({open,version:'50.8.44'});
 })();

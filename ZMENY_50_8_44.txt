@@ -1,0 +1,18 @@
+Školní dobrodružství 50.8.44 – OLOMOUC: učivo podle sešitů (15. 11. 2026)
+
+ZÁKLAD: plná verze 50.8.43.
+
+1. Při aktivní škole Olomouc se na hlavní obrazovce objeví „Olomouc · učivo ze sešitů“.
+2. V nabídce Matematiky / Angličtiny / Češtiny je přímý vstup do jejich olomouckých témat.
+3. Přírodověda z hlavní obrazovky vede při aktivní Olomouci na olomouckou přírodovědu; při Fulneku zůstává stávající fulnecká učebnice.
+4. Olomoucká témata:
+   Angličtina: potraviny (28425), Present Simple, příslovce četnosti, čas (28427).
+   Matematika: zaokrouhlování, číselné řády, rozvinutý zápis (28430).
+   Český jazyk: slovesa – osoba a číslo, slovesný čas, slovní druhy (28439).
+   Přírodověda: horniny/nerosty a nerostné suroviny (28445).
+5. Celkem 12 tematických okruhů, 132 originálních otázek. Každý test/lekce má 10 různých otázek, správná odpověď je zelená a automaticky přejde na další otázku.
+6. Výsledky se ukládají lokálně pod klíčem sd844_olomouc_results_v1 pro konkrétní profil, školu a téma; nezasahují do XP ani do školních plánů Fulneku.
+7. Původní příručky a sešity nejsou v balíčku reprodukovány. Nové otázky jsou originální, témata vychází z videí.
+8. Učivo není přiřazeno ke konkrétním měsícům: videa neprokazují celý měsíční plán školy.
+
+Před vydáním ověřit na telefonu: aktivní Olomouc -> vstup, Matematika, Angličtina, Čeština, Přírodověda; návrat gestem, kliknutí a zelený automatický přechod. Fulnek musí nadále otevírat Přírodovědu Fulnek.
