@@ -1,0 +1,10 @@
+Školní dobrodružství 50.8.45 – oprava zobrazení karet po verzi 50.8.44
+
+- Původní geometrie obrázků byla vyřezána příliš a přidán ostrý tmavý pruh.
+- Obnoveno 30 kompletních grafik a tři související snímky Vlastivědy.
+- Zredukován okraj původních obrázků; nové rámečky zajišťuje CSS.
+- V Dobrodružné cestě se odstraní druhé DOM popisky (již v obrázku).
+- Jednotné 2 sloupce na telefonu, rovné řádky a zaoblené rohy.
+- Zachován 3D stisk i přepínání prostředí.
+- Žádné zásahy do profilů, PIN, škol, výsledků ani Olomouc 50.8.44.
+- UPOZORNĚNÍ: Testy zdrojů nestačí na potvrzení vzhledu na Samsungu.

@@ -4,7 +4,7 @@
  * jedna vlastní titulková lišta, která zakryje starý baked-in titulek.
  */
 (()=>{'use strict';
-const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-43/', FIXED='./assets/ikony/cards-50-8-43/';
+const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-45/', FIXED='./assets/ikony/cards-50-8-45/';
 const ENTRIES=[
  {title:'Výuka',image:'vyuka.webp'},
  {title:'Procvičování',image:'procvicovani.webp'},
@@ -75,5 +75,5 @@ function init(){
  schedule();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-window.SDVlastivedaMenu50839=Object.freeze({refresh:schedule,version:'50.8.43'});
+window.SDVlastivedaMenu50839=Object.freeze({refresh:schedule,version:'50.8.45'});
 })();
