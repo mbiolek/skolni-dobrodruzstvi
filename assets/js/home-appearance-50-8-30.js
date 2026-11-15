@@ -21,7 +21,7 @@ function apply(){
   const key=infoOf(card);if(!key)return;
   const data=ITEMS[key];
   const path=adventure
-   ?`./assets/ikony/cards-50-8-35/${data.art}.webp`
+   ?`./assets/ikony/cards-50-8-43/${data.art}.webp`
    :`./assets/ui-exact-50-8-4/${style}/blanks/${data.base}.svg`;
   card.dataset.sd840Style=style;
   card.classList.add('sd821-card','sd830-subject','sd838-home-card','sd840-home-card');
@@ -42,7 +42,10 @@ function apply(){
   const old=card.querySelector(':scope > .sd821-label');
   if(old)old.remove();
   let label=visual.querySelector(':scope > .sd842-caption');
-  if(adventure){if(label)label.remove();}
+  if(adventure){
+    if(!label){label=document.createElement('span');label.className='sd842-caption';label.setAttribute('aria-hidden','true');visual.append(label)}
+    if(label.textContent!==data.name)label.textContent=data.name;
+  }
   else {
     if(!label){label=document.createElement('span');label.className='sd842-caption';label.setAttribute('aria-hidden','true');visual.append(label)}
     if(label.textContent!==data.name)label.textContent=data.name;
@@ -69,5 +72,5 @@ function boot(){
  }).observe(home,{childList:true,subtree:true});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-window.SDHomeAppearance50830=Object.freeze({refresh,version:'50.8.42'});
+window.SDHomeAppearance50830=Object.freeze({refresh,version:'50.8.43'});
 })();

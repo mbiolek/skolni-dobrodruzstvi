@@ -4,7 +4,7 @@
  * jedna vlastní titulková lišta, která zakryje starý baked-in titulek.
  */
 (()=>{'use strict';
-const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-35/', FIXED='./assets/ikony/cards-50-8-40/';
+const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-43/', FIXED='./assets/ikony/cards-50-8-43/';
 const ENTRIES=[
  {title:'Výuka',image:'vyuka.webp'},
  {title:'Procvičování',image:'procvicovani.webp'},
@@ -43,6 +43,9 @@ function update(){
   if(!btn.getAttribute('aria-label'))btn.setAttribute('aria-label',info.title);
   let image=btn.querySelector(':scope > img.sd839-geo-image');
   btn.querySelectorAll(':scope > span.sd839-geo-label').forEach(n=>n.remove());
+  let caption=btn.querySelector(':scope > span.sd843-geo-caption');
+  if(!caption){caption=document.createElement('span');caption.className='sd843-geo-caption';btn.append(caption)}
+  caption.textContent=info.title;caption.setAttribute('aria-hidden','true');
   if(!image){image=document.createElement('img');image.className='sd839-geo-image';image.alt='';image.setAttribute('aria-hidden','true');image.draggable=false;btn.append(image)}
   // Název je vytištěn již na ilustraci; nevytvářet druhou HTML vrstvu.
   const src=(['priprava-na-skolni-test.webp','opakovani.webp','zaverecny-test.webp'].includes(info.image)?FIXED:ROOT)+info.image;
@@ -53,6 +56,7 @@ function update(){
   x.classList.remove('sd839-geo-card','sd839-geo-adventure');
   x.querySelector(':scope > img.sd839-geo-image')?.remove();
   x.querySelector(':scope > span.sd839-geo-label')?.remove();
+  x.querySelector(':scope > span.sd843-geo-caption')?.remove();
  });
 }
 function schedule(){if(!busy){busy=true;requestAnimationFrame(update)}}
@@ -71,5 +75,5 @@ function init(){
  schedule();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-window.SDVlastivedaMenu50839=Object.freeze({refresh:schedule,version:'50.8.39'});
+window.SDVlastivedaMenu50839=Object.freeze({refresh:schedule,version:'50.8.43'});
 })();

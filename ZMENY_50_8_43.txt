@@ -1,0 +1,9 @@
+Školní dobrodružství 50.8.43
+- Jednotný bezrámový obrázkový podklad (30 grafických souborů); původní stříbrný rámeček a tisknuté popisky nejsou součástí nových obrazových assetů.
+- Jeden tenký rámeček vykreslovaný pomocí CSS.
+- Jediný živý popisek, společná mřížka a bezpečná výška.
+- Sjednoceno hlavní menu, tlačítka uvnitř předmětů a nabídka Vlastivědy.
+- Odstraněna čtyři konfliktující CSS přepisování stejné geometrie.
+- Klikací obsluhy, profily, PINy, školy a výsledky zůstávají zachované.
+- Přírodověda se čtyřmi tematickými oblastmi zachována z 50.8.40.
+- Vzhled ostatních prostředí zůstává založen na jejich původních obrazových šablonách.

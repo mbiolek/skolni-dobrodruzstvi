@@ -96,7 +96,7 @@ function ensureExact(b){
  if(!picture){picture=document.createElement('img');picture.className='sd84-exact-picture';picture.alt='';picture.decoding='async';picture.draggable=false;picture.setAttribute('aria-hidden','true');art.appendChild(picture)}
  // Every card has a separate, accessible live label; baked-in labels do not scale on mobile.
  const image835=th==='adventure'?art835(title):null;
- const url=image835?`./assets/ikony/cards-50-8-35/${image835}.webp`:(th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`);
+ const url=image835?`./assets/ikony/cards-50-8-43/${image835}.webp`:(th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`);
  if(picture.getAttribute('src')!==url)picture.src=url;
  b.classList.add('sd84-exact-card');b.classList.toggle('sd87-dynamic',!exact);
  b.classList.toggle('sd835-picture-card',!!image835);
@@ -110,7 +110,12 @@ function ensureExact(b){
   // Never create a second DOM title. Keep the source caption (hidden by
   // exact-card CSS) so switching to any other environment remains possible.
   b.querySelectorAll(':scope > .sd87-card-title').forEach(n=>n.remove());
+  let live=b.querySelector(':scope > .sd843-card-caption');
+  if(!live){live=document.createElement('span');live.className='sd843-card-caption';live.setAttribute('aria-hidden','true');b.append(live)}
+  if(live.textContent!==title)live.textContent=title;
+  live.classList.toggle('sd843-caption-small',title.length>21);
  }else{
+  b.querySelector(':scope > .sd843-card-caption')?.remove();
   // Other environments still require an independently positioned live title.
   if(!label){label=document.createElement('span');label.className='sd87-card-title';label.setAttribute('aria-hidden','true');b.appendChild(label)}
   if(label.textContent!==title)label.textContent=title;
