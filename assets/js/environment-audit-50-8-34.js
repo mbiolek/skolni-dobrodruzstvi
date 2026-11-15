@@ -81,17 +81,9 @@ function normalizeGrid(grid, group){
  buttons.forEach(btn=>decorateButton(btn,group));
 }
 function normalizeHome(){
- document.querySelectorAll(HOME_SELECTOR).forEach(card=>{
-  card.classList.add('sd834-home-card');
-  const key=Object.keys(SUBJECT_LABELS).find(k=>card.classList.contains(k));
-  const title=key?SUBJECT_LABELS[key]:'';
-  const extras=card.querySelectorAll(':scope > .sd87-card-title,:scope > .sd-layer-caption,:scope > .sd817-photo-title,:scope > .sd-layer-art,:scope > img.sd-subject-title-svg');
-  extras.forEach(el=>el.remove());
-  let label=card.querySelector(':scope > .sd821-label');
-  if(!label){label=document.createElement('span');label.className='sd821-label';label.setAttribute('aria-hidden','true');card.appendChild(label)}
-  if(title && cleanText(label.textContent)!==title) label.textContent=title;
-  if(title) card.setAttribute('aria-label',title);
- });
+ // Úvodní karty vlastní výhradně SDHomeAppearance50830.
+ // Žádná další vrstva nad obrázek ani další sd821-label.
+ window.SDHomeAppearance50830?.refresh?.();
 }
 function apply(){
  document.body.dataset.sd834Style=cardStyle();

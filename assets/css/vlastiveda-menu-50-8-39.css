@@ -59,3 +59,6 @@ html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.
  font-size:clamp(10.5px,3vw,18px)!important;line-height:1.08!important;
 }
 @media(prefers-reduced-motion:reduce){html body[data-card-style] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card{transition:none!important}}
+
+/* 50.8.40 — vystředěné názvy jsou součástí aktualizovaných grafických souborů. */
+html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card > span.sd839-geo-label{display:none!important}

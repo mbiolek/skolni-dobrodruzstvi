@@ -1,0 +1,13 @@
+Školní dobrodružství 50.8.40 (15. 11. 2026)
+
+Opravy:
+1. Domovské karty: odstranění souběžných vykreslovačů a duplicitních titulků.
+2. Úvodní karty: zachovány grafické šablony 5 prostředí, živá XP a body jsou pod obrázkem, ne přes jeho název.
+3. Angličtina: odkaz na matematiku Fulnek se nevkládá do anglického výběru.
+4. Vlastivěda: Příprava na školní test, Opakování a Závěrečný test mají samostatné obrázky se správným názvem. Už žádné dodatečné titulkové pásky HTML.
+5. Přírodověda Fulnek: první obrazovka má 4 hlavní oblasti (Příroda kolem nás, Neživá příroda, Vesmír, Život na Zemi), kapitoly až po výběru oblasti. Přidáno tlačítko Zpět i historie pro kategorie a kapitoly.
+6. Číslo verze je v patičce domovské stránky, takže nepřekrývá obsah.
+7. Zachován 3D stisk karet a vzhled ostatních prostředí.
+
+Mimo rozsah: změna výukových dat, PINů, profilů, přiřazení škol nebo existujících výsledků.
+Poznámka: Zobrazení na konkrétním telefonu vyžaduje ověření po nasazení.

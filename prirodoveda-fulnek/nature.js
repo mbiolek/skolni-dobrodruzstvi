@@ -12,7 +12,7 @@ const r=(arr)=>arr[Math.floor(Math.random()*arr.length)];
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const themes={noc1:'hrad-noc-1-5084.webp',noc2:'hrad-noc-2-5084.webp',noc3:'hrad-noc-3-5084.webp',hrad:'hrad.webp',priroda:'priroda.webp',skola:'skola.webp',hradni:'hradni-styl.webp'};
 try{const w=localStorage.getItem('sd88-wallpaper')||'noc3';document.body.style.setProperty('--nature-bg',`url("../assets/pozadi/${themes[w]||themes.noc3}")`);document.body.dataset.theme=localStorage.getItem('sd-card-style-v1')||'stone';}catch(_){document.body.style.setProperty('--nature-bg','url("../assets/pozadi/hrad-noc-1-5084.webp")')}
-let topics=[], questions=[], topic=null, view='home', quiz=null, dataset=null, zoomed=false;
+let topics=[], questions=[], topic=null, view='home', quiz=null, dataset=null, zoomed=false, activeGroup=null;
 function getProfile(){try{return localStorage.getItem(ACTIVE)||'host'}catch{return 'host'}}
 function getProfileName(){try{const id=getProfile(),all=JSON.parse(localStorage.getItem(PROFILES)||'{}');return id==='parent'?'Rodič':all[id]?.name||id}catch{return getProfile()}}
 function key(){return PREFIX+getProfile()}
@@ -23,7 +23,7 @@ function save(){try{localStorage.setItem(key(),JSON.stringify(db))}catch(e){cons
 function merlin(text){return `<div class="n-merlin"><img src="../assets/merlin/merlin-lucerna-5070.webp" alt="Moudrý Merlin s lucernou" loading="lazy"><p><strong>Moudrý Merlin:</strong> ${esc(text)}</p></div>`}
 function btn(label,act,cls='primary',attr=''){return `<button type="button" class="n-btn ${cls}" data-act="${esc(act)}" ${attr}>${esc(label)}</button>`}
 function layout(title,content,desc=''){
- root.innerHTML=`<header class="n-top"><a href="../index.html" class="n-back">← Domů</a><span class="n-brand">🌿 Školní dobrodružství</span></header><section class="n-heading"><div class="n-label">PŘÍRODOVĚDA · 5. TŘÍDA · FULNEK</div><h1>${esc(title)}</h1>${desc?`<p>${esc(desc)}</p>`:''}</section><nav class="n-nav" aria-label="Nabídka přírodovědy">${btn('Všechny kapitoly','home','nav')}${btn('Školní test','test','nav')}${btn('Opakování chyb','repeat','nav')}${btn('Moje výsledky','results','nav')}</nav><div class="n-main">${content}</div><footer class="n-footer">Školní dobrodružství · Přírodověda 5. třída · verze 50.8.20<br><small>Výsledky ukládáme pouze k profilu na tomto zařízení. Obrázky jsou názorné ilustrace.</small></footer>`;
+ root.innerHTML=`<header class="n-top">${view!=='home'?`<button type="button" data-act="back" class="n-back">← Zpět</button>`:''}<a href="../index.html" class="n-back">⌂ Domů</a><span class="n-brand">🌿 Školní dobrodružství</span></header><section class="n-heading"><div class="n-label">PŘÍRODOVĚDA · 5. TŘÍDA · FULNEK</div><h1>${esc(title)}</h1>${desc?`<p>${esc(desc)}</p>`:''}</section><nav class="n-nav" aria-label="Nabídka přírodovědy">${btn('Všechny kapitoly','home','nav')}${btn('Školní test','test','nav')}${btn('Opakování chyb','repeat','nav')}${btn('Moje výsledky','results','nav')}</nav><div class="n-main">${content}</div><footer class="n-footer">Školní dobrodružství · Přírodověda 5. třída · verze 50.8.40<br><small>Výsledky ukládáme pouze k profilu na tomto zařízení. Obrázky jsou názorné ilustrace.</small></footer>`;
  window.scrollTo(0,0);
 }
 const dbTopic=id=>topics.find(t=>t.id===id);
@@ -54,8 +54,46 @@ function drawDiagram(t){
 }
 const groups=['Příroda kolem nás','Neživá příroda','Vesmír','Život na Zemi'];
 const chapterBtn=t=>`<button class="n-topic" data-act="lesson" data-topic="${esc(t.id)}"><img src="${photo(t.img)}" alt="" loading="lazy"><span class="n-topic-body"><b>${esc(t.title)}</b><small>${esc(t.group)}</small></span></button>`;
-function home(){topic=null;view='home';db=read();const content=groups.map(g=>`<section class="n-group"><h2>${esc(g)}</h2><div class="n-grid">${topics.filter(t=>t.group===g).map(chapterBtn).join('')}</div></section>`).join('')+infoPanel('Další učivo přijde později','<p>Část <strong>Člověk – lidské tělo a lidské výtvory</strong> doplníme až podle zbývajících fotografií učebnice. Zatím není součástí otázek.</p>')+merlin('Vyber si kapitolu. Nejdřív si prohlédni obrázek a schéma, potom zkus otázky.');layout('Člověk v přírodě',content,'Učivo podle učebnice používané ve Fulneku • kapitoly přibližně do strany 47')}
-function lesson(id){const t=dbTopic(id);if(!t)return home();topic=t;view='lesson';const content=picture(t,true)+drawDiagram(t)+infoPanel('Co se naučíš',`<p class="n-intro">${esc(t.desc)}</p><ol class="n-steps">${t.steps.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`)+infoPanel('Zkus si zapamatovat',`<p>Po přečtení výkladu odpověz na otázky. Při chybě ti Merlin vysvětlí správný postup.</p><div class="n-actions">${btn('Procvičovat tuto kapitolu','practice')}${btn('Další kapitola','next-topic','secondary')}</div>`)+merlin('Prohlédni si obrázek. Vysvětli vlastními slovy, co vidíš, a potom zkus procvičování.');layout(t.title,content,'Výuka s fotografiemi, schématem a vysvětlením')}
+const GROUP_ART={
+ 'Příroda kolem nás':'ziva-priroda',
+ 'Neživá příroda':'neziva-priroda',
+ 'Vesmír':'vesmir',
+ 'Život na Zemi':'potravni-retezec'
+};
+function rememberRoute(level,group='',id=''){
+ try{history.pushState({sdNature50840:true,level,group,id},'',location.href)}catch(_){}
+}
+function home(push=false){
+ topic=null;activeGroup=null;view='home';db=read();
+ const content=`<div class="n-group-selection" aria-label="Čtyři oblasti přírodovědy">${groups.map(g=>`<button type="button" class="n-group-choice" data-act="group" data-group="${esc(g)}"><img src="${photo(GROUP_ART[g])}" alt="" loading="lazy"><span>${esc(g)}</span></button>`).join('')}</div>`+merlin('Nejprve si vyber jednu ze čtyř oblastí přírodovědy. Potom se otevřou kapitoly této oblasti.');
+ layout('Člověk v přírodě',content,'Vyber jednu ze čtyř oblastí učiva 5. třídy.');
+ if(push)rememberRoute('home');
+}
+function groupPage(group,push=true){
+ if(!groups.includes(group))return home();
+ activeGroup=group;topic=null;view='group';
+ const selection=topics.filter(t=>t.group===group);
+ const content=`<div class="n-group-meta">${selection.length} kapitol</div><div class="n-grid">${selection.map(chapterBtn).join('')}</div>`;
+ layout(group,content,'Vyber kapitolu pro výuku nebo procvičování.');
+ if(push)rememberRoute('group',group);
+}
+function lesson(id,push=true){
+ const t=dbTopic(id);if(!t)return home();
+ activeGroup=t.group;topic=t;view='lesson';
+ const content=picture(t,true)+drawDiagram(t)+infoPanel('Co se naučíš',`<p class="n-intro">${esc(t.desc)}</p><ol class="n-steps">${t.steps.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`)+infoPanel('Zkus si zapamatovat',`<p>Po přečtení výkladu odpověz na otázky. Při chybě ti Merlin vysvětlí správný postup.</p><div class="n-actions">${btn('Procvičovat tuto kapitolu','practice')}${btn('Další kapitola','next-topic','secondary')}</div>`)+merlin('Prohlédni si obrázek. Vysvětli vlastními slovy, co vidíš, a potom zkus procvičování.');
+ layout(t.title,content,'Výuka s fotografiemi, schématem a vysvětlením');
+ if(push)rememberRoute('lesson',t.group,id);
+}
+function goBack(){
+ if(view==='quiz'&&topic){lesson(topic.id,false);return}
+ if((view==='group'||view==='lesson')&&history.state?.sdNature50840&&history.state.level!=='home'){history.back();return}
+ if(view==='home'){location.assign('../index.html');return}
+ if(view==='group'){home();return}
+ if(view==='lesson'){groupPage(activeGroup,false);return}
+ if(view==='quiz'&&topic){lesson(topic.id,false);return}
+ if(activeGroup){groupPage(activeGroup,false);return}
+ home();
+}
 function nextTopic(){if(!topic)return home();const i=topics.indexOf(topic);return lesson(topics[(i+1)%topics.length].id)}
 function begin(kind){db=read();let pool=[];if(kind==='practice'){if(!topic)return home();const related=topics.filter(t=>t.group===topic.group && t.id!==topic.id).flatMap(t=>t.questions);pool=[...shuffle(topic.questions),...shuffle(related).slice(0,Math.max(0,10-topic.questions.length))];}else if(kind==='test'){pool=shuffle(questions).slice(0,15)}else if(kind==='repeat'){pool=shuffle(db.mistakes.map(x=>questions.find(q=>q.id===x.qid)).filter(Boolean)).slice(0,15)}else return;
  if(pool.length===0){view='empty';layout('Opakování chyb',infoPanel('Zatím žádné chyby','<p>Po prvním chybně vyřešeném příkladu se sem uloží otázka pro zopakování.</p>'+btn('Zpět ke kapitolám','home')));return;}
@@ -78,9 +116,10 @@ function finish(){if(!quiz)return home();const done=quiz;view='summary';const sc
 function results(){db=read();view='results';const percent=db.attempts?Math.round(100*db.correct/db.attempts):0;
  layout('Moje výsledky',infoPanel('Přehled profilu '+getProfileName(),`<div class="n-stats"><div><b>${db.attempts}</b><small>Odpovědí</small></div><div><b>${percent}%</b><small>Správně</small></div><div><b>${db.mistakes.length}</b><small>K opakování</small></div></div><div class="n-actions">${btn('Opakovat chyby','repeat')}${btn('Všechny kapitoly','home','secondary')}</div>`)+infoPanel('Poslední testy',db.sessions.length?`<ol class="n-history">${db.sessions.slice().reverse().slice(0,20).map(s=>`<li>${esc(new Date(s.at).toLocaleDateString('cs-CZ'))} · ${s.kind==='test'?'Školní test':s.kind==='repeat'?'Opakování':'Procvičování'} · <strong>${s.score}/${s.total}</strong></li>`).join('')}</ol>`:'<p>Ještě nebyl dokončen žádný test.</p>')+merlin('Výsledky patří k vybranému profilu. Ostatní profily mají své vlastní záznamy.'),'Ukládáno lokálně, bez zasahování do matematiky a dalších předmětů');}
 function openPhoto(src){const dialog=document.getElementById('nature-photo');if(!dialog)return;const image=dialog.querySelector('img');image.src=photo(src);image.alt='Zvětšený názorný obrázek';if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');zoomed=true;}
-root.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const act=b.dataset.act;if(act==='home')home();else if(act==='lesson')lesson(b.dataset.topic);else if(act==='next-topic')nextTopic();else if(act==='practice')begin('practice');else if(act==='test')begin('test');else if(act==='repeat')begin('repeat');else if(act==='results')results();else if(act==='answer')answer(Number(b.dataset.idx));else if(act==='hint')hint();else if(act==='next')next();else if(act==='zoom')openPhoto(b.dataset.src)});
+root.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const act=b.dataset.act;if(act==='home')home(true);else if(act==='back')goBack();else if(act==='group')groupPage(b.dataset.group);else if(act==='lesson')lesson(b.dataset.topic);else if(act==='next-topic')nextTopic();else if(act==='practice')begin('practice');else if(act==='test')begin('test');else if(act==='repeat')begin('repeat');else if(act==='results')results();else if(act==='answer')answer(Number(b.dataset.idx));else if(act==='hint')hint();else if(act==='next')next();else if(act==='zoom')openPhoto(b.dataset.src)});
 const dialog=document.getElementById('nature-photo');dialog?.querySelector('[data-close]')?.addEventListener('click',()=>{dialog.close?.();zoomed=false});dialog?.addEventListener('click',e=>{if(e.target===dialog){dialog.close?.();zoomed=false}});
 window.addEventListener('storage',e=>{if(e.key===ACTIVE){db=read();if(view==='results')results()}});
-async function start(){try{if(window.SDNatureData50820){dataset=window.SDNatureData50820;}else{const res=await fetch('./chapters.json?v=50820');if(!res.ok)throw new Error('HTTP '+res.status);dataset=await res.json();}topics=dataset.chapters;questions=topics.flatMap(t=>t.questions);if(topics.length!==26||questions.length!==79)throw new Error('Neúplná databáze');home()}catch(err){root.innerHTML=`<div class="n-error"><h1>Přírodovědu se nepodařilo načíst</h1><p>${esc(err.message)}</p><p>Obnov stránku po dokončení aktualizace PWA.</p><a href="../index.html">← Domů</a></div>`;}}
+window.addEventListener('popstate',e=>{const state=e.state;if(!state?.sdNature50840)return; if(state.level==='home')home(false); else if(state.level==='group')groupPage(state.group,false); else if(state.level==='lesson')lesson(state.id,false);});
+async function start(){try{if(window.SDNatureData50820){dataset=window.SDNatureData50820;}else{const res=await fetch('./chapters.json?v=50820');if(!res.ok)throw new Error('HTTP '+res.status);dataset=await res.json();}topics=dataset.chapters;questions=topics.flatMap(t=>t.questions);if(topics.length!==26||questions.length!==79)throw new Error('Neúplná databáze');home();try{history.replaceState({sdNature50840:true,level:'home'},'',location.href)}catch(_){}}catch(err){root.innerHTML=`<div class="n-error"><h1>Přírodovědu se nepodařilo načíst</h1><p>${esc(err.message)}</p><p>Obnov stránku po dokončení aktualizace PWA.</p><a href="../index.html">← Domů</a></div>`;}}
 start();
 })();

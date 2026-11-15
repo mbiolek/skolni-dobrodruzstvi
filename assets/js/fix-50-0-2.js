@@ -5,12 +5,14 @@ function updateVersion(){
  let badge=document.getElementById('schoolVersion502');
  if(!badge){badge=document.createElement('div');badge.id='schoolVersion502';document.body.append(badge)}
  badge.textContent='Školní dobrodružství · verze '+current;
+ const home=document.querySelector('#homeScreen .app')||document.getElementById('homeScreen');
+ if(home&&badge.parentNode!==home)home.append(badge);
  badge.title='Informace o verzi';badge.onclick=()=>document.getElementById('appVersionDialog')?.classList.add('open');
  const gate=document.getElementById('authGate');
  badge.classList.toggle('on-login',!!gate&&!gate.classList.contains('off'));
  const prior=document.getElementById('schoolVersionAtLogin');if(prior)prior.hidden=true;
 }
-updateVersion();window.addEventListener('school-account',()=>setTimeout(updateVersion,0));
+updateVersion();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',updateVersion,{once:true});window.addEventListener('school-account',()=>setTimeout(updateVersion,0));
 window.addEventListener('pageshow',updateVersion);
 window.SDShowVersion=updateVersion;
 })();

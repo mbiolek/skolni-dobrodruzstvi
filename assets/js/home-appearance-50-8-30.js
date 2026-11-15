@@ -1,62 +1,67 @@
-/* 50.8.38 – Jediný renderer domovských karet.
- * Domů používá stejné skutečné obrazové šablony jako nabídky uvnitř předmětu,
- * nikoli staré soubory home-50-8-21. Zachovává stávající obsluhu kliknutí a XP.
- */
+/* 50.8.40 — jediné skutečné vykreslení domovských předmětů.
+   Žádný souběžný HTML titulek přes již nadepsaný obrázek. */
 (()=>{'use strict';
 const STYLES=new Set(['glass','stone','parchment','guild','adventure']);
-const SUBJECTS={
- math:{slug:'matematika',title:'Matematika',template:'opakovani'},
- english:{slug:'anglictina',title:'Angličtina',template:'procvicovani'},
- czech:{slug:'cestina',title:'Čeština',template:'vyuka'},
- nature:{slug:'prirodoveda',title:'Přírodověda',template:'mesicni_plan'},
- history:{slug:'vlastiveda',title:'Vlastivěda',template:'test'},
- music:{slug:'hudebni-vychova',title:'Hudební výchova',template:'zaverecny_test'}
+const ITEMS={
+ math:{name:'Matematika',art:'matematika',base:'vyuka'},
+ english:{name:'Angličtina',art:'anglictina',base:'procvicovani'},
+ czech:{name:'Čeština',art:'cestina',base:'vyuka'},
+ nature:{name:'Přírodověda',art:'prirodoveda',base:'mesicni_plan'},
+ history:{name:'Vlastivěda',art:'vlastiveda',base:'test'},
+ music:{name:'Hudební výchova',art:'hudebni-vychova',base:'zaverecny_test'}
 };
 const SELECTOR='#homeScreen .subject-grid .subject,#homeScreen .v23-extra-grid .subject';
-function style(){let s=document.body.dataset.cardStyle;return STYLES.has(s)?s:'guild'}
-function item(card){const key=Object.keys(SUBJECTS).find(k=>card.classList.contains(k));return key?SUBJECTS[key]:null}
+function currentStyle(){let v=document.body.dataset.cardStyle;return STYLES.has(v)?v:'guild'}
+function infoOf(card){return Object.keys(ITEMS).find(x=>card.classList.contains(x))}
 let queued=false;
 function apply(){
  queued=false;
- const selected=style();
+ const style=currentStyle(),adventure=style==='adventure';
  document.querySelectorAll(SELECTOR).forEach(card=>{
-  const d=item(card);if(!d)return;
-  const adventure=selected==='adventure';
-  // Exact same files as inner menu (ui-exact-50-8-4/<theme>/blanks/*.svg).
-  // Adventure has its own illustrated cards with the printed subject title.
-  const src=adventure
-   ?`./assets/ikony/cards-50-8-35/${d.slug}.webp`
-   :`./assets/ui-exact-50-8-4/${selected}/blanks/${d.template}.svg`;
-  card.classList.add('sd821-card','sd830-subject','sd838-home-card');
+  const key=infoOf(card);if(!key)return;
+  const data=ITEMS[key];
+  const path=adventure
+   ?`./assets/ikony/cards-50-8-35/${data.art}.webp`
+   :`./assets/ui-exact-50-8-4/${style}/blanks/${data.base}.svg`;
+  card.dataset.sd840Style=style;
+  card.classList.add('sd821-card','sd830-subject','sd838-home-card','sd840-home-card');
   card.classList.toggle('sd835-home-art',adventure);
-  card.dataset.sd838Style=selected;
-  card.setAttribute('aria-label',d.title);
-  // Remove renderer leftovers, never remove XP footer, click handlers or buttons.
-  card.querySelectorAll(':scope > img.sd812-home-art,:scope > img.sd815-home-art,:scope > img.sd816-home-art,:scope > img.sd817-home-art,:scope > .sd817-photo-title,:scope > .sd-layer-art,:scope > .sd-layer-caption,:scope > .sd87-card-title,:scope > .sd87-topic-medallion,:scope > img.sd-subject-title-svg').forEach(n=>n.remove());
-  card.classList.remove('sd815-art-card','sd816-painted-card','sd817-themed','sd817-image-mode','sd817-photo-mode','sd84-exact-card','sd-layered','sd814-unified-home-card');
+  card.setAttribute('aria-label',data.name);
+  // Keep only the picture and the LIVE XP counters. The button itself and its
+  // original click handlers are never replaced.
   let visual=card.querySelector(':scope > .sd821-visual');
-  if(!visual){visual=document.createElement('span');visual.className='sd821-visual';visual.setAttribute('aria-hidden','true');card.prepend(visual)}
+  if(!visual){visual=document.createElement('span');visual.className='sd821-visual';visual.setAttribute('aria-hidden','true')}
   let image=visual.querySelector(':scope > img');
-  if(!image){visual.replaceChildren();image=document.createElement('img');visual.appendChild(image)}
-  if(image.getAttribute('src')!==src)image.setAttribute('src',src);
-  image.alt='';image.decoding='async';image.draggable=false;
+  if(!image){visual.replaceChildren();image=document.createElement('img');visual.append(image)}
+  if(image.getAttribute('src')!==path)image.setAttribute('src',path);
+  image.alt='';image.draggable=false;image.decoding='async';image.setAttribute('aria-hidden','true');
+  let footer=card.querySelector(':scope > .v451-footer');
+  if(!footer){footer=document.createElement('span');footer.className='v451-footer';footer.setAttribute('aria-hidden','true');footer.innerHTML='<span>★ 0 XP</span><span>🏅 0 bodů</span>'}
+  // In other four themes the blank SVG *needs* exactly one live title.
   let label=card.querySelector(':scope > .sd821-label');
-  if(!label){label=document.createElement('span');label.className='sd821-label';label.setAttribute('aria-hidden','true');visual.after(label)}
-  if(label.textContent!==d.title)label.textContent=d.title;
-  label.setAttribute('aria-hidden','true');
+  if(adventure){if(label)label.remove();card.replaceChildren(visual,footer)}
+  else{
+   if(!label){label=document.createElement('span');label.className='sd821-label';label.setAttribute('aria-hidden','true')}
+   if(label.textContent!==data.name)label.textContent=data.name;
+   if(card.children.length!==3||card.children[0]!==visual||card.children[1]!==label||card.children[2]!==footer)card.replaceChildren(visual,label,footer);
+  }
  });
 }
 function refresh(){if(queued)return;queued=true;requestAnimationFrame(apply)}
 function boot(){
  refresh();
- ['sd-card-style-change','sd-style-preview','sd88-wallpaper-changed'].forEach(e=>document.addEventListener(e,refresh));
- window.addEventListener('pageshow',refresh);window.addEventListener('focus',refresh);
+ for(const type of ['sd-card-style-change','sd-style-preview','sd88-wallpaper-changed','sd87-cards-ready'])document.addEventListener(type,refresh);
+ window.addEventListener('pageshow',refresh);
+ window.addEventListener('focus',refresh);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});
- new MutationObserver(ms=>{if(ms.some(m=>m.attributeName==='data-card-style'))refresh()}).observe(document.body,{attributes:true,attributeFilter:['data-card-style']});
- const home=document.getElementById('homeScreen');if(home)new MutationObserver(ms=>{
-  if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches?.('.subject,.subject-grid,.v23-extra-grid')||n.querySelector?.('.subject')))))refresh();
+ new MutationObserver(records=>{
+  if(records.some(r=>r.type==='attributes'&&r.attributeName==='data-card-style'))refresh();
+ }).observe(document.body,{attributes:true,attributeFilter:['data-card-style']});
+ const home=document.getElementById('homeScreen');
+ if(home)new MutationObserver(records=>{
+  if(records.some(r=>r.type==='childList'&&[...r.addedNodes].some(n=>n.nodeType===1 && (n.matches?.('.subject-grid,.v23-extra-grid,.subject')||n.querySelector?.('.subject-grid,.v23-extra-grid,.subject')))))refresh();
  }).observe(home,{childList:true,subtree:true});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-window.SDHomeAppearance50830=Object.freeze({refresh,version:'50.8.38'});
+window.SDHomeAppearance50830=Object.freeze({refresh,version:'50.8.40'});
 })();

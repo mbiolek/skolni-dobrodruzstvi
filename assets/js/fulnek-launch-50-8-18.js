@@ -2,13 +2,19 @@
    Existing cards and their handlers stay untouched. */
 (()=>{'use strict';
 const url=new URL('./matematika-fulnek/index.html',document.baseURI).href;
-function open(){location.assign(url)}
+function open(){
+ const hub=document.getElementById('subjectHub');
+ if(hub?.classList.contains('open') && hub.dataset.subject && hub.dataset.subject!=='math')return;
+ location.assign(url);
+}
 function install(){
  const hub=document.querySelector('#subjectHub .hub-cards');
  if(hub&&!hub.querySelector('.sd518-fulnek-hub')){
   const b=document.createElement('button');b.type='button';b.className='hub-card sd518-fulnek-hub';
   b.innerHTML='<b>Matematika – 5. třída · Fulnek</b><span class="hub-emoji" aria-hidden="true">📐</span><small>Výuka, procvičování, školní test a opakování chyb</small><span class="hub-start">Otevřít učivo</span>';
   b.addEventListener('click',open);hub.append(b);
+  const toggle=()=>{b.hidden=hub.dataset.subject==='english';};
+  new MutationObserver(toggle).observe(hub,{attributes:true,attributeFilter:['data-subject','class']});toggle();
  }
  const grid=document.getElementById('v496Topics');
  if(grid&&!grid.querySelector('.sd518-fulnek-topic')){

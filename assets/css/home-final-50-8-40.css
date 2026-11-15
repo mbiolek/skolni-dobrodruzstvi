@@ -1,0 +1,96 @@
+/* 50.8.40 – bez třetí/čtvrté vrstvy DOM titulků a bez překrytí XP.
+   Vizuální kartu vykresluje pouze SDHomeAppearance50830. */
+html body[data-card-style] #homeScreen .app .sd825-home-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:clamp(12px,2.5vw,20px)!important;align-items:stretch!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card{
+ position:relative!important;display:block!important;width:100%!important;height:auto!important;
+ aspect-ratio:1/1.16!important;min-height:0!important;max-height:none!important;
+ box-sizing:border-box!important;margin:0!important;padding:0!important;
+ background:transparent!important;background-color:transparent!important;
+ background-image:none!important;box-shadow:none!important;
+ border:0!important;border-radius:0!important;overflow:visible!important;
+ outline:none!important;isolation:isolate!important;
+ -webkit-tap-highlight-color:transparent!important;
+ transition:transform .13s ease,filter .13s ease!important;
+ filter:drop-shadow(0 4px 4px #0712227a)!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd840-home-card::before,
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd840-home-card::after{
+ content:none!important;display:none!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual{
+ position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:auto!important;
+ width:100%!important;height:calc(100% - 34px)!important;min-height:0!important;max-height:none!important;
+ display:block!important;margin:0!important;padding:0!important;overflow:visible!important;
+ background:transparent!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;transform:none!important;pointer-events:none!important;z-index:1!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > img{
+ display:block!important;width:100%!important;height:100%!important;
+ object-fit:contain!important;object-position:center center!important;
+ background:transparent!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;filter:none!important;transform:none!important;
+}
+/* Adventurální obrázky mají nápis přímo v souboru, žádný další DOM nápis. */
+html body[data-card-style='adventure'] #homeScreen .sd825-home-grid .subject.sd840-home-card > .sd821-label,
+html body[data-card-style='adventure'] #homeScreen .sd825-home-grid .subject.sd840-home-card :is(.sd87-card-title,.sd-layer-caption,.sd817-photo-title){
+ display:none!important;visibility:hidden!important;opacity:0!important;
+}
+/* V ostatních čtyřech prostředích přesně jeden HTML titulek nad čistou šablonou. */
+html body[data-card-style]:not([data-card-style='adventure']) #homeScreen .sd825-home-grid .subject.sd840-home-card > .sd821-label{
+ display:flex!important;visibility:visible!important;opacity:1!important;
+ align-items:center!important;justify-content:center!important;text-align:center!important;
+ max-width:82%!important;white-space:normal!important;overflow-wrap:anywhere!important;
+ z-index:3!important;pointer-events:none!important;
+}
+/* XP / odznaky leží POD obrazovou kartou, ne na jejím předtištěném názvu. */
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd840-home-card > .v451-footer{
+ display:flex!important;position:absolute!important;z-index:6!important;
+ top:auto!important;bottom:1px!important;left:0!important;right:0!important;
+ width:100%!important;height:30px!important;min-height:0!important;max-height:30px!important;
+ margin:0!important;padding:0 2px!important;background:none!important;border:0!important;
+ align-items:center!important;justify-content:space-between!important;gap:3px!important;pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd840-home-card > .v451-footer > span{
+ position:static!important;display:inline-flex!important;flex:0 1 auto!important;
+ max-width:49%!important;min-width:0!important;min-height:24px!important;
+ box-sizing:border-box!important;margin:0!important;padding:3px 7px!important;
+ background:#0b1b32ed!important;color:white!important;
+ font:800 clamp(9px,2.8vw,13px)/1.05 system-ui,sans-serif!important;
+ border:1px solid #c6a56a!important;border-radius:18px!important;
+ box-shadow:0 2px 4px #0007!important;white-space:nowrap!important;
+}
+html body[data-card-style] #homeScreen .subject.sd840-home-card:active{
+ background:none!important;transform:translateY(3px) scale(.987)!important;
+ filter:drop-shadow(0 2px 2px #07122270)!important;
+}
+html body[data-card-style] #homeScreen .subject.sd840-home-card:focus-visible{
+ outline:2px solid #f6da8d!important;outline-offset:2px!important;
+}
+@media(min-width:720px){html body[data-card-style] #homeScreen .app .sd825-home-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:359px){
+ html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd840-home-card > .v451-footer > span{
+ font-size:9px!important;padding:2px 3px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){html body[data-card-style] #homeScreen .subject.sd840-home-card{transition:none!important}}
+/* Kontextové odkazy do Matematiky nikdy nemají být v Angličtině. */
+#subjectHub[data-subject='english'] .sd518-fulnek-hub{display:none!important}
+/* Nejstarší zbytkový stín vykreslovaný za kartami se nepoužije. */
+html body[data-card-style] :is(#subjectHub,#sdCzechHub5074,#sd52) button.sd835-picture-card::before,
+html body[data-card-style] :is(#subjectHub,#sdCzechHub5074,#sd52) button.sd835-picture-card::after{content:none!important;display:none!important}
+/* Plovoucí vodoznak verze nesmí překrývat tlačítka a obsah. */
+#sdVersionBadge,#sdVersionChip,.sd-version-badge,.sd-version-pill{
+ pointer-events:none!important;
+}
+
+/* Číslo verze je nyní v normálním toku domovské stránky. */
+html body #homeScreen #schoolVersion502,html body #homeScreen #schoolVersion502.on-login{
+ display:table!important;position:static!important;inset:auto!important;right:auto!important;bottom:auto!important;
+ transform:none!important;z-index:auto!important;clear:both!important;max-width:96%!important;
+ margin:10px auto 16px!important;padding:7px 12px!important;text-align:center!important;
+ pointer-events:auto!important;cursor:pointer!important;
+}
+html body #homeScreen #schoolVersion502.on-login{display:none!important}
