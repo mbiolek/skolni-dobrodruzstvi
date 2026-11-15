@@ -1,0 +1,134 @@
+/* Školní dobrodružství 50.8.42 – jedna velikost obrázků a vnitřní popisek.
+   Opravuje důvody ořezání v 50.8.41, nikoli další maskovací vrstvu. */
+html body[data-card-style] #homeScreen .app .sd825-home-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:clamp(13px,3.2vw,22px)!important;align-items:start!important;
+ justify-items:stretch!important;width:100%!important;box-sizing:border-box!important;
+ padding:0!important;margin:15px 0 20px!important;
+}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ justify-content:flex-start!important;position:relative!important;
+ width:100%!important;height:auto!important;max-width:none!important;min-height:0!important;
+ margin:0!important;padding:0!important;aspect-ratio:auto!important;
+ box-sizing:border-box!important;overflow:visible!important;
+ background:none!important;background-color:transparent!important;background-image:none!important;
+ border:none!important;border-radius:0!important;box-shadow:none!important;
+ outline:none!important;isolation:isolate!important;clip-path:none!important;
+ -webkit-tap-highlight-color:transparent!important;
+ filter:drop-shadow(0 3px 3px rgba(0,10,28,.25))!important;
+ transition:transform .14s ease,filter .14s ease!important;
+}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd840-home-card::before,
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd840-home-card::after{
+ content:none!important;display:none!important;
+}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual{
+ display:block!important;position:relative!important;inset:auto!important;
+ flex:0 0 auto!important;width:100%!important;height:auto!important;aspect-ratio:1/1!important;
+ min-height:0!important;max-height:none!important;
+ padding:0!important;margin:0!important;overflow:visible!important;
+ background:none!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;transform:none!important;z-index:1!important;
+ pointer-events:none!important;
+}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > img{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;
+ object-fit:contain!important;object-position:center!important;transform:none!important;
+ max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;
+ background:none!important;border:none!important;box-shadow:none!important;
+}
+/* Source images of four environments contain BLANK title plaques. One label per plaque. */
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > .sd821-label{display:none!important}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ display:flex!important;position:absolute!important;z-index:5!important;
+ box-sizing:border-box!important;align-items:center!important;justify-content:center!important;
+ left:11%!important;width:78%!important;margin:0!important;padding:0 1%!important;
+ color:#3c2534!important;background:none!important;border:0!important;box-shadow:none!important;
+ font:bold clamp(12px,3.7vw,20px)/1.08 Georgia,'Times New Roman',serif!important;
+ white-space:normal!important;overflow-wrap:break-word!important;text-align:center!important;
+ text-wrap:balance!important;pointer-events:none!important;
+}
+html body[data-card-style='stone'] #homeScreen .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ top:68%!important;height:17%!important;color:#412b29!important;text-shadow:0 1px 1px #fff1da!important;
+}
+html body[data-card-style='guild'] #homeScreen .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ top:59%!important;height:18%!important;left:16%!important;width:68%!important;
+ color:#fff0ce!important;text-shadow:0 1px 3px #030e2e!important;
+}
+html body[data-card-style='parchment'] #homeScreen .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ top:62%!important;height:16%!important;color:#483125!important;text-shadow:0 1px 1px #ffefd5!important;
+}
+html body[data-card-style='glass'] #homeScreen .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ top:62%!important;height:16%!important;color:#fff9e9!important;text-shadow:0 2px 4px #020c30!important;
+}
+/* Adventure pictures have baked-in captions. No extra live text. */
+html body[data-card-style='adventure'] #homeScreen .sd825-home-grid .subject.sd840-home-card > .sd821-visual > .sd842-caption{display:none!important}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > .v451-footer{
+ position:relative!important;inset:auto!important;display:flex!important;visibility:visible!important;
+ align-items:center!important;justify-content:space-between!important;flex:none!important;
+ width:100%!important;height:32px!important;min-height:32px!important;max-height:32px!important;
+ padding:2px 1px!important;margin:2px 0 0!important;
+ box-sizing:border-box!important;gap:4px!important;
+ background:none!important;border:0!important;box-shadow:none!important;z-index:3!important;
+}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > .v451-footer > span{
+ display:inline-flex!important;position:static!important;align-items:center!important;
+ flex:0 1 auto!important;max-width:49%!important;min-width:0!important;
+ height:26px!important;min-height:0!important;box-sizing:border-box!important;
+ margin:0!important;padding:3px 6px!important;
+ color:#fff!important;background:#081c38ef!important;border:1px solid #c7aa76!important;
+ border-radius:18px!important;box-shadow:0 1px 2px #0007!important;
+ font:800 clamp(9px,2.8vw,13px)/1.1 system-ui,sans-serif!important;
+ white-space:nowrap!important;
+}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd840-home-card:active{
+ transform:translateY(3px) scale(.986)!important;
+ filter:drop-shadow(0 1px 1px #00102277)!important;background:none!important;
+}
+/* All interior picture buttons: preserve natural square pictures and complete edges. */
+html body[data-card-style] :is(#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,#v496TopicPanel #v496Topics,#enUnit499 #en499topics,#sd52 .sd52-grid,#sdCurriculum .sd-grid).sd834-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:clamp(14px,3.5vw,22px)!important;justify-items:stretch!important;align-items:start!important;
+}
+html body[data-card-style] :is(#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,#v496TopicPanel #v496Topics,#enUnit499 #en499topics,#sd52 .sd52-grid,#sdCurriculum .sd-grid).sd834-grid > button.sd834-nav-card{
+ width:100%!important;max-width:none!important;min-width:0!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ aspect-ratio:1/1!important;margin:0!important;padding:0!important;
+ align-self:start!important;justify-self:stretch!important;overflow:visible!important;
+ box-sizing:border-box!important;clip-path:none!important;
+ background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+html body[data-card-style] :is(#subjectHub,#advSubjectMenu,#sdCzechHub5074,#sd52) button.sd84-exact-card > .sd-layer-art,
+html body[data-card-style] :is(#subjectHub,#advSubjectMenu,#sdCzechHub5074,#sd52) button.sd84-exact-card > .sd-layer-art > img.sd84-exact-picture{
+ inset:0!important;width:100%!important;height:100%!important;
+ transform:none!important;object-fit:contain!important;object-position:center!important;
+ max-width:100%!important;max-height:100%!important;border:none!important;box-shadow:none!important;
+}
+html body[data-card-style='adventure'] :is(#subjectHub,#advSubjectMenu,#sdCzechHub5074,#sd52) button.sd835-picture-card{
+ overflow:visible!important;background:none!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;filter:drop-shadow(0 3px 3px #06122a66)!important;
+}
+html body[data-card-style='adventure'] :is(#subjectHub,#advSubjectMenu,#sdCzechHub5074,#sd52) button.sd835-picture-card > .sd-layer-art > img.sd84-exact-picture{
+ transform:none!important;object-fit:contain!important;
+}
+/* Geography seven-card grid: do not scale the baked artwork to 110%. */
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure,
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd-ui-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure{
+ width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:1/1!important;
+ margin:0!important;padding:0!important;overflow:visible!important;
+ border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;
+}
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > img.sd839-geo-image,
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd-ui-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > img.sd839-geo-image{
+ transform:none!important;object-fit:contain!important;max-height:100%!important;
+}
+@media(min-width:720px){
+ html body[data-card-style] #homeScreen .app .sd825-home-grid,
+ html body[data-card-style] :is(#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#sd52 .sd52-grid).sd834-grid{
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ }
+}
+@media(hover:none){html body[data-card-style] button.sd835-picture-card:hover:not(:active){transform:none!important;filter:none!important}}
+@media(prefers-reduced-motion:reduce){html body[data-card-style] #homeScreen .subject.sd840-home-card{transition:none!important}}

@@ -1,0 +1,8 @@
+Školní dobrodružství – 50.8.42 (15.11.2026)
+- Odstraněné škálování na 110 % z neúspěšné verze 50.8.41.
+- Zastavené ořezávání spodní části karet a názvů ve výukových nabídkách.
+- Všechna prostředí: jeden nadpis vložený DOVNITŘ grafické jmenovky, ne pod obrázek.
+- XP a body jsou živé a mají svůj samostatný řádek pod obrázkem.
+- Sedm karet Vlastivědy používá celé obrázky bez zvětšení a řezání.
+- Očištěny skutečně chybné, odloučené světlé proužky uvnitř zdrojových WebP (bez zásahu do původních ilustrací).
+- Klikací funkce, profily, školy, PIN a výsledky jsou beze změny.

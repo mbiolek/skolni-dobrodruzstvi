@@ -37,14 +37,20 @@ function apply(){
   image.alt='';image.draggable=false;image.decoding='async';image.setAttribute('aria-hidden','true');
   let footer=card.querySelector(':scope > .v451-footer');
   if(!footer){footer=document.createElement('span');footer.className='v451-footer';footer.setAttribute('aria-hidden','true');footer.innerHTML='<span>★ 0 XP</span><span>🏅 0 bodů</span>'}
-  // In other four themes the blank SVG *needs* exactly one live title.
-  let label=card.querySelector(':scope > .sd821-label');
-  if(adventure){if(label)label.remove();card.replaceChildren(visual,footer)}
-  else{
-   if(!label){label=document.createElement('span');label.className='sd821-label';label.setAttribute('aria-hidden','true')}
-   if(label.textContent!==data.name)label.textContent=data.name;
-   if(card.children.length!==3||card.children[0]!==visual||card.children[1]!==label||card.children[2]!==footer)card.replaceChildren(visual,label,footer);
+  // Keep a single live title INSIDE the artwork. Previous releases positioned it
+  // against the whole card (including XP footer), so it fell BELOW the plaque.
+  const old=card.querySelector(':scope > .sd821-label');
+  if(old)old.remove();
+  let label=visual.querySelector(':scope > .sd842-caption');
+  if(adventure){if(label)label.remove();}
+  else {
+    if(!label){label=document.createElement('span');label.className='sd842-caption';label.setAttribute('aria-hidden','true');visual.append(label)}
+    if(label.textContent!==data.name)label.textContent=data.name;
   }
+  // Do not recreate button, listeners, footer or image during a periodic repaint.
+  if(card.children.length!==2||card.children[0]!==visual||card.children[1]!==footer)
+    card.replaceChildren(visual,footer);
+
  });
 }
 function refresh(){if(queued)return;queued=true;requestAnimationFrame(apply)}
@@ -63,5 +69,5 @@ function boot(){
  }).observe(home,{childList:true,subtree:true});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-window.SDHomeAppearance50830=Object.freeze({refresh,version:'50.8.40'});
+window.SDHomeAppearance50830=Object.freeze({refresh,version:'50.8.42'});
 })();
