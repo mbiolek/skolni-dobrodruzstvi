@@ -1,0 +1,5 @@
+/* Čtyři vstupní oblasti Přírodovědy mají přesné společné rozměry. */
+.n-group-selection{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(12px,3vw,20px)!important;align-items:stretch!important;justify-items:stretch!important;grid-auto-rows:1fr!important}
+.n-group-choice{display:flex!important;width:100%!important;max-width:none!important;min-width:0!important;aspect-ratio:1/1.05!important;margin:0!important;min-height:0!important;max-height:none!important;align-self:stretch!important;border:1.5px solid #c0ae80!important;border-radius:18px!important;box-shadow:0 5px 9px #0005!important}
+.n-group-choice > span{min-height:3.2em;display:flex;align-items:flex-end;justify-content:center;padding:6px 7px 12px!important}
+@media(min-width:720px){.n-group-selection{grid-template-columns:repeat(4,minmax(0,1fr))!important}}

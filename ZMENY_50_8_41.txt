@@ -1,0 +1,12 @@
+Školní dobrodružství – 50.8.41
+
+Oprava zobrazení tlačítek podle snímků 50.8.40:
+• Úvodní výběr předmětů – dvě stejně široké karty v řádku, stejné výšky, mezery a jednotná pozice ukazatelů XP.
+• Dobrodružná cesta – tenký stříbrný rámeček místo příliš širokého bílého; vykreslovací okraje starého obrázku jsou maskovány bez změny původních ilustrací.
+• Vlastivěda – všech sedm tlačítek má stejnou velikost, přesné zarovnání v mřížce a ztenčený rám.
+• Ostatní předměty a prostředí – stejné rozvržení mřížek, ale jejich vlastní ilustrace a motivy zůstávají zachovány.
+• Přírodověda Fulnek – čtyři oblasti v jednotné dvousloupcové mřížce.
+• 3D promáčknutí při dotyku zůstává zachováno; nepoužívá se modrý překryv.
+• Oprava světlých proužků z okrajů obrázků – grafika se zobrazuje v ořezávající masce.
+
+Nemění se otázky, výsledky, profily, PINy ani přiřazení škol.

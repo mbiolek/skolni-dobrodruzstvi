@@ -1,0 +1,217 @@
+/* 50.8.41 – jednotné rozměry obrázkových karet a jemnější obrysy.
+   Původní ilustrace / text jsou beze změny. Ořezává se pouze vnější
+   okraj obrázku, takže zmizí široký napevno nakreslený rámeček,
+   nepravidelná průhledná oblast a světlé proužky ze sprite-sheetu. */
+
+/* Jediná mřížka domovských předmětů: dvě stejně široké karty na mobilu. */
+html body[data-card-style] #homeScreen .app .sd825-home-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-rows:auto!important;
+  column-gap:clamp(11px,3vw,18px)!important;
+  row-gap:clamp(13px,3vw,20px)!important;
+  align-items:stretch!important;
+  justify-items:stretch!important;
+  padding:0!important;
+  margin:15px 0 20px!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card{
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:1/1.19!important;
+  margin:0!important;
+  padding:0!important;
+  justify-self:stretch!important;
+  align-self:stretch!important;
+  border:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+/* Pouze skutečný obrázek je maskovaný tenkým obrysem; XP jsou až pod ním. */
+html body[data-card-style='adventure'] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual{
+  display:block!important;
+  position:absolute!important;
+  left:0!important;top:0!important;right:0!important;bottom:auto!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:calc(100% - 34px)!important;
+  overflow:hidden!important;
+  border:1.4px solid #c9d4e1!important;
+  border-radius:clamp(14px,4vw,23px)!important;
+  background:#0e2644!important;
+  box-shadow:0 5px 8px #05132758,inset 0 0 0 1px #ffffff32!important;
+  pointer-events:none!important;
+}
+html body[data-card-style='adventure'] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual > img{
+  display:block!important;
+  position:absolute!important;
+  top:0!important;left:0!important;
+  width:100%!important;height:100%!important;
+  object-fit:fill!important;
+  object-position:center!important;
+  transform:scale(1.10)!important;
+  transform-origin:center!important;
+  max-width:none!important;max-height:none!important;
+  padding:0!important;margin:0!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+/* XP / body: stabilní pruh pod obrázkem, bez překrytí nadpisu. */
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > .v451-footer{
+  display:flex!important;
+  position:absolute!important;
+  left:0!important;right:0!important;bottom:0!important;top:auto!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:29px!important;
+  max-height:29px!important;
+  padding:0 1px!important;
+  margin:0!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:3px!important;
+  border:0!important;
+  background:transparent!important;
+  z-index:5!important;
+}
+html body[data-card-style] #homeScreen .sd825-home-grid .subject.sd821-card.sd821-card.sd840-home-card > .v451-footer > span{
+  min-height:23px!important;
+  max-width:49%!important;
+  font:800 clamp(9px,2.8vw,13px)/1.08 system-ui,sans-serif!important;
+  padding:3px clamp(3px,1.5vw,7px)!important;
+  white-space:nowrap!important;
+}
+/* Ve čtyřech ostatních prostředích zachovat jejich původní rámeček.
+   Mřížka, výška a pozice počítadel se ale sjednotí. */
+@media(min-width:720px){
+ html body[data-card-style] #homeScreen .app .sd825-home-grid{
+   grid-template-columns:repeat(3,minmax(0,1fr))!important;
+   gap:20px!important;
+ }
+}
+
+/* Přehledy uvnitř předmětů – dvě stabilní stejně velké karty v řádku. */
+html body[data-card-style] :is(
+ #subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,
+ #sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,
+ #v496TopicPanel #v496Topics,#enUnit499 #en499topics,
+ #sd52 .sd52-grid,#sdCurriculum .sd-grid
+ ).sd834-grid{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ column-gap:clamp(12px,3vw,18px)!important;
+ row-gap:clamp(15px,3.4vw,22px)!important;
+ align-items:stretch!important;
+ justify-items:stretch!important;
+}
+html body[data-card-style] :is(
+ #subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,
+ #sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,
+ #v496TopicPanel #v496Topics,#enUnit499 #en499topics,
+ #sd52 .sd52-grid,#sdCurriculum .sd-grid
+ ).sd834-grid > button.sd834-nav-card{
+ box-sizing:border-box!important;
+ width:100%!important;max-width:none!important;min-width:0!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ aspect-ratio:1/1!important;
+ padding:0!important;margin:0!important;
+ align-self:stretch!important;justify-self:stretch!important;
+}
+@media(min-width:720px){
+ html body[data-card-style] :is(#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,#v496TopicPanel #v496Topics,#enUnit499 #en499topics,#sd52 .sd52-grid,#sdCurriculum .sd-grid).sd834-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ }
+}
+@media(min-width:1050px){
+ html body[data-card-style] :is(#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,#v496TopicPanel #v496Topics,#enUnit499 #en499topics,#sd52 .sd52-grid,#sdCurriculum .sd-grid).sd834-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ }
+}
+/* Specificky Vlastivěda: sjednocení všech sedmi fyzických obrysů,
+   ne pouze čtvercových oblastí uvnitř souborů se sprite okraji. */
+html body[data-card-style] #sd52 #sd52main > .sd52-grid.sd839-geo-grid,
+html body[data-card-style] #sd52 #sd52main > .sd-ui-grid.sd839-geo-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-rows:auto!important;
+  gap:clamp(14px,3.5vw,22px)!important;
+  justify-items:stretch!important;
+  align-items:stretch!important;
+}
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure,
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd-ui-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure{
+  display:block!important;
+  position:relative!important;
+  box-sizing:border-box!important;
+  width:100%!important;max-width:none!important;min-width:0!important;
+  height:auto!important;max-height:none!important;min-height:0!important;
+  aspect-ratio:1/1!important;
+  margin:0!important;padding:0!important;
+  align-self:stretch!important;justify-self:stretch!important;
+  overflow:hidden!important;
+  border:1.4px solid #c9d4e1!important;
+  border-radius:clamp(14px,4vw,23px)!important;
+  background:#0d2441!important;
+  background-image:none!important;
+  box-shadow:0 5px 8px #05132758,inset 0 0 0 1px #ffffff25!important;
+  -webkit-tap-highlight-color:transparent!important;
+  isolation:isolate!important;
+}
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > img.sd839-geo-image,
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd-ui-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > img.sd839-geo-image{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;height:100%!important;
+  object-fit:fill!important;
+  object-position:center!important;
+  transform:scale(1.10)!important;
+  transform-origin:center!important;
+  z-index:1!important;
+  margin:0!important;padding:0!important;
+  border:0!important;border-radius:0!important;
+  box-shadow:none!important;
+  pointer-events:none!important;
+}
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > :not(img.sd839-geo-image),
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd-ui-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > :not(img.sd839-geo-image){
+  display:none!important;
+}
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure:active,
+html body[data-card-style='adventure'] #sd52 #sd52main > .sd-ui-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure:active{
+  transform:translateY(3px) scale(.985)!important;
+  box-shadow:0 2px 4px #07182b78!important;
+  filter:brightness(.97)!important;
+}
+@media(min-width:720px){
+ html body[data-card-style] #sd52 #sd52main > .sd52-grid.sd839-geo-grid,
+ html body[data-card-style] #sd52 #sd52main > .sd-ui-grid.sd839-geo-grid{
+   grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ }
+}
+
+/* Všechna samostatná dobrodružná obrázková tlačítka: tenčí společný obrys.
+   Jejich vnější obrázkový rámeček se vizuálně zmenší přiblížením,
+   bez přidání dalšího barevného překryvu a bez změny textu. */
+html body[data-card-style='adventure'] :is(#subjectHub,#sdCzechHub5074,#advSubjectMenu) button.sd835-picture-card.sd84-exact-card{
+  border:1.4px solid #c9d4e1!important;
+  border-radius:clamp(14px,4vw,23px)!important;
+  overflow:hidden!important;
+  background:#0d2441!important;
+  box-shadow:0 5px 8px #05132758!important;
+}
+html body[data-card-style='adventure'] :is(#subjectHub,#sdCzechHub5074,#advSubjectMenu) button.sd835-picture-card.sd84-exact-card > .sd-layer-art > img.sd84-exact-picture{
+  transform:scale(1.10)!important;
+  transform-origin:center!important;
+  object-fit:fill!important;
+}
+
+/* Přírodověda Fulnek: samostatný modul, stejně zarovnané čtyři oblasti. */
