@@ -1,0 +1,11 @@
+Školní dobrodružství 50.8.39 — Vlastivěda, sedm jednotných karet
+
+- Na obrazovce Vlastivěda → výběr režimu používá všech sedm tlačítek stejné proporce a dvousloupcové rozložení na mobilu.
+- Dobrodružná cesta: Výuka, Procvičování, Příprava na školní test, Měsíční plán, Opakování, Závěrečný test a Nastavení používají jednu stříbrně orámovanou sadu obrázků.
+- Již vytištěný název uvnitř ilustrace je zakryt jediným novým, přesně pojmenovaným titulkem, který se přizpůsobí délce. Ostatní styly ponechávají své vlastní rámečky a názvy.
+- 3D stisk bez modrého překryvu je aktivní na všech sedmi kartách.
+- Při přepnutí mezi pěti prostředími se vzhled korektně přepne a nespouští se staré duplicitní obrázky.
+- Akce tlačítek, profily, školy, učivo, měsíční plán, data testů a uložené výsledky zůstávají beze změny.
+- Tlačítko Nastavení je ponecháno v nabídce Vlastivědy, protože jde o nastavení počtu testových otázek (nikoli o obecné nastavení aplikace).
+
+Tato aktualizace opravuje konkrétně sedm karet menu Vlastivědy. Opravy ostatních obrazovek nejsou součástí této dílčí verze.

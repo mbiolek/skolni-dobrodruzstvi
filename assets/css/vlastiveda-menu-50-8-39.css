@@ -1,0 +1,61 @@
+/* 50.8.39 — Sedm karet Vlastivědy, jednotný rám, velikost a 3D odezva.
+ * Styl je aktivní pouze na úvodní nabídce Vlastivědy v modulu školních plánů. */
+html body[data-card-style] #sd52 .sd52-grid.sd839-geo-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:clamp(12px,3.2vw,22px)!important;align-items:stretch!important;
+}
+@media(min-width:720px){html body[data-card-style] #sd52 .sd52-grid.sd839-geo-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+html body[data-card-style] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card{
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:none!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ aspect-ratio:1/1.02!important;align-self:stretch!important;justify-self:stretch!important;
+ padding:0!important;margin:0!important;overflow:visible!important;
+ -webkit-tap-highlight-color:transparent!important;touch-action:manipulation!important;
+ transition:transform 145ms ease,filter 145ms ease!important;
+ transform-origin:center center!important;
+}
+html body[data-card-style] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card:active{
+ transform:translateY(3px) scale(.985)!important;
+ filter:drop-shadow(0 2px 2px rgba(0,9,21,.3))!important;
+}
+@media(hover:none){html body[data-card-style] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card:hover:not(:active){
+ transform:none!important;filter:none!important;}}
+html body[data-card-style] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card > :is(.sd839-geo-image,.sd839-geo-label){display:none!important}
+
+/* Sedm karet Dobrodružné cesty používá jedinou rodinu stříbrných obrázků.
+   Obal s vlastní titulkovou lištou zakrývá předtištěný, často nesprávný název
+   (např. „Test“ na kartě Příprava na školní test) místo dvojího popisku. */
+html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure{
+ position:relative!important;display:block!important;isolation:isolate!important;
+ border:0!important;border-radius:0!important;background:none!important;background-image:none!important;
+ background-color:transparent!important;box-shadow:none!important;
+}
+html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure::before,
+html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure::after{
+ display:none!important;content:none!important;
+}
+html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > :not(.sd839-geo-image):not(.sd839-geo-label){
+ display:none!important;visibility:hidden!important;
+}
+html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > img.sd839-geo-image{
+ display:block!important;position:absolute!important;inset:0!important;z-index:1!important;
+ width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;
+ pointer-events:none!important;visibility:visible!important;opacity:1!important;
+}
+html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > span.sd839-geo-label{
+ display:flex!important;position:absolute!important;z-index:3!important;
+ left:10%!important;right:10%!important;bottom:8.5%!important;min-height:19%!important;max-height:29%!important;
+ align-items:center!important;justify-content:center!important;
+ box-sizing:border-box!important;margin:0!important;padding:3% 3%!important;
+ color:#fff9ed!important;text-shadow:0 2px 3px #000,0 0 2px #000!important;
+ background:linear-gradient(180deg,#132c48ef,#071626fa)!important;
+ border:1px solid #b9c7d6!important;border-radius:11px!important;
+ box-shadow:inset 0 1px 1px #ffffff66,0 2px 4px #061426bb!important;
+ font:800 clamp(12px,3.4vw,21px)/1.08 system-ui,-apple-system,Arial,sans-serif!important;
+ text-align:center!important;white-space:normal!important;overflow-wrap:anywhere!important;
+ text-wrap:balance!important;pointer-events:none!important;
+}
+html body[data-card-style='adventure'] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > span.sd839-geo-label.sd839-geo-long{
+ font-size:clamp(10.5px,3vw,18px)!important;line-height:1.08!important;
+}
+@media(prefers-reduced-motion:reduce){html body[data-card-style] #sd52 .sd52-grid.sd839-geo-grid > button.sd839-geo-card{transition:none!important}}
