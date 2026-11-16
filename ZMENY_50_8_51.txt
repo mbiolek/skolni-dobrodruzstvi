@@ -1,0 +1,9 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.51
+
+Oprava po testu na Samsungu: odstranění tmavých bloků a zmenšení dobrodružných karet.
+- 30 znovu sestavených WEBP obrázků bez stříbrných rámů a bez tmavého titulkového pásu.
+- Popisky jsou nyní přímo součástí obrázků.
+- Jednotný rozměr 132 × 132 CSS px v mřížce 2 sloupců; na širších displejích 3 sloupce.
+- Jeden zdroj obrázků pro domovskou obrazovku, předměty, témata a vlastivědu.
+- Jen styl Dobrodružná cesta. Další čtyři styly zůstaly beze změn.
+- Verze aplikace, Service Worker a precache 50.8.51.
