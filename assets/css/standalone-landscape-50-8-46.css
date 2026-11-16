@@ -1,0 +1,27 @@
+/* 50.8.46: samostatné školní stránky – při otočení na šířku neměnit měřítko. */
+html,body{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;max-width:100%;overflow-x:clip}
+@media (orientation:landscape) and (max-height:650px){
+ #fulnek-app,#nature-app,#sd844-root{box-sizing:border-box;max-width:min(100%,640px)!important;margin-left:auto!important;margin-right:auto!important}
+ #fulnek-app .f-grid,#sd844-root .sd844-grid,
+ #nature-app .n-grid,#nature-app .n-group-selection{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,168px))!important;
+  gap:12px!important;justify-content:center!important;justify-items:stretch!important;
+ }
+ #fulnek-app .f-card,#sd844-root .sd844-card,
+ #nature-app .n-topic,#nature-app .n-group-choice{
+  width:100%!important;max-width:168px!important;min-width:0!important;
+  height:auto!important;max-height:none!important;
+ }
+ #sd844-root .sd844-card.wide{grid-column:1/-1!important;width:100%!important;max-width:none!important;min-height:84px!important}
+ #sd844-root .sd844-card .glyph{font-size:clamp(28px,4vw,45px)!important}
+ #nature-app .n-topic img{height:112px!important;max-width:100%!important}
+ #nature-app .n-group-choice{aspect-ratio:1/1.04!important}
+ #nature-app .n-group-choice > span{font-size:clamp(13px,2.3vw,17px)!important}
+ #fulnek-app .f-heading h1,#nature-app .n-heading h1{font-size:clamp(23px,3.6vw,33px)!important}
+ #nature-app .n-nav{max-width:100%!important;gap:8px!important}
+ #sd844-root{padding-left:12px!important;padding-right:12px!important}
+ #sd844-root .app-header{gap:8px!important;padding:12px 0!important}
+}
+@media(max-width:360px){
+ #fulnek-app .f-grid,#nature-app .n-grid,#sd844-root .sd844-grid{gap:9px!important}
+}

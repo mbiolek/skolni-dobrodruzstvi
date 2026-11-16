@@ -1,0 +1,26 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.46 – stabilní rozložení + mobil na šířku
+
+- Ve všech 5 grafických prostředích je společný rozměrový systém tlačítek.
+- Jednotné 2 sloupce na mobilu na výšku; na šířku 3 sloupce s pevnou maximální
+  velikostí 168 px, bez neúměrného zvětšení podle šířky displeje.
+- Domovská stránka, předmětové nabídky a výběr témat sdílejí stejné limity
+  velikosti i mezer. Dobrodružné karty se již neroztahují proti jiným prostředím.
+- Zachovány individuální vzhledy, předtištěné popisky Dobrodružné cesty,
+  dynamické popisky ostatních prostředí i jemný 3D stisk.
+- XP a medaile pod obrázkem, ne přes spodní název karty.
+- Responzivní samostatné moduly: Matematika Fulnek, Přírodověda Fulnek,
+  Olomouc – učivo ze sešitů.
+- Orientace telefonu nemění profil, aktivní školu, zadání ani uložené výsledky.
+- Aktualizovaný Service Worker a verzování na 50.8.46.
+
+OVĚŘOVÁNÍ:
+- Test CSS geometrie na rozlišeních 360×780, 390×820, 780×360, 844×390,
+  1024×768, pro všech 5 prostředí: shodná velikost a nulové vodorovné přetečení.
+- Test s kompletním skutečným HTML/CSS/JS v izolovaném testovacím prohlížeči:
+  6 domovských karet, 5 různých témat, správné obrázkové cesty; přímo v aplikaci
+  na telefonu nebylo testováno.
+- V izolované testovací stránce není přístup k lokálnímu úložišti; testované
+  je vykreslování/rozmístění karet, nikoliv přihlášení či kompletní gameplay.
+
+BEZPEČNOST: Úprava se nedotýká localStorage, profilů, škol, XP ani odpovědí.
+Použij inkrementální ZIP nad 50.8.45, nebo celou verzi.
