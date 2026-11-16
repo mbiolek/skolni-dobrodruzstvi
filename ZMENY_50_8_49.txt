@@ -1,0 +1,9 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.49
+
+Grafická oprava dobrodružných karet
+
+- odstraněn světlý / bílý rám přímo ze zdrojových obrázků dobrodružných tlačítek
+- upraveny obrázky v sadách cards-50-8-45 a cards-50-8-35
+- opraven poškozený soubor kapitoly-podle-ucebnice.webp v sadě 50.8.45
+- ponecháno stávající rozložení a funkce tlačítek; změna je zaměřena na čistší vzhled karet
+- aktualizována verze aplikace a Service Worker na 50.8.49
