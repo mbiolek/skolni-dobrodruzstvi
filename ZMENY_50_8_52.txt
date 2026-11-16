@@ -1,0 +1,8 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.8.52
+
+Oprava velikosti dobrodružných karet:
+- Odstraněn vlastní limit 132 px na kartu a 276 px na mřížku z verze 50.8.51.
+- Dobrodružné karty používají přesně stejnou společnou geometrii (včetně otočení) jako ostatní schválená prostředí.
+- Zachované hotové obrázky z cards-finished-50-8-51 bez bílých rámů a bez tmavých popiskových pásů.
+- Zachované dotykové akce, profily, výuka, testy, XP a výsledky; ostatní prostředí beze změny.
+- Verze Service Workeru a číslo aplikace 50.8.52.
