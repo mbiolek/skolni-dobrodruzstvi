@@ -95,8 +95,8 @@ function ensureExact(b){
  let picture=art.querySelector(':scope > img.sd84-exact-picture');
  if(!picture){picture=document.createElement('img');picture.className='sd84-exact-picture';picture.alt='';picture.decoding='async';picture.draggable=false;picture.setAttribute('aria-hidden','true');art.appendChild(picture)}
  // Every card has a separate, accessible live label; baked-in labels do not scale on mobile.
- const image835=th==='adventure'?art835(title):null;
- const url=image835?`./assets/ikony/cards-50-8-45/${image835}.webp`:(th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`);
+ const image835=th==='adventure'?(art835(title)||base.replaceAll('_','-')):null;
+ const url=image835?`./assets/ikony/cards-clean-50-8-50/${image835}.webp`:(th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`);
  if(picture.getAttribute('src')!==url)picture.src=url;
  b.classList.add('sd84-exact-card');b.classList.toggle('sd87-dynamic',!exact);
  b.classList.toggle('sd835-picture-card',!!image835);
@@ -112,7 +112,8 @@ function ensureExact(b){
   b.querySelectorAll(':scope > .sd87-card-title').forEach(n=>n.remove());
   let live=b.querySelector(':scope > .sd843-card-caption');
   if(!live){live=document.createElement('span');live.className='sd843-card-caption';live.setAttribute('aria-hidden','true');b.append(live)}
-  if(live.textContent!==title)live.textContent=title;
+  const displayTitle=(image835==='matematika-fulnek'||image835==='matematika-olomouc')?'Otevřít učivo':title;
+  if(live.textContent!==displayTitle)live.textContent=displayTitle;
   live.classList.toggle('sd843-caption-small',title.length>21);
  }else{
   b.querySelector(':scope > .sd843-card-caption')?.remove();

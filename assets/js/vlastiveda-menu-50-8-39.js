@@ -4,7 +4,7 @@
  * jedna vlastní titulková lišta, která zakryje starý baked-in titulek.
  */
 (()=>{'use strict';
-const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-45/', FIXED='./assets/ikony/cards-50-8-45/';
+const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-45/', FIXED='./assets/ikony/cards-50-8-45/', CLEAN='./assets/ikony/cards-clean-50-8-50/';
 const ENTRIES=[
  {title:'Výuka',image:'vyuka.webp'},
  {title:'Procvičování',image:'procvicovani.webp'},
@@ -48,7 +48,7 @@ function update(){
   caption.textContent=info.title;caption.setAttribute('aria-hidden','true');
   if(!image){image=document.createElement('img');image.className='sd839-geo-image';image.alt='';image.setAttribute('aria-hidden','true');image.draggable=false;btn.append(image)}
   // Název je vytištěn již na ilustraci; nevytvářet druhou HTML vrstvu.
-  const src=(['priprava-na-skolni-test.webp','opakovani.webp','zaverecny-test.webp'].includes(info.image)?FIXED:ROOT)+info.image;
+  const src=adventure ? CLEAN+info.image : (['priprava-na-skolni-test.webp','opakovani.webp','zaverecny-test.webp'].includes(info.image)?FIXED:ROOT)+info.image;
   if(image.getAttribute('src')!==src)image.setAttribute('src',src);
 
  }
@@ -75,5 +75,5 @@ function init(){
  schedule();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-window.SDVlastivedaMenu50839=Object.freeze({refresh:schedule,version:'50.8.45'});
+window.SDVlastivedaMenu50839=Object.freeze({refresh:schedule,version:'50.8.50'});
 })();

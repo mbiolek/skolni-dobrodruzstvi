@@ -21,7 +21,7 @@ function apply(){
   const key=infoOf(card);if(!key)return;
   const data=ITEMS[key];
   const path=adventure
-   ?`./assets/ikony/cards-50-8-45/${data.art}.webp`
+   ?`./assets/ikony/cards-clean-50-8-50/${data.art}.webp`
    :`./assets/ui-exact-50-8-4/${style}/blanks/${data.base}.svg`;
   card.dataset.sd840Style=style;
   card.classList.add('sd821-card','sd830-subject','sd838-home-card','sd840-home-card');
@@ -72,5 +72,5 @@ function boot(){
  }).observe(home,{childList:true,subtree:true});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-window.SDHomeAppearance50830=Object.freeze({refresh,version:'50.8.45'});
+window.SDHomeAppearance50830=Object.freeze({refresh,version:'50.8.50'});
 })();

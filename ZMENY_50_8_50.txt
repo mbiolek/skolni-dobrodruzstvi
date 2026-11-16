@@ -1,0 +1,14 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.50 – oprava skutečného zdroje obrázků
+
+DIAGNÓZA:
+- renderer home-appearance-50-8-30.js, exact-cutouts-50-8-7.js a vlastiveda-menu-50-8-39.js načítaly 50.8.45 grafiky s rámy
+- staré CSS cards-system, cards-restore, cards-layout a cards-presentation předepisovaly další rámy a příliš široké gridy
+- 50.8.49 pouze částečně ořezala staré grafiky; rámy tím nebyly odstraněny celé
+
+ZMĚNY:
+- jediná sada čistých originálních obrázků cards-clean-50-8-50 bez světlých rámů a bez zapečených textů
+- všechna 3 místa vykreslování přepojena na tuto sadu
+- živé názvy tlačítek opět výhradně jedinou HTML vrstvou
+- jednotné malé čtvercové karty max. 150 x 150 CSS px a mřížka 2 sloupce na telefonu
+- nulové dekorativní bílé CSS rámy; jiná 4 prostředí nezměněna
+- verze a cache Service Workeru 50.8.50
