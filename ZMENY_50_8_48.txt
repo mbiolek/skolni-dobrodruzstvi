@@ -1,0 +1,15 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.48
+
+Výchozí verze: 50.8.47.
+
+OPRAVA DOBRODRUŽNÝCH KARET
+- Přesná a symetrická dvousloupcová mřížka na mobilu, jednotná velikost všech karet.
+- Vnitřní navigace: předměty, výuka, procvičování, test, výsledky, matematické kapitoly, čeština, angličtina, vlastivěda a učivo.
+- Vypnuté staré CSS rámy, dekorace a rozdílné výšky, sjednocené rohy.
+- Mírné optické skrytí stříbrného okraje zabudovaného v ilustracích.
+- Zachované stávající ilustrace a popisky, navigace a výsledky.
+- Ostatní čtyři prostředí nedotčená; původní vzhled hlavní stránky a XP zůstal.
+- Na šířku telefonu se zobrazí tři stejně velké sloupce bez zvětšení karet.
+
+Tato oprava je omezena na CSS; žádná logika aplikace, školy ani výsledky se nemění.
+Před potvrzením vizuálního výsledku zkontrolujte na Samsungu S24.

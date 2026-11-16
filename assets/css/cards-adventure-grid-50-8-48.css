@@ -1,0 +1,255 @@
+/* Školní dobrodružství 50.8.48 — DOBRODRUŽNÉ KARTY.
+   Jediná nová vrstva pouze pro data-card-style="adventure".
+   Nedotýká se skla, kamene, pergamenu ani cechu.
+
+   50.8.47 odstranila CSS okraj jen u vybraných variant selektorů;
+   navíc samy ilustrace 50.8.45 obsahují nepravidelný stříbrný lem.
+   Níže je společná geometrie všech vnořených nabídek a velmi mírné
+   skrytí potištěného vnějšího lemu bez výměny obrázků/popisků.
+*/
+html body[data-card-style="adventure"]{
+  --sd848-card-gap:12px;
+  --sd848-grid-width:390px;
+  --sd848-card-radius:14px;
+}
+/* Skutečné kontejnery všech navigačních karet, i když ještě nemají
+   sd834-grid; žádné chybějící stránky ani samostatně vycentrované karty. */
+html body[data-card-style="adventure"] :is(
+  #subjectHub .hub-cards,
+  #advSubjectMenu .adv-menu-cards,
+  #sdCzechHub5074 .sd-czech-cards,
+  #vlastScreen #vlUnits,
+  #v496TopicPanel #v496Topics,
+  #enUnit499 #en499topics,
+  #sd52 .sd52-grid,
+  #sd52 #sd52main .sd839-geo-grid,
+  #sdCurriculum .sd-grid
+){
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-flow:row!important;
+  grid-auto-rows:auto!important;
+  gap:var(--sd848-card-gap)!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:min(100%,var(--sd848-grid-width))!important;
+  min-width:0!important;
+  padding:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  align-items:start!important;
+  justify-items:stretch!important;
+  align-content:start!important;
+  justify-content:center!important;
+}
+/* Každé tlačítko tvoří PŘESNĚ jednu buňku bez vlastních vnějších mezer.
+   Nezávislé na starých třídách sd835/sd834/sd839. */
+html body[data-card-style="adventure"] :is(
+  #subjectHub .hub-cards,
+  #advSubjectMenu .adv-menu-cards,
+  #sdCzechHub5074 .sd-czech-cards,
+  #vlastScreen #vlUnits,
+  #v496TopicPanel #v496Topics,
+  #enUnit499 #en499topics,
+  #sd52 .sd52-grid,
+  #sd52 #sd52main .sd839-geo-grid,
+  #sdCurriculum .sd-grid
+) > button{
+  display:block!important;
+  position:relative!important;
+  box-sizing:border-box!important;
+  justify-self:stretch!important;
+  align-self:start!important;
+  float:none!important;
+  flex:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:1/1!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  outline:0 solid transparent;
+  border-radius:var(--sd848-card-radius)!important;
+  background:#0b1d34!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  clip-path:none!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+}
+/* Staré CSS používalo také :before/:after jako další světlý rámeček. */
+html body[data-card-style="adventure"] :is(
+  #subjectHub .hub-cards,
+  #advSubjectMenu .adv-menu-cards,
+  #sdCzechHub5074 .sd-czech-cards,
+  #vlastScreen #vlUnits,
+  #v496TopicPanel #v496Topics,
+  #enUnit499 #en499topics,
+  #sd52 .sd52-grid,
+  #sd52 #sd52main .sd839-geo-grid,
+  #sdCurriculum .sd-grid
+) > button::before,
+html body[data-card-style="adventure"] :is(
+  #subjectHub .hub-cards,
+  #advSubjectMenu .adv-menu-cards,
+  #sdCzechHub5074 .sd-czech-cards,
+  #vlastScreen #vlUnits,
+  #v496TopicPanel #v496Topics,
+  #enUnit499 #en499topics,
+  #sd52 .sd52-grid,
+  #sd52 #sd52main .sd839-geo-grid,
+  #sdCurriculum .sd-grid
+) > button::after{content:none!important;display:none!important;}
+
+/* Zachovat jednu původní ilustraci a její vytištěný popisek.  Lehké
+   přiblížení pouze dobrodružného motivu potlačí stříbrný lem zakomponovaný
+   přímo ve WEBP; obrázek se nikdy nesmí zvětšovat MIMO svou kartu. */
+html body[data-card-style="adventure"] :is(
+  #subjectHub .hub-cards,
+  #advSubjectMenu .adv-menu-cards,
+  #sdCzechHub5074 .sd-czech-cards,
+  #vlastScreen #vlUnits,
+  #v496TopicPanel #v496Topics,
+  #enUnit499 #en499topics,
+  #sd52 .sd52-grid,
+  #sd52 #sd52main .sd839-geo-grid,
+  #sdCurriculum .sd-grid
+) > button > .sd-layer-art{
+  position:absolute!important;
+  display:block!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:inherit!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+  pointer-events:none!important;
+}
+html body[data-card-style="adventure"] :is(
+  #subjectHub .hub-cards,
+  #advSubjectMenu .adv-menu-cards,
+  #sdCzechHub5074 .sd-czech-cards,
+  #vlastScreen #vlUnits,
+  #v496TopicPanel #v496Topics,
+  #enUnit499 #en499topics,
+  #sd52 .sd52-grid,
+  #sd52 #sd52main .sd839-geo-grid,
+  #sdCurriculum .sd-grid
+) > button :is(img.sd84-exact-picture,img.sd839-geo-image){
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:fill!important;
+  object-position:center!important;
+  border:0!important;
+  border-radius:0!important;
+  filter:none!important;
+  /* Vnější potisknutý kovový okraj není součástí klikacího rámečku. */
+  transform:scale(1.045,1.08) translateY(.5%)!important;
+  transform-origin:50% 50%!important;
+  pointer-events:none!important;
+}
+/* Nevracet druhý titulek přes text vytištěný přímo ve výtvarném motivu. */
+html body[data-card-style="adventure"] button.sd835-picture-card > :is(
+  .sd843-card-caption,.sd87-card-title,.sd-layer-caption,.sd-ui-card__title,
+  .sd-ui-card__desc,.sd87-topic-medallion
+),
+html body[data-card-style="adventure"] #sd52 #sd52main .sd839-geo-card.sd839-geo-adventure > .sd843-geo-caption{
+  display:none!important;visibility:hidden!important;opacity:0!important;
+}
+/* Home ponechává XP odznaky i svůj společný vnější layout z 50.8.47.
+   Pouze zrušit světlý dekorativní CSS rám a sjednotit obrázkové rohy. */
+html body[data-card-style="adventure"] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > span.sd821-visual{
+  border:0!important;
+  border-radius:var(--sd848-card-radius)!important;
+  background:#0b1d34!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  clip-path:none!important;
+}
+html body[data-card-style="adventure"] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > img{
+  width:100%!important;height:100%!important;
+  object-fit:fill!important;
+  object-position:center!important;
+  transform:scale(1.045,1.08) translateY(.5%)!important;
+  transform-origin:50% 50%!important;
+  border:0!important;border-radius:0!important;
+}
+/* Pro středně široké obrazovky zůstanou dvě symetrické karty.
+   Tři přehledné sloupce použít až na šířku telefonu / tabletu. */
+@media (min-width:650px){
+ html body[data-card-style="adventure"]{
+  --sd848-card-gap:12px;
+  --sd848-grid-width:540px;
+ }
+ html body[data-card-style="adventure"] :is(
+  #subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,
+  #sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,
+  #v496TopicPanel #v496Topics,#enUnit499 #en499topics,
+  #sd52 .sd52-grid,#sd52 #sd52main .sd839-geo-grid,
+  #sdCurriculum .sd-grid
+ ){
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ }
+}
+@media (max-width:340px){
+ html body[data-card-style="adventure"]{--sd848-card-gap:9px;--sd848-card-radius:12px}
+}
+/* Přístupné zvýraznění klávesnice pouze při focus-visible, ne při klepnutí. */
+html body[data-card-style="adventure"] :is(#subjectHub,#advSubjectMenu,#sdCzechHub5074,#vlastScreen,#v496TopicPanel,#enUnit499,#sd52,#sdCurriculum) button:focus-visible{
+ outline:2px solid #f9d47b!important;
+ outline-offset:2px!important;
+}
+/* Karta na hlavní obrazovce má historicky záměrně mnohokrát opakovanou
+   třídu .sd821-card v selektoru 50.8.47. Zde ji výslovně přebijeme;
+   jinak by bílé rohy a overflow:visible zůstaly i po naší opravě. */
+html body[data-card-style="adventure"] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual{
+  border:0!important;
+  border-radius:var(--sd848-card-radius)!important;
+  overflow:hidden!important;
+  background:#0b1d34!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+}
+html body[data-card-style="adventure"] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual > img{
+  transform:scale(1.045,1.08) translateY(.5%)!important;
+  transform-origin:50% 50%!important;
+  border-radius:0!important;
+  border:0!important;
+  object-fit:fill!important;
+}
+/* Vlastivěda / zeměpis má historický dvou-ID selektor. */
+html body[data-card-style="adventure"] #sd52 #sd52main > .sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure,
+html body[data-card-style="adventure"] #sd52 #sd52main > .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure{
+ border:0!important;border-radius:var(--sd848-card-radius)!important;
+ box-shadow:none!important;overflow:hidden!important;background:#0b1d34!important;
+ max-width:100%!important;width:100%!important;aspect-ratio:1/1!important;
+ margin:0!important;padding:0!important;
+}
+html body[data-card-style="adventure"] #sd52 #sd52main > .sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > img.sd839-geo-image,
+html body[data-card-style="adventure"] #sd52 #sd52main > .sd52-grid.sd839-geo-grid > button.sd839-geo-card.sd839-geo-adventure > img.sd839-geo-image{
+ transform:scale(1.045,1.08) translateY(.5%)!important;
+ transform-origin:center!important;
+ border:0!important;border-radius:0!important;
+}
