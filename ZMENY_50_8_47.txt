@@ -1,0 +1,12 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.47
+
+Opraveno podle fotografií verze 50.8.46:
+- skutečná příčina popisků nad obrázkem: pozice static, nově absolute uvnitř každé karty
+- umístění názvů podle motivu (sklo, kámen, pergamen, cech)
+- Dobrodružná cesta: vypnuté druhé CSS stříbrné ohraničení, originální rám zůstává v grafice
+- stejná geometrie 2 sloupce na mobilu a 3 na šířku, bez přibližování
+- nepřidává druhou HTML kopii názvu nad obrázkem
+- aktualizační mezipaměť obsahuje nový CSS soubor, nový build 50.8.47
+
+Zachována původní funkční logika, lokální profily, školy, výsledky, Olomouc.
+Poznámka: automatické vizuální testy v Chromium; skutečné prostředí Samsung je třeba ověřit.
