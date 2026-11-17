@@ -1,0 +1,45 @@
+/* Školní dobrodružství 50.8.58 – cílené doladění karet.
+   Nezasahovat do mřížky, funkce tlačítek, XP ani popisků ostatních prostředí.
+   Dobrodružné WEBP obsahují ilustraci i titulek v jednom souboru. Proto se
+   zobrazuje celý motiv bez deformace, nikoliv CSS ořez/stretch ikony. */
+
+/* A LITTLE NARROWER adventure cards within the same two-column grid. */
+html body[data-card-style="adventure"] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card {
+ width:95%!important;max-width:95%!important;
+ justify-self:center!important;align-self:start!important;
+}
+html body[data-card-style="adventure"] :is(#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,#v496TopicPanel #v496Topics,#enUnit499 #en499topics,#sd52 .sd52-grid,#sdCurriculum .sd-grid).sd834-grid > button.sd834-nav-card.sd835-picture-card,
+html body[data-card-style="adventure"] #sd52 #sd52main button.sd839-geo-card.sd839-geo-adventure {
+ width:95%!important;max-width:95%!important;justify-self:center!important;
+}
+/* Preserve original 1:1 artwork, visibly smaller rather than zooming/cropping.
+   Empty space stays transparent; title stays inside the original image. */
+html body[data-card-style="adventure"] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual > img,
+html body[data-card-style="adventure"] :is(#subjectHub,#advSubjectMenu,#sdCzechHub5074,#v496TopicPanel,#enUnit499,#sdCurriculum,#sd52,#vlastScreen) button.sd-ui-card.sd-layered.sd84-exact-card.sd835-picture-card > .sd-layer-art > img.sd84-exact-picture,
+html body[data-card-style="adventure"] #sd52 #sd52main button.sd839-geo-card.sd839-geo-adventure > img.sd839-geo-image {
+ top:7%!important;left:7%!important;right:auto!important;bottom:auto!important;
+ width:86%!important;height:86%!important;
+ aspect-ratio:1/1!important;object-fit:contain!important;
+ object-position:center!important;transform:none!important;
+ border:0!important;border-radius:clamp(9px,2.4vw,15px)!important;
+ filter:none!important;
+}
+html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples > button.sd50854-preview-card > img.sd50854-preview-art {
+ top:7%!important;left:7%!important;right:auto!important;bottom:auto!important;
+ width:86%!important;height:86%!important;
+ aspect-ratio:1/1!important;object-fit:contain!important;
+ object-position:center!important;transform:none!important;
+}
+
+/* PARCHMENT: historic, dark readable ink on warm beige plaque. */
+html body[data-card-style="parchment"] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual > span.sd842-caption,
+html body[data-game-theme][data-card-style="parchment"] :is(#subjectHub,#advSubjectMenu,#sdCzechHub5074,#v496TopicPanel,#enUnit499,#sdCurriculum,#sd52,#vlastScreen) button.sd-ui-card.sd-layered.sd84-exact-card > span.sd87-card-title {
+ color:#24160e!important;
+ font-family:Georgia,'Times New Roman',serif!important;
+ font-weight:900!important;
+ text-shadow:0 1px 1px #ffe8bc,0 0 2px #fff1cf!important;
+ letter-spacing:0!important;
+}
+html body[data-card-style="parchment"] :is(#subjectHub,#advSubjectMenu,#sdCzechHub5074,#v496TopicPanel,#enUnit499,#sdCurriculum,#sd52) button.sd84-exact-card .sd-layer-caption :is(strong,b,.sd-ui-card__title){
+ color:#24160e!important;font-weight:900!important;text-shadow:0 1px 1px #ffebc5!important;
+}

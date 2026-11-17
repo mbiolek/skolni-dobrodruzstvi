@@ -1,0 +1,9 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.58
+
+• Dobrodružné předměty: mírně užší karty, menší vykreslené ilustrace bez natažení nebo ořezu.
+• Pergamen: temně hnědé/černé výraznější popisky, teplejší a živější motivy.
+• Kamenné runy, Krystal a Hradní cech: velmi jemné oživení barev uvnitř motivů.
+• Zachovány názvy, akce tlačítek, profilové funkce, XP a dvousloupcová mřížka.
+• Service Worker a verze 50.8.58: nová cache pro správné načtení aktualizace.
+
+Poznámka: Dobrodružné WEBP obsahují obraz i nápis, proto není možné ikonku izolovaně zmenšit pouhou změnou CSS. Proporce jsou nyní zachovány.
