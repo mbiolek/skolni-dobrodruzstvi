@@ -1,0 +1,51 @@
+/* Školní dobrodružství 50.8.57 – čitelné výsledky matematiky v nočních prostředích.
+   Noční motiv nastavuje body color:white, zatímco původní .panel/.stat zůstávají bílé.
+   Zasahujeme pouze do konkrétního výsledkového panelu, ne do karet ani témat. */
+html body #mathScreen #summary.panel {
+  background:#fff !important;
+  color:#233453 !important;
+  border-color:#d7e3f4 !important;
+  text-shadow:none !important;
+}
+html body #mathScreen #summary :is(h2,#summaryText,#hardList,.review) {
+  color:#233453 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+html body #mathScreen #summary h2 {
+  font-weight:850 !important;
+  line-height:1.3 !important;
+}
+html body #mathScreen #summary .stats {
+  gap:9px !important;
+}
+html body #mathScreen #summary .stat {
+  background:#eeeafb !important;
+  color:#30265b !important;
+  border:1px solid #ded4f4 !important;
+  text-shadow:none !important;
+}
+html body #mathScreen #summary .stat strong {
+  color:#30265b !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+  font-variant-numeric:tabular-nums;
+}
+html body #mathScreen #summary .stat span {
+  color:#4a3d76 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+html body #mathScreen #summary #summaryText {
+  margin:18px 0 22px;
+  line-height:1.55;
+  overflow-wrap:anywhere;
+}
+html body #mathScreen #summary #hardList .review {
+  padding:12px 3px;
+  border-bottom-color:#e5e5ef !important;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+html body #mathScreen #summary #hardList .review:last-child { border-bottom:0 !important; }
+/* The main summary actions retain their original colors and tap behavior. */

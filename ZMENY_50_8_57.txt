@@ -1,0 +1,13 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.57
+
+Oprava nečitelného výsledkového panelu matematiky.
+- Výsledky jsou čitelné i na nočním pozadí, kde je barva textu aplikace bílá.
+- Nadpisy, počet správných odpovědí, chyb, pomalých odpovědí a seznam k procvičení nyní používají vlastní tmavou barvu textu.
+- Nejsou změněny předmětové karty, ostatní prostředí ani ukládání výsledků.
+- Navýšená verze cache a aplikace na 50.8.57.
+
+Dodatečně na základě kontroly všech prostředí: 
+- 24 předmětových grafik je barevně sladěno se čtyřmi prostředími (kamenné runy – teplý kámen/zlato; krystal – ledově modrá; pergamen – sépiová kresba; cech – tmavě modrá/zlato).
+- prvni obrazovka pouziva stejnou dvousloupcovou mrizku a rozmer obrazoveho slotu jako nabidky predmetu.
+- pro grafiku zruseno nenativni roztahovani object-fit:fill; obr. se vykresluje v puvodnim pomeru stran bez deformace.
+- nazvy predmetu, XP, funkce a grafika dobrodruzstvi zustavaji beze zmeny.

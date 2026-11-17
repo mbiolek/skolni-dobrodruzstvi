@@ -1,0 +1,78 @@
+/* 50.8.57 – first-page subjects use the SAME two-column card geometry as menus.
+   All five skins keep their current captions and actions; no theme-dependent zoom.
+   Artwork is displayed at intrinsic aspect ratio (contain, NEVER fill/cover).
+   The theme itself owns the border/label; this sheet owns only the common slots. */
+:root{--sd857-grid-width:420px;--sd857-gap:clamp(12px,2.4vw,18px);--sd857-card-max:194px}
+html body[data-card-style] #homeScreen .app .sd825-home-grid{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ width:100%!important;
+ max-width:min(100%,var(--sd857-grid-width))!important;
+ justify-content:center!important;align-content:start!important;
+ gap:var(--sd857-gap)!important;
+ margin:16px auto 22px!important;padding:0!important;
+}
+html body[data-card-style] #homeScreen .app .sd825-home-grid :is(.subject-grid,.v23-extra-grid){display:contents!important}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card{
+ box-sizing:border-box!important;
+ position:relative!important;display:flex!important;flex-flow:column nowrap!important;
+ width:100%!important;max-width:var(--sd857-card-max)!important;min-width:0!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ aspect-ratio:auto!important;justify-self:stretch!important;align-self:start!important;
+ margin:0!important;padding:0!important;overflow:visible!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual{
+ position:relative!important;display:block!important;inset:auto!important;
+ width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+ aspect-ratio:1/1!important;flex:0 0 auto!important;
+ margin:0!important;padding:0!important;box-sizing:border-box!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+ overflow:visible!important;transform:none!important;
+}
+html body[data-card-style]:not([data-card-style='adventure']) #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > span.sd821-visual > img{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;
+ max-width:100%!important;max-height:100%!important;
+ object-fit:contain!important;object-position:center!important;
+ transform:none!important;filter:none!important;
+ border:0!important;border-radius:0!important;
+ background:transparent!important;margin:0!important;padding:0!important;
+}
+/* The adventure asset is square with its own baked-in caption.
+   Preserve existing v50.8.56 proportional rendering, which is already fixed. */
+html body[data-card-style] #homeScreen .app .sd825-home-grid .subject.sd821-card.sd821-card.sd821-card.sd821-card.sd840-home-card > :is(span,div).v451-footer{
+ box-sizing:border-box!important;display:flex!important;position:relative!important;
+ inset:auto!important;left:auto!important;right:auto!important;
+ width:100%!important;height:34px!important;min-height:34px!important;max-height:34px!important;
+ flex:0 0 34px!important;margin:5px 0 0!important;padding:2px 0 0!important;
+ align-items:center!important;justify-content:space-between!important;gap:3px!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+/* Same card slot size and gap in deeper subject selection. 
+   Existing individual skins/labels remain responsible for their own decoration. */
+html body[data-card-style] :is(#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,#v496TopicPanel #v496Topics,#enUnit499 #en499topics,#sd52 .sd52-grid,#sdCurriculum .sd-grid).sd834-grid{
+ gap:var(--sd857-gap)!important;
+ max-width:min(100%,var(--sd857-grid-width))!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+@media (min-width:650px){
+ html body[data-card-style] #homeScreen .app .sd825-home-grid,
+ html body[data-card-style] :is(#subjectHub .hub-cards,#advSubjectMenu .adv-menu-cards,#sdCzechHub5074 .sd-czech-cards,#vlastScreen #vlUnits,#v496TopicPanel #v496Topics,#enUnit499 #en499topics,#sd52 .sd52-grid,#sdCurriculum .sd-grid).sd834-grid{
+  grid-template-columns:repeat(3,minmax(0,var(--sd857-card-max)))!important;
+  max-width:min(100%,618px)!important;
+ }
+}
+/* Ink/text must belong to each environment, not inherit the global white label. */
+html body[data-card-style='parchment'] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ color:#54301c!important;text-shadow:0 1px 1px #fff5d6,0 0 2px #fff1cb!important;
+}
+html body[data-card-style='stone'] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ color:#3e2b20!important;text-shadow:0 1px 1px #f7e2aa,0 0 2px #f4dfbd!important;
+}
+html body[data-card-style='glass'] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ color:#f0faff!important;text-shadow:0 1px 3px #102656,0 2px 4px #061838!important;
+}
+html body[data-card-style='guild'] #homeScreen .app .sd825-home-grid .subject.sd840-home-card > span.sd821-visual > span.sd842-caption{
+ color:#ffefc7!important;text-shadow:0 1px 3px #03142c,0 2px 4px #00142b!important;
+}

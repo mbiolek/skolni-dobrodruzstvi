@@ -25,7 +25,7 @@ function apply(){
   // Preserve this card's HTML title, size, action, and XP footer unchanged.
   const path=adventure
    ?`./assets/ikony/cards-finished-50-8-51/${data.art}.webp`
-   :`./assets/ikony/subject-icons-50-8-56/${style}-${data.art}.webp`;
+   :`./assets/ikony/subject-icons-50-8-57/${style}-${data.art}.webp`;
   card.dataset.sd840Style=style;
   card.classList.add('sd821-card','sd830-subject','sd838-home-card','sd840-home-card');
   card.classList.toggle('sd835-home-art',adventure);
