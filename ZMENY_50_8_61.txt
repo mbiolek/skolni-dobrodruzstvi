@@ -1,0 +1,13 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.61
+
+Martin: oficiální témata ústní závěrečné zkoušky školy (schváleno 4. 3. 2026)
+
+- Opraveno všech 25 elektrotechnicko-automobilových dvojic podle nahraného školního DOCX.
+- Každý okruh nyní ukazuje původní přesné požadavky zvlášť pro obě poloviny otázky.
+- Odlišeny školní požadavky od nezávislých výukových poznámek.
+- Doplněna originální šestibodová osnova pro ústní odpověď.
+- Originální školní dokument je v aplikaci dostupný v sekci Výuční list i ve Skriptech.
+- Cílová maturitní nástavba změněna na Autotronik 39-41-L/51 (SŠ technická a dopravní Ostrava-Vítkovice).
+- Vlastní CERMAT výukový obsah a výsledky ostatních profilů nezměněny.
+- Pro nové ústní okruhy se ukládá hodnocení pod novými ID oral26-XX, takže není přiřazeno k dřívějším chybně posunutým číslům.
+- Školní podklad je pro rok 2026, pro rok 2027 je třeba ověřit platnost u školy.
