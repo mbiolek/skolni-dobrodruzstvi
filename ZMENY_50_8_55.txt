@@ -1,0 +1,8 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.55 – menší vnitřní motivy
+
+- Graficky upraveno všech 30 WEBP dobrodružných karet.
+- Středové motivy jsou jemně opticky zmenšené lokální deformací.
+- Tištěné názvy na spodním okraji, vnější ilustrace a rozložení zůstávají.
+- Všechny 4 vykreslovací moduly včetně živého náhledu používají novou sadu.
+- Ostatní prostředí, rozměry tlačítek, XP a funkčnost beze změny.
+- Nová verze 50.8.55 a nové názvy souborů pro spolehlivou aktualizaci.

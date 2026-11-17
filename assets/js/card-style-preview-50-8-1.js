@@ -18,7 +18,7 @@ const SAMPLES=[
   ['Závěrečný test','zaverecny_test','zaverecny-test']
 ];
 // 50.8.54: Exactly the same finished illustrations as the real adventure buttons.
-const ADVENTURE_ASSETS='./assets/ikony/cards-finished-50-8-51/';
+const ADVENTURE_ASSETS='./assets/ikony/cards-motivy-50-8-55/';
 function init(){
  const chooser=document.querySelector('#sdCardStyleSelect .sd-card-theme-options');
  if(!chooser||!window.SDUICards||!window.SDCardThemes)return;
