@@ -20,9 +20,12 @@ function apply(){
  document.querySelectorAll(SELECTOR).forEach(card=>{
   const key=infoOf(card);if(!key)return;
   const data=ITEMS[key];
+  // 50.8.56: use the six existing subject-specific illustrations in each
+  // approved environment, composed on the SAME original blank frame.
+  // Preserve this card's HTML title, size, action, and XP footer unchanged.
   const path=adventure
-   ?`./assets/ikony/cards-motivy-50-8-55/${data.art}.webp`
-   :`./assets/ui-exact-50-8-4/${style}/blanks/${data.base}.svg`;
+   ?`./assets/ikony/cards-finished-50-8-51/${data.art}.webp`
+   :`./assets/ikony/subject-icons-50-8-56/${style}-${data.art}.webp`;
   card.dataset.sd840Style=style;
   card.classList.add('sd821-card','sd830-subject','sd838-home-card','sd840-home-card');
   card.classList.toggle('sd835-home-art',adventure);

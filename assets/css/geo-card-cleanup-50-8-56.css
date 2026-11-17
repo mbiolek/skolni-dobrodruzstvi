@@ -1,0 +1,7 @@
+/* 50.8.56: Gold/stone/glass/parchment/guild must use one themed SVG art layer.
+   The geography extra WEBP is never part of those environments. */
+html body[data-card-style]:not([data-card-style="adventure"]) #sd52 #sd52main button.sd-ui-card > img.sd839-geo-image,
+html body[data-card-style]:not([data-card-style="adventure"]) #sd52 #sd52main button.sd-ui-card > span.sd843-geo-caption,
+html body[data-card-style]:not([data-card-style="adventure"]) #sd52 #sd52main button.sd-ui-card > span.sd839-geo-label {
+ display:none!important;visibility:hidden!important;
+}

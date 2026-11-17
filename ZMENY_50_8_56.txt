@@ -1,0 +1,12 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.56 – POMĚRY ILUSTRACÍ A DUPLICITNÍ KARTY
+
+1. Dobrodružné předměty: návrat ke čtvercovým původním obrázkům 50.8.51 bez deformace způsobené lokální úpravou v 50.8.55. Ilustrace jsou ve všech kartách menší, uprostřed a mají přirozený poměr stran 1:1; bez ořezávání textů.
+2. Živý náhled používá stejné obrázky a pravidla jako skutečné tlačítko.
+3. Vlastivěda: duplicitní obrázky se v ostatních prostředích odstraní, zobrazují se jen v dobrodružném prostředí.
+4. Odstraněna duplicitní grafická vrstva; klikání, školy, XP, Merlin a ostatní prostředí zachovány.
+5. Aktualizace cache Service Workeru na 50.8.56.
+
+Poznámka: Grafika je spojena s pozadím v jednom WEBP; proto se pro odstranění deformace obnovila původní kompozice a vykresluje bez deformace, namísto dalšího nelineárního zmenšování motivů.
+
+6. Kamenné runy, Hradní cech, Kouzelný krystal a Pergamen: domovské karty Matematika, Čeština, Angličtina, Přírodověda, Vlastivěda a Hudební výchova nyní používají jedinečné předmětové motivy ze starší sady home-50-8-21, vložené do stávajících šablon, nikoliv opakované obrázky Výuka/Test.
+7. Velikosti, názvy předmětů, rozložení a XP zůstávají původní ve všech prostředích.

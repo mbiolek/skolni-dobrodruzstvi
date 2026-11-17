@@ -4,7 +4,7 @@
  * jedna vlastní titulková lišta, která zakryje starý baked-in titulek.
  */
 (()=>{'use strict';
-const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-45/', FIXED='./assets/ikony/cards-50-8-45/', CLEAN='./assets/ikony/cards-motivy-50-8-55/';
+const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-45/', FIXED='./assets/ikony/cards-50-8-45/', CLEAN='./assets/ikony/cards-finished-50-8-51/';
 const ENTRIES=[
  {title:'Výuka',image:'vyuka.webp'},
  {title:'Procvičování',image:'procvicovani.webp'},
@@ -29,13 +29,27 @@ function update(){
  const visible=!root.hidden&&current?.screen==='subject'&&current?.subject===SUBJECT;
  const grid=root.querySelector('#sd52main > .sd52-grid, #sd52main > .sd-ui-grid');
  if(!grid)return;
- if(!visible){grid.classList.remove('sd839-geo-grid');return;}
+ if(!visible){
+  grid.classList.remove('sd839-geo-grid');
+  return;
+ }
  const buttons=[...grid.children].filter(x=>x.tagName==='BUTTON');
  if(buttons.length<7)return;
  const matched=[];
  for(const info of ENTRIES){const b=buttons.find(b=>findTitle(b)===info.title);if(!b)return;matched.push([b,info])}
- grid.classList.add('sd839-geo-grid');
  const adventure=document.body.dataset.cardStyle==='adventure';
+ // 50.8.56: only the adventure skin needs an additional full-image tile.
+ // In the other four skins this duplicated an already themed SVG card, giving
+ // a second white border and baked-in title underneath the normal card.
+ if(!adventure){
+  grid.classList.remove('sd839-geo-grid');
+  for(const btn of buttons){
+   btn.classList.remove('sd839-geo-card','sd839-geo-adventure');
+   btn.querySelectorAll(':scope > img.sd839-geo-image, :scope > span.sd839-geo-label, :scope > span.sd843-geo-caption').forEach(n=>n.remove());
+  }
+  return;
+ }
+ grid.classList.add('sd839-geo-grid');
  for(const [btn,info] of matched){
   btn.classList.add('sd839-geo-card');
   btn.classList.toggle('sd839-geo-adventure',adventure);
