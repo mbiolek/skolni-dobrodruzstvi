@@ -1,0 +1,9 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.53
+
+Oprava viditelné velikosti dobrodružných karet proti zlatému (kamennému) prostředí:
+- zachována stejná mřížka, velikost klikací plochy a poloha XP jako 50.8.52;
+- dobrodružná ilustrace uvnitř karty zabírá 97 % šířky a 87,5 % výšky;
+- nejedná se o deformaci: object-fit: cover, object-position: bottom zachovává spodní popisky;
+- změněno pouze prostředí adventure, ostatní čtyři prostředí beze změny;
+- veškeré obrázky a interaktivní navigace zůstaly beze změny;
+- verze aplikace a service workeru zvýšena na 50.8.53.
