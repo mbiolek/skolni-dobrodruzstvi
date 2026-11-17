@@ -96,7 +96,7 @@ function ensureExact(b){
  if(!picture){picture=document.createElement('img');picture.className='sd84-exact-picture';picture.alt='';picture.decoding='async';picture.draggable=false;picture.setAttribute('aria-hidden','true');art.appendChild(picture)}
  // Every card has a separate, accessible live label; baked-in labels do not scale on mobile.
  const image835=th==='adventure'?(art835(title)||base.replaceAll('_','-')):null;
- const url=image835?`./assets/ikony/cards-finished-50-8-51/${image835}.webp`:(th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`);
+ const url=image835?`./assets/ikony/cards-wide-50-8-59/${image835}.webp`:(th==='adventure'?`./assets/ui-exact-50-8-8/adventure/${base}.svg`:`${ROOT}${th}/blanks/${base}.svg`);
  if(picture.getAttribute('src')!==url)picture.src=url;
  b.classList.add('sd84-exact-card');b.classList.toggle('sd87-dynamic',!exact);
  b.classList.toggle('sd835-picture-card',!!image835);

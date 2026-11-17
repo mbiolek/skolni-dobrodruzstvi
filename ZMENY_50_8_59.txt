@@ -1,0 +1,11 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.59 – KARTY NIŽŠÍ, NE UŽŠÍ
+
+• Oprava v prostředí Dobrodružné předměty: navrácena 100% šířka karet v obou sloupcích.
+• Grafické pole má poměr stran 512:454 (přibližně o 11 % menší výška).
+• Nová sada 30 obrázků o skutečných rozměrech 512×454 px.
+• Vnitřní motiv byl úměrně zmenšen (~14 %), písmo i grafika bez deformace.
+• Vnitřní nabídky předmětů i živý náhled používají stejnou sadu.
+• Ostatní čtyři prostředí, názvy, XP, školy a navigace beze změny.
+• Aktualizované offline stažení nové grafiky ve verzi 50.8.59.
+
+Poznámka: Nové WEBP jsou zkomponované z původních ilustrací.

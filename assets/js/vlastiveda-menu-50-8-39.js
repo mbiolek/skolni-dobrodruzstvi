@@ -4,7 +4,7 @@
  * jedna vlastní titulková lišta, která zakryje starý baked-in titulek.
  */
 (()=>{'use strict';
-const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-45/', FIXED='./assets/ikony/cards-50-8-45/', CLEAN='./assets/ikony/cards-finished-50-8-51/';
+const SUBJECT='geography', ROOT='./assets/ikony/cards-50-8-45/', FIXED='./assets/ikony/cards-50-8-45/', CLEAN='./assets/ikony/cards-wide-50-8-59/';
 const ENTRIES=[
  {title:'Výuka',image:'vyuka.webp'},
  {title:'Procvičování',image:'procvicovani.webp'},
