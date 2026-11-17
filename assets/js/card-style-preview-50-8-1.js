@@ -10,26 +10,30 @@ const OPTIONS={
   adventure:['Dobrodružné předměty','Jako dlaždice výběru předmětů']
 };
 const SAMPLES=[
-  ['Výuka','vyuka'],
-  ['Procvičování','procvicovani'],
-  ['Příprava na školní test','test'],
-  ['Měsíční plán','mesicni_plan'],
-  ['Opakování','opakovani'],
-  ['Závěrečný test','zaverecny_test']
+  ['Výuka','vyuka','vyuka'],
+  ['Procvičování','procvicovani','procvicovani'],
+  ['Příprava na školní test','test','priprava-na-skolni-test'],
+  ['Měsíční plán','mesicni_plan','mesicni-plan'],
+  ['Opakování','opakovani','opakovani'],
+  ['Závěrečný test','zaverecny_test','zaverecny-test']
 ];
+// 50.8.54: Exactly the same finished illustrations as the real adventure buttons.
+const ADVENTURE_ASSETS='./assets/ikony/cards-finished-50-8-51/';
 function init(){
  const chooser=document.querySelector('#sdCardStyleSelect .sd-card-theme-options');
  if(!chooser||!window.SDUICards||!window.SDCardThemes)return;
  let previewStyle=null,originalStyle=null,previousFocus=null;
  const overlay=document.createElement('div');overlay.className='sd5081-overlay';overlay.id='sd5081StyleOverlay';overlay.hidden=true;
  overlay.innerHTML=`<section class="sd5081-dialog" role="dialog" aria-modal="true" aria-labelledby="sd5081StyleTitle" aria-describedby="sd5081StyleHelp">
- <header class="sd5081-header"><div><span class="sd5081-kicker">ŽIVÝ NÁHLED SVG KARET</span><h2 id="sd5081StyleTitle"></h2><p id="sd5081StyleHelp">Zobrazené karty jsou složené ze stejných vektorových vrstev jako tlačítka ve výuce.</p></div><button class="sd5081-close" type="button" aria-label="Zavřít náhled">✕</button></header>
+ <header class="sd5081-header"><div><span class="sd5081-kicker" id="sd5081PreviewKicker">ŽIVÝ NÁHLED KARET</span><h2 id="sd5081StyleTitle"></h2><p id="sd5081StyleHelp">Zobrazené karty jsou složené ze stejných vektorových vrstev jako tlačítka ve výuce.</p></div><button class="sd5081-close" type="button" aria-label="Zavřít náhled">✕</button></header>
  <div class="sd5081-samples sd-ui-grid" id="sd5081Samples"></div>
  <p class="sd5081-action-hint" id="sd5081SampleHint" aria-live="polite">Klepnutím na kartu si prohlédneš její reakci. V předmětech mají tlačítka své původní funkce.</p>
  <footer class="sd5081-actions"><button type="button" class="sd5081-cancel">Zpět bez změny</button><button type="button" class="sd5081-use">Použít tento styl</button></footer>
  </section>`;
  document.body.append(overlay);
  const title=overlay.querySelector('#sd5081StyleTitle');
+ const description=overlay.querySelector('#sd5081StyleHelp');
+ const kicker=overlay.querySelector('#sd5081PreviewKicker');
  const samples=overlay.querySelector('#sd5081Samples');
  const hint=overlay.querySelector('#sd5081SampleHint');
  const cancel=overlay.querySelector('.sd5081-cancel');
@@ -70,10 +74,30 @@ function init(){
   previewStyle=style;
   temporaryStyle(style);
   title.textContent=OPTIONS[style][0];
+  const adventure=style==='adventure';
+  kicker.textContent=adventure?'ŽIVÝ NÁHLED HOTOVÝCH KARET':'ŽIVÝ NÁHLED SVG KARET';
+  description.textContent=adventure
+   ?'Stejné obrázky, velikost a proporce jako u skutečných dobrodružných tlačítek.'
+   :'Zobrazené karty jsou složené ze stejných vektorových vrstev jako tlačítka ve výuce.';
   hint.textContent='Klepnutím na kartu si prohlédneš její reakci. V předmětech mají tlačítka své původní funkce.';
   samples.replaceChildren();
-  SAMPLES.forEach(([name,ico])=>{
-   const sample=window.SDUICards.button({title:name,icon:ico,className:'sd5081-sample'});
+  SAMPLES.forEach(([name,ico,filename])=>{
+   let sample;
+   if(adventure){
+    // Do not construct SVG here: older decorators otherwise introduce
+    // different artwork and 1:1 frames not used by the real app.
+    sample=document.createElement('button');
+    sample.type='button';
+    sample.className='sd50854-preview-card';
+    const picture=document.createElement('img');
+    picture.className='sd50854-preview-art';
+    picture.src=ADVENTURE_ASSETS+filename+'.webp';
+    picture.alt='';picture.draggable=false;picture.decoding='async';
+    picture.setAttribute('aria-hidden','true');
+    sample.append(picture);
+   }else{
+    sample=window.SDUICards.button({title:name,icon:ico,className:'sd5081-sample'});
+   }
    sample.setAttribute('aria-label',`Ukázka tlačítka ${name}`);
    sample.addEventListener('click',()=>{
     hint.textContent=`Ukázka: ${name}. Po použití stylu bude toto tlačítko v předmětu otevírat svou původní funkci.`;

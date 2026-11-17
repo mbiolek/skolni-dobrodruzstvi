@@ -1,0 +1,8 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.54
+
+Sjednocený živý náhled dobrodružných karet
+- Výběr stylu Dobrodružné předměty nyní používá stejné WEBP soubory cards-finished-50-8-51 jako skutečná tlačítka.
+- Náhled používá přesně stejný poměr viditelného obrázku 97 % šířky a 87,5 % výšky uvnitř čtvercového klikacího místa jako 50.8.53.
+- Názvy jsou součástí obrázku; žádný starý SVG popisek ani další rámeček.
+- Pouze náhled Dobrodružných předmětů, žádná změna ostatních čtyř prostředí a obrazovek výuky.
+- Aktualizován Service Worker a verze na 50.8.54.

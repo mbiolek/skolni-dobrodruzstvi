@@ -1,0 +1,51 @@
+/* 50.8.54: preview-only matching for the already approved Adventure cards.
+ * Preserve all real buttons and all other card themes. The clickable box
+ * stays square like the real card hit target; the visible art occupies the
+ * same 97% × 87.5%, aligned 6.25% from the top (50.8.53).
+ */
+html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples.sd5081-samples{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ column-gap:clamp(12px,3vw,20px)!important;
+ row-gap:clamp(12px,3vw,20px)!important;
+ width:100%!important;max-width:352px!important;
+ margin-left:auto!important;margin-right:auto!important;
+ justify-items:stretch!important;align-items:start!important;
+}
+html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples > button.sd50854-preview-card{
+ display:block!important;position:relative!important;box-sizing:border-box!important;
+ width:100%!important;max-width:none!important;min-width:0!important;
+ height:auto!important;max-height:none!important;min-height:0!important;
+ aspect-ratio:1 / 1!important;align-self:start!important;justify-self:stretch!important;
+ margin:0!important;padding:0!important;
+ background:transparent!important;background-image:none!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;
+ overflow:visible!important;clip-path:none!important;filter:none!important;
+ cursor:pointer!important;touch-action:manipulation!important;
+ -webkit-tap-highlight-color:transparent!important;
+ transition:transform .13s ease,filter .13s ease!important;
+}
+html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples > button.sd50854-preview-card::before,
+html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples > button.sd50854-preview-card::after{
+ display:none!important;content:none!important;
+}
+html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples > button.sd50854-preview-card > img.sd50854-preview-art{
+ display:block!important;position:absolute!important;box-sizing:border-box!important;
+ inset:auto!important;top:6.25%!important;bottom:auto!important;
+ left:1.5%!important;right:auto!important;
+ width:97%!important;height:87.5%!important;
+ min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:50% 100%!important;
+ margin:0!important;padding:0!important;transform:none!important;
+ border:0!important;border-radius:clamp(10px,2.6vw,17px)!important;
+ box-shadow:0 3px 7px #0005!important;filter:none!important;
+ pointer-events:none!important;
+}
+html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples > button.sd50854-preview-card:active{
+ transform:translateY(2px) scale(.989)!important;filter:brightness(.97)!important;
+}
+html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples > button.sd50854-preview-card:focus-visible{
+ outline:2px solid #ffe49a!important;outline-offset:2px!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body[data-card-style="adventure"] #sd5081StyleOverlay #sd5081Samples > button.sd50854-preview-card{transition:none!important}
+}
