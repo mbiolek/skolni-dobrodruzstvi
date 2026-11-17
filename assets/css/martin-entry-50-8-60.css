@@ -10,3 +10,10 @@ body.sd860-martin-active #homeScreen #sd860MartinLaunch{display:flex!important;f
 #sd860MartinLaunch .sd860-start{display:inline-block;background:linear-gradient(#ffe4a0,#c99c4a);color:#162746;border:1px solid #ffeeb8;text-align:center;border-radius:15px;padding:14px;text-decoration:none;font:800 16px system-ui,sans-serif}
 .sd860-parent-box{border:1px solid #cbb182;border-radius:13px;padding:12px 16px;margin:15px 0;background:#ecf2ff;color:#152a49}
 .sd860-parent-box p{font-size:14px;color:#152a49}.sd860-parent-box button{font:inherit;font-weight:750;background:#1b375d;color:#fff;border:1px solid #d8bb8b;padding:10px 15px;border-radius:10px}
+
+#sd862ParentDemo.sd862-parent-demo{display:block;text-decoration:none;margin-top:12px;text-align:center;padding:15px 10px;background:linear-gradient(140deg,#20456a,#122f56);color:#fff8e9;border:2px solid #d9b46e;border-radius:14px;font:bold 15px system-ui,sans-serif}
+#sd862ParentDemo:focus-visible{outline:3px solid #7db8ff;outline-offset:3px}.sd862-help{line-height:1.45}
+
+/* 50.8.62: Martinův profil může přímo vybrat jeden ze dvou odborných avatarů. */
+#sd862AvatarChoose.sd862-avatar-choose{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#203a56;border:1px solid #ffd48c;color:#ffedc7;padding:8px 12px;border-radius:17px;cursor:pointer;font:700 14px system-ui,sans-serif;align-self:flex-start}
+#sd862AvatarChoose img{width:72px;height:72px;object-fit:cover;border-radius:13px;border:2px solid #e4c58a}

@@ -1,0 +1,12 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.8.62
+
+• Dva nové 18leté avatary pro Martinův profil: autoelektrikář a diagnostika; výběr přímo v nabídce avatarů.
+• Rodičovská správa: plnohodnotné zkušební otevření Martinovy výuky, testů a výsledků přes oddělený testovací profil, i bez založeného Martina.
+• Test rodiče: výsledky, ústní okruhy, poznámky a týdenní plán se ukládají pod jedinečným klíčem, ne pod Martinovým účtem.
+• Rozšířené původní výukové poznámky ke všem 25 dvojicím školních ústních témat 2026.
+• 25 originálních zjednodušených schémat toku signálu / funkce, nikoli servisních elektro-schémat vozidel.
+• U každého okruhu 3 kontrolní ústní otázky, poznámkový blok a vlastní hodnocení; náhodný výběr okruhu.
+• Původní doslovná školní zadání a Word soubor zůstávají beze změny.
+• Původní CERMAT trénink, ostatní profily, XP, prostředí a obrázky tlačítek zůstávají zachovány.
+
+POZNÁMKA: Jde o autorská výuková shrnutí. Pro závěrečné zkoušky v roce 2027 ověřit případnou aktualizaci okruhů školy.

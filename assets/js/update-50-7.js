@@ -2,7 +2,7 @@
 (()=>{'use strict';
 const ROOT='./assets/',AVATAR_KEY='skolni-dobrodruzstvi-v37-avatar',PROFILE_KEY='matematika-karticky-progress-v3-profiles',ACTIVE_KEY='matematika-karticky-progress-v3-active',PARENT_KEY='sd-parent-merlin-choice';
 const read=(key)=>{try{return JSON.parse(localStorage.getItem(key)||'{}')||{}}catch{return {}}};
-const avatarUrl=i=>`${ROOT}avatari/avatar-${Math.floor(i/8)+1}-${i%8+1}.webp`;
+const avatarUrl=i=>i===40?`${ROOT}avatari/martin-autolektrikar-technik.webp`:i===41?`${ROOT}avatari/martin-autolektrikar-diagnostika.webp`:`${ROOT}avatari/avatar-${Math.floor(i/8)+1}-${i%8+1}.webp`;
 const parentOptions=[
  {id:'blue',name:'Merlin s lucernou',url:'./assets/merlin/avatar-parent-blue.gif'},
  {id:'purple',name:'Moudrý Merlin',url:'./assets/merlin/avatar-parent-purple.png'}
@@ -10,13 +10,14 @@ const parentOptions=[
 const parentSelected=()=>{try{return localStorage.getItem(PARENT_KEY)==='purple'?'purple':'blue'}catch{return 'blue'}};
 const parentURL=()=>parentOptions.find(o=>o.id===parentSelected()).url;
 
-const groups=['Dobrodruzi','Školáci','Přírodovědci','Fantasy','Se zvířaty'];
+const groups=['Dobrodruzi','Školáci','Přírodovědci','Fantasy','Se zvířaty','Autoelektrikář'];
 const names=[
  ['Dobrodruh Tom','Statečná Ema','Objevitel Adam','Průzkumnice Sofie','Cestovatel Matyáš','Dobrodružka Lucie','Hledač pokladů Filip','Odvážná Klára'],
  ['Šikovný Tomáš','Chytrá Eliška','Veselý Adam','Studijní Nela','Zvídavý Martin','Kreativní Anetka','Počítačový David','Usměvavá Verunka'],
  ['Přírodovědec Jakub','Zooložka Tereza','Biolog Ondra','Botanička Karolína','Cestovatel Petr','Milovnice zvířat Liduška','Pozorovatel Vít','Ekoložka Adéla'],
  ['Kouzelný Armin','Čarodějka Mia','Rytíř Vojta','Princezna Amálie','Elf Samuel','Lesní víla Ema','Drakobijec Lukáš','Kouzelnice Sára'],
- ['Tom a pes','Eliška a kočka','Adam a medvěd','Nela a králík','Matyáš a sova','Lucie a kůň','Filip a drak','Klára a liška']
+ ['Tom a pes','Eliška a kočka','Adam a medvěd','Nela a králík','Matyáš a sova','Lucie a kůň','Filip a drak','Klára a liška'],
+ ['Martin – autoelektrikář','Martin – diagnostika']
 ].flat();
 let activeId=null,filter=-1;
 const gate=document.getElementById('authGate');
@@ -30,10 +31,24 @@ function current(){
 }
 function resolvedId(){return gate?.classList.contains('off')?current():null} 
 function userName(id){return read(PROFILE_KEY)[id]?.name||id}
-function selectedIndex(id){if(!id)return null;const all=read(AVATAR_KEY);const val=[all[id],all[userName(id)]].find(x=>Number.isInteger(x)&&x>=0&&x<40);return val===undefined?null:val}
+function selectedIndex(id){if(!id)return null;const all=read(AVATAR_KEY);const val=[all[id],all[userName(id)]].find(x=>Number.isInteger(x)&&x>=0&&x<42);return val===undefined?null:val}
 function paint(){
+ // One-time upgrade for Martin profiles, including the login-selection screen.
+ // Never alter the other children's selected avatars.
+ const allProfiles=read(PROFILE_KEY),storedAvatars=read(AVATAR_KEY);
+ let migrated=false;
+ for(const [profileId,user] of Object.entries(allProfiles)){
+  if(!/^martin(?:\s|$)/i.test(user?.name||''))continue;
+  const migrationKey='sd862_martin_avatar_migrated_'+profileId;
+  if(localStorage.getItem(migrationKey))continue;
+  if(!Number.isInteger(storedAvatars[profileId])||storedAvatars[profileId]<40){
+   storedAvatars[profileId]=40;storedAvatars[user.name]=40;migrated=true;
+  }
+  localStorage.setItem(migrationKey,'1');
+ }
+ if(migrated)localStorage.setItem(AVATAR_KEY,JSON.stringify(storedAvatars));
  const id=resolvedId(),sel=id==='parent'?null:selectedIndex(id);
- const img=id==='parent'?parentURL():sel!==null?avatarUrl(sel):null;
+ const img=id==='parent'?parentURL():sel!==null?avatarUrl(sel):/^martin(?:\s|$)/i.test(userName(id)||'')?avatarUrl(40):null;
  if(img){const url=`url("${img}")`;document.documentElement.style.setProperty('--v24-hero-art',url);
   const hero=document.querySelector('#homeScreen .v23-portrait');if(hero)hero.style.setProperty('background-image',url,'important');
   const pic=document.getElementById('v26-playerpic');if(pic)pic.style.setProperty('background-image',url,'important')}
@@ -42,7 +57,7 @@ function paint(){
   const name=b.querySelector('strong')?.textContent?.trim()||'';
   const isParent=name.toLowerCase().includes('rodič');
   const bid=isParent?'parent':Object.keys(ps).find(k=>ps[k]?.name===name)||name;
-  const choice=[data[bid],data[name]].find(x=>Number.isInteger(x)&&x>=0&&x<40);
+  const choice=[data[bid],data[name]].find(x=>Number.isInteger(x)&&x>=0&&x<42)??(!isParent&&/^martin(?:\s|$)/i.test(name)?40:undefined);
   if(!isParent&&choice===undefined)return;
   const image=isParent?parentURL():avatarUrl(choice);const url=`url("${image}")`;
   b.style.setProperty('--v24-avatar',url);b.style.setProperty('--v23-user-img',url);
@@ -76,10 +91,10 @@ if(dialog&&grid&&opener){
    });return;
   }
   const chosen=selectedIndex(id);
-  [-1,0,1,2,3,4].forEach(g=>{const b=document.createElement('button');b.type='button';
-   b.textContent=g<0?'Všichni (40)':groups[g];b.className=filter===g?'active':'';
+  [-1,0,1,2,3,4,5].forEach(g=>{const b=document.createElement('button');b.type='button';
+   b.textContent=g<0?'Všichni (42)':groups[g];b.className=filter===g?'active':'';
    b.setAttribute('aria-pressed',String(filter===g));b.addEventListener('click',()=>{filter=g;show()});filters.append(b)});
-  names.forEach((label,i)=>{if(filter>=0&&Math.floor(i/8)!==filter)return;
+  names.forEach((label,i)=>{if(filter>=0&&(i<40?Math.floor(i/8):5)!==filter)return;
    const b=document.createElement('button');b.type='button';b.className='v24-avatar-option'+(chosen===i?' selected':'');
    b.setAttribute('aria-pressed',String(chosen===i));b.setAttribute('aria-label',label);
    const img=document.createElement('span');img.className='pic';img.style.backgroundImage=`url("${avatarUrl(i)}")`;
