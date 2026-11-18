@@ -1,0 +1,9 @@
+Školní dobrodružství 50.8.63 – Oficiální CERMAT
+
+- Ověřené přímé odkazy na 12 původních testů (2026, 2025 a 2024; matematika a čeština, 1. a 2. řádné termíny)
+- U každého testu: externí PDF zadání, záznamového archu a oficiálního klíče řešení
+- Časomíra na 70 nebo 60 minut, pokračuje při přepnutí okna podle reálného času
+- Ruční uložení bodů 0–50 a poznámky (nikoli automatické ověření odpovědí)
+- Pokrok ve skutečných testech odděleně od vlastních výukových úloh; izolován i test rodiče
+- Žádný oficiální test se neopisuje, PDF zůstávají na webu CERMATu, pro přístup je potřeba internet
+- Zachována původní odborná část i profily; aktualizace Service Worker na 50.8.63
