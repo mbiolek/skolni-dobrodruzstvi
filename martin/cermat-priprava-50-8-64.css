@@ -1,0 +1,32 @@
+/* Školní dobrodružství 50.8.64 – oddělená příprava CERMAT */
+#cermat64App{max-width:940px;padding:17px;margin:0 auto}
+.c64-hero{background:linear-gradient(132deg,#23466e,#112b4c);border:1px solid #e0b86f;border-radius:21px;padding:22px;margin:8px 0 17px}
+.c64-hero .mini{letter-spacing:.1em;color:#ffdfa6;font-size:12px;font-weight:800}
+.c64-hero h1{font-size:clamp(25px,5vw,34px);line-height:1.22;margin:10px 0}.c64-hero p{line-height:1.55;margin:6px 0;color:#e3eaf5}
+.c64-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.c64-action{display:flex;flex-direction:column;gap:8px;text-decoration:none;text-align:left;background:#1b395d;border:1px solid #b6a07a;border-radius:18px;padding:17px;min-height:132px;color:#faf7f0}
+.c64-action b{font-size:20px}.c64-action small{font-size:13px;color:#cbd9ed;line-height:1.35}
+.c64-menu{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0}.c64-menu button{flex:1;min-width:110px}
+.c64-menu button.on{background:#edca88;color:#162640;font-weight:800}
+.c64-card{background:#142b4a;border:1px solid #8192a9;border-radius:18px;padding:clamp(15px,3vw,22px);margin:15px 0}
+.c64-card h2{font-size:21px;margin:2px 0 12px}.c64-card p{line-height:1.5}
+.c64-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.c64-progress{height:9px;border-radius:40px;background:#3c5470;overflow:hidden;margin:14px 0}.c64-progress span{display:block;height:100%;background:linear-gradient(90deg,#ebca74,#58d3a4)}
+.c64-question{font-size:clamp(19px,4.4vw,26px);line-height:1.4;font-weight:800;margin:17px 0 23px}
+.c64-answers{display:grid;grid-template-columns:1fr;gap:11px}.c64-answers button{text-align:left;font-size:17px;line-height:1.5;min-height:57px;background:#20446b;border:1px solid #7697bd;transition:background .18s ease,border-color .18s ease}
+.c64-answers button.correct{background:#126a45!important;border:2px solid #69f2ac!important;color:#fff}.c64-answers button.wrong{background:#7a2532!important;border:2px solid #ff7f8e!important}
+.c64-answers button:disabled{opacity:1;cursor:default}.c64-feedback{min-height:30px;margin:13px 0;font-weight:700;line-height:1.5}.c64-feedback.ok{color:#94ffd0}.c64-feedback.no{color:#ffd1ce}
+.c64-tag{color:#f4d79a;font-size:12px;font-weight:780;letter-spacing:.05em}.c64-soft{font-size:13px;color:#c4d4e7}
+.c64-score{font-size:41px;font-weight:900;color:#ffd891}
+.c64-wrong{background:#10223f;border-radius:12px;border:1px solid #4b6685;padding:12px;margin:10px 0}
+.c64-wrong strong{display:block;margin-bottom:6px}.c64-wrong small{color:#e8d19a}
+.c64-pdf-row{border:1px solid #556e8b;background:#152e4e;border-radius:13px;padding:14px;margin:10px 0}
+.c64-pdf-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}.c64-pdf-links a{display:inline-block;background:#213c62;color:#ffedb7;border:1px solid #c5a264;border-radius:11px;padding:10px 12px;text-decoration:none;font-size:13px;font-weight:800}
+.c64-info{padding:12px 15px;border-radius:12px;background:#102844;border-left:4px solid #efc272;line-height:1.5}
+.c64-time{font-weight:900;font-variant-numeric:tabular-nums;font-size:20px;color:#ffdc92}.c64-time.expired{color:#ffaaa9}
+.c64-main-btn{width:100%;font-weight:850;font-size:16px}.c64-kind{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0}.c64-kind button{flex:1;min-width:120px}
+.c64-kind button.on{background:#f5d796;color:#132a45;font-weight:850}
+.c64-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0}.c64-tabs button{flex:1;min-width:90px}
+.c64-tabs .on{background:#ffe6ac;color:#152c45;font-weight:800}
+.c64-footnote{font-size:12px;color:#c1cde0;line-height:1.55;margin:20px 0}
+@media(max-width:600px){.c64-links{grid-template-columns:1fr}.c64-action{min-height:100px}.c64-pdf-links a{flex:1 0 40%;text-align:center}#cermat64App{padding:10px}}

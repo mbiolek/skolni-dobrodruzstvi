@@ -1,0 +1,21 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.64 – MARTIN CERMAT A/B/C + TEST NANEČISTO
+
+Navazuje na kompletní verzi 50.8.63; ostatní části aplikace zachovány.
+
+1. V Martinově profilu a rodičovské kopii nová sekce „CERMAT trénink“:
+   - A/B/C procvičování, 15 náhodných otázek na trénink
+   - správná odpověď se zvýrazní zeleně, automatický přechod po cca 0,95 s
+   - nesprávná odpověď červeně, vysvětlení, možnost dalšího pokusu
+   - 30 úloh v režimu test nanečisto, časový limit 70 min mat / 60 min čj
+   - bez zobrazení správnosti během ostrého testu, výsledky s rozborem po dokončení
+   - uchování rozehraného testu a výsledků lokálně, oddělení rodiče a Martina
+2. Tréninkový soubor: 51 nových matematických + 60 nových českých úloh
+   inspirovaných oblastmi veřejných testů 2026 a dosavadních 78 + 52 originálních
+   cvičení. Celkem 241 úloh. Autorské texty, ne převzaté originální úlohy CERMAT.
+3. PDF: přímé odkazy na oficiální testové sešity, archy a klíče pro roky 2024–2026
+   na stránkách CERMATu. PDF se otevírají online a lze je vytisknout v Safari/Chrome.
+4. Přímý odkaz na oficiální online CERMAT TAU a další oficiální procvičování.
+
+Poznámka: A/B/C simulace má vlastní počet správných odpovědí, NENÍ
+oficiální didaktický test CERMAT ani jeho bodové hodnocení 0–50.
+Originální oficiální zadání je vždy nutno řešit samostatně v PDF nebo TAU.
