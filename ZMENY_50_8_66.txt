@@ -1,0 +1,14 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.66 – CLOUD / SUPABASE
+
+CENTRÁLNÍ DATABÁZE: vytvořena a zabezpečena v Supabase.
+PROFILY: rodič musí potvrdit první import na zařízení, kde jsou správná data.
+SERVEROVÉ MAZÁNÍ: odstraněný profil má trvalý tombstone a nelze ho obnovit ze staré zálohy.
+ZAŘÍZENÍ DĚTÍ: anonymní Supabase Auth + jednorázový kód, párování schvaluje přihlášený rodič.
+BEZPEČNOST: na dětské zařízení se nepřihlašuj účtem rodiče; používá vlastní JWT a RLS.
+ZÁLOHA: automaticky vznikne místní kopie před převodem; tlačítko umožňuje stáhnout JSON.
+PROGRESS: profilové statistiky a vybrané Martinovy výsledky se posílají se serverovou revizí.
+KONFLIKTY: starší zařízení nesmí přepsat novější serverová data; problém oznámí.
+OMEZENÍ: další moduly se starými klíči lokálního úložiště zatím nemusí být synchronizovány;
+           PINy ostatních zařízení se nepřenášejí, telefon dítěte používá bezpečné párování.
+           offline změny smazaného profilu se projeví až po obnovení internetu.
+NUTNÉ V SUPABASE: zapnout Authentication → Providers → Anonymous, pro párování dětských zařízení.

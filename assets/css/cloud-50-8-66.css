@@ -1,0 +1,15 @@
+/* 50.8.66: správce připojí rodinný cloud, dítě pouze vlastní zařízení. */
+.sd866-cloud{margin:18px auto;padding:16px;border:2px solid #81b9d9;border-radius:18px;background:rgba(18,42,67,.92);color:#fff;max-width:790px;box-sizing:border-box}
+.sd866-cloud h3,.sd866-cloud h4{margin:3px 0 12px;color:#f7dba5}.sd866-cloud h4{margin-top:16px}
+.sd866-cloud p,.sd866-cloud small{font-size:14px;line-height:1.5;color:#e0eafa}
+.sd866-cloud input,.sd866-cloud select{display:block;width:100%;max-width:500px;min-height:43px;box-sizing:border-box;border-radius:10px;border:1px solid #93aabd;margin:6px 0 12px;padding:9px 12px;background:white!important;color:#112538!important;font:inherit}
+.sd866-cloud label{display:block;font-size:14px;line-height:1.4}
+.sd866-cloud button,.sd866-childpair button{padding:10px 14px;min-height:42px;margin:4px 4px 4px 0;border:1px solid #ccdfee;border-radius:12px;background:#347fb7;color:white;font-weight:700;font-size:14px;white-space:normal;cursor:pointer}
+.sd866-cloud button:disabled,.sd866-childpair button:disabled{opacity:.55}
+.sd866-cloud .sd866-actions{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+#sd866Status{padding:11px;border-radius:10px;background:#234969;color:#fff;margin:10px 0 15px;font-size:14px;line-height:1.5}
+#sd866Status.sd866-error{border:1px solid #f09e9e;color:#ffe0e0}
+.sd866-childpair{margin-top:14px;font-size:14px}
+.sd866-childpair #sd866PairPanel{background:rgba(8,35,55,.88);border:1px solid #c3d7ed;color:white;padding:14px;border-radius:14px;margin-top:10px}
+.sd866-childpair strong{display:block;font-size:19px;letter-spacing:1px;overflow-wrap:anywhere;margin:12px 0;color:#fce19c}
+@media(max-width:500px){.sd866-cloud{padding:12px}.sd866-cloud .sd866-actions{display:grid;grid-template-columns:1fr 1fr}.sd866-cloud button{font-size:13px}}

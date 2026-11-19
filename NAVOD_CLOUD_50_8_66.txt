@@ -1,0 +1,55 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.66 – BEZPEČNÉ ZPROVOZNĚNÍ CENTRÁLNÍCH PROFILŮ
+
+Databázový projekt je již vytvořený v Supabase, tabulky a RLS nainstalovány.
+V nové verzi aplikace otevři profil „Rodič – správce“ a novou sekci „Centrální databáze 50.8.66“.
+
+1. NEJDŘÍV SAMSUNG (kde existují správné profily):
+   - Přihlas se místním rodičovským PINem.
+   - U cloudu klikni Vytvořit cloudový účet.
+     E-mail/heslo je nové přihlášení pro aplikaci (nezadávej databázové heslo Supabase).
+   - Je-li vyžadováno potvrzení e-mailu, potvrď ho a potom klikni Přihlásit k cloudu.
+   - Zvol „Stáhnout místní zálohu“ a uschovej si ji v soukromí.
+   - Zvol „Převést profily z tohoto zařízení“ a odsouhlas jména Martin a Matyáš.
+   - NENAHRÁVEJ starý zkušební profil „Test“ z počítače dřív než tyto profily.
+
+2. POČÍTAČ:
+   - Otevři aktualizovanou aplikaci; přihlas se jako Rodič – správce.
+   - Přihlas se STEJNÝM cloudovým e-mailem a heslem jako na Samsungu.
+   - Aplikace načte cloudové profily a uloží předchozí místní kopii. Profil Test zůstane
+     v záloze, ale seznam profilů se řídí cloudem.
+
+3. TELEFON DÍTĚTE / iPHONE:
+   - Supabase Dashboard -> Authentication -> Sign In / Providers -> Anonymous -> Enable.
+   - V aplikaci na telefonu dítěte na přihlašovací stránce zvol
+     „Připojit dětské zařízení k rodině“ -> „Vytvořit párovací kód“.
+   - Kód předej rodiči. Rodič ve správě cloudu vybere profil a kód potvrdí.
+   - Na telefonu dítěte klikni „Zkontrolovat párování“.
+   - Dítě nebude znát cloudové heslo rodiče. Párovací kód platí 15 minut.
+
+4. SMAZÁNÍ PROFILU:
+   - Přihlas se jako rodič na cloudově připojeném zařízení.
+   - Klikni Smazat u správného profilu; aplikace nejprve potvrdí smazání v Supabase.
+   - Další zařízení načtou změnu po připojení k internetu (obvykle do 30 sekund,
+     případně po návratu do aplikace). Smazaný profil se z místní zálohy nevrací.
+
+CO JE V TÉTO VERZI SYNCHRONIZOVÁNO:
+   - rodičem spravované profily a jména; jejich zrušení mezi zařízeními,
+   - hlavní profilový stav, počítadla, XP a zapamatované úlohy v objektu profilu,
+   - Martinův studijní plán a některé CERMAT výsledky.
+OSTATNÍ DATA:
+   - část starších modulů nadále ukládá průběh lokálně; tato verze netvrdí
+     stoprocentní synchronizaci všech jejich statistik, škol ani hlasu.
+   - PINy zůstávají místní doplňkovou ochranou, nepřenášejí se do cloudu.
+   - při konfliktu pokroku aplikace odmítne přepsat novější serverová data;
+     rozpracovaná místní data zůstanou zachovaná, ale sloučení může vyžadovat pomoc.
+   - plné offline prohlížení je možné podle již dostupných podkladů; smazání se ověří
+     až po obnovení spojení.
+
+BEZPEČNOST:
+   - veřejný klíč sb_publishable slouží pouze ke spojení s projektem a sám nemá
+     právo číst cizí výsledky. Tajný service_role klíč ani heslo databáze není v balíčku.
+   - Oprávnění dětí a rodiče jsou vynucována databázovými politikami RLS.
+   - Nezadávej rodičovské heslo do telefonu dítěte; použij párování.
+
+TATO VERZE BYLA TESTOVÁNA SE SIMULOVANÝM PŘIHLÁŠENÍM. OSTRÉ PŘIHLÁŠENÍ NA TELEFONU
+A SKUTEČNÝ PŘENOS JEŠTĚ MUSÍ PROBĚHNOUT POMOCÍ TVÉHO VLASTNÍHO ÚČTU.
