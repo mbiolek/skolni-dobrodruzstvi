@@ -1,0 +1,21 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.65
+
+Martinův přehled:
+- zjednodušený na dvě hlavní oblasti: Přijímačky CERMAT / Výuční list
+- tři výrazné akce: Učit se, Procvičovat, Test naostro (s popisem významu)
+- podrobné statistiky a původní obsah nezmizely, jsou pod rozbalovací nabídkou
+- rodičovský zkušební režim zůstává oddělený od Martinových výsledků
+
+CERMAT příprava:
+- 26 vlastních krátkých výukových kapitol s postupem a příkladem
+- v procvičování Nápověda a Vysvětlit řešení pro každou ze stávajících 241 A/B/C úloh
+- odpovědi s pomocí se NEPOČÍTAJÍ za samostatně zvládnuté
+- zelené potvrzení a automatické další otázky zachováno
+- Test naostro nemá nápovědu
+- přímý odkaz na oficiální TAU + archiv původních PDF u CERMATu
+
+Omezení:
+- databáze TAU není přebírána ani hromadně kopírována bez licence
+- vlastní A/B/C test není doslovný oficiální test ani přesné hodnocení 0–50 bodů
+- školní písemné otázky z předchozího ZIP nebyly přidány na veřejný web (neznámá licence)
+- přímé mobilní testování na Samsungu a iPhonu dosud neproběhlo
