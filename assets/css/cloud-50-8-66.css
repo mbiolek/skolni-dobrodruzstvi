@@ -18,3 +18,12 @@
 #authAdmin .sd866-cloud :is(p,small,label,.sd866-explain){color:#f0f6ff!important;opacity:1!important;text-shadow:none!important}
 #authAdmin .sd866-cloud h3,#authAdmin .sd866-cloud h4{color:#ffe3ab!important}
 #authAdmin .sd866-cloud #sd866Status{color:#fff!important;background:#245078!important}
+
+/* 50.8.68: nápověda a chybová hlášení vždy přímo u dětského párování. */
+#sd866PairPanel[hidden]{display:none!important}
+#sd866PairPanel:not([hidden]){display:block!important}
+#authGate #sd866ChildPair{position:relative;z-index:1;pointer-events:auto!important}
+#authGate #sd866ChildPair button{position:relative;pointer-events:auto!important;touch-action:manipulation;min-height:48px}
+#authGate #sd866PairMessage{display:block!important;color:#f5fbff!important;background:#24486b;border:1px solid #86abc8;border-radius:12px;padding:12px;margin:12px 0 4px;font-size:14px!important;line-height:1.55;text-align:left;overflow-wrap:anywhere;opacity:1!important}
+#authGate #sd866PairMessage[data-error="1"]{color:#fff2f2!important;background:#68292b;border:2px solid #ffb4b4}
+#authGate #sd866CodeText{color:#fff2a6!important;font-size:clamp(17px,5vw,23px)!important;letter-spacing:1px;overflow-wrap:anywhere}

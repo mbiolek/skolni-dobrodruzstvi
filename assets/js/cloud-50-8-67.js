@@ -16,7 +16,9 @@ const mode=()=>localStorage.getItem(MODE_KEY)||'';
 let session=json(SESSION_KEY,null),family=null,remote=[],linked=null,working=false;
 let baseline=json('sd866_sync_baseline',{}),revision=json('sd866_sync_revision',{}),lastError='',lastSync='',lastSnapshot='',pairCode='';
 let busySync=false,loading=false,stop=false;
-const log=(e)=>{lastError=String(e?.message||e);console.warn('SD 50.8.66 CLOUD:',e); status(lastError,true)};
+const childMessage=(msg,isError=false)=>{const e=$('sd866PairMessage');if(!e)return;e.hidden=false;e.textContent=msg;e.dataset.error=isError?'1':'0';};
+const readableError=e=>{const msg=String(e?.message||e);return /anonymous[_ -]?provider[_ -]?disabled|anonymous sign.ins are disabled/i.test(msg)?'Párovací kód nelze vytvořit: v Supabase není zapnuté anonymní přihlašování. Rodič musí otevřít Authentication → Sign In / Providers → Anonymous Sign-Ins a zapnout Enable anonymous sign-ins. Potom zde klikni znovu na „Vytvořit párovací kód“.':msg;};
+const log=(e)=>{lastError=readableError(e);console.warn('SD 50.8.68 CLOUD:',e);status(lastError,true);if($('sd866PairPanel')&&!$('sd866PairPanel').hidden)childMessage(lastError,true);};
 function status(str,error=false){let el=$('sd866Status');if(el){el.textContent=str;el.classList.toggle('sd866-error',error)}}
 const putSession=s=>{session=s;if(s&&s.access_token){s.expires_at=s.expires_at||Math.floor(Date.now()/1000)+Number(s.expires_in||3600);localStorage.setItem(SESSION_KEY,JSON.stringify(s))}else{localStorage.removeItem(SESSION_KEY)}};
 async function net(path,options={},bearer=false,tryRefresh=true){
@@ -184,13 +186,15 @@ async function syncParent(){if(busySync||!isReady())return;busySync=true;
  }catch(e){log(e)}finally{busySync=false}
 }
 async function createCode(){
+ if(!navigator.onLine)throw Error('Telefon není připojený k internetu. Zapni Wi-Fi nebo mobilní data.');
  if(mode()==='parent'&&session)throw Error('Na tomto zařízení je přihlášen rodič. Nejprve v cloudu použij Odhlásit.');
  let s=session;
  if(!s?.access_token){s=await net('/auth/v1/signup',{method:'POST',body:{}},false);if(!s.access_token)throw Error('Anonymní přihlašování není povoleno. V Supabase otevři Authentication → Providers → Anonymous a povol Anonymous sign-ins.');putSession(s)}
  const bits=new Uint8Array(16);crypto.getRandomValues(bits);
  const code=Array.from(bits,b=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b%32]).join('');
  await net('/rest/v1/sd_pair_requests',{method:'POST',body:{auth_user_id:s.user.id,pairing_code:code}},true);
- pairCode=code;localStorage.setItem(MODE_KEY,'child-pending');renderChild();return code;
+ pairCode=code;localStorage.setItem(MODE_KEY,'child-pending');renderChild();
+ childMessage('Kód je připraven. Rodič ho zadá do své aplikace v části Centrální databáze, vybere Martina nebo Matyáše a potvrdí přístup. Potom stiskni „Zkontrolovat párování“.');return code;
 }
 function revokeLocalChild(){
  const id=linked?.legacy_id||localStorage.getItem('sd866_linked_legacy');
@@ -199,9 +203,9 @@ function revokeLocalChild(){
  sessionStorage.removeItem('skolni-live-v441');localStorage.removeItem('matematika-karticky-progress-v3-active');
  notify();
 }
-async function verifyChild(){if(!session)return;const user=await authUser();if(!user?.id)return;
+async function verifyChild(){if(!session){childMessage('Nejdřív klikni na „Vytvořit párovací kód“.',true);return;}const user=await authUser();if(!user?.id){childMessage('Zařízení ještě není přihlášené. Vytvoř párovací kód znovu.',true);return;}
  const accounts=await net('/rest/v1/sd_child_accounts?auth_user_id=eq.'+user.id+'&select=profile_id,family_id',{},true);
- if(!accounts.length){if(mode()==='child'){revokeLocalChild();status('Toto zařízení bylo odpojeno správcem.',true)}return}
+ if(!accounts.length){if(mode()==='child'){revokeLocalChild();status('Toto zařízení bylo odpojeno správcem.',true);childMessage('Zařízení bylo odpojeno rodičem.',true)}else childMessage('Rodič zatím párování nepotvrdil. Po jeho potvrzení klikni znovu na „Zkontrolovat párování“.');return}
  const prof=await net('/rest/v1/sd_profiles?id=eq.'+accounts[0].profile_id+'&select=id,legacy_id,display_name,deleted_at',{},true);
  if(!prof.length||prof[0].deleted_at){revokeLocalChild();status('Profil byl smazán nebo zařízení odpojeno.',true);return}
  linked=prof[0];localStorage.setItem('sd866_linked_legacy',linked.legacy_id);localStorage.setItem(MODE_KEY,'child');
@@ -247,7 +251,7 @@ function buildUI(){if($('sd866Cloud'))return;
  admin.insertBefore(panel,admin.querySelector('h3'));
  const row=document.createElement('div');row.id='sd866ChildPair';row.className='sd866-childpair';
  row.innerHTML=`<button id="sd866PairStart" type="button">Připojit dětské zařízení k rodině</button>
- <div id="sd866PairPanel" hidden><p>Otevři stejné Školní dobrodružství na telefonu dítěte. Vytvoř zde párovací kód a rodič ho zadá ve své správě.</p><button id="sd866Code" type="button">Vytvořit párovací kód</button><button id="sd866CheckPair" type="button">Zkontrolovat párování</button><button id="sd866Unpair" type="button">Odpojit toto zařízení</button><strong id="sd866CodeText"></strong><p id="sd866PairMessage" role="status"></p></div>`;
+ <div id="sd866PairPanel" hidden><p>Na tomto telefonu vytvoř kód. Rodič jej zadá ve své rodičovské správě a schválí přístup.</p><button id="sd866Code" type="button">Vytvořit párovací kód</button><button id="sd866CheckPair" type="button">Zkontrolovat párování</button><button id="sd866Unpair" type="button">Odpojit toto zařízení</button><strong id="sd866CodeText"></strong><p id="sd866PairMessage" role="status" aria-live="polite">Stiskni „Vytvořit párovací kód“.</p></div>`;
  gate.querySelector('.authbox')?.append(row);
  const css=document.createElement('link');css.rel='stylesheet';css.href='./assets/css/cloud-50-8-66.css';document.head.append(css);
  $('sd866Login').onclick=()=>action(async()=>auth('login',$('sd866Email').value.trim(),$('sd866Password').value),true);
@@ -257,15 +261,15 @@ function buildUI(){if($('sd866Cloud'))return;
  $('sd866Backup').onclick=downloadBackup;
  $('sd866Logout').onclick=()=>{putSession(null);family=null;remote=[];linked=null;localStorage.removeItem(MODE_KEY);status('Cloud odhlášen. Místní záloha nebyla smazána.');renderCloud()};
  $('sd866Pair').onclick=()=>action(()=>pairDevice($('sd866PairCode').value.trim().toUpperCase(),$('sd866PairProfile').value));
- $('sd866PairStart').onclick=()=>{$('sd866PairPanel').hidden=!$('sd866PairPanel').hidden;renderChild()};
- $('sd866Code').onclick=()=>action(createCode);
- $('sd866CheckPair').onclick=()=>action(verifyChild);
+ $('sd866PairStart').onclick=()=>{const panel=$('sd866PairPanel');panel.hidden=!panel.hidden;panel.dataset.open=panel.hidden?'0':'1';$('sd866PairStart').setAttribute('aria-expanded',String(!panel.hidden));renderChild();if(!panel.hidden){childMessage(pairCode?'Párovací kód je vytvořen. Předej ho rodiči.':'Stiskni „Vytvořit párovací kód“. Pokud se objeví chyba, uvidíš její vysvětlení tady.');panel.scrollIntoView?.({block:'nearest',behavior:'smooth'});}};
+ $('sd866Code').onclick=()=>action(createCode,false,true);
+ $('sd866CheckPair').onclick=()=>action(verifyChild,false,true);
  $('sd866Unpair').onclick=()=>{if(!confirm('Odpojit toto zařízení od cloudu? Místní záloha nebude smazána.'))return;
    putSession(null);revokeLocalChild();localStorage.removeItem(MODE_KEY);localStorage.removeItem('sd866_linked_legacy');pairCode='';renderChild();location.reload()};
  renderCloud();renderChild();
 }
-async function action(fn,clear=false){if(working)return;working=true;const buttons=document.querySelectorAll('#sd866Cloud button,#sd866ChildPair button');buttons.forEach(b=>b.disabled=true);
- try{if(clear)status('Ověřuji přihlášení…');await fn();if(clear)renderCloud()}catch(e){log(e)}finally{working=false;buttons.forEach(b=>b.disabled=false)}}
+async function action(fn,clear=false,forChild=false){if(working)return;working=true;const buttons=document.querySelectorAll('#sd866Cloud button,#sd866ChildPair button');buttons.forEach(b=>b.disabled=true);
+ try{if(clear)status('Ověřuji přihlášení…');if(forChild)childMessage('Pracuji, kontroluji připojení k Supabase…');await fn();if(clear)renderCloud()}catch(e){log(e);if(forChild)childMessage(lastError,true)}finally{working=false;buttons.forEach(b=>b.disabled=false)}}
 function renderCloud(){
  const on=mode()==='parent'&&!!session&&!!family;
  if($('sd866SignIn'))$('sd866SignIn').hidden=on;
@@ -276,7 +280,7 @@ function renderCloud(){
   if(v&&Array.from($('sd866PairProfile').options).some(x=>x.value===v))$('sd866PairProfile').value=v;
  }
 }
-function renderChild(){if($('sd866CodeText'))$('sd866CodeText').textContent=pairCode?'PÁROVACÍ KÓD: '+pairCode:'';if($('sd866PairMessage'))$('sd866PairMessage').textContent=linked?'Připojeno: '+linked.display_name:mode()==='child-pending'?'Čekám na potvrzení rodiče…':''}
+function renderChild(){if($('sd866CodeText'))$('sd866CodeText').textContent=pairCode?'PÁROVACÍ KÓD: '+pairCode:'';if(linked)childMessage('Připojeno: '+linked.display_name+'. Můžeš otevřít svůj profil.');else if(mode()==='child-pending'&&pairCode)childMessage('Čekám na potvrzení rodiče. Kód je uvedený výše.');}
 // 50.8.67: trvalý token tohoto zařízení dovoluje pouze číst profily a
 // zapisovat studijní výsledky. NIKDY neumožňuje vytvoření/mazání profilu.
 // Rodičův cloudový JWT se při přechodu na dítě odstraní.

@@ -1,0 +1,19 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.68 – OPRAVA PÁROVÁNÍ
+
+Potvrzená příčina: Supabase Auth odmítá anonymní registrace (HTTP 422, anonymous_provider_disabled).
+Předchozí verze chybu zobrazovala jen ve skryté rodičovské správě; dětská obrazovka vypadala nefunkčně.
+
+Opraveno:
+- Tlačítko Připojit dětské zařízení otevře panel s jasným návodem.
+- Vytvořit párovací kód a Zkontrolovat párování zobrazují aktuální stav přímo pod tlačítky.
+- Chyba při vypnutém Anonymous Sign-Ins se přeloží do češtiny s přesným postupem pro rodiče.
+- Zobrazuje se načítání, informace o čekání na schválení a potvrzení úspěšného párování.
+- Zpřesněno mobilní ovládání a čitelnost hlášení.
+- Úpravy nezasahují do profilů ani uložených výsledků.
+
+NUTNÉ NASTAVENÍ V SUPABASE (bez toho server kód nevydá):
+https://supabase.com/dashboard/project/fmwcavjpsobwaorneedc/auth/providers
+Authentication -> Sign In / Providers -> Anonymous Sign-Ins -> Enable anonymous sign-ins.
+Rodič pak schválí šestnáctimístný kód v Rodičovská správa -> Centrální databáze.
+
+Instalovat pouze na současnou verzi 50.8.67, nebo použít kompletní ZIP.
