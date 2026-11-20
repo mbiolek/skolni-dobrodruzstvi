@@ -13,3 +13,8 @@
 .sd866-childpair #sd866PairPanel{background:rgba(8,35,55,.88);border:1px solid #c3d7ed;color:white;padding:14px;border-radius:14px;margin-top:10px}
 .sd866-childpair strong{display:block;font-size:19px;letter-spacing:1px;overflow-wrap:anywhere;margin:12px 0;color:#fce19c}
 @media(max-width:500px){.sd866-cloud{padding:12px}.sd866-cloud .sd866-actions{display:grid;grid-template-columns:1fr 1fr}.sd866-cloud button{font-size:13px}}
+
+/* 50.8.67 – text zůstane čitelný i při starších globálních motivech. */
+#authAdmin .sd866-cloud :is(p,small,label,.sd866-explain){color:#f0f6ff!important;opacity:1!important;text-shadow:none!important}
+#authAdmin .sd866-cloud h3,#authAdmin .sd866-cloud h4{color:#ffe3ab!important}
+#authAdmin .sd866-cloud #sd866Status{color:#fff!important;background:#245078!important}

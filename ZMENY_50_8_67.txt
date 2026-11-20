@@ -1,0 +1,31 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.67
+=================================
+
+1) PLYNULÉ SPOUŠTĚNÍ
+- Jedna úvodní obrazovka se zobrazuje už při prvním vykreslení HTML.
+- Pozadí se načte ihned ze zvoleného a uloženého prostředí.
+- Přihlašovací nabídka a ostatní obrazovky jsou schované do dokončení úvodního načtení.
+- Při běžné aktualizaci se již nespouští nevyžádané automatické obnovení. Nová verze se aktivuje až po potvrzení uživatelem; první instalace se aktivuje automaticky.
+
+2) AUTOMATICKÁ SYNCHRONIZACE
+- Po jednorázovém cloudovém přihlášení rodiče se zařízení zaregistruje se zvláštním omezeným synchronizačním oprávněním.
+- Toto oprávnění slouží POUZE k načítání profilů a čtení/zápisu výsledků. Nesmí přidávat, přejmenovávat ani mazat profily.
+- Rodičovské přihlášení se při vstupu do dětského profilu nadále záměrně uzamkne.
+- Při spuštění, návratu do aplikace, obnovení připojení a v pravidelných intervalech se na pozadí ověří a synchronizují údaje.
+- Lokální změny se odešlou přibližně do 9 sekund, kontrola změn na serveru probíhá přibližně po 25 sekundách, pokud je aplikace otevřená a online.
+- Konflikt revizí zastaví přepsání dat; lokální změny zůstanou zachovány.
+- Smazaný profil nemůže být obnoven z lokálních výsledků.
+- Existující dětské telefony spárované samostatným účtem zůstávají podporovány.
+
+3) BEZPEČNOST A PŘEVOD
+- Serverové SQL funkce a omezené synchronizační tokeny už byly nasazeny do projektu Supabase skolni-dobrodruzstvi.
+- V aplikaci je nadále pouze zveřejnitelný (publishable) klíč Supabase. Žádné databázové heslo ani service_role token.
+- ŽÁDNÉ profily se nemažou, neimportují znovu a žádný PIN se při instalaci automaticky nemění.
+- Po aktualizaci 50.8.66 na 50.8.67 je nutné jednou na Samsungu i počítači otevřít rodičovskou správu a přihlásit se ke cloudovému účtu. Tím se vytvoří trvalé oprávnění zařízení pro automatickou synchronizaci. Potom se při běžném používání děti do rodičovského cloudu přihlašovat nemusejí.
+- Při správě/mazání dětských profilů zůstává potřeba ověřené přihlášení rodiče.
+
+KONTROLA:
+- Ve zdrojovém HTML nalezen jediný JS modul úvodní obrazovky a žádný duplikovaný zdroj skriptu.
+- V logu z 20. 11. 2026 identifikována aktivace SW a vynucený reload v předchozí verzi.
+- Otestován SQL rollback serverového zápisu i klientský upload výsledků s omezeným tokenem v simulovaném Chromiu.
+- Mobil Samsung a skutečné chování GitHub Pages po publikaci není možné v tomto prostředí otestovat; až pak bude potřeba reálné ověření.
