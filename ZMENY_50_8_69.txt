@@ -1,0 +1,18 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.69 / PŘÍRODOVĚDA FULNEK
+20. listopadu 2026
+
+- Zpracováno z fotografií sešitu spolužačky z Fulneku (8. září až listopad); fotografie nejsou publikovány.
+- 31 výukových kapitol, 156 původně formulovaných uzavřených otázek; staré otázky a výsledky zůstávají.
+- Nová témata: zelené rostliny, živočichové, fotosyntéza, obnovitelné/neobnovitelné zdroje, zlato.
+- Rozšířeny existující kapitoly: živá a neživá příroda, půda, horniny, nerostné a energetické suroviny, vzduch, světlo, vesmír, planety, Země a Měsíc.
+- Nová mapa ze sešitu se 16 tematickými zastávkami: od zářijové přírody po listopadový Měsíc.
+- Poslední doložené téma: Měsíc. Jde o stav doložený sešitem, ne živé spojení se školou.
+- Označení „Tady jsme“ umožňuje změnit výchozí látku místně na zařízení.
+- Profilový přehled ukazuje počet procvičených a zvládnutých témat a správných odpovědí.
+- Test ze sešitu zahrnuje pouze doložená témata; celá učebnice má samostatný test.
+- Výsledky přírodovědy se zapisují pod sd​​nature_progress_+ID profilu a synchronizují po návratu do hlavní aplikace. Při změnách na více zařízeních se používá ochrana revizí proti přepsání.
+- Starší místní výsledky sd-fulnek-nature-v1:* se jednorázově přenesou do nového úložiště při prvním otevření přírodovědy, původní záznam zůstává.
+- Oprava věcné nepřesnosti z poznámek je ve výuce výslovně označena: půda není sama živý organismus, přesto obsahuje živé organismy.
+- Zachována zařízení a rodičovské cloudové účty; databázová změna jen přidává povolený typ výsledků.
+
+Nasazení: rozbalit aktualizační ZIP do existující složky projektu a zveřejnit na GitHub Pages.

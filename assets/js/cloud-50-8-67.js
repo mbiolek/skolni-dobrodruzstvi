@@ -48,7 +48,7 @@ async function authUser(){if(!session)return null;
  try{return await net('/auth/v1/user',{},true)}catch(e){if(!navigator.onLine)throw e;putSession(null);throw e}}
 function backupLocal(){if(localStorage.getItem(BACKUP_KEY))return;
  const keys=[PROFILES,AUTH_LOCAL,'matematika-karticky-progress-v3-active','sd52_schools_plans_v1','skolni-dobrodruzstvi-v37-avatar'];
- for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&(/^(sd860_martin_progress_|sd864_cermat_priprava_|school-v29-|sd865_)/).test(k))keys.push(k)}
+ for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&(/^(sd860_martin_progress_|sd864_cermat_priprava_|sdnature_progress_|school-v29-|sd865_)/).test(k))keys.push(k)}
  const save={version:'50.8.66',created:new Date().toISOString(),items:{}};
  for(const k of new Set(keys))if(localStorage.getItem(k)!==null)save.items[k]=localStorage.getItem(k);
  localStorage.setItem(BACKUP_KEY,JSON.stringify(save));
@@ -141,7 +141,7 @@ async function importLocal(){
   if(!row){const added=await net('/rest/v1/sd_profiles',{method:'POST',headers:{Prefer:'return=representation'},body:{family_id:family.id,legacy_id:id,display_name:String(p.name).slice(0,120)}},true);row=added[0];rows.push(row)}
   const pg=await fetchProgress(row.id);
   if(!pg.some(x=>x.activity_key==='legacy_profile'))await writeProgress(row,'legacy_profile',p,0);
-  for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_']){
+  for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_','sdnature_progress_']){
     const raw=localStorage.getItem(prefix+id),activity='storage:'+prefix.slice(0,-1);
     if(raw&& !pg.some(x=>x.activity_key===activity)){
       try{await writeProgress(row,activity,JSON.parse(raw),0)}catch(e){console.warn('Import modulu:',e);skipped.push(p.name+'/'+activity)}
@@ -171,7 +171,7 @@ async function syncParent(){if(busySync||!isReady())return;busySync=true;
     await writeProgress(row,'legacy_profile',p,revision[row.id+':legacy_profile']||0);
     baseline[row.legacy_id]=JSON.stringify(p);saveMeta();
    }
-   for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_']){
+   for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_','sdnature_progress_']){
     const localKey=prefix+row.legacy_id,raw=localStorage.getItem(localKey);
     if(raw===null)continue;
     const baseKey='storage:'+localKey,activity='storage:'+prefix.slice(0,-1);
@@ -217,9 +217,9 @@ async function verifyChild(){if(!session){childMessage('Nejdřív klikni na „V
     baseline[linked.legacy_id]=JSON.stringify(own);saveMeta();
   }catch(e){log(e);return}
  }
- for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_']){
+ for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_','sdnature_progress_']){
   const localKey=prefix+linked.legacy_id,raw=localStorage.getItem(localKey),activity='storage:'+prefix.slice(0,-1);
-  if(raw!==null&&baseline['storage:'+localKey]!==undefined&&baseline['storage:'+localKey]!==raw){
+  if(raw!==null&&((baseline['storage:'+localKey]!==undefined&&baseline['storage:'+localKey]!==raw)||(prefix==='sdnature_progress_'&&baseline['storage:'+localKey]===undefined&&!rows.some(p=>p.activity_key===activity)))){
     try{await writeProgress(linked,activity,JSON.parse(raw),revision[linked.id+':'+activity]||0);
       baseline['storage:'+localKey]=raw;saveMeta();
     }catch(e){log(e);return}
@@ -330,7 +330,7 @@ async function syncDevice(forcePull=false){
    if(p&&baseline[id]!==undefined&&raw!==baseline[id]){
     await pushDevice(row,'legacy_profile',p,raw,id);
    }
-   for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_']){
+   for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_','sdnature_progress_']){
     const k=prefix+id,r=localStorage.getItem(k),baselineKey='storage:'+k;
     if(r===null||baseline[baselineKey]===r)continue;
     let data;try{data=JSON.parse(r)}catch{continue}

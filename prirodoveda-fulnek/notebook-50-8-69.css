@@ -1,0 +1,21 @@
+/* Školní dobrodružství 50.8.69 – školní sešit a osobní postup */
+.n-school-card{margin:2px 0 22px;padding:clamp(15px,4vw,24px);background:linear-gradient(145deg,#183e58f5,#133052f7);border:2px solid #f0d09b;border-radius:22px;box-shadow:0 10px 26px #0008}
+.n-school-kicker{font-size:12px;font-weight:800;letter-spacing:.08em;color:#bcefe1;text-transform:uppercase}
+.n-school-card h2{margin:7px 0;font-size:clamp(23px,5vw,30px);color:#fff0b8}
+.n-school-card>strong{font-size:clamp(20px,4.6vw,27px);display:block;margin:8px 0;color:#c6ffd9}
+.n-school-card p{font-size:14px;line-height:1.6;color:#f3f7f7}
+.n-school-actions{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}
+.n-school-meter{border-top:1px solid #ffffff6e;padding-top:12px;font-size:14px;line-height:1.5;color:#fff7df}
+.n-school-mini{background:linear-gradient(140deg,#134f4e,#173d54);border:1px solid #8bdbbe;border-radius:16px;padding:13px 16px;margin:10px 0}
+.n-school-mini strong{color:#c5ffde;font-size:17px}.n-school-mini p{line-height:1.6;font-size:14px;margin:8px 0}
+.n-school-list{padding:0;margin:10px 0;list-style:none;display:grid;gap:10px}
+.n-school-row{border:1px solid #acbccc;border-radius:16px;background:#112d4fe8;padding:13px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.n-school-row.is-focus{border:2px solid #c8f4b2;background:#185049ee}
+.n-school-date{font-size:12px;font-weight:800;border-radius:9px;background:#224564;padding:7px;color:#fff1c5;white-space:nowrap}
+.n-school-row-body{display:flex;flex:1 1 150px;flex-direction:column;gap:5px}
+.n-school-row-body b{font-size:15px;line-height:1.3}.n-school-row-body small{color:#dcecf3;font-size:12px}
+.n-school-row-body em{color:#c6f7cf;font-size:12px;font-style:normal;font-weight:800}
+.n-school-row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.n-school-row-actions .n-btn{padding:8px 9px;font-size:12px;min-height:38px}
+.n-topic-focus{border-color:#b8f7ae;box-shadow:0 0 0 2px #b8f7ae,0 8px 20px #0007}
+@media(max-width:440px){.n-school-row{align-items:flex-start}.n-school-row-actions{width:100%}.n-school-row-actions .n-btn{flex:1}.n-school-card{padding:15px}}
