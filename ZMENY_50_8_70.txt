@@ -1,0 +1,10 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.70 – POŘÁDEK VE ŠKOLÁCH
+20. listopadu 2026
+
+1. Ručně vložený prázdný duplikát ZŠ T.G.Masaryka (Fulnek, 5.B) se automaticky přesune do obnovitelného archivu, pouze pokud nemá žádné měsíční plány, témata, výsledky ani přiřazené děti. Žádné učivo se nemaže.
+2. Přednastavená ZŠ T. G. Masaryka Fulnek (6 měsíčních plánů a 51 témat) zůstává beze změn.
+3. Martinovi se jednorázově odebere chybné automatické přiřazení města Fulnek. Příprava CERMAT a autoelektrikáře není dotčena.
+4. Matyášovi zůstává již zvolené přiřazení Olomouc + přednastavený Fulnek. Při zcela novém profilu Matyáš se přednastaví pouze Fulnek, je-li dostupný.
+5. Opraveno dřívější automatické přiřazování Fulneku všem novým dětem.
+6. Při synchronizaci nového profilu z cloudu se uvedená oprava uplatní i bez ručního zásahu. Přihlášení a cloudová databáze se nemění.
+7. Oprava školy působí v místních údajích na daném zařízení. Každé aktualizované zařízení provede stejnou kontrolu při otevření aplikace. Ostatní výsledky a rodičovské nastavení se nezmění.

@@ -5,6 +5,7 @@ const ACTIVE='matematika-karticky-progress-v3-active';
 const PROFILES='matematika-karticky-progress-v3-profiles';
 const FULNEK_ID='zstgm_fulnek_5_2026';
 const SEED_KEY='sd50822_fulnek_seed_v1';
+const CLEAN_PROFILE_PREFIX='sd50870_clean_profile_';
 const SUBJECTS=['math','czech','english','nature','geography','history','music'];
 const HOME_MAP={math:'math',english:'english',czech:'czech',nature:'nature',history:'geography',music:'music'};
 const CURR_KEY_PREFIX='sd_curriculum_v501_';
@@ -150,13 +151,51 @@ function seedFulnek(){
    db.plans[key]=merged;
   }
  }
+ // 50.8.70: ručně vložený PRÁZDNÝ duplikát "ZŠ T.G.Masaryka" nechat
+ // jen v obnovitelném archivu. Přednastavený Fulnek s učivem zůstává.
+ // Žádnou školu s tématy, výsledky nebo přiřazeným dítětem neschovávat.
  const ps=profiles();
+ const duplicateIds=[];
+ const hasCourse=db.schools.some(s=>s.id===FULNEK_ID);
+ if(hasCourse){
+  for(const school of db.schools){
+   if(school.id===FULNEK_ID||!String(school.id||'').startsWith('school_'))continue;
+   if(norm(school.city).trim()!=='fulnek'||!norm(school.name).includes('masaryk'))continue;
+   if(school.grade&&!/^5\s*\.?\s*b$/i.test(String(school.grade).trim()))continue;
+   const usedPlan=Object.entries(db.plans).some(([k,v])=>k.startsWith(school.id+'|')&&Array.isArray(v)&&v.length>0);
+   const usedResult=Object.entries(db.results).some(([k,v])=>k.includes('|'+school.id+'|')&&Array.isArray(v)&&v.length>0);
+   const usedByChild=Object.values(db.assignments).some(ids=>Array.isArray(ids)&&ids.includes(school.id));
+   if(usedPlan||usedResult||usedByChild||db.archivedSchools[school.id])continue;
+   db.archivedSchools[school.id]={school:{...school},assignedTo:[],archivedAt:new Date().toISOString(),reason:'Prázdná duplicita Fulneku, verze 50.8.70'};
+   duplicateIds.push(school.id);
+  }
+  if(duplicateIds.length)db.schools=db.schools.filter(s=>!duplicateIds.includes(s.id));
+ }
+ const fulnekIds=new Set(db.schools.filter(s=>norm(s.city).trim()==='fulnek').map(s=>s.id));
+ const newlyCleaned=[];
  for(const [id,p] of Object.entries(ps)){
   if(id==='parent')continue;
-  // Jen nový profil dostane výchozí školu. Nikdy nevracet školu, kterou rodič odebral.
-  if(!Array.isArray(db.assignments[id]))db.assignments[id]=[FULNEK_ID];
+  const name=norm(p?.name).trim();
+  if(name==='martin' && !safeGet(CLEAN_PROFILE_PREFIX+id,null)){
+   // Jen jednou odebrat chybně automaticky přiřazený Fulnek; případné
+   // pozdější výslovné rozhodnutí rodiče už další spuštění nepřepíše.
+   db.assignments[id]=(Array.isArray(db.assignments[id])?db.assignments[id]:[]).filter(sid=>!fulnekIds.has(sid));
+   for(const prefix of ['sd827_default_school_','sd827_active_school_']){
+    const current=safeGet(prefix+id,null);
+    if(current&&fulnekIds.has(current))try{localStorage.removeItem(prefix+id)}catch{}
+   }
+   newlyCleaned.push(id);
+  }
+  // Učivo páté třídy se smí automaticky přiřadit jen Matyášovi;
+  // nikdy Martinovi, Anetce ani dalším nově vytvořeným profilům.
+  if(name==='matyas'&&!Array.isArray(db.assignments[id])&&hasCourse)db.assignments[id]=[FULNEK_ID];
  }
- jsonSet(DBKEY,db);
+ if(duplicateIds.length){
+  for(const id of Object.keys(ps))for(const prefix of ['sd827_default_school_','sd827_active_school_']){
+   if(duplicateIds.includes(safeGet(prefix+id,null)))try{localStorage.removeItem(prefix+id)}catch{}
+  }
+ }
+ if(jsonSet(DBKEY,db))for(const id of newlyCleaned)safeSet(CLEAN_PROFILE_PREFIX+id,'done');
  window.SDSchoolPlans52?.reloadDb?.();
  safeSet(SEED_KEY,'done');
 }
@@ -272,5 +311,8 @@ function boot(){
  installHooks();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();
+// Cloud může profily načíst až po spuštění. Nové profily proto projdou
+// stejnou opravou; uživatelské volby škol se bezdůvodně nepřepisují.
+window.addEventListener('sd866-updated',seedFulnek);
 window.SDHomeXpFulnek50822=Object.freeze({refresh:updateHomeStats,seed:seedFulnek,version:'50.8.24'});
 })();
