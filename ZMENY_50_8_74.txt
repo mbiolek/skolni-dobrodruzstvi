@@ -1,0 +1,43 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.8.74
+23. listopadu 2026
+
+NOVÝ RODIČOVSKÝ PROFIL
+- Rozcestník na Profily dětí, Zařízení a přístupy, Školy a plány, Výsledky a testování.
+- Zachované původní ovládání profilů, škol, rodičovského PINu, testovacího režimu a výsledků.
+- Přehled všech dětských účtů spárovaných v Supabase.
+- Rodič může jednotlivým zařízením povolit nebo zakázat přístup k dalším dětským profilům.
+- Hlavní profil zařízení nelze skrýt; lze odpojit celé zařízení.
+- Rodič může zařízení přejmenovat a odpojit. Odpojením se odstraní i práva k dalším profilům.
+- Cloudová práva vynucuje stávající Supabase RLS a funkce sd_set_device_profile_access, nikoliv jen CSS.
+
+PÁROVÁNÍ BEZ OPISOVÁNÍ
+- Dětský telefon vytvoří jednorázový párovací kód (stejně bezpečný jako v 50.8.73).
+- Nové tlačítko „Poslat rodiči párovací odkaz“ předá kód ve webovém odkazu, např. přes WhatsApp.
+- Rodič odkaz otevře, jednorázový kód se vyplní sám a rodič vybere profil a schválí přístup.
+- Telefon dítěte po schválení automaticky vyhledá připojení.
+- Kód i odkaz platí maximálně 15 minut; odkaz je tajný a nesmí se sdílet veřejně.
+- Původní ruční zadávání kódu zůstává záložní možností.
+- Tato verze nepřidává automatický seznam nevyžádaných anonymních žádostí bez jednorázového odkazu.
+
+VIDITELNOST A SYNCHRONIZACE
+- Dětská zařízení stahují pouze profily, které mají schválené podle pravidel přístupu v databázi.
+- Po změně přístupu zmizí nepovolené profily při další online synchronizaci.
+- Rodičovská správa zůstává dětskému účtu nedostupná.
+- Stávající šetrné řešení konfliktu výsledků a základní synchronizace zachováno.
+- Tato aktualizace nemění XP, měsíční plány ani dosavadní obsah výuky.
+
+INSTALACE A OMEZENÍ
+- Aktivační postup PWA je zachován z verze 50.8.73, nová verze používá vlastní cache.
+- Na zařízení rodiče je potřeba mít přihlášený rodinný cloud.
+- Ostré párování a chování na Androidu/iOS je třeba ověřit s reálnými zařízeními.
+- Nepřenášej rodičovské heslo do telefonu dítěte.
+
+TECHNICKÉ SOUBORY
+- assets/js/cloud-50-8-67.js (doplněna bezpečná správa povolených profilů)
+- assets/js/parent-dashboard-50-8-74.js
+- assets/css/parent-dashboard-50-8-74.css
+- index.html, sw.js, assets/js/app-version.js
+
+BEZPEČNOST
+- Žádné service_role klíče v aplikaci.
+- Grant UPDATE je omezen na sloupec device_name v sd_child_accounts.
