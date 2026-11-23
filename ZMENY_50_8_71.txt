@@ -1,0 +1,20 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.8.71
+23. listopadu 2026
+
+ŠKOLY A ROČNÍKY
+- Jedna ZŠ T. G. Masaryka Fulnek; ročník a třída patří každému dítěti zvlášť.
+- Matyáš: Fulnek 5.B a Olomouc 5.D. Anetka: Fulnek 5.B. Bára: Fulnek 6. ročník. Martin nemá automaticky přiřazenou základní školu.
+- Rodič může každému dítěti nastavit samostatný ročník (1.–9.), třídu a školní rok; tlačítko Postoupit do dalšího ročníku ukládá historii.
+- Výuka a měsíční plány se nově rozlišují podle školy, ročníku a školního roku. Původní plány Fulneku pro 5. ročník 2026/2027 zůstávají v původním formátu.
+- Výsledky a dříve uložená látka se při změně ročníku nemažou ani nepřepisují.
+- Bára má nyní správně 6. ročník, ale obsah 6. ročníku teprve bude nutné zadat podle jejích podkladů. Nepoužije se výukový plán 5. ročníku.
+
+CLOUD
+- Do Supabase přidána pouze rodičem měnitelná konfigurace škol a ročníků oddělená od osobních výsledků.
+- Na dětském spárovaném zařízení se konfigurace stahuje, dítě ji nemůže na serveru měnit.
+- První nahrání škol do cloudu musí proběhnout z rodičovského zařízení se správnou konfigurací; při dalších změnách je nutné rodičovské cloudové přihlášení.
+- Souběžné úpravy nastavení na různých zařízeních se nepřepisují automaticky; při neshodě revize se zobrazí konflikt.
+
+BEZPEČNOST
+- Lokální data se nemažou, nedochází k resetu XP, PINů ani spárování.
+- Před nasazením je vhodné udělat lokální zálohu v rodičovské správě.

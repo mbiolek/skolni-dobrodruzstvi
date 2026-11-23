@@ -1,0 +1,23 @@
+/* 50.8.71 · škola společná, ročníky podle profilu */
+#sd52 .sd871-person{margin:20px 0;padding:16px;border-radius:20px;border:1px solid rgba(99,128,155,.24);background:#fff}
+#sd52 .sd871-person h3{margin:0 0 8px;color:#19344e}
+#sd52 .sd871-enrollment-card{background:#f1f6fa;border:1px solid #bccdda;border-radius:18px;padding:14px;margin:12px 0 18px;display:grid;gap:12px}
+#sd52 .sd871-enrollment-card>strong{color:#123b56}
+#sd52 .sd871-enrollment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+#sd52 .sd871-enrollment-card label,#sd52 .sd871-edit-plan-grade label{color:#18354c;font-size:15px;font-weight:700;display:grid;gap:6px}
+#sd52 .sd871-enrollment-card input,#sd52 .sd871-enrollment-card select,#sd52 .sd871-edit-plan-grade select{width:100%;max-width:100%;box-sizing:border-box;padding:12px;border:1px solid #94aebe;border-radius:12px;background:white;color:#172f43;font-size:16px}
+#sd52 .sd871-actions{display:flex;flex-wrap:wrap;gap:9px}
+#sd52 .sd871-actions button{border-radius:12px;border:1px solid #426589;padding:12px 14px;background:#dce9f8;color:#193753;font-weight:700;min-height:45px;white-space:normal}
+#sd52 .sd871-actions .sd871-next-grade{background:#faf3e4;border-color:#c6ae72}
+#sd52 .sd871-checks{display:grid;gap:5px;margin:8px 0}
+#sd52 .sd871-edit-plan-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px;background:#eef3f8;padding:14px;border-radius:16px;margin:16px 0}
+#sd52 .sd871-cloud-notice{font-size:14px;color:#e5e6fa;background:rgba(14,40,68,.65);border-radius:12px;padding:14px}
+#sd827SchoolSwitch .sd871-single-school{opacity:1;cursor:default}
+@media(max-width:390px){#sd52 .sd871-enrollment-grid{grid-template-columns:1fr}#sd52 .sd871-actions button{width:100%}}
+
+#sd871GradeNotice[hidden]{display:none!important}
+#sd871GradeNotice{position:fixed;inset:0;z-index:2147483500;display:grid;place-items:center;background:rgba(5,13,28,.85);padding:18px;box-sizing:border-box}
+.sd871-grade-notice-card{max-width:460px;width:100%;max-height:90vh;overflow:auto;box-sizing:border-box;border-radius:22px;background:#f4f7fb;color:#143552;padding:26px;box-shadow:0 15px 60px #0009;font-family:system-ui,sans-serif;line-height:1.5}
+.sd871-grade-notice-card h2{font-size:24px;margin-top:0}
+.sd871-grade-notice-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.sd871-grade-notice-actions button{padding:12px 14px;border-radius:12px;border:1px solid #6583a2;background:#dceafc;color:#153a59;font-size:16px;font-weight:700}

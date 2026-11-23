@@ -44,16 +44,16 @@ function updateSchoolSwitch(){
   if(!hero)home.prepend(holder);
  }
  const schools=assignedSchools();
- holder.hidden=active()==='parent'||schools.length<=1;
+ holder.hidden=active()==='parent'||schools.length===0;
  if(holder.hidden){holder.replaceChildren();return}
  const selected=activeSchoolId();
- holder.innerHTML='<div class="sd827-school-label">🏫 Škola pro dnešní učení</div><div class="sd827-school-choices"></div>';
+ holder.innerHTML='<div class="sd827-school-label">🏫 '+(schools.length===1?'Moje škola a ročník':'Škola pro dnešní učení')+'</div><div class="sd827-school-choices"></div>';
  const group=holder.querySelector('.sd827-school-choices');
  for(const s of schools){const btn=document.createElement('button');btn.type='button';
   btn.className='sd827-school-btn'+(s.id===selected?' selected':'');
   btn.setAttribute('aria-pressed',String(s.id===selected));
-  const loc=s.city||s.name;btn.textContent=loc+(s.grade?' · '+s.grade:'');
-  btn.addEventListener('click',()=>selectSchool(s.id));group.append(btn);
+  const loc=s.city||s.name;const gr=window.SDGradeSchools871?.label(active(),s.id);btn.textContent=loc+(gr?' · '+gr:'');
+  if(schools.length===1){btn.disabled=true;btn.classList.add('sd871-single-school')}else btn.addEventListener('click',()=>selectSchool(s.id));group.append(btn);
  }
 }
 function showAvatarOnTap(){

@@ -8,6 +8,7 @@ const KEY='sb_publishable_jfEwl3aVTkJ9WiV6oFbYGA_MuZHulxj';
 const PROFILES='matematika-karticky-progress-v3-profiles', AUTH_LOCAL='skolni-auth-v1';
 const SESSION_KEY='sd866_supabase_session',MODE_KEY='sd866_device_mode',BACKUP_KEY='sd866_local_backup';
 const DEVICE_KEY='sd867_restricted_device_token';
+let schoolBusy=false;
 let deviceToken=localStorage.getItem(DEVICE_KEY)||'',deviceBusy=false,deviceReady=false;
 let deviceLastPoll=0,deviceLastSend=0;
 const conflicts=new Set();
@@ -46,6 +47,42 @@ async function auth(type,email,password){
 }
 async function authUser(){if(!session)return null;
  try{return await net('/auth/v1/user',{},true)}catch(e){if(!navigator.onLine)throw e;putSession(null);throw e}}
+async function syncSchoolParent(){
+ const grade=window.SDGradeSchools871;
+ if(schoolBusy||!isReady()||!grade||!family)return;
+ schoolBusy=true;
+ try{
+  const url='/rest/v1/sd_school_state?family_id=eq.'+family.id+'&select=data,revision';
+  const list=await net(url,{},true);
+  if(!list.length){
+   const res=await net('/rest/v1/sd_school_state',{
+    method:'POST',headers:{Prefer:'return=representation'},body:{family_id:family.id,data:grade.exportConfig()}
+   },true);
+   if(res?.[0])grade.clearDirty(res[0].revision);
+   status('Rozdělení škol a ročníků uloženo do cloudu.');
+  }else if(grade.isDirty()){
+   const rev=grade.cloudRevision();
+   // Nemazat cloudovou konfiguraci, pokud se mezitím změnila jinde.
+   if(rev!==Number(list[0].revision)){
+    status('Školy na jiném zařízení mají novější změny. Místní nastavení je zachované; před další úpravou je potřeba vyřešit konflikt.',true);
+    return;
+   }
+   const result=await net('/rest/v1/sd_school_state?family_id=eq.'+family.id+'&revision=eq.'+rev,{
+    method:'PATCH',headers:{Prefer:'return=representation'},body:{data:grade.exportConfig(),revision:rev}
+   },true);
+   if(!result?.length)throw Error('Školy se mezitím změnily jinde. Místní nastavení se nesmazalo.');
+   grade.clearDirty(result[0].revision);
+   status('Školy a ročníky synchronizovány.');
+  }else grade.applyRemote(list[0].data,list[0].revision);
+ }catch(e){status('Školy čekají na synchronizaci: '+String(e.message||e),true);console.warn('SD 50.8.71 škola:',e)}
+ finally{schoolBusy=false}
+}
+async function pullSchoolChild(familyId){
+ if(!familyId||!session?.access_token)return;
+ try{const rows=await net('/rest/v1/sd_school_state?family_id=eq.'+familyId+'&select=data,revision',{},true);
+  if(rows.length)window.SDGradeSchools871?.applyRemote?.(rows[0].data,rows[0].revision);
+ }catch(e){console.warn('Načítání škol dítěte:',e)}
+}
 function backupLocal(){if(localStorage.getItem(BACKUP_KEY))return;
  const keys=[PROFILES,AUTH_LOCAL,'matematika-karticky-progress-v3-active','sd52_schools_plans_v1','skolni-dobrodruzstvi-v37-avatar'];
  for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&(/^(sd860_martin_progress_|sd864_cermat_priprava_|sdnature_progress_|school-v29-|sd865_)/).test(k))keys.push(k)}
@@ -104,7 +141,7 @@ async function loadParent(){
  if(!families.length){families=await net('/rest/v1/sd_families',{method:'POST',headers:{Prefer:'return=representation'},body:{owner_id:user.id,name:'Školní dobrodružství'}},true)}
  family=families[0];remote=await fetchProfiles();lastSync='';
  if(remote.length){await pullParent();localStorage.setItem(MODE_KEY,'parent')}
- try{await registerSyncDevice()}catch(e){status('Profily v cloudu fungují; automatická synchronizace zařízení vyžaduje nové ověření: '+String(e.message||e),true)}
+ try{await syncSchoolParent();await registerSyncDevice()}catch(e){status('Profily v cloudu fungují; automatická synchronizace zařízení vyžaduje nové ověření: '+String(e.message||e),true)}
  status(remote.length?`Cloud připojen. Aktivních profilů: ${remote.filter(p=>!p.deleted_at).length}.`:'Cloud je prázdný. První převod udělej na telefonu, kde jsou Martin a Matyáš.');
  renderCloud();
 }
@@ -182,7 +219,7 @@ async function syncParent(){if(busySync||!isReady())return;busySync=true;
     }
    }
   }
-  await pullParent();status('Synchronizováno v '+lastSync+'.');
+  await pullParent();await syncSchoolParent();status('Synchronizováno v '+lastSync+'.');
  }catch(e){log(e)}finally{busySync=false}
 }
 async function createCode(){
@@ -209,6 +246,7 @@ async function verifyChild(){if(!session){childMessage('Nejdřív klikni na „V
  const prof=await net('/rest/v1/sd_profiles?id=eq.'+accounts[0].profile_id+'&select=id,legacy_id,display_name,deleted_at',{},true);
  if(!prof.length||prof[0].deleted_at){revokeLocalChild();status('Profil byl smazán nebo zařízení odpojeno.',true);return}
  linked=prof[0];localStorage.setItem('sd866_linked_legacy',linked.legacy_id);localStorage.setItem(MODE_KEY,'child');
+ await pullSchoolChild(accounts[0].family_id);
  const rows=await fetchProgress(linked.id);
  // Nejdřív odešli změny dítěte, které vznikly od posledního uložení.
  const locally=json(PROFILES,{}),own=locally[linked.legacy_id],old=baseline[linked.legacy_id];
@@ -257,7 +295,7 @@ function buildUI(){if($('sd866Cloud'))return;
  $('sd866Login').onclick=()=>action(async()=>auth('login',$('sd866Email').value.trim(),$('sd866Password').value),true);
  $('sd866Register').onclick=()=>action(async()=>auth('signup',$('sd866Email').value.trim(),$('sd866Password').value),true);
  $('sd866Import').onclick=()=>action(importLocal);
- $('sd866Sync').onclick=()=>action(async()=>{if(deviceToken)await syncDevice(true);else await syncParent()});
+ $('sd866Sync').onclick=()=>action(async()=>{if(deviceToken)await syncDevice(true);else await syncParent();if(isReady())await syncSchoolParent()});
  $('sd866Backup').onclick=downloadBackup;
  $('sd866Logout').onclick=()=>{putSession(null);family=null;remote=[];linked=null;localStorage.removeItem(MODE_KEY);status('Cloud odhlášen. Místní záloha nebyla smazána.');renderCloud()};
  $('sd866Pair').onclick=()=>action(()=>pairDevice($('sd866PairCode').value.trim().toUpperCase(),$('sd866PairProfile').value));
@@ -297,6 +335,7 @@ async function pullDevice(){
  if(!deviceToken)return null;
  const info=await net('/rest/v1/rpc/sd_sync_pull',{method:'POST',body:{p_token:deviceToken}},false);
  if(!info||!Array.isArray(info.profiles)||!Array.isArray(info.progress))throw Error('Neúplná odpověď cloudu');
+ if(info.school_config)window.SDGradeSchools871?.applyRemote?.(info.school_config,info.school_revision);
  const rows=info.profiles;remote=rows;
  const grouped={};for(const p of info.progress)(grouped[p.profile_id]??=[]).push(p);
  // Prázdná databáze nesmí smazat dosud neimportované místní profily.
@@ -368,7 +407,7 @@ function lockParentOnChild(){
   if(deviceToken)setTimeout(()=>syncDevice(true),700);
  }
 }
-window.SDCloud866={isReady,isControlled,mode,publicEntry,canEnter,lockParentOnChild,createProfile,renameProfile,deleteProfile,pullParent,syncParent,backupLocal,downloadBackup,refreshDevice:verifyChild,syncDevice,registerSyncDevice};
+window.SDCloud866={syncSchoolParent,isReady,isControlled,mode,publicEntry,canEnter,lockParentOnChild,createProfile,renameProfile,deleteProfile,pullParent,syncParent,backupLocal,downloadBackup,refreshDevice:verifyChild,syncDevice,registerSyncDevice};
 setTimeout(init,0);
 let childLastVerify=0;
 function automaticSync(){
@@ -381,6 +420,7 @@ window.addEventListener('online',automaticSync);
 window.addEventListener('pageshow',automaticSync);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)automaticSync()});
 window.addEventListener('school-account',()=>setTimeout(automaticSync,600));
+window.addEventListener('sd871-school-config-change',()=>{if(isReady())setTimeout(syncSchoolParent,250)});
 setInterval(automaticSync,9000);
 // Dětské telefony ve speciálním spárovaném režimu ověřují vlastní JWT každých 30 s.
 
