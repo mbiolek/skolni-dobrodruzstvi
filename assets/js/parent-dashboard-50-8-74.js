@@ -114,7 +114,7 @@ function initPairing(){
   send.addEventListener('click',async()=>{
    const code=(($('sd866CodeText')?.textContent)||'').match(/[A-HJ-NP-Z2-9]{16}/)?.[0];
    if(!code){$('sd866Code')?.click();$('sd866PairMessage').textContent='Nejdřív vytvoř kód. Potom klikni na „Poslat rodiči párovací odkaz“.';return}
-   const u=new URL('./index.html',location.href);u.search='';u.hash='';u.searchParams.set('sdPair',code);
+   const u=new URL('./index.html',location.href);u.search='';u.hash='sdPair='+encodeURIComponent(code);
    try{
     if(navigator.share)await navigator.share({title:'Školní dobrodružství – připojení zařízení',url:u.href});
     else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(u.href);alert('Odkaz zkopírován. Pošli ho rodiči přes WhatsApp nebo zprávu.')}
@@ -125,10 +125,10 @@ function initPairing(){
  }
  let input=$('sd866PairCode');
  if(!input)return;
- const url=new URL(location.href),incoming=url.searchParams.get('sdPair');
+ const url=new URL(location.href),incoming=url.hash.startsWith('#sdPair=')?decodeURIComponent(url.hash.slice(8)):'';
  if(incoming&&/^[A-HJ-NP-Z2-9]{16}$/.test(incoming)){
   pairRequest=incoming;sessionStorage.setItem('sd874-pair-request',incoming);
-  url.searchParams.delete('sdPair');history.replaceState(history.state,'',url.href);
+  url.hash='';history.replaceState(history.state,'',url.href);
  }
  pairRequest=pairRequest||sessionStorage.getItem('sd874-pair-request')||'';
  if(pairRequest){
