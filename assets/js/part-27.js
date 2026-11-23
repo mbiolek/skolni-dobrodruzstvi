@@ -1,4 +1,4 @@
-/* Školní dobrodružství 50.8.6 – srozumitelné a potvrzované aktualizace PWA. */
+/* Školní dobrodružství 50.8.73 – odolné dokončení aktualizací PWA. */
 (()=>{'use strict';
 const box=document.getElementById('pwa31bar'),msg=document.getElementById('pwa31msg'),actions=document.getElementById('pwa31actions');
 if(!box||!msg||!actions)return;
@@ -9,6 +9,7 @@ meter.innerHTML='<div class="sd5086-track" role="progressbar" aria-label="Stahov
 box.insertBefore(meter,actions);
 const track=meter.querySelector('.sd5086-track'),fill=track.querySelector('span'),count=meter.querySelector('small');
 let reg=null,installing=null,hiddenInstall=false,updateRequested=false,refreshing=false,hasController=!!navigator.serviceWorker.controller,lastLogBucket=-1,lastReadyVersion="nová",offeredWorker=null;
+let readyPoll=null,readyPollCount=0,completedVersion="";
 function diagnostic(type,detail){try{window.schoolDiagnostic?.(type,detail)}catch(_){}}
 function hide(){box.style.display='none'}
 function show(text,buttons=[],progress=null){
@@ -22,8 +23,36 @@ function show(text,buttons=[],progress=null){
  }else meter.hidden=true;
  box.style.display='block';
 }
+function stopReadyChecks(){if(readyPoll!==null){clearInterval(readyPoll);readyPoll=null;}readyPollCount=0;}
+function reconcileCompleted(){
+ if(updateRequested||hiddenInstall)return;
+ if(reg?.waiting){stopReadyChecks();offer(reg);return;}
+ if(installing?.state==='redundant'){
+  stopReadyChecks();show('Aktualizace nebyla dokončena, aktuální verze je stále použitelná.',[
+   ['Zkusit znovu',()=>reg?.update().catch(err=>diagnostic('update-error',String(err)))],['Zavřít',hide,true]
+  ]);return;
+ }
+ if(installing?.state==='installed'&&!navigator.serviceWorker.controller){stopReadyChecks();hide();return;}
+ if(readyPollCount>=12){
+   show('Soubory jsou stažené, ale prohlížeč zatím nepotvrdil připravenost aktualizace.',[
+    ['Zkontrolovat dokončení',()=>{if(reg?.waiting){offer(reg);return;}reg?.update().then(()=>{if(reg?.waiting)offer(reg)}).catch(err=>diagnostic('update-error',String(err)))}],
+    ['Skrýt oznámení',()=>{hiddenInstall=true;stopReadyChecks();hide()},true]
+   ]);
+ }
+}
+function scheduleReadyChecks(){
+ if(readyPoll!==null)return;
+ readyPollCount=0;
+ readyPoll=setInterval(()=>{
+  readyPollCount++;
+  reconcileCompleted();
+  if(reg?.waiting || readyPollCount>=60)stopReadyChecks();
+ },500);
+ reconcileCompleted();
+}
 function offer(registration){
  if(!registration?.waiting)return;
+ stopReadyChecks();
  const w=registration.waiting;
  if(!navigator.serviceWorker.controller){return;} // first installation: automatic
  const ready=()=>{
@@ -39,18 +68,31 @@ function offer(registration){
 }
 function onProgress(data){
  if(data?.type!=='SD_UPDATE_PROGRESS')return;
+ // Late 'downloading 100 %' messages must never overwrite a ready update offer.
+ if(offeredWorker&&reg?.waiting)return;
  if(data.stage==='downloading'){
    const p=Math.floor((data.done||0)*5/Math.max(data.total||1,1));
    if(lastLogBucket!==p){lastLogBucket=p;diagnostic('update-progress',`${data.version}: ${data.done}/${data.total} souborů`)}
-   if(!hiddenInstall){show('Stahuji novou verzi '+data.version+'. Aplikaci můžeš dál používat.',[
+   const completed=Number(data.total)>0&&Number(data.done)>=Number(data.total);
+   if(completed){
+     completedVersion=data.version||'nová';lastReadyVersion=completedVersion;
+     if(reg?.waiting){offer(reg);return;}
+     if(!hiddenInstall){show('Všechny soubory jsou stažené. Ověřuji připravenost aktualizace…',[
+       ['Zkontrolovat dokončení',()=>reconcileCompleted()],
+       ['Skrýt průběh',()=>{hiddenInstall=true;stopReadyChecks();hide()},true]
+     ],data)}
+     scheduleReadyChecks();
+   } else if(!hiddenInstall){show('Stahuji novou verzi '+data.version+'. Aplikaci můžeš dál používat.',[
     ['Skrýt průběh',()=>{hiddenInstall=true;hide()},true]
    ],data)}
  } else if(data.stage==='ready'){
-   lastReadyVersion=data.version||'nová';
+   lastReadyVersion=data.version||completedVersion||'nová';
    diagnostic('update','download completed '+data.version);
-   // wait for registration.waiting; statechange event triggers offer().
    if(reg?.waiting)offer(reg);
-   else show('Nová verze je stažená. Připravuji nabídku aktualizace.');
+   else {if(!hiddenInstall)show('Nová verze je stažená. Čekám na potvrzení prohlížeče…',[
+     ['Zkontrolovat dokončení',()=>reconcileCompleted()],
+     ['Skrýt průběh',()=>{hiddenInstall=true;stopReadyChecks();hide()},true]
+   ]);scheduleReadyChecks();}
  } else if(data.stage==='error'){
    diagnostic('update-error',data.detail||'chyba stahování');
    show('Aktualizaci se nepodařilo dokončit. Současná verze zůstává funkční.',[
@@ -64,24 +106,24 @@ navigator.serviceWorker.addEventListener('controllerchange',()=>{
  // A new worker can only activate after an explicit choice or a first installation.
  const nowControlled=!!navigator.serviceWorker.controller;
  if(nowControlled && hasController){
-   refreshing=true;diagnostic('update','new worker activated – reload');
+   refreshing=true;stopReadyChecks();diagnostic('update','new worker activated – reload');
    location.reload();
  } else hasController=nowControlled;
 });
 function watch(worker){
  if(!worker||worker===installing)return;
- installing=worker;offeredWorker=null;hiddenInstall=false;lastLogBucket=-1;
+ stopReadyChecks();installing=worker;offeredWorker=null;hiddenInstall=false;lastLogBucket=-1;
  diagnostic('update','install started');
  if(navigator.serviceWorker.controller)show('Zjištěna nová verze. Připravuji její bezpečné stažení…');
  worker.addEventListener('statechange',()=>{
   diagnostic('update',`worker state: ${worker.state}`);
   if(worker.state==='installed'){
     if(reg?.waiting)offer(reg);
-    else if(navigator.serviceWorker.controller)show('Stažení dokončeno. Připravuji potvrzení aktualizace.');
+    else if(navigator.serviceWorker.controller){show('Stažení dokončeno. Připravuji potvrzení aktualizace.');scheduleReadyChecks();}
     else hide();
   }
   if(worker.state==='redundant' && !reg?.waiting){
-    show('Aktualizaci se nepodařilo dokončit. Současná verze zůstává funkční.',[
+    stopReadyChecks();show('Aktualizaci se nepodařilo dokončit. Současná verze zůstává funkční.',[
       ['Zkusit znovu',()=>reg?.update().catch(()=>{})],['Zavřít',hide,true]
     ]);
   }

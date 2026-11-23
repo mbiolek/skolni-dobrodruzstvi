@@ -1,0 +1,13 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – VERZE 50.8.73
+23. listopadu 2026
+
+OPRAVA AKTUALIZACÍ PWA
+- Pokud stahování skončí na 100 %, automaticky se znovu kontroluje, zda je nový Service Worker připraven k aktivaci.
+- Zpožděná zpráva „stahuji“ už nesmí přepsat nabídku „Aktualizovat nyní“.
+- Při 100 % je vždy dostupné „Zkontrolovat dokončení“ nebo „Skrýt průběh“.
+- Když prohlížeč nepotvrdí dokončení, zobrazí se srozumitelné upozornění s možností opakované kontroly.
+- Staré profily, PINy, synchronizace a výsledky se nemění. Aktualizace se aktivuje až po potvrzení rodičem.
+
+PODKLAD K DIAGNOSTICE
+- Na GitHub main je verze 50.8.72 a 547/547 souborů v předchozí aktualizaci.
+- Problém se vyskytuje v přechodu mezi stahováním a stavem čekajícího Service Workeru, nikoliv v počtu souborů.
