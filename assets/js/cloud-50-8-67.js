@@ -15,6 +15,7 @@ const conflicts=new Set();
 const $=id=>document.getElementById(id), json=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key)||'null')??fallback}catch{return fallback}};
 const mode=()=>localStorage.getItem(MODE_KEY)||'';
 let session=json(SESSION_KEY,null),family=null,remote=[],linked=null,working=false;
+let allowedProfileIds=new Set(); // 50.8.74: profily povolené serverem pro dětský účet
 let baseline=json('sd866_sync_baseline',{}),revision=json('sd866_sync_revision',{}),lastError='',lastSync='',lastSnapshot='',pairCode='';
 let busySync=false,loading=false,stop=false;
 const childMessage=(msg,isError=false)=>{const e=$('sd866PairMessage');if(!e)return;e.hidden=false;e.textContent=msg;e.dataset.error=isError?'1':'0';};
@@ -234,38 +235,75 @@ async function createCode(){
  childMessage('Kód je připraven. Rodič ho zadá do své aplikace v části Centrální databáze, vybere Martina nebo Matyáše a potvrdí přístup. Potom stiskni „Zkontrolovat párování“.');return code;
 }
 function revokeLocalChild(){
- const id=linked?.legacy_id||localStorage.getItem('sd866_linked_legacy');
- linked=null;
- if(id){const ps=json(PROFILES,{});if(ps[id]){delete ps[id];localStorage.setItem(PROFILES,JSON.stringify(ps))}}
- sessionStorage.removeItem('skolni-live-v441');localStorage.removeItem('matematika-karticky-progress-v3-active');
+ const ids=new Set(allowedProfileIds);
+ if(linked?.legacy_id)ids.add(linked.legacy_id);
+ const old=localStorage.getItem('sd866_linked_legacy');if(old)ids.add(old);
+ allowedProfileIds.clear();linked=null;
+ const ps=json(PROFILES,{});
+ for(const id of ids)delete ps[id];
+ localStorage.setItem(PROFILES,JSON.stringify(ps));
+ localStorage.removeItem('sd866_linked_legacy');
+ sessionStorage.removeItem('skolni-live-v441');
+ localStorage.removeItem('matematika-karticky-progress-v3-active');
  notify();
 }
-async function verifyChild(){if(!session){childMessage('Nejdřív klikni na „Vytvořit párovací kód“.',true);return;}const user=await authUser();if(!user?.id){childMessage('Zařízení ještě není přihlášené. Vytvoř párovací kód znovu.',true);return;}
- const accounts=await net('/rest/v1/sd_child_accounts?auth_user_id=eq.'+user.id+'&select=profile_id,family_id',{},true);
- if(!accounts.length){if(mode()==='child'){revokeLocalChild();status('Toto zařízení bylo odpojeno správcem.',true);childMessage('Zařízení bylo odpojeno rodičem.',true)}else childMessage('Rodič zatím párování nepotvrdil. Po jeho potvrzení klikni znovu na „Zkontrolovat párování“.');return}
- const prof=await net('/rest/v1/sd_profiles?id=eq.'+accounts[0].profile_id+'&select=id,legacy_id,display_name,deleted_at',{},true);
- if(!prof.length||prof[0].deleted_at){revokeLocalChild();status('Profil byl smazán nebo zařízení odpojeno.',true);return}
- linked=prof[0];localStorage.setItem('sd866_linked_legacy',linked.legacy_id);localStorage.setItem(MODE_KEY,'child');
- await pullSchoolChild(accounts[0].family_id);
- const rows=await fetchProgress(linked.id);
- // Nejdřív odešli změny dítěte, které vznikly od posledního uložení.
- const locally=json(PROFILES,{}),own=locally[linked.legacy_id],old=baseline[linked.legacy_id];
- if(own&&old!==undefined&&JSON.stringify(own)!==old){
-  try{await writeProgress(linked,'legacy_profile',own,revision[linked.id+':legacy_profile']||0);
-    baseline[linked.legacy_id]=JSON.stringify(own);saveMeta();
-  }catch(e){log(e);return}
+let childVerifying=null;
+async function verifyChild(){
+ if(childVerifying)return childVerifying;
+ childVerifying=verifyChildNow().finally(()=>{childVerifying=null});
+ return childVerifying;
+}
+async function verifyChildNow(){
+ if(!session){childMessage('Nejdřív klikni na „Vytvořit párovací kód“.',true);return}
+ const user=await authUser();
+ if(!user?.id){childMessage('Zařízení ještě není přihlášené. Vytvoř párovací kód znovu.',true);return}
+ const accounts=await net('/rest/v1/sd_child_accounts?auth_user_id=eq.'+encodeURIComponent(user.id)+'&select=profile_id,family_id',{},true);
+ if(!accounts.length){
+  if(mode()==='child'){revokeLocalChild();status('Zařízení bylo odpojeno rodičem.',true)}
+  else childMessage('Rodič zatím připojení neschválil. Po potvrzení se profil načte automaticky.');
+  return;
  }
- for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_','sdnature_progress_']){
-  const localKey=prefix+linked.legacy_id,raw=localStorage.getItem(localKey),activity='storage:'+prefix.slice(0,-1);
-  if(raw!==null&&((baseline['storage:'+localKey]!==undefined&&baseline['storage:'+localKey]!==raw)||(prefix==='sdnature_progress_'&&baseline['storage:'+localKey]===undefined&&!rows.some(p=>p.activity_key===activity)))){
-    try{await writeProgress(linked,activity,JSON.parse(raw),revision[linked.id+':'+activity]||0);
-      baseline['storage:'+localKey]=raw;saveMeta();
-    }catch(e){log(e);return}
+ const account=accounts[0];
+ // Dotaz vrací jen profily povolené pravidly RLS konkrétnímu dětskému JWT.
+ const permitted=await net('/rest/v1/sd_profiles?family_id=eq.'+encodeURIComponent(account.family_id)+'&deleted_at=is.null&select=id,legacy_id,display_name,deleted_at',{},true);
+ const primary=permitted.find(p=>p.id===account.profile_id);
+ if(!primary){revokeLocalChild();status('Hlavní profil byl odstraněn nebo zařízení ztratilo oprávnění.',true);return}
+ const logs={};const local=json(PROFILES,{});
+ for(const p of permitted){
+  const before=await fetchProgress(p.id);logs[p.id]=before;
+  const existing=local[p.legacy_id],old=baseline[p.legacy_id];
+  if(existing&&old!==undefined&&JSON.stringify(existing)!==old){
+   try{
+    await writeProgress(p,'legacy_profile',existing,revision[p.id+':legacy_profile']||0);
+    baseline[p.legacy_id]=JSON.stringify(existing);saveMeta();
+   }catch(e){log(e);return}
   }
+  for(const prefix of ['sd860_martin_progress_','sd864_cermat_priprava_','sdnature_progress_']){
+   const localKey=prefix+p.legacy_id,raw=localStorage.getItem(localKey),activity='storage:'+prefix.slice(0,-1);
+   if(raw!==null&&((baseline['storage:'+localKey]!==undefined&&baseline['storage:'+localKey]!==raw)||(prefix==='sdnature_progress_'&&baseline['storage:'+localKey]===undefined&&!before.some(x=>x.activity_key===activity)))){
+    try{
+     await writeProgress(p,activity,JSON.parse(raw),revision[p.id+':'+activity]||0);
+     baseline['storage:'+localKey]=raw;saveMeta();
+    }catch(e){log(e);return}
+   }
+  }
+  logs[p.id]=await fetchProgress(p.id);
  }
- const latest=await fetchProgress(linked.id);
- mirror([linked],{[linked.id]:latest});
- status('Zařízení spárováno s profilem '+linked.display_name+'.');renderChild();
+ const previous=new Set(allowedProfileIds);
+ const next=new Set(permitted.map(p=>p.legacy_id));
+ // Zneplatni lokální kopie profilů, kterým rodič právě odebral přístup.
+ for(const id of previous)if(!next.has(id)){
+  const oldPs=json(PROFILES,{});
+  if(oldPs[id]){delete oldPs[id];localStorage.setItem(PROFILES,JSON.stringify(oldPs))}
+ }
+ linked=primary;
+ localStorage.setItem('sd866_linked_legacy',primary.legacy_id);
+ localStorage.setItem(MODE_KEY,'child');
+ await pullSchoolChild(account.family_id);
+ allowedProfileIds=next;
+ mirror(permitted,logs);
+ status('Zařízení připojeno. Dostupné profily: '+permitted.map(p=>p.display_name).join(', ')+'.');
+ renderChild();
 }
 async function pairDevice(code,legacyId){if(!isReady())throw Error('Přihlas se jako rodič.');const p=remote.find(x=>x.legacy_id===legacyId&&!x.deleted_at);if(!p)throw Error('Profil není dostupný.');
  await net('/rest/v1/rpc/sd_pair_device',{method:'POST',body:{p_pairing_code:code,p_profile_id:p.id}},true);status('Zařízení úspěšně přiřazeno k profilu '+p.display_name+'.');
@@ -396,9 +434,9 @@ async function init(){
   if(session?.access_token&&(mode()==='child'||mode()==='child-pending'))await verifyChild();
  }catch(e){log(e)}
 }
-function publicEntry(id){return mode()!=='child'||!!linked&&linked.legacy_id===id}
+function publicEntry(id){return mode()!=='child'||allowedProfileIds.has(id)}
 async function canEnter(id){if(mode()!=='child')return true;
- try{await verifyChild();return !!linked&&linked.legacy_id===id}catch(e){status('Bez internetového ověření nelze změnit profil. Zkus se připojit.',true);return false}
+ try{await verifyChild();return allowedProfileIds.has(id)}catch(e){status('Bez internetového ověření nelze změnit profil. Zkus se připojit.',true);return false}
 }
 function lockParentOnChild(){
  if(mode()==='parent'&&session){
@@ -407,7 +445,7 @@ function lockParentOnChild(){
   if(deviceToken)setTimeout(()=>syncDevice(true),700);
  }
 }
-window.SDCloud866={syncSchoolParent,isReady,isControlled,mode,publicEntry,canEnter,lockParentOnChild,createProfile,renameProfile,deleteProfile,pullParent,syncParent,backupLocal,downloadBackup,refreshDevice:verifyChild,syncDevice,registerSyncDevice};
+window.SDCloud866={syncSchoolParent,isReady,isControlled,mode,publicEntry,canEnter,lockParentOnChild,createProfile,renameProfile,deleteProfile,pullParent,syncParent,backupLocal,downloadBackup,refreshDevice:verifyChild,syncDevice,registerSyncDevice,requestParent:(path,options={})=>{if(!isReady())throw Error('Tato akce vyžaduje přihlášeného rodiče.');return net(path,options,true);}};
 setTimeout(init,0);
 let childLastVerify=0;
 function automaticSync(){
