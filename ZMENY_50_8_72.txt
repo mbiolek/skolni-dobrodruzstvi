@@ -1,0 +1,12 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.72 – RODIČOVSKÁ SPRÁVA A MARTINOVA ŠKOLA
+
+- Správa škol: úvodní kompaktní přehled dětí, upravuje se jen vybrané dítě.
+- Oddělená záložka správy škol a měsíčních plánů; přidání i archiv jsou sbalené.
+- Martin: skutečná škola RB SOU autoopravárenské, Zengrova 38,
+  Ostrava-Vítkovice, obor Autoelektrikář, školní rok 2026/2027.
+- Oddělené nastavení střední školy od osnov základních škol.
+- Rodičovský měsíční plán: výběr dítěte a školy. Žádný falešný údaj
+  „ročník nepřiřazen“, když rodič sám nestuduje.
+- Učivo, výsledky, profily, PINy a spárování zůstávají beze změny.
+- Nové nastavení Martinovy školy je zahrnuto v konfiguraci synchronizace.
+- Zůstává potřeba ověřit zobrazení a synchronizaci na skutečném telefonu.

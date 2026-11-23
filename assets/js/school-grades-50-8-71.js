@@ -9,11 +9,13 @@ const put=(k,v)=>{try{localStorage.setItem(k,v);return true}catch{return false}}
 const asObj=x=>x&&typeof x==='object'&&!Array.isArray(x)?x:{};
 const asArr=x=>Array.isArray(x)?x:[];
 const norm=x=>String(x||'').trim().toLocaleLowerCase('cs').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+const MARTIN_SCHOOL='RB Střední odborné učiliště autoopravárenské, s.r.o.';
+const MARTIN_PROGRAM='Autoelektrikář (26-57-H/01)';
 const esc=x=>String(x??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
 function read(){let v={};try{v=JSON.parse(get(DB)||'{}')}catch{}
  v=asObj(v);v.schools=asArr(v.schools);v.plans=asObj(v.plans);v.results=asObj(v.results);
  v.assignments=asObj(v.assignments);v.archivedSchools=asObj(v.archivedSchools);v.enrollments=asObj(v.enrollments);
- v.schoolGradesVersion=1;return v;}
+ v.vocationalEnrollments=asObj(v.vocationalEnrollments);v.schoolGradesVersion=1;return v;}
 function profiles(){try{return asObj(JSON.parse(get(PROFILES)||'{}'))}catch{return {}}}
 function currentYear(){const now=new Date(),y=now.getFullYear();return now.getMonth()>=7?`${y}/${y+1}`:`${y-1}/${y}`}
 function validYear(year){return /^20\d{2}\/20\d{2}$/.test(String(year||''))&&(+year.slice(5)===+year.slice(0,4)+1)}
@@ -26,6 +28,9 @@ function mergeProfiles(db){let changed=false;const ps=profiles();const fulnek=db
  for(const [id,p] of Object.entries(ps)){
   if(id==='parent'||!p?.name)continue;
   const name=norm(p.name);db.enrollments[id]=asObj(db.enrollments[id]);
+  if(name==='martin'&&!db.vocationalEnrollments[id]){
+   db.vocationalEnrollments[id]={school:MARTIN_SCHOOL,location:'Zengrova 38, Ostrava-Vítkovice',program:MARTIN_PROGRAM,grade:3,schoolYear:YEAR};changed=true;
+  }
   if(!Array.isArray(db.assignments[id]))db.assignments[id]=[];
   // Doplnění školy i když ji aplikace před prvním načtením profilů teprve vytvořila.
   // Již dříve zapsaný ročník zůstává zachován, takže ručně odpojenou školu znovu nepřipojíme.
@@ -92,13 +97,25 @@ function advance(profileId,sid){if(!parentLocally())return {ok:false,error:'Roč
  const nextYear=(Number(cur.schoolYear.slice(0,4))+1);const next=`${nextYear}/${nextYear+1}`;
  const className=cur.className?cur.className.replace(/^\s*\d+/,String(cur.grade+1)):`${cur.grade+1}.`;
  return update(profileId,sid,{grade:cur.grade+1,className,schoolYear:next});}
+function vocational(profileId){const d=read();return d.vocationalEnrollments[profileId]||null;}
+function updateVocational(profileId,data){if(!parentLocally())return {ok:false,error:'Školu smí měnit pouze rodič.'};
+ const p=profiles()[profileId];if(!p||norm(p.name)!=='martin')return {ok:false,error:'Tento formulář patří Martinovu profilu.'};
+ const school=String(data.school||'').trim().slice(0,150),location=String(data.location||'').trim().slice(0,120),program=String(data.program||'').trim().slice(0,100);
+ const gr=Number(data.grade),schoolYear=String(data.schoolYear||'').trim();
+ if(school.length<4||program.length<3||!Number.isInteger(gr)||gr<1||gr>4||!validYear(schoolYear))return {ok:false,error:'Vyplň školu, obor, ročník 1–4 a školní rok.'};
+ const d=read();d.vocationalEnrollments[profileId]={school,location,program,grade:gr,schoolYear};
+ if(!persist(d))return {ok:false,error:'Změny se nepodařilo uložit.'};
+ // I při potvrzení původních hodnot musí škola odejít do centrální konfigurace.
+ touch();return {ok:true};}
 function exportConfig(){const d=read();return {version:1,schools:d.schools.map(s=>({...s})),
   plans:{...d.plans},assignments:{...d.assignments},enrollments:{...d.enrollments},
-  archivedSchools:{...d.archivedSchools}};}
+  archivedSchools:{...d.archivedSchools},vocationalEnrollments:{...d.vocationalEnrollments}};}
 function applyRemote(config,revision){if(!config||config.version!==1||!Array.isArray(config.schools))return false;
  if(get(DIRTY)==='1')return false;
  const db=read();db.schools=config.schools;db.assignments=asObj(config.assignments);
  db.enrollments=asObj(config.enrollments);db.archivedSchools=asObj(config.archivedSchools);db.plans=asObj(config.plans);
+ db.vocationalEnrollments=config.vocationalEnrollments?asObj(config.vocationalEnrollments):db.vocationalEnrollments;
+ mergeProfiles(db);
  // db.results a ostatní osobní údaje se nepřepisují. Přijaté školní nastavení patří rodiči.
  if(!persist(db,false))return false;
  put(REV,String(Number(revision)||0));return true;}
@@ -127,7 +144,7 @@ function guardFifthGrade(e){if(!document.body||!e.target?.closest)return;
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>document.addEventListener('click',guardFifthGrade,true),{once:true});
 else document.addEventListener('click',guardFifthGrade,true);
 window.SDGradeSchools871=Object.freeze({read,grade,enrollment,label,courseKey,planKey,update,assign,advance,
- exportConfig,applyRemote,isDirty,touch,clearDirty,cloudRevision,refreshProfiles,migrate,gradeNotice,year:YEAR,validYear});
+ exportConfig,applyRemote,isDirty,touch,clearDirty,cloudRevision,refreshProfiles,migrate,gradeNotice,vocational,updateVocational,year:YEAR,validYear});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',migrate,{once:true});else migrate();
 window.addEventListener('sd866-updated',refreshProfiles);
 })();
