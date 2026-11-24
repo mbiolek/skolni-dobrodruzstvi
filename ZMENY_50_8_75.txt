@@ -1,0 +1,30 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.75 – OPRAVA RODIČOVSKÉ SPRÁVY (24. 11. 2026)
+
+Opraveno podle snímků obrazovky z telefonu:
+
+1. CENTRÁLNÍ DATABÁZE
+   - V Supabase opraveno právo EXECUTE pro interní funkci sd_private.sd_is_child(uuid) pouze pro roli authenticated.
+   - Chyba „permission denied for function sd_is_child“ už nemá blokovat načítání oprávněných dětských profilů a připojení rodičovského cloudu.
+   - Anonymní databázová role anon nedostala přístup. Identita a oprávnění se i nadále ověřují pomocí auth.uid() a RLS.
+   - Z bezpečnostních důvodů nebyly odstraňovány databázové politiky ani nahrazovány přístupem pro všechny.
+   - Dříve zrušenou cloudovou relaci může být nutné znovu přihlásit.
+
+2. RODIČOVSKÁ SPRÁVA
+   - V záložce „Školy a plány“ ponecháno jedno tlačítko pro otevření správy škol.
+   - Opraven kontrast textu v záložkách Školy a plány a Zařízení a přístupy.
+   - Starší odstavce zůstávající pod záložkami byly odstraněny.
+   - Automatické zamčení a diagnostika přesunuty do sbalené sekce „Nastavení a diagnostika“ na kartě Výsledky a testování.
+   - Přehled cloudu nově používá popis „Rodinný cloud a synchronizace“ namísto čísla starého technického modulu.
+
+3. VERZE A AKTUALIZACE
+   - Číslo 50.8.75 v app-version.js a sw.js.
+   - Nová cache PWA, aby se po aktualizaci načetly nové opravy CSS/JS.
+   - Zachována původní školní data, profily, XP, přihlašovací PIN i nastavení škol.
+
+OVĚŘENÍ
+   - SQL oprávnění pro authenticated potvrzeno v databázi.
+   - SELECT v RLS pod rolí authenticated nehlásí původní chybu.
+   - Syntaktické kontroly JavaScriptu, kompletnost odkazů na soubory a GitHub diff.
+   - Ostré přihlášení cloudového rodičovského účtu a chování na Samsungu/iPhonu vyžaduje test uživatelem.
+
+Nevypínej cloud a nemaž data aplikace. Po aktualizaci případně znovu přihlas rodičovský cloud.
