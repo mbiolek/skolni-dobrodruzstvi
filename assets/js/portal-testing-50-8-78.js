@@ -55,7 +55,9 @@ function show(){
  const grid=el(host,'div',undefined,'sd878-people-grid');
  for(const [id,p] of children()){
   const card=el(grid,'article',undefined,'sd878-person-card');
-  const img=el(card,'img');img.src='./assets/avatari/avatar-1-1.webp';img.alt='';img.className='sd878-person-avatar';
+  const img=el(card,'img');let avatar=1;
+  try{avatar=Number(JSON.parse(localStorage.getItem('skolni-dobrodruzstvi-v37-avatar')||'{}')[id])||1}catch{}
+  img.src=avatar===41?'./assets/avatari/martin-autolektrikar-technik.webp':avatar===42?'./assets/avatari/martin-autolektrikar-diagnostika.webp':'./assets/avatari/avatar-'+(Math.floor((avatar-1)/8)+1)+'-'+(((avatar-1)%8)+1)+'.webp';img.alt='';img.className='sd878-person-avatar';
   el(card,'strong',p.name);el(card,'small','Kompletní výuka očima dítěte');
   btn(card,'Testovat jako '+p.name,()=>open(id,p.name),'sd878-primary');
  }
