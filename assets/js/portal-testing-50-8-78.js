@@ -32,7 +32,13 @@ function open(pid,name){
  const frame=el(overlay,'iframe');frame.title='Testovací náhled '+name;
  frame.setAttribute('sandbox','allow-scripts allow-forms allow-downloads');
  frame.name=packet;
- frame.src='./index.html?sd878preview='+encodeURIComponent(pid);
+ el(overlay,'p','Načítám izolovanou kopii aplikace…','sd878-preview-loading');
+ fetch('./index.html',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Nelze načíst aplikaci');return r.text()}).then(html=>{
+  frame.srcdoc=html;
+  overlay.querySelector('.sd878-preview-loading')?.remove();
+ }).catch(err=>{
+  overlay.querySelector('.sd878-preview-loading').textContent='Testovací náhled se nepodařilo načíst: '+err.message;
+ });
 }
 function show(){
  const host=document.getElementById('sd878Testing');if(!host)return;
