@@ -16,15 +16,23 @@ function tabs(){
  h?.insertAdjacentElement('afterend',dashboard);
  const profiles=$('sd874TabProfiles'),devices=$('sd874TabDevices'),schools=$('sd874TabSchools'),study=$('sd874TabStudy');
  const directNodes=[...admin.children].filter(el=>el!==dashboard&&el!==h);
+ const utilities=document.createElement('details');utilities.className='sd875-tools';utilities.innerHTML='<summary>Nastavení a diagnostika</summary>';
+ study.append(utilities);
  for(const node of directNodes){
   if(node.id==='sd866Cloud')devices.append(node);
   else if(node.id==='sd860ParentTool'||node.classList.contains('authrow'))study.append(node);
   else if(node.classList.contains('sd54-schools-btn'))schools.append(node);
+  else if(node.classList.contains('authitem'))utilities.append(node);
+  else if(node.tagName==='P'&&node.textContent.includes('Profily dětí a nastavení přístupů'))node.remove();
   else if(node.id==='adminChildren'||node.id==='adminMessage'||node.classList.contains('sd872-auth-details')||node.tagName==='H3')profiles.append(node);
  }
- const schoolButton=document.createElement('button');schoolButton.type='button';schoolButton.className='sd874-school-button';schoolButton.textContent='Otevřít správu dětí, škol a ročníků';
- schoolButton.addEventListener('click',()=>{if(!document.body.classList.contains('parent-role'))return;document.body.classList.remove('sd54-admin-open');window.SDSchoolPlans52?.manage?.(true)});
- schools.prepend(schoolButton);
+ let schoolButton=schools.querySelector('.sd54-schools-btn');
+ if(!schoolButton){
+  schoolButton=document.createElement('button');schoolButton.type='button';schoolButton.textContent='Otevřít správu dětí, škol a ročníků';
+  schoolButton.addEventListener('click',()=>{if(!document.body.classList.contains('parent-role'))return;document.body.classList.remove('sd54-admin-open');window.SDSchoolPlans52?.manage?.(true)});
+  schools.prepend(schoolButton);
+ }
+ schoolButton.classList.add('sd874-school-button');
  const schoolInfo=document.createElement('p');schoolInfo.textContent='Přiřazuj školy každému dítěti zvlášť. Martinův autoelektrikář je oddělený od základních škol.';schools.append(schoolInfo);
  const title=document.createElement('h3');title.textContent='Připojená zařízení a oprávnění';devices.prepend(title);
  const empty=document.createElement('p');empty.textContent='Pouze rodič smí schvalovat zařízení, přidávat profily a měnit jejich viditelnost.';devices.insertBefore(empty,title.nextSibling);
