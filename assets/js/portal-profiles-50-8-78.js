@@ -60,6 +60,14 @@ function show(){
     feedback(result?.ok?'Ročník a třída uloženy.':result?.error||'Uložení selhalo.');if(result?.ok)show();
    },'sd878-primary');
   }
+  if(schools.length>1){
+   const defaults=schools.map(x=>[x.id,(x.city||x.name)+' – '+x.name]);
+   const defaultSchool=select(config,'Výchozí škola dítěte',defaults,window.SDSchoolContext827?.defaultSchoolId?.(id)||defaults[0][0]);
+   btn(config,'Uložit výchozí školu',()=>{
+    window.SDSchoolContext827?.setDefault?.(id,defaultSchool.value);
+    feedback('Výchozí škola byla nastavena.');
+   },'sd878-primary');
+  }
   btn(config,'Obnovit / změnit PIN',()=>legacyPin(id),'sd878-primary');
   el(config,'p','PIN se mění na tomto zařízení. Spárované zařízení používá schválený přístup přes cloud.','sd878-description');
   btn(config,'Přejmenovat profil',()=>{
