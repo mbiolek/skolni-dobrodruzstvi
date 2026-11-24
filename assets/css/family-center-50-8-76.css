@@ -95,3 +95,10 @@
  #authAdmin #sd876Center .sd876-tile-info{font-size:11px}
  #authAdmin #sd876Center .sd876-access-grid{grid-template-columns:1fr}
 }
+
+/* QR žádosti se zobrazuje také na dětském telefonu pro naskenování rodičem. */
+#authGate #sd876ChildQR{background:#fff!important;border:1px solid #c0d6e5!important;border-radius:14px;padding:14px;margin:12px 0;text-align:center}
+#authGate #sd876ChildQR strong{display:block;color:#173a55!important;font-size:16px;margin-bottom:9px}
+#authGate #sd876ChildQR .sd876-qr-image{display:flex;justify-content:center;align-items:center;min-height:204px;padding:8px;background:white}
+#authGate #sd876ChildQR .sd876-qr-image img,#authGate #sd876ChildQR .sd876-qr-image canvas{max-width:100%}
+#authGate #sd876ChildQR .sd876-hint{color:#244b68!important;font-size:13px!important}
