@@ -1,0 +1,121 @@
+/* Školní dobrodružství 50.8.78 – jednotná grafika rodičovského centra podle prostředí. */
+body{--sd878-card-from:#fff8e8;--sd878-card-to:#e8cf9d;--sd878-card-edge:#846a3d;--sd878-ink:#3c2a16;--sd878-accent:#8a6236}
+body[data-game-theme="a"],body[data-wallpaper="hrad"]{--sd878-card-from:#fff0c9;--sd878-card-to:#cfac70;--sd878-card-edge:#775534;--sd878-ink:#483018;--sd878-accent:#946b38}
+body[data-game-theme="b"],body[data-wallpaper="priroda"]{--sd878-card-from:#e3f8d0;--sd878-card-to:#91b47a;--sd878-card-edge:#52754a;--sd878-ink:#25412b;--sd878-accent:#3f7153}
+body[data-game-theme="c"],body[data-wallpaper="skola"]{--sd878-card-from:#eff9ff;--sd878-card-to:#9acbe3;--sd878-card-edge:#3d799d;--sd878-ink:#163e59;--sd878-accent:#316f9b}
+body[data-game-theme="d"],body[data-wallpaper^="noc"]{--sd878-card-from:#dae3ff;--sd878-card-to:#7b87b9;--sd878-card-edge:#404e88;--sd878-ink:#202952;--sd878-accent:#5365a3}
+#authAdmin #sd876Center .sd876-menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#authAdmin #sd876Center .sd878-tile{
+ min-height:164px!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center;
+ padding:10px 8px 11px!important;gap:4px;
+ background:linear-gradient(155deg,var(--sd878-card-from),var(--sd878-card-to))!important;
+ border:2px solid var(--sd878-card-edge)!important;border-bottom:6px solid var(--sd878-card-edge)!important;
+ color:var(--sd878-ink)!important;border-radius:19px!important;
+ box-shadow:inset 0 1px 1px #fff9,0 5px 10px #0b1c3e50!important;
+ text-shadow:none!important;transform:translateY(0);transition:transform .14s,box-shadow .14s;
+}
+#authAdmin #sd876Center .sd878-tile:nth-child(n){background:linear-gradient(155deg,var(--sd878-card-from),var(--sd878-card-to))!important;border-color:var(--sd878-card-edge)!important}
+#authAdmin #sd876Center .sd878-tile:active{transform:translateY(4px);border-bottom-width:2px!important;box-shadow:0 2px 3px #14283d52!important}
+#authAdmin #sd876Center .sd878-tile-art{display:block;width:69px;height:69px;max-width:40%;object-fit:contain;filter:drop-shadow(0 3px 3px #1b243755);border-radius:10px}
+#authAdmin #sd876Center .sd878-tile .sd876-tile-icon{display:none}
+#authAdmin #sd876Center .sd878-tile .sd876-tile-title{color:var(--sd878-ink)!important;font-size:clamp(15px,3.4vw,19px);line-height:1.2;text-align:center;overflow-wrap:break-word}
+#authAdmin #sd876Center .sd878-tile .sd876-tile-info{font-size:clamp(10px,2.35vw,12px);font-weight:700;color:var(--sd878-ink)!important;opacity:.84!important;line-height:1.25}
+#authAdmin #sd876Center .sd878-portal-msg{margin:9px 0;border-radius:10px;background:#e4f7ea;border:1px solid #82bca0;color:#144d30;padding:11px 13px;font-weight:700}
+#authAdmin #sd876Center .sd878-portal-msg.error{background:#fff1ec;border-color:#d7a39b;color:#8f302b}
+#authAdmin #sd876Center .sd878-portal-msg[hidden]{display:none!important}
+#authAdmin #sd876Center .sd878-description{font-size:14px!important;color:#304f6a!important;line-height:1.6!important;opacity:1!important}
+#authAdmin #sd876Center .sd878-btn{
+ display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+ padding:10px 13px!important;white-space:normal!important;text-align:center;
+ color:#1b4765!important;background:#e4f1fb!important;border:1px solid #8daec8!important;
+ border-radius:12px!important;box-shadow:0 2px 0 #7594ad;font-size:14px!important;
+ font-weight:800!important;line-height:1.35;cursor:pointer;
+}
+#authAdmin #sd876Center .sd878-primary{background:#2b617f!important;color:white!important;border-color:#5e96b8!important}
+#authAdmin #sd876Center .sd878-danger{background:#fae6e2!important;color:#8c2c28!important;border-color:#d8a5a0!important}
+#authAdmin #sd876Center .sd878-people-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#authAdmin #sd876Center .sd878-person-card{min-width:0;display:flex;flex-direction:column;gap:9px;background:#fff;border:1px solid #bad1e0;border-radius:15px;padding:13px;box-shadow:0 3px 12px #17365815;color:#173d5b}
+#authAdmin #sd876Center .sd878-person-card strong{font-size:18px;color:#1b425f!important}
+#authAdmin #sd876Center .sd878-person-card small{font-size:13px;color:#456b81!important;line-height:1.45;opacity:1}
+#authAdmin #sd876Center .sd878-person-heading{display:flex;align-items:center;gap:10px}
+#authAdmin #sd876Center .sd878-person-avatar{width:65px;height:65px;object-fit:cover;border-radius:15px;border:1px solid #a4bed2;background:#eff5fa}
+#authAdmin #sd876Center .sd878-person-details{border-top:1px solid #c7d4e2;padding-top:10px}
+#authAdmin #sd876Center .sd878-person-details > summary{font-weight:850;font-size:15px;cursor:pointer;color:#204c6d}
+#authAdmin #sd876Center .sd878-person-content{display:flex;flex-direction:column;align-items:stretch;gap:9px;padding-top:12px}
+#authAdmin #sd876Center .sd878-field{display:flex;flex-direction:column;gap:5px;font-size:14px;font-weight:750;color:#244b66!important;min-width:0;margin:5px 0}
+#authAdmin #sd876Center .sd878-field :is(input,select,textarea){width:100%;max-width:100%;box-sizing:border-box;border:1px solid #a8c0d0;border-radius:10px;min-height:44px;background:#fff;color:#183f5b;padding:10px 12px;font-size:15px}
+#authAdmin #sd876Center .sd878-check{display:flex;align-items:center;gap:9px;font-weight:750;color:#264f6e!important;font-size:14px}
+#authAdmin #sd876Center .sd878-check input{width:20px;height:20px;flex:none}
+#authAdmin #sd876Center .sd878-school-assignment{border:1px solid #cadde9;border-radius:12px;background:#f4faff;padding:11px;display:flex;flex-direction:column;gap:8px}
+#authAdmin #sd876Center .sd878-add-child,#authAdmin #sd876Center .sd878-advanced{margin:15px 0;padding:12px 14px;border:1px solid #aac5d6;border-radius:13px;background:#f0f7fb}
+#authAdmin #sd876Center .sd878-add-child > summary,#authAdmin #sd876Center .sd878-advanced > summary{cursor:pointer;color:#204861;font-weight:850;min-height:32px;font-size:16px}
+#authAdmin #sd876Center .sd878-add-child .sd878-field{margin:9px 0}
+#authAdmin #sd876Center .sd878-school-tree{display:flex;flex-direction:column;gap:12px}
+#authAdmin #sd876Center .sd878-tree-school{border:1px solid #b6c9dd;border-radius:15px;background:#fff;padding:11px 12px}
+#authAdmin #sd876Center .sd878-tree-school > summary{font-weight:850;color:#1b405d;font-size:17px;cursor:pointer;padding:7px}
+#authAdmin #sd876Center .sd878-grade-list{padding:4px 0 0 9px}
+#authAdmin #sd876Center .sd878-tree-grade{margin:9px 0;border:1px solid #c5d9e5;background:#f4f8fc;padding:11px;border-radius:12px}
+#authAdmin #sd876Center .sd878-tree-grade > summary{font-weight:800;color:#24516f;cursor:pointer;font-size:15px}
+#authAdmin #sd876Center .sd878-subject-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:11px 0 0}
+#authAdmin #sd876Center .sd878-subject-tile{min-height:66px!important;background:#eef6ff!important;color:#174a6b!important;font-size:13px!important;line-height:1.4}
+#authAdmin #sd876Center .sd878-add-grade{display:flex;align-items:center;gap:9px;margin:12px 0;flex-wrap:wrap}
+#authAdmin #sd876Center .sd878-add-grade select{padding:10px;border:1px solid #a6c2d7;border-radius:9px;background:#fff;color:#234d6b}
+#authAdmin #sd876Center .sd878-subject-editor{padding:14px;background:#fff;border-radius:14px;border:2px solid #9fc3dc;margin:18px 0}
+#authAdmin #sd876Center .sd878-subject-editor[hidden]{display:none!important}
+#authAdmin #sd876Center .sd878-editor-form{display:flex;flex-direction:column;gap:9px;padding:16px;background:#f1f8ff;border-radius:12px;margin:13px 0}
+#authAdmin #sd876Center .sd878-editor-form label{display:flex;flex-direction:column;gap:5px;color:#21465d!important;font-weight:800}
+#authAdmin #sd876Center .sd878-editor-form :is(input,select,textarea){width:100%;max-width:100%;background:white!important;color:#1e425a!important;border:1px solid #abc7d9;border-radius:10px;padding:12px;font-size:15px}
+#authAdmin #sd876Center .sd878-editor-form textarea{min-height:135px}
+#authAdmin #sd876Center .sd878-row,#authAdmin #sd876Center .sd878-ctl-row{display:flex;flex-wrap:wrap;gap:9px;margin:8px 0}
+#authAdmin #sd876Center .sd878-lesson{margin:11px 0;padding:13px;border:1px solid #bed5e3;border-radius:12px;background:#fff}
+#authAdmin #sd876Center .sd878-lesson strong{display:block;font-size:16px;color:#1e3e5a}
+#authAdmin #sd876Center .sd878-lesson small{display:block;color:#53738a!important;margin:6px 0}
+#authAdmin #sd876Center .sd878-preview{background:#edf5fb;border-radius:10px;padding:11px;max-height:250px;overflow:auto}
+#authAdmin #sd876Center .sd878-preview p{white-space:pre-wrap;color:#214863!important}
+#authAdmin #sd876Center .sd878-map-details{border:1px solid #b5ccdb;background:#f9fcff;padding:15px;border-radius:15px;margin:14px 0}
+#authAdmin #sd876Center .sd878-adventure-map{min-height:470px;border-radius:19px;border:3px solid #b99c70;background-color:#b2b98a;background-image:linear-gradient(#1d382b3d,#234e5560),url('../ikony/cards-clean-50-8-50/mapa-dobrodruzstvi.webp');background-size:cover;background-position:center;padding:18px;box-shadow:inset 0 1px 12px #1a2a3b88}
+#authAdmin #sd876Center .sd878-adventure-map h3{margin:2px 0 12px;color:#fff9de!important;text-shadow:0 2px 5px #11293d!important;text-align:center}
+#authAdmin #sd876Center .sd878-map-track{display:flex;flex-direction:column;gap:10px;align-items:stretch;max-width:520px;margin:auto}
+#authAdmin #sd876Center .sd878-map-node{width:fit-content;max-width:85%;min-width:190px;white-space:pre-line!important;background:linear-gradient(140deg,#f1dda6,#bb9a62)!important;color:#48301b!important;border:2px solid #755639!important;border-bottom:5px solid #755639!important;padding:10px 14px!important;font-size:14px!important;box-shadow:0 4px 9px #0c233a87!important}
+#authAdmin #sd876Center .sd878-map-node:nth-child(even){align-self:flex-end}
+#authAdmin #sd876Center .sd878-map-node:nth-child(odd){align-self:flex-start}
+#authAdmin #sd876Center .sd878-map-node:focus-visible{outline:3px solid #fff5c5;outline-offset:3px}
+#authAdmin #sd876Center .sd878-theme-panel{margin:12px 0;padding:12px;border:1px solid #bdd3e2;border-radius:14px;background:#f0f8fc}
+#authAdmin #sd876Center .sd878-theme-panel summary{cursor:pointer;font-weight:850;color:#174566;font-size:16px}
+#authAdmin #sd876Center .sd878-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px 0}
+#authAdmin #sd876Center .sd878-device-spec{font-weight:650;color:#214c6e!important;background:#eff6fb;padding:7px;border-radius:9px;margin:5px 0}
+#authAdmin #sd876Center .sd878-uncertain{font-style:italic;color:#775d25!important}
+#authGate #sd876ChildPair .sd878-pair-fallback{border:1px solid #709eb5;background:#183b55;border-radius:12px;margin:10px 0;padding:10px}
+#authGate #sd876ChildPair .sd878-pair-fallback summary{font-size:13px;color:#e5f1ff;cursor:pointer;font-weight:750}
+#authGate #sd876ChildPair #sd878ParentEmail{display:block;width:100%;max-width:100%;font-size:16px;padding:11px;border-radius:11px}
+#sd878PreviewWindow{position:fixed;inset:0;z-index:2147483400;background:#0b1f34;display:flex;flex-direction:column;padding:0}
+#sd878PreviewWindow .sd878-preview-bar{min-height:55px;box-sizing:border-box;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between;padding:10px 14px;background:#173b5d;color:white;border-bottom:2px solid #8eb4c7}
+#sd878PreviewWindow .sd878-preview-bar strong{font-size:15px;color:white}
+#sd878PreviewWindow .sd878-preview-bar span{font-size:12px;color:#e6f5fc}
+#sd878PreviewWindow .sd878-preview-bar button{border-radius:10px;background:#fff0df;color:#613b25;border:1px solid #cda78a;padding:9px 14px;font-weight:850}
+#sd878PreviewWindow iframe{border:0;width:100%;flex:1;min-height:0;background:#05162d}
+html[data-sd878-preview="on"] body .sd878-preview-banner{position:fixed;bottom:0;left:0;right:0;z-index:2147483300;background:#255570;color:#fff;padding:8px;text-align:center;font:700 12px system-ui}
+body.child-role #sd878ChildEntry{display:block;margin:14px auto;min-height:65px;padding:14px;border-radius:16px;background:#265879;color:#fff;border:2px solid #aac7de;font-weight:850;font-size:16px;max-width:94%}
+#sd878LessonOverlay{position:fixed;inset:0;z-index:2147483100;background:#153650ef;overflow:auto;padding:20px 12px}
+#sd878LessonOverlay[hidden]{display:none}
+#sd878LessonOverlay .sd878-learner{max-width:730px;margin:2vh auto;background:#fff;border:1px solid #a7c8dc;border-radius:18px;padding:17px;color:#1a3b59}
+#sd878LessonOverlay .sd878-learner-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#sd878LessonOverlay .sd878-learner button{min-height:42px;border:1px solid #7daac6;background:#e8f4fc;color:#194b6b;border-radius:12px;padding:10px;font-weight:850;margin:6px}
+#sd878LessonOverlay .sd878-learner .sd878-question{padding:13px;border-radius:13px;background:#f0f8fe;margin:13px 0}
+#sd878LessonOverlay .sd878-question button{display:block;width:100%;text-align:left;margin:8px 0}
+#sd878LessonOverlay .sd878-feedback.correct{color:#187447}
+@media(max-width:480px){
+ #authAdmin #sd876Center .sd878-tile{min-height:143px!important;padding:9px 6px 11px!important}
+ #authAdmin #sd876Center .sd878-tile-art{width:55px;height:55px}
+ #authAdmin #sd876Center .sd878-tile .sd876-tile-title{font-size:15px!important}
+ #authAdmin #sd876Center .sd878-tile .sd876-tile-info{font-size:10px!important}
+ #authAdmin #sd876Center .sd878-people-grid{grid-template-columns:1fr}
+ #authAdmin #sd876Center .sd878-subject-grid{grid-template-columns:1fr 1fr}
+ #authAdmin #sd876Center .sd878-adventure-map{min-height:425px;padding:12px}
+ #authAdmin #sd876Center .sd878-map-node{min-width:145px;max-width:85%;font-size:12px!important}
+}
+@media(orientation:landscape) and (max-height:430px){
+ #authAdmin #sd876Center .sd878-tile{min-height:112px!important}
+ #authAdmin #sd876Center .sd878-tile-art{width:36px;height:36px}
+ #authAdmin #sd876Center .sd876-menu{gap:8px}
+}
