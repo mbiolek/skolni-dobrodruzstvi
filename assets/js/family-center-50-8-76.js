@@ -13,7 +13,7 @@ const titles={profiles:'Profily dětí',devices:'Zařízení a žádosti',visibi
 const icons={profiles:'👨‍👧‍👦',devices:'📱',visibility:'👁',schools:'🏫',results:'📊',settings:'⚙'};
 let center=null,active='',data={accounts:[],profiles:[],access:[],pending:[]};
 let parentBusy=false,pendingSecret='',inviteToken='',childBusy=false;
-const notify=(text,error=false,id='sd876Notice')=>{const el=$(id);if(el){el.textContent=String(text||'');el.classList.toggle('error',!!error)}};
+const notify=(text,error=false,id='sd876Notice')=>{const el=$(id);if(el){el.hidden=!text;el.textContent=String(text||'');el.classList.toggle('error',!!error)}};
 const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el};
 const add=(host,tag,cls,text)=>{const x=make(tag,cls,text);host.append(x);return x};
 const ctl=(label,callback,cls='')=>{const b=make('button','sd876-btn '+cls,label);b.type='button';b.addEventListener('click',callback);return b};
@@ -69,8 +69,8 @@ function shell(){
  add(heading,'p','','Všechny děti, zařízení a školy na jednom místě.');
  const cloudStatus=add(header,'span','sd876-connection','Cloud');
  cloudStatus.id='sd876CloudStatus';
- const badge=add(center,'div','sd876-pending');
- badge.id='sd876PendingCount';badge.hidden=true;
+ const badge=add(center,'button','sd876-pending');
+ badge.id='sd876PendingCount';badge.type='button';badge.hidden=true;
  const menu=add(center,'div','sd876-menu');menu.id='sd876Menu';
  for(const id of Object.keys(titles)){
   const b=make('button','sd876-tile');b.type='button';b.dataset.view=id;
@@ -235,7 +235,8 @@ function clearIncoming(){pendingSecret='';try{sessionStorage.removeItem('sd876_p
 async function approve(args){
  if(parentBusy)return;parentBusy=true;
  try{
-  await RPC('sd_876_approve_request',args);
+  const success=await RPC('sd_876_approve_request',args);
+  if(success!==true)throw Error('Kód není platný nebo je vyčerpán limit pokusů. Zkus párovací odkaz.');
   clearIncoming();notify('Zařízení bylo schváleno a přiřazeno k profilu.');
  }catch(err){notify(err.message||String(err),true)}
  finally{parentBusy=false}
@@ -406,7 +407,7 @@ function boot(){
  shell();childUI();updateCloud();
  pendingSecret=sessionStorage.getItem('sd876_parent_request')||'';
  if(pendingSecret&&parentReady())openView('devices');
- $('sd866Login')?.addEventListener('click',()=>setTimeout(()=>{updateCloud();if(parentReady())refreshData(active,true)},1600));
+ $('sd866Login')?.addEventListener('click',()=>setTimeout(()=>{updateCloud();if(parentReady()&&pendingSecret)openView('devices');else if(parentReady())refreshData(active,true)},1800));
  window.addEventListener('school-account',()=>setTimeout(()=>{updateCloud();renderResults();if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active,true);if(parentReady()&&pendingSecret)openView('devices')},400));
  window.addEventListener('sd866-updated',renderResults);
  window.addEventListener('online',()=>{pollChild();if(parentReady()&&active)refreshData(active,true)});
