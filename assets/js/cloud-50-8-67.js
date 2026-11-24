@@ -223,6 +223,18 @@ async function syncParent(){if(busySync||!isReady())return;busySync=true;
   await pullParent();await syncSchoolParent();status('Synchronizováno v '+lastSync+'.');
  }catch(e){log(e)}finally{busySync=false}
 }
+async function ensureChildIdentity(){
+ if(mode()==='parent'&&session?.access_token)throw Error('Na tomto zařízení je přihlášen rodič. Párování spusť na zařízení dítěte.');
+ let user=null;
+ if(session?.access_token)user=await authUser();
+ if(!user?.id){
+  const next=await net('/auth/v1/signup',{method:'POST',body:{}},false);
+  if(!next?.access_token||!next?.user?.id)throw Error('V Supabase musí být povolené anonymní přihlašování dětských zařízení.');
+  putSession(next);user=next.user;
+ }
+ if(mode()!=='child')localStorage.setItem(MODE_KEY,'child-pending');
+ return user.id;
+}
 async function createCode(){
  if(!navigator.onLine)throw Error('Telefon není připojený k internetu. Zapni Wi-Fi nebo mobilní data.');
  if(mode()==='parent'&&session)throw Error('Na tomto zařízení je přihlášen rodič. Nejprve v cloudu použij Odhlásit.');
@@ -445,7 +457,7 @@ function lockParentOnChild(){
   if(deviceToken)setTimeout(()=>syncDevice(true),700);
  }
 }
-window.SDCloud866={syncSchoolParent,isReady,isControlled,mode,publicEntry,canEnter,lockParentOnChild,createProfile,renameProfile,deleteProfile,pullParent,syncParent,backupLocal,downloadBackup,refreshDevice:verifyChild,syncDevice,registerSyncDevice,requestParent:(path,options={})=>{if(!isReady())throw Error('Tato akce vyžaduje přihlášeného rodiče.');return net(path,options,true);}};
+window.SDCloud866={syncSchoolParent,isReady,isControlled,mode,publicEntry,canEnter,lockParentOnChild,createProfile,renameProfile,deleteProfile,pullParent,syncParent,backupLocal,downloadBackup,refreshDevice:verifyChild,syncDevice,registerSyncDevice,requestParent:(path,options={})=>{if(!isReady())throw Error('Tato akce vyžaduje přihlášeného rodiče.');return net(path,options,true);},ensureChildIdentity,requestCloud:(path,options={})=>net(path,options,true)};
 setTimeout(init,0);
 let childLastVerify=0;
 function automaticSync(){
