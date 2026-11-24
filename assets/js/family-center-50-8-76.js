@@ -11,7 +11,7 @@ const localSet=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
 const localDel=k=>{try{localStorage.removeItem(k)}catch{}};
 const titles={profiles:'Profily dětí',devices:'Zařízení a žádosti',visibility:'Viditelnost profilů',schools:'Školy a učivo',results:'Výsledky dětí',settings:'Nastavení'};
 const icons={profiles:'👨‍👧‍👦',devices:'📱',visibility:'👁',schools:'🏫',results:'📊',settings:'⚙'};
-let center=null,active='',data={accounts:[],profiles:[],access:[],pending:[]};
+let center=null,active='',data={accounts:[],profiles:[],access:[],pending:[],syncDevices:[]};
 let parentBusy=false,pendingSecret='',inviteToken='',childBusy=false;
 const notify=(text,error=false,id='sd876Notice')=>{const el=$(id);if(el){el.hidden=!text;el.textContent=String(text||'');el.classList.toggle('error',!!error)}};
 const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el};
@@ -46,13 +46,14 @@ async function getData(){
  const f=await REST('sd_families?select=id&limit=1');
  if(!f.length)throw Error('Rodina zatím není připojená.');
  const id=encodeURIComponent(f[0].id);
- const [accounts,profiles,access,pending]=await Promise.all([
+ const [accounts,profiles,access,pending,syncDevices]=await Promise.all([
   REST('sd_child_accounts?family_id=eq.'+id+'&select=auth_user_id,profile_id,device_name,created_at&order=created_at.asc'),
   REST('sd_profiles?family_id=eq.'+id+'&deleted_at=is.null&select=id,display_name&order=created_at.asc'),
   REST('sd_device_profile_access?family_id=eq.'+id+'&select=auth_user_id,profile_id'),
-  RPC('sd_876_pending_requests')
+  RPC('sd_876_pending_requests'),
+  RPC('sd_876_parent_sync_devices')
  ]);
- data={accounts,profiles,access,pending:Array.isArray(pending)?pending:[]};
+ data={accounts,profiles,access,pending:Array.isArray(pending)?pending:[],syncDevices:Array.isArray(syncDevices)?syncDevices:[]};
  updateBadge();return data;
 }
 function updateBadge(){
@@ -270,10 +271,20 @@ function renderDevices(){
   row.append(ctl('Přejmenovat',()=>renameDevice(a),'sd876-secondary'));
   row.append(ctl('Odpojit',()=>disconnectDevice(a),'sd876-warning'));
  });
+ add(host,'h4','','Rodičovská synchronizační zařízení');
+ if(!data.syncDevices.length)add(host,'p','sd876-empty','Žádné další zařízení pro rodinnou synchronizaci.');
+ data.syncDevices.forEach((a,i)=>{
+  const card=add(host,'article','sd876-device');
+  add(card,'strong','',a.device_name||'Rodičovské zařízení '+(i+1));
+  add(card,'small','', 'Připojeno '+new Date(a.created_at).toLocaleDateString('cs-CZ')+' · Přístup ke všem dětským profilům');
+  const row=add(card,'div','sd876-action-row');
+  row.append(ctl('Přejmenovat',()=>renameParentDevice(a),'sd876-secondary'));
+  row.append(ctl('Odpojit',()=>disconnectParentDevice(a),'sd876-warning'));
+ });
 }
 function renderVisibility(){
  const host=$('sd876Visibility');if(!host)return;host.replaceChildren();
- if(!data.accounts.length){add(host,'p','sd876-empty','Nejdřív spáruj dětské zařízení.');return}
+ if(!data.accounts.length)add(host,'p','sd876-empty','Nejdřív spáruj dětské zařízení.');
  data.accounts.forEach((a,i)=>{
   const card=add(host,'article','sd876-device');
   add(card,'h4','',a.device_name||'Zařízení '+(i+1));
@@ -289,6 +300,15 @@ function renderVisibility(){
    check.addEventListener('change',()=>setAccess(a,p,check));
   }
  });
+ if(data.syncDevices.length){
+  add(host,'h4','','Rodičovská synchronizační zařízení');
+  add(host,'p','sd876-hint','Správcovská zařízení mají přístup ke všem dětským profilům a nelze jim nastavovat omezenou viditelnost. Můžeš je odpojit v části Zařízení.');
+  for(const a of data.syncDevices){
+   const card=add(host,'article','sd876-device');
+   add(card,'strong','',a.device_name||'Rodičovské zařízení');
+   add(card,'small','','Všechny dětské profily');
+  }
+ }
 }
 async function setAccess(a,p,control){
  const enabled=control.checked;control.disabled=true;
@@ -311,6 +331,25 @@ async function disconnectDevice(a){
  try{
   await cloud().requestParent('/rest/v1/sd_child_accounts?auth_user_id=eq.'+encodeURIComponent(a.auth_user_id),{method:'DELETE'});
   notify('Zařízení bylo odpojeno.');await refreshData('devices',true);
+ }catch(err){notify(err.message,true)}
+}
+async function renameParentDevice(a){
+ const name=prompt('Název rodičovského zařízení:',a.device_name||'');
+ if(name===null)return;
+ const cleaned=name.trim().slice(0,60);
+ if(cleaned.length<2){notify('Název zařízení je příliš krátký.',true);return}
+ try{
+  const ok=await RPC('sd_876_rename_parent_device',{p_device_id:a.id,p_device_name:cleaned});
+  if(!ok)throw Error('Zařízení už není připojené.');
+  notify('Název uložen.');await refreshData('devices',true);
+ }catch(err){notify(err.message,true)}
+}
+async function disconnectParentDevice(a){
+ if(!confirm('Odpojit '+(a.device_name||'rodičovské zařízení')+'? Pokud právě používáš tento telefon, bude možná potřeba znovu zapnout synchronizaci.'))return;
+ try{
+  const ok=await RPC('sd_revoke_sync_device',{p_device_id:a.id});
+  if(!ok)throw Error('Zařízení už není připojené.');
+  notify('Synchronizační zařízení odpojeno.');await refreshData('devices',true);
  }catch(err){notify(err.message,true)}
 }
 function renderResults(){
