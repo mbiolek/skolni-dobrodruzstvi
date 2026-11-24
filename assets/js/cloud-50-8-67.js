@@ -457,7 +457,7 @@ function lockParentOnChild(){
   if(deviceToken)setTimeout(()=>syncDevice(true),700);
  }
 }
-window.SDCloud866={syncSchoolParent,isReady,isControlled,mode,publicEntry,canEnter,lockParentOnChild,createProfile,renameProfile,deleteProfile,pullParent,syncParent,backupLocal,downloadBackup,refreshDevice:verifyChild,syncDevice,registerSyncDevice,requestParent:(path,options={})=>{if(!isReady())throw Error('Tato akce vyžaduje přihlášeného rodiče.');return net(path,options,true);},ensureChildIdentity,requestCloud:(path,options={})=>net(path,options,true)};
+window.SDCloud866={syncSchoolParent,isReady,isControlled,mode,publicEntry,canEnter,lockParentOnChild,createProfile,renameProfile,deleteProfile,pullParent,syncParent,backupLocal,downloadBackup,refreshDevice:verifyChild,syncDevice,registerSyncDevice,requestParent:(path,options={})=>{if(!isReady())throw Error('Tato akce vyžaduje přihlášeného rodiče.');return net(path,options,true);},ensureChildIdentity,requestCloud:(path,options={})=>net(path,options,true),changeCloudPassword:async(pass)=>{if(!isReady())throw Error('Nejdřív přihlas rodinný cloud.');if(typeof pass!=='string'||pass.length<10)throw Error('Heslo musí mít alespoň 10 znaků.');return net('/auth/v1/user',{method:'PUT',body:{password:pass}},true)}};
 setTimeout(init,0);
 let childLastVerify=0;
 function automaticSync(){
