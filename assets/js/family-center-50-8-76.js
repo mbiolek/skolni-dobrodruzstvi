@@ -353,6 +353,8 @@ function childUI(){
  const short=add(response,'strong','sd876-shortcode','');short.id='sd876ShortCode';
  add(response,'p','sd876-hint','Šestimístný kód je jen záložní možnost. Odkaz má přednost.');
  response.append(ctl('Poslat žádost rodiči',shareRequest,'sd876-primary'));
+ response.append(ctl('Zobrazit QR pro rodiče',showChildQR,'sd876-secondary'));
+ const qr=add(response,'div','sd876-qr-panel');qr.id='sd876ChildQR';qr.hidden=true;
  const waiting=add(form,'p','sd876-child-message','');waiting.id='sd876ChildMessage';waiting.setAttribute('role','status');
  const invite=sessionStorage.getItem('sd876_child_invite');
  const pending=local('sd876_pending_secret');
@@ -385,6 +387,17 @@ function showChildPending(secret,code,associated){
 function loadPendingChild(secret){
  const code=local('sd876_pending_code')||'';
  showChildPending(secret,code,false);
+}
+function showChildQR(){
+ const secret=local('sd876_pending_secret'),panel=$('sd876ChildQR');
+ if(!secret||!panel){notify('Nejdřív vytvoř žádost.',true,'sd876ChildMessage');return}
+ panel.replaceChildren();panel.hidden=false;
+ add(panel,'strong','','QR kód žádosti pro rodiče');
+ const img=add(panel,'div','sd876-qr-image');
+ if(typeof window.QRCode==='function'){
+  new window.QRCode(img,{text:appURL('sd876request',secret),width:190,height:190,colorDark:'#15364e',colorLight:'#ffffff',correctLevel:window.QRCode.CorrectLevel.M});
+ }else add(img,'p','','QR generátor není k dispozici. Použij sdílení odkazu.');
+ add(panel,'p','sd876-hint','Rodič naskenuje QR kód a schválí připojení po výběru profilu.');
 }
 async function shareRequest(){
  const secret=local('sd876_pending_secret');
