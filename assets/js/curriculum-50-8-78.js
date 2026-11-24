@@ -173,7 +173,11 @@ async function renderChildList(host){
   const data=await listChild();
   const pid=activeId(),schoolData=window.SDGradeSchools871?.read?.()||{};
   const schools=schoolData.assignments?.[pid]||[];
-  const list=data.filter(item=>schools.includes(item.school_id) && (!window.SDGradeSchools871?.grade?.(pid,item.school_id)||window.SDGradeSchools871.grade(pid,item.school_id)===item.grade));
+  const vocational=window.SDGradeSchools871?.vocational?.(pid);
+  const list=data.filter(item=>{
+   if(item.school_id==='stredni_'+pid)return vocational&&Number(vocational.grade)===Number(item.grade);
+   return schools.includes(item.school_id)&&(!window.SDGradeSchools871?.grade?.(pid,item.school_id)||window.SDGradeSchools871.grade(pid,item.school_id)===item.grade);
+  });
   if(!list.length){msg(host,'Pro přiřazené školy a ročníky zatím není zveřejněné vlastní učivo.');return}
   for(const item of list){
    const b=button(host,item.title+' · '+subjectName(item.subject)+' · '+item.grade+'. ročník',()=>practiceItem(item,host),'sd878-lesson-launch');b.classList.add('sd878-full');
