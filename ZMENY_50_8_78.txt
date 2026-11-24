@@ -1,0 +1,54 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.78
+24. 11. 2026 – nové rodičovské centrum
+
+ÚVODNÍ OBRAZOVKA RODIČE
+- Šest velkých 3D karet (2 × 3): Testovací rozhraní, Profily dětí, Školy a učivo, Mapa postupu, Zařízení a párování, Nastavení.
+- Styl karet odpovídá zvolenému prostředí, využívá existující ilustrace a dvě vlastní vektorové ikony (Profily a Zařízení).
+- Původní dětská domovská obrazovka není výchozí obrazovkou rodiče.
+- Zachované rodičovské tlačítko Zpět, přepnutí profilu a viditelný export diagnostického logu.
+
+TESTOVACÍ ROZHRANÍ
+- Karty všech dětských profilů a náhled stejného prostředí dítěte v samostatném izolovaném iframe.
+- Testovací kopie pracuje s virtuálním uložištěm a neproniká do Supabase. Nezapisuje skutečné výsledky ani XP dítěte.
+- Zveřejněné doplněné učivo lze do testovacího náhledu přednačíst z cloudu.
+
+PROFILY DĚTÍ
+- Každé dítě: seznam škol, ročník, třída, školní rok, výchozí škola při více školách.
+- Martinův středoškolský obor má vlastní formulář.
+- Reset PINu pod detailem dítěte (PIN platí lokálně, schválená zařízení používají cloudové ověření).
+- Přidání dítěte pod přehledem profilů; původní správa profilů zůstává jako pokročilá možnost.
+
+ŠKOLY A UČIVO
+- Strom škola → ročník → předmět.
+- Přehled počtu témat původních měsíčních plánů.
+- Nový editor slovíček, testů a výukového textu s návrhem, kontrolou, zveřejněním dětem a editací.
+- Pro slovíčka se zadává „anglicky = česky“; testy vyžadují alespoň tři různé otázky.
+- Zveřejněné nové lekce vidí dítě v nabídce Doplněné učivo školy, pouze pro přiřazenou školu a ročník.
+- U doplněných testů se po odpovědi automaticky pokračuje na další otázku.
+
+MAPA POSTUPU
+- Ilustrovaná dobrodružná mapa pěti základních předmětů.
+- Volba dítěte, detail jeho uložených školních výsledků a doplněného procvičování, souhrn XP.
+- Neexistující nebo neúplné výsledky nejsou nahrazovány odhady.
+
+ZAŘÍZENÍ A PÁROVÁNÍ
+- Přímá žádost ze zařízení do rodičovského profilu bez QR a opisování kódu.
+- Na novém zařízení se jednorázově zadá e-mail rodičovského cloudového účtu a název zařízení.
+- Rodič uvidí čekající žádost pod šesti kartami a v sekci Zařízení. Vybere profil a klikne Schválit / Zamítnout.
+- QR, jednorázový odkaz a šestimístný kód zůstávají pouze záložní možnosti.
+- Schválení dítěte automaticky zjistí online, rodičovské heslo dítě nedostává.
+- Přehled již spárovaných zařízení zobrazuje typ, platformu, prohlížeč a poslední dostupnou aktivitu, pokud je lze z doložených dat zjistit.
+- Model Androidu či iPhonu se uvádí jen při dostatečných údajích; nepřesná data jsou označena.
+
+NASTAVENÍ
+- Centrální databáze, synchronizace, rodičovský PIN, změna hesla cloudového účtu, avatar, grafické prostředí, vlastní lokální fotografie pozadí, export diagnostiky.
+- Cloudové nové učivo je chráněno Supabase RLS: zapisuje rodič, dítě čte jen zveřejněné položky pro rodinu.
+- Výsledky nového procvičování se přidávají do stávající synchronizace.
+
+BEZPEČNOST A KOMPATIBILITA
+- Data a dříve spárované profily se při aktualizaci nemažou.
+- Testovací iframe používá neprůhledný sandbox původů a oddělenou virtuální lokální paměť.
+- SQL změny zahrnují bezpečně omezené přístupy a datový katalog.
+- Náhled typu zařízení využívá údaje dostupné z přihlášených relací, model není zaručen.
+- Automatické notifikace do zavřené aplikace nejsou implementované: rodič uvidí nové žádosti při otevřené rodičovské správě nebo po jejím spuštění.
+- Nové neotestované obrazovky je potřeba ověřit na Samsungu a iPhonu; zkontrolovat zvlášť zpětné gesto a testovací náhled.
