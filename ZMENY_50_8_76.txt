@@ -1,0 +1,32 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – 50.8.76
+24. 11. 2026 – kompletní rodičovské centrum
+
+CO JE NOVÉ
+- Šest hlavních 3D karet v rodičovské správě: Profily dětí, Zařízení a žádosti, Viditelnost profilů, Školy a učivo, Výsledky dětí, Nastavení.
+- Původní ovládání vytváření, mazání, PINů, škol, Martinova testování a výsledků je zachováno, ale uspořádáno.
+- Rodinná QR pozvánka (časově omezená, místně generovaný QR bez odesílání tokenů třetí straně).
+- Dětské zařízení může vytvořit žádost a poslat odkaz rodiči; při rodinné QR pozvánce se žádost automaticky zobrazí v rodičovském seznamu.
+- Rodič rozhoduje Schválit / Zamítnout, vybere konkrétní profil dítěte. Rodičovský PIN ani heslo se neposílá na telefon dítěte.
+- Šestimístný kód pouze jako nouzová možnost. Chybné pokusy jsou omezeny na straně databáze.
+- Rodič vidí seznam zařízení, může je přejmenovat a odpojit.
+- Viditelnost dětských profilů nastaví rodič zvlášť pro každé zařízení. Hlavní profil zařízení se odpojuje jen společně s celým zařízením.
+- Serverové oprávnění je stále vynucováno Supabase RLS; skrytí profilu není jen vizuální.
+- Profil rodiče nelze spárovat jako dětský.
+- Dětské zařízení po schválení samo obnoví přístup ke schváleným profilům; není potřeba kliknout na opakovanou kontrolu.
+- Vlastní fotografie pozadí pouze na daném zařízení, uložená v IndexedDB, ne v cloudu.
+- Stávající XP, učivo, školy, PIN a místní zálohy se během aktualizace nemažou.
+
+BEZPEČNOST
+- Žádný service_role klíč v aplikaci.
+- 192bit jednorázové tajné odkazy se přenáší jako fragment URL, aby neskončily v serverových přístupových záznamech.
+- QR pozvánky i žádosti mají platnost 15 minut a omezení počtu.
+- Nové databázové tabulky nemají přímé právo čtení/zápisu pro klientské role; přístup probíhá kontrolovanými funkcemi.
+- Privilegované databázové funkce vyžadují ověřený Supabase účet; provádějí kontrolu vlastnictví rodiny a profilu.
+- Stávající přístupy z 50.8.75 zůstávají zachované.
+
+KOMPATIBILITA A OVĚŘENÍ
+- PWA verze a cache se mění na 50.8.76.
+- Ověřena syntaktická kontrola JavaScriptu, přítomnost assetů a databázový průchod v rollbackované testovací transakci.
+- Reálné použití na konkrétních telefonech Android/iOS a skutečných uživatelských účtech nelze v tomto prostředí plně otestovat.
+- Rodič po instalaci otevře Rodičovská správa → Zařízení a žádosti; dětské zařízení otevře „Požádat o připojení“.
+- Po případném odhlášení cloudu se stačí přihlásit stejným původním účtem; nikdy nevytvářet novou rodinu místo existující.
