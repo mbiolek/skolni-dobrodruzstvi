@@ -1,0 +1,46 @@
+/* 50.8.75: opravena citelnost a sjednocene rodicovske rozvrzeni. */
+#authAdmin #sd874TabSchools,
+#authAdmin #sd874TabDevices{color:#f5f8ff!important;}
+#authAdmin #sd874TabSchools > p,
+#authAdmin #sd874TabDevices > p{
+  color:#f4f8ff!important;opacity:1!important;text-shadow:none!important;
+  font-size:15px!important;line-height:1.55!important;
+}
+#authAdmin #sd874TabSchools .sd874-school-button{
+  display:block!important;box-sizing:border-box;width:100%;max-width:100%;
+  margin:8px 0 14px!important;min-height:54px!important;padding:12px 16px!important;
+  border:2px solid #a0c5e6!important;border-radius:14px!important;
+  background:#dcecfb!important;color:#173a57!important;
+  font-weight:800!important;font-size:clamp(14px,3vw,17px)!important;
+  white-space:normal!important;text-align:center!important;
+  box-shadow:0 3px 0 #33506c!important;
+}
+#authAdmin #sd874TabSchools .sd874-school-button:focus-visible{outline:3px solid #f5d28e;outline-offset:3px}
+#authAdmin #sd874TabDevices #sd866Cloud{
+  background:rgba(22,50,79,.98)!important;
+  border-color:#9ac3db!important;opacity:1!important;color:#f9fbff!important;
+}
+#authAdmin #sd874TabDevices #sd866Cloud :is(p,small,label,h3,h4,.sd866-explain){
+  color:#f4f9ff!important;opacity:1!important;text-shadow:none!important;
+}
+#authAdmin #sd874TabDevices #sd866Cloud :is(h3,h4){color:#ffe0ab!important}
+#authAdmin #sd874TabDevices #sd866Cloud :is(input,select){
+  background:#fff!important;color:#153550!important;opacity:1!important;
+}
+#authAdmin #sd874TabDevices #sd866Status{
+  color:#fff!important;opacity:1!important;background:#244c6d!important;
+}
+#authAdmin #sd874TabDevices #sd866Status.sd866-error{
+  color:#fff!important;background:#642f39!important;border:2px solid #ffb5a8!important;
+}
+#authAdmin #sd874TabStudy .sd875-tools{margin-top:18px;padding:12px 14px;
+ border:1px solid #9bc5de;border-radius:14px;background:#284663;color:white;}
+#authAdmin #sd874TabStudy .sd875-tools > summary{
+  cursor:pointer;font-weight:800;min-height:36px;display:list-item;color:#f6e6c5;}
+#authAdmin #sd874TabStudy .sd875-tools > .authitem{margin:12px 0 0;background:#f4f7ff;
+ color:#173651;border-radius:12px;padding:14px;}
+#authAdmin #sd874TabStudy .sd875-tools > .authitem :is(strong,label,p){
+  color:#173651!important;opacity:1!important;text-shadow:none!important;
+}
+#authAdmin #sd874TabStudy .sd875-tools > .authitem select{color:#173651!important;background:#fff!important;}
+#sd874Dashboard .sd874-tab[hidden]{display:none!important;}
