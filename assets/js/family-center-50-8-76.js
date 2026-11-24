@@ -62,6 +62,7 @@ function updateBadge(){
 }
 function shell(){
  const admin=$('authAdmin');if(!admin||$('sd876Center'))return;
+ admin.dataset.sd876='1';
  center=make('section','sd876-center');center.id='sd876Center';
  const header=add(center,'div','sd876-head');
  const heading=add(header,'div','');
