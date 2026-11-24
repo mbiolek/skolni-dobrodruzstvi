@@ -1,6 +1,33 @@
 /* 50.8.78 – správa každého dítěte, školy, třídy, ročníku a PINu na jednom místě. */
 (()=>{'use strict';
 const P='matematika-karticky-progress-v3-profiles';
+
+const AVATARS='skolni-dobrodruzstvi-v37-avatar';
+const avatarList=()=>{try{return JSON.parse(localStorage.getItem(AVATARS)||'{}')}catch{return {}}};
+const avatarSrc=n=>{n=Number(n)||1;return n===41?'./assets/avatari/martin-autolektrikar-technik.webp':n===42?'./assets/avatari/martin-autolektrikar-diagnostika.webp':'./assets/avatari/avatar-'+(Math.floor((n-1)/8)+1)+'-'+(((n-1)%8)+1)+'.webp'};
+async function saveAvatar(pid,choice){
+ const c=window.SDCloud866;
+ if(c?.isControlled?.()){
+  if(!c.isReady?.())throw Error('Nejdřív přihlas rodinný cloud. Avatar se zatím nezměnil.');
+  const res=await c.requestParent('/rest/v1/sd_profiles?legacy_id=eq.'+encodeURIComponent(pid)+'&deleted_at=is.null',{method:'PATCH',headers:{Prefer:'return=representation'},body:{avatar:{id:choice}}});
+  if(!res?.length)throw Error('Avatar se v centrální databázi neuložil.');
+ }
+ const v=avatarList();v[pid]=choice;localStorage.setItem(AVATARS,JSON.stringify(v));
+ window.dispatchEvent(new CustomEvent('sd878-avatar-change',{detail:{profileId:pid,avatar:choice}}));
+}
+function avatarPicker(host,pid,p){
+ const panel=el(host,'details',undefined,'sd878-avatar-picker');
+ el(panel,'summary','Vybrat avatara dítěte');
+ const options=el(panel,'div',undefined,'sd878-avatar-grid');
+ const allowed=/^martin$/i.test(String(p.name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,''))?42:40;
+ for(let i=1;i<=allowed;i++){
+  const b=el(options,'button',undefined,'sd878-avatar-option');b.type='button';b.setAttribute('aria-label','Avatar '+i);
+  const img=el(b,'img');img.src=avatarSrc(i);img.alt='Avatar '+i;img.loading='lazy';
+  if(avatarList()[pid]===i)b.setAttribute('aria-pressed','true');
+  b.onclick=async()=>{b.disabled=true;try{await saveAvatar(pid,i);feedback('Avatar uložený. Na dalších zařízeních se objeví po synchronizaci.');show()}catch(e){feedback(e.message||String(e));b.disabled=false}};
+ }
+}
+
 const el=(h,t,x,c)=>{const n=document.createElement(t);if(x!==undefined)n.textContent=x;if(c)n.className=c;h.append(n);return n};
 const btn=(h,x,f,c)=>{const n=el(h,'button',x,'sd878-btn '+(c||''));n.type='button';n.onclick=f;return n};
 const field=(h,x,v='')=>{const l=el(h,'label',x,'sd878-field');const i=el(l,'input');i.value=v;return i};
@@ -24,7 +51,7 @@ function show(){
  for(const [id,p] of kids){
   const card=el(grid,'article',undefined,'sd878-person-card');
   const heading=el(card,'div',undefined,'sd878-person-heading');
-  const img=el(heading,'img');img.src='./assets/avatari/avatar-1-1.webp';img.alt='';img.className='sd878-person-avatar';
+  const img=el(heading,'img');img.src=avatarSrc(avatarList()[id]||1);img.alt='';img.className='sd878-person-avatar';
   el(heading,'strong',p.name);
   const v=window.SDGradeSchools871?.vocational?.(id);
   const schools=(data.assignments?.[id]||[]).map(sid=>data.schools.find(s=>s.id===sid)).filter(Boolean);
@@ -68,6 +95,7 @@ function show(){
     feedback('Výchozí škola byla nastavena.');
    },'sd878-primary');
   }
+  avatarPicker(config,id,p);
   btn(config,'Obnovit / změnit PIN',()=>legacyPin(id),'sd878-primary');
   el(config,'p','PIN se mění na tomto zařízení. Spárované zařízení používá schválený přístup přes cloud.','sd878-description');
   btn(config,'Přejmenovat profil',()=>{
