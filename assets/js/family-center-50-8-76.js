@@ -9,8 +9,9 @@ const childRPC=(name,data={})=>cloud().requestCloud('/rest/v1/rpc/'+name,{method
 const local=k=>{try{return localStorage.getItem(k)}catch{return null}};
 const localSet=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
 const localDel=k=>{try{localStorage.removeItem(k)}catch{}};
-const titles={profiles:'Profily dětí',devices:'Zařízení a žádosti',visibility:'Viditelnost profilů',schools:'Školy a učivo',results:'Výsledky dětí',settings:'Nastavení'};
-const icons={profiles:'👨‍👧‍👦',devices:'📱',visibility:'👁',schools:'🏫',results:'📊',settings:'⚙'};
+const titles={testing:'Testovací rozhraní',profiles:'Profily dětí',schools:'Školy a učivo',map:'Mapa postupu',devices:'Zařízení a párování',settings:'Nastavení',visibility:'Viditelnost profilů',results:'Výsledky dětí'};
+const mainViews=['testing','profiles','schools','map','devices','settings'];
+const icons={testing:'🧪',profiles:'👨‍👧‍👦',schools:'🏫',map:'🗺️',devices:'📱',settings:'⚙️',visibility:'👁',results:'📊'};
 let center=null,active='',data={accounts:[],profiles:[],access:[],pending:[],syncDevices:[]};
 let parentBusy=false,pendingSecret='',inviteToken='',childBusy=false;
 let landingScheduled=false;
@@ -78,17 +79,22 @@ function shell(){
  const badge=add(center,'button','sd876-pending');
  badge.id='sd876PendingCount';badge.type='button';badge.hidden=true;
  const menu=add(center,'div','sd876-menu');menu.id='sd876Menu';
- for(const id of Object.keys(titles)){
-  const b=make('button','sd876-tile');b.type='button';b.dataset.view=id;
+ for(const id of mainViews){
+  const b=make('button','sd876-tile sd878-tile sd878-tile-'+id);b.type='button';b.dataset.view=id;
   add(b,'span','sd876-tile-icon',icons[id]);
+  const art=document.createElement('img');art.className='sd878-tile-art';art.alt='';art.loading='lazy';
+  art.src='./assets/ikony/cards-clean-50-8-50/'+({testing:'test',profiles:'moje-vysledky',schools:'kapitoly-podle-ucebnice',map:'mapa-dobrodruzstvi',devices:'nastaveni',settings:'nastaveni'}[id]||'nastaveni')+'.webp';
+  b.prepend(art);
   add(b,'strong','sd876-tile-title',titles[id]);
   add(b,'small','sd876-tile-info',{
-   profiles:'Jména, PINy a správa',
-   devices:'Připojení a schválení',
-   visibility:'Kdo může který profil',
-   schools:'Ročníky a měsíční plány',
-   results:'Pokrok, XP, testy',
-   settings:'Cloud, zabezpečení'
+   testing:'Obsah očima dětí, bez změny XP',
+   profiles:'Školy, ročníky, PINy',
+   schools:'Předměty, slovíčka, testy',
+   map:'Dobrodružná cesta a pokrok',
+   devices:'Žádosti, viditelnost, typy',
+   settings:'Cloud, avataři, prostředí',
+   visibility:'Oprávnění zařízení',
+   results:'XP, testy a výsledky'
   }[id]);
   if(id==='devices'){const dot=add(b,'span','sd876-count');dot.id='sd876PendingDot';dot.hidden=true}
   b.addEventListener('click',()=>openView(id));menu.append(b);
@@ -135,15 +141,21 @@ function shell(){
  const school=pane('schools');
  const redundant=school?.querySelectorAll('.sd874-school-button')||[];
  for(let i=1;i<redundant.length;i++)redundant[i].remove();
- const msg=add(pane('settings'),'p','sd876-hint','Vzhled tlačítek a prostředí upravíš přes tlačítko Prostředí na hlavní stránce.');
+ const msg=add(pane('settings'),'p','sd876-hint','Zde upravíš prostředí, avatary, rodičovský PIN a zabezpečení.');
  const results=pane('results');
  const stats=make('section','sd876-results');stats.id='sd876Results';results.prepend(stats);
  renderResults();
+ const testing=pane('testing');add(testing,'div','sd878-test-portal').id='sd878Testing';
+ const map=pane('map');add(map,'div','sd878-progress-map').id='sd878Map';
+ const profilesHost=pane('profiles');const detailed=make('div','sd878-child-management');detailed.id='sd878Profiles';profilesHost.prepend(detailed);
+ const schoolHost=pane('schools');const catalog=make('div','sd878-school-management');catalog.id='sd878Schools';schoolHost.prepend(catalog);
  const dev=pane('devices');
  sectionTop(dev,'Zařízení může požádat o připojení bez opisování dlouhého kódu. Schválení provádí pouze rodič.');
  add(dev,'div','sd876-device-tools').id='sd876DeviceTools';
  add(dev,'div','sd876-request-list').id='sd876Requests';
  add(dev,'div','sd876-devices-list').id='sd876Devices';
+ const toVisibility=ctl('Nastavit viditelnost profilů na zařízeních',()=>openView('visibility'),'sd876-primary');
+ toVisibility.id='sd878OpenVisibility';dev.append(toVisibility);
  const vis=pane('visibility');
  sectionTop(vis,'U každého spárovaného zařízení nastav, které dětské profily smí zobrazit. Hlavní profil zařízení zůstává povolený.');
  add(vis,'div','sd876-matrix').id='sd876Visibility';
@@ -191,6 +203,7 @@ async function openView(view){
   else await refreshData(view,true);
  }
  if(view==='results')renderResults();
+ if(view==='testing'||view==='profiles'||view==='schools'||view==='map'||view==='settings')window.SDParent878?.show?.(view);
  updateCloud();
  const layer=document.getElementById('authAdmin');
  if(layer)layer.scrollTop=0;
