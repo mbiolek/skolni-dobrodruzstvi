@@ -100,7 +100,7 @@ function ownProfileFromRow(row,progress){const old=progress?.find(x=>x.activity_
 }
 async function fetchProfiles(){
  if(!family)return [];
- return await net('/rest/v1/sd_profiles?family_id=eq.'+family.id+'&select=id,family_id,legacy_id,display_name,deleted_at,updated_at&order=created_at.asc',{},true);
+ return await net('/rest/v1/sd_profiles?family_id=eq.'+family.id+'&select=id,family_id,legacy_id,display_name,avatar,deleted_at,updated_at&order=created_at.asc',{},true);
 }
 async function fetchProgress(profileId){return await net('/rest/v1/sd_progress?profile_id=eq.'+profileId+'&select=activity_key,data,revision,updated_at',{},true)}
 function backupIfChange(){backupLocal()}
@@ -110,8 +110,11 @@ function saveMeta(){localStorage.setItem('sd866_sync_baseline',JSON.stringify(ba
 function mirror(rows,allProgress,replace=true){
  if(!replace)return;
  backupIfChange();const current=json(PROFILES,{}),next={};
+ const storedAvatars=json('skolni-dobrodruzstvi-v37-avatar',{});let avatarChanged=false;
  for(const row of rows){if(row.deleted_at){removePin(row.legacy_id);continue}
   const logs=allProgress[row.id]||[],data=ownProfileFromRow(row,logs),legacy=row.legacy_id;
+  const avatarId=Number(row.avatar?.id);
+  if(Number.isInteger(avatarId)&&avatarId>=1&&avatarId<=42&&storedAvatars[legacy]!==avatarId){storedAvatars[legacy]=avatarId;avatarChanged=true}
   const currentObj=current[legacy];
   // Preserve unsaved local exercises; never silently overwrite conflicting work.
   const previous=baseline[legacy];
@@ -131,6 +134,7 @@ function mirror(rows,allProgress,replace=true){
     }
   }}
  }
+ if(avatarChanged)localStorage.setItem('skolni-dobrodruzstvi-v37-avatar',JSON.stringify(storedAvatars));
  localStorage.setItem(PROFILES,JSON.stringify(next));
  const active=localStorage.getItem('matematika-karticky-progress-v3-active');
  if(active&&!next[active])localStorage.removeItem('matematika-karticky-progress-v3-active');
@@ -277,7 +281,7 @@ async function verifyChildNow(){
  }
  const account=accounts[0];
  // Dotaz vrací jen profily povolené pravidly RLS konkrétnímu dětskému JWT.
- const permitted=await net('/rest/v1/sd_profiles?family_id=eq.'+encodeURIComponent(account.family_id)+'&deleted_at=is.null&select=id,legacy_id,display_name,deleted_at',{},true);
+ const permitted=await net('/rest/v1/sd_profiles?family_id=eq.'+encodeURIComponent(account.family_id)+'&deleted_at=is.null&select=id,legacy_id,display_name,avatar,deleted_at',{},true);
  const primary=permitted.find(p=>p.id===account.profile_id);
  if(!primary){revokeLocalChild();status('Hlavní profil byl odstraněn nebo zařízení ztratilo oprávnění.',true);return}
  const logs={};const local=json(PROFILES,{});
