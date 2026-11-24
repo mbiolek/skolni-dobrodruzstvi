@@ -84,7 +84,7 @@ function shell(){
   const b=make('button','sd876-tile sd878-tile sd878-tile-'+id);b.type='button';b.dataset.view=id;
   add(b,'span','sd876-tile-icon',icons[id]);
   const art=document.createElement('img');art.className='sd878-tile-art';art.alt='';art.loading='lazy';
-  art.src='./assets/ikony/cards-clean-50-8-50/'+({testing:'test',profiles:'moje-vysledky',schools:'kapitoly-podle-ucebnice',map:'mapa-dobrodruzstvi',devices:'nastaveni',settings:'nastaveni'}[id]||'nastaveni')+'.webp';
+  art.src=(id==='profiles'||id==='devices')?'./assets/ikony/parent-50-8-78/'+(id==='profiles'?'profiles.svg':'devices.svg'):'./assets/ikony/cards-clean-50-8-50/'+({testing:'test',schools:'kapitoly-podle-ucebnice',map:'mapa-dobrodruzstvi',settings:'nastaveni'}[id]||'nastaveni')+'.webp';
   b.prepend(art);
   add(b,'strong','sd876-tile-title',titles[id]);
   add(b,'small','sd876-tile-info',{
