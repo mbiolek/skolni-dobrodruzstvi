@@ -119,3 +119,12 @@ body.child-role #sd878ChildEntry{display:block;margin:14px auto;min-height:65px;
  #authAdmin #sd876Center .sd878-tile-art{width:36px;height:36px}
  #authAdmin #sd876Center .sd876-menu{gap:8px}
 }
+
+/* Nové žádosti přímo pod šesti hlavními kartami rodiče. */
+#authAdmin #sd876Center .sd878-quick-requests{margin:16px 0;border:2px solid #d0a65f;background:#fff4d6;color:#3b331e;border-radius:17px;padding:14px;box-shadow:0 5px 12px #1d2b3b3a}
+#authAdmin #sd876Center .sd878-quick-requests[hidden]{display:none!important}
+#authAdmin #sd876Center .sd878-pending-title{color:#694c26!important;font-size:19px!important;margin:2px 0 11px!important}
+#authAdmin #sd876Center .sd878-quick-request{display:flex;flex-direction:column;gap:7px;border:1px solid #d4bc8d;border-radius:13px;background:#fff9ed;padding:12px;margin:10px 0}
+#authAdmin #sd876Center .sd878-quick-request strong{color:#42331e!important;font-size:16px}
+#authAdmin #sd876Center .sd878-quick-request small{font-size:13px;color:#5a563e!important}
+#authAdmin #sd876Center .sd878-quick-request select{width:100%;max-width:400px;min-height:43px;border-radius:10px;padding:10px;border:1px solid #aa9977;background:#fff;color:#483821}
