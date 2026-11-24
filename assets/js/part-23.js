@@ -16,6 +16,8 @@ const hub=$('subjectHub'),adv=$('advSubjectMenu'),auth=$('authGate');
 let subject='math', applying=false, syncing=false, rebasing=false, lastRoute='';
 const authenticated=()=>!auth||auth.classList.contains('off');
 function state(skipDialogs=false){
+ if(!skipDialogs&&document.body.classList.contains('parent-role')&&document.body.classList.contains('sd54-admin-open')&&$('sd876Center'))
+  return 'parentCenter:'+($('sd876Center').dataset.view||'root');
  if(!skipDialogs&&document.body.classList.contains('sd54-admin-open'))return 'parentAdmin';
  if(isVisible('sd826Map')&&$('sd826Map').classList.contains('visible'))return 'progressMap';
  if(!skipDialogs&&isVisible('sd55-modal'))return 'merlinHelp';
@@ -46,6 +48,7 @@ const subjectFor=(route)=>{
 function describe(){
  const route=state();
  if(route==='homeScreen')return {route,subject:'',depth:0};
+ if(route.startsWith('parentCenter:'))return {route,subject:'',depth:route==='parentCenter:root'?0:1};
  if(route==='parentAdmin'||route==='progressMap')return {route,subject:'',depth:1};
  if(route==='subjectMenu('+subject+')'||route.startsWith('subjectMenu(')||route==='czechMenu'||route==='vlastScreen')return {route,subject:subjectFor(route),depth:1};
  if(route.startsWith('englishUnit:'))return {route,subject:'english',depth:route.endsWith(':lesson')?3:2};
@@ -132,7 +135,11 @@ function backOne(source='button'){
  if(!authenticated()){record('back',source+' | authentication');return 'handled'}
  applying=true;
  try{
- if(route==='parentAdmin')document.body.classList.remove('sd54-admin-open');
+ if(route.startsWith('parentCenter:')){
+  if(route==='parentCenter:root')return 'home';
+  window.SDFamilyCenter877?.restore?.('');
+ }
+ else if(route==='parentAdmin')document.body.classList.remove('sd54-admin-open');
  else if(route==='progressMap')window.SDHomeMap50826?.close?.();
  else if(route==='merlinHelp')window.SDMerlin56?.close?.();
  else if(route.startsWith('englishUnit:'))window.SDEnglishUnit499?.back?.();
@@ -229,7 +236,25 @@ window.addEventListener('popstate',e=>{
   subject=wanted.subject||subject;
   // Browser already moved back exactly one entry. Reconstruct only that entry:
   // Never call history.back() again from a swipe handler.
-  if(wanted.depth===0){document.body.classList.remove('sd54-admin-open');closeDialogs();showHome()}
+  if(wanted.route?.startsWith('parentCenter:')){
+    if(previous.route.startsWith('schoolPlans:'))window.SDSchoolPlans52?.close?.();
+    if(previous.route.startsWith('curriculum:'))window.SDCurriculum501?.close?.();
+    showHome();
+    window.SDFamilyCenter877?.restore?.(wanted.route.slice('parentCenter:'.length)==='root'?'':wanted.route.slice('parentCenter:'.length));
+  }
+  else if(wanted.route==='homeScreen'&&document.body.classList.contains('parent-role')&&previous.route.startsWith('parentCenter:')){
+    // Navigace gestem z podsekce nikdy nesmí přeskočit rodičovský rozcestník.
+    if(previous.route!=='parentCenter:root'){
+      showHome();window.SDFamilyCenter877?.restore?.('');
+      pushEntry({route:'parentCenter:root',subject:'',depth:0},'root');
+    }else if(confirm('Chceš změnit přihlášený profil?')){
+      $('authExit')?.click();
+    }else{
+      showHome();window.SDFamilyCenter877?.restore?.('');
+      pushEntry({route:'parentCenter:root',subject:'',depth:0},'root');
+    }
+  }
+  else if(wanted.depth===0){document.body.classList.remove('sd54-admin-open');closeDialogs();showHome()}
   else if(wanted.route==='englishUnit:topics'){
     // Gesto z lekce vrací JEN na výběr témat, nikoli na domovskou stránku.
     window.SDEnglishUnit499?.topics?.();
@@ -244,7 +269,7 @@ window.addEventListener('popstate',e=>{
     $('sdBack')?.click();
   } else if(wanted.route.startsWith('schoolPlans:') && wanted.route.endsWith(':subject')){
     showSubject(subject);
-  } else if(wanted.route==='parentAdmin'){window.SDSchoolPlans52?.close?.();showHome();document.body.classList.add('sd54-admin-open')
+  } else if(wanted.route==='parentAdmin'){window.SDSchoolPlans52?.close?.();showHome();window.SDFamilyCenter877?.restore?.('')
   } else if(wanted.route==='mathTopics'){
     showSubject('math');window.SDMathTopics496?.open?.($('v496TopicPanel')?.dataset.mode||'teach');
   } else if(wanted.depth===1){showSubject(subject)}
