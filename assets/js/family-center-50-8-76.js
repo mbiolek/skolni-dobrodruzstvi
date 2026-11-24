@@ -58,7 +58,7 @@ async function getData(){
 }
 function updateBadge(){
  const n=data.pending.length,count=$('sd876PendingCount');
- if(count){count.textContent=n?String(n)+' žádostí čeká na schválení':'Žádné čekající žádosti';count.hidden=!parentReady()}
+ if(count){count.textContent=n?String(n)+' žádostí čeká na schválení':'Žádné čekající žádosti';count.hidden=!parentReady()||n===0}
  const dot=$('sd876PendingDot');if(dot){dot.hidden=!n;dot.textContent=n}
 }
 function shell(){
@@ -79,7 +79,7 @@ function shell(){
   add(b,'span','sd876-tile-icon',icons[id]);
   add(b,'strong','sd876-tile-title',titles[id]);
   add(b,'small','sd876-tile-info',{
-   profiles:'Děti, PINy, avatary',
+   profiles:'Jména, PINy a správa',
    devices:'Připojení a schválení',
    visibility:'Kdo může který profil',
    schools:'Ročníky a měsíční plány',
