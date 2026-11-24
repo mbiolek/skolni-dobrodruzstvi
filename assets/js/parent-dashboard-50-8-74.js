@@ -149,6 +149,8 @@ function initPairing(){
  $('sd866Pair')?.addEventListener('click',()=>{if(pairRequest){sessionStorage.removeItem('sd874-pair-request');pairRequest=''}});
 }
 function boot(){
+ const cloudHeading=$('sd866Cloud')?.querySelector('h3');
+ if(cloudHeading)cloudHeading.textContent='☁️ Rodinný cloud a synchronizace';
  tabs();addDevices();initPairing();
  window.addEventListener('school-account',()=>setTimeout(()=>{initPairing();if(mode()==='parent'){if(pairRequest&&document.body.classList.contains('parent-role'))switchTab('devices');refreshDevices(true)}},200));
  window.addEventListener('pageshow',()=>refreshDevices());
