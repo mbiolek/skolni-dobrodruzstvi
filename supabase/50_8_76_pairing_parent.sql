@@ -55,12 +55,12 @@ begin
   insert into public.sd_876_attempts(actor_id) values(v_parent);
   select count(*) into v_attempts from public.sd_876_attempts
   where actor_id=v_parent and attempted_at>now()-interval '15 minutes';
-  if v_attempts>5 then raise exception 'Překročen limit pokusů. Použij párovací odkaz nebo QR kód.';end if;
+  if v_attempts>5 then return false;end if;
   select * into v_row from public.sd_876_requests where short_code=p_code for update;
  end if;
- if not found or v_row.id is null then raise exception 'Žádost neexistuje';end if;
- if v_row.family_id is not null and v_row.family_id<>v_family then raise exception 'Žádost patří jiné rodině';end if;
- if v_row.expires_at<=now() or v_row.approved_at is not null or v_row.rejected_at is not null then raise exception 'Žádost vypršela nebo již byla vyřízena';end if;
+ if not found or v_row.id is null then if p_code is not null then return false;end if;raise exception 'Žádost neexistuje';end if;
+ if v_row.family_id is not null and v_row.family_id<>v_family then if p_code is not null then return false;end if;raise exception 'Žádost patří jiné rodině';end if;
+ if v_row.expires_at<=now() or v_row.approved_at is not null or v_row.rejected_at is not null then if p_code is not null then return false;end if;raise exception 'Žádost vypršela nebo již byla vyřízena';end if;
  if exists(select 1 from public.sd_child_accounts where auth_user_id=v_row.auth_user_id) then raise exception 'Zařízení už je spárované';end if;
  if v_row.auth_user_id=v_parent then raise exception 'Rodičovský účet nelze spárovat jako dětský';end if;
  insert into public.sd_child_accounts(auth_user_id,family_id,profile_id,device_name)
