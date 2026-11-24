@@ -1,0 +1,42 @@
+/* Školní dobrodružství 50.8.77 – výchozí rodičovská obrazovka a dostupná diagnostika */
+body.parent-role #sd54-admin-open{display:none!important}
+body.parent-role.sd54-admin-open #sd54-admin-close{display:none!important}
+body.parent-role.sd54-admin-open #authAdmin.on{
+ padding-top:calc(env(safe-area-inset-top) + 14px)!important;
+ padding-bottom:calc(72px + env(safe-area-inset-bottom))!important;
+ overscroll-behavior:contain;
+}
+#authAdmin #sd876Center .sd876-head{flex-wrap:wrap;align-items:center;gap:12px}
+#authAdmin #sd876Center .sd876-head > div:first-child{flex:1 1 185px;min-width:0}
+#authAdmin #sd876Center .sd877-change-profile{min-height:42px!important;border-radius:13px!important;padding:9px 13px!important;font-size:13px!important;font-weight:800!important;border:1px solid #aac8de!important;background:#e9f3fd!important;color:#183c5c!important}
+#authAdmin #sd876Center #sd876Back{
+ display:flex!important;position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:50;
+ width:100%;justify-content:center;text-align:center;margin:5px 0 14px;
+ padding:12px 14px!important;min-height:48px!important;
+ background:#e5f3fc!important;color:#163d5e!important;
+ border:2px solid #8eb8d4!important;
+ box-shadow:0 3px 0 #517b99,0 7px 14px #142b4826!important;
+}
+#authAdmin #sd876Center #sd876Back[hidden]{display:none!important}
+#authAdmin #sd876Center .sd877-log-shortcut{
+ display:flex;flex-direction:column;align-items:stretch;gap:6px;
+ border:1px solid #a9c7da;background:#f3f9ff;padding:16px;
+ border-radius:18px;margin:12px 0 22px;
+ box-shadow:0 3px 10px #0c294019;color:#173c5a;
+}
+#authAdmin #sd876Center .sd877-log-shortcut[hidden]{display:none!important}
+#authAdmin #sd876Center .sd877-log-shortcut strong{font-size:17px;color:#173a57}
+#authAdmin #sd876Center .sd877-log-shortcut p{font-size:13px;line-height:1.4;margin:1px 0 7px;color:#335b77!important;opacity:1!important}
+#authAdmin #sd876Center #sd877ExportLog{width:100%;font-size:15px!important;min-height:48px}
+#authAdmin #sd876Center .sd877-log-settings{
+ background:#fff;border:1px solid #a9c6db;border-radius:13px;
+ padding:14px;margin:16px 0;color:#173850;
+}
+#authAdmin #sd876Center .sd877-log-settings h4{color:#173a57!important;margin:0 0 8px}
+#authAdmin #sd876Center .sd877-log-settings p{color:#335a74!important;opacity:1!important}
+@media(max-width:430px){
+ #authAdmin #sd876Center .sd876-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+ #authAdmin #sd876Center .sd876-head > div:first-child{grid-column:1/3}
+ #authAdmin #sd876Center .sd876-connection{grid-column:1;justify-self:start}
+ #authAdmin #sd876Center .sd877-change-profile{grid-column:2;justify-self:end}
+}
