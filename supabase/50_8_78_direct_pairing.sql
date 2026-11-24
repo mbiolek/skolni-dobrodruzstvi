@@ -44,6 +44,7 @@ begin
   'secret',v_result->>'secret',
   'expires_at',v_result->>'expires_at',
   'request_id',v_result->>'request_id',
+  'short_code',v_result->>'short_code',
   'status','pending'
  );
 end $fn$;
