@@ -13,6 +13,7 @@ const titles={profiles:'Profily dětí',devices:'Zařízení a žádosti',visibi
 const icons={profiles:'👨‍👧‍👦',devices:'📱',visibility:'👁',schools:'🏫',results:'📊',settings:'⚙'};
 let center=null,active='',data={accounts:[],profiles:[],access:[],pending:[],syncDevices:[]};
 let parentBusy=false,pendingSecret='',inviteToken='',childBusy=false;
+let landingScheduled=false;
 const notify=(text,error=false,id='sd876Notice')=>{const el=$(id);if(el){el.hidden=!text;el.textContent=String(text||'');el.classList.toggle('error',!!error)}};
 const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el};
 const add=(host,tag,cls,text)=>{const x=make(tag,cls,text);host.append(x);return x};
@@ -71,6 +72,9 @@ function shell(){
  add(heading,'p','','Všechny děti, zařízení a školy na jednom místě.');
  const cloudStatus=add(header,'span','sd876-connection','Cloud');
  cloudStatus.id='sd876CloudStatus';
+ const exitButton=ctl('Změnit profil',()=>document.getElementById('authExit')?.click(),'sd877-change-profile');
+ exitButton.id='sd877ChangeProfile';
+ header.append(exitButton);
  const badge=add(center,'button','sd876-pending');
  badge.id='sd876PendingCount';badge.type='button';badge.hidden=true;
  const menu=add(center,'div','sd876-menu');menu.id='sd876Menu';
@@ -89,11 +93,23 @@ function shell(){
   if(id==='devices'){const dot=add(b,'span','sd876-count');dot.id='sd876PendingDot';dot.hidden=true}
   b.addEventListener('click',()=>openView(id));menu.append(b);
  }
- const back=ctl('← Zpět do rodičovského centra',()=>openView(''),'sd876-back');
+ const back=ctl('← Zpět do rodičovského centra',returnToCenter,'sd876-back');
  back.id='sd876Back';back.hidden=true;center.append(back);
  const heading2=add(center,'h3','sd876-section-title');heading2.id='sd876Title';heading2.hidden=true;
  const note=add(center,'p','sd876-message');note.id='sd876Notice';note.setAttribute('role','status');note.setAttribute('aria-live','polite');note.hidden=true;
  const panes=add(center,'section','sd876-panes');panes.id='sd876Panes';
+ const diagShortcut=make('section','sd877-log-shortcut');
+ diagShortcut.id='sd877LogShortcut';
+ add(diagShortcut,'strong','','Diagnostika aplikace');
+ add(diagShortcut,'p','','Potřebuješ nahlásit chybu? Ulož diagnostický log jako textový soubor (TXT).');
+ const saveLog=ctl('Uložit diagnostický log (TXT)',()=>{
+  const exportButton=document.getElementById('diag456Export');
+  if(exportButton){exportButton.click();notify('Diagnostický log byl připraven ke stažení.','', 'sd876Notice')}
+  else notify('Export logu teď není dostupný.','true','sd876Notice');
+ },'sd876-primary');
+ saveLog.id='sd877ExportLog';
+ diagShortcut.append(saveLog);
+ menu.insertAdjacentElement('afterend',diagShortcut);
  for(const key of Object.keys(titles)){const pane=add(panes,'div','sd876-pane');pane.dataset.pane=key;pane.hidden=true}
  const previous=admin.querySelector('#sd874Dashboard');
  (previous||admin.querySelector('h2'))?.insertAdjacentElement(previous?'beforebegin':'afterend',center);
@@ -101,6 +117,11 @@ function shell(){
  move('#sd874TabProfiles',pane('profiles'));move('#sd874TabSchools',pane('schools'));
  const study=move('#sd874TabStudy',pane('results'));
  const tools=study?.querySelector('.sd875-tools');if(tools)move('.sd875-tools',pane('settings'));
+ const diagSettings=make('div','sd877-log-settings');
+ add(diagSettings,'h4','','Diagnostika aplikace');
+ add(diagSettings,'p','','Záznamy pro hledání chyb v navigaci, aktualizacích a synchronizaci.');
+ diagSettings.append(ctl('Uložit log jako TXT',()=>document.getElementById('diag456Export')?.click(),'sd876-primary'));
+ pane('settings').append(diagSettings);
  // Rodičovský PIN patří do Nastavení, ne mezi dětské profily.
  for(const detail of [...(pane('profiles')?.querySelectorAll('details.sd872-auth-details')||[])]){
   if(detail.querySelector('summary')?.textContent.includes('rodičovského PINu'))pane('settings').prepend(detail);
@@ -131,21 +152,48 @@ function shell(){
  openView('');
 }
 const pane=key=>center?.querySelector('[data-pane="'+key+'"]');
+function returnToCenter(){
+ const route=window.SDNavigation?.current?.()||'';
+ if(route.startsWith('parentCenter:')&&!route.endsWith(':root'))window.SDNavigation.back();
+ else openView('');
+}
+function restoreParentView(view=''){
+ if(!document.body.classList.contains('parent-role'))return;
+ document.body.classList.add('sd54-admin-open');
+ document.getElementById('authAdmin')?.classList.add('on');
+ openView(view||'');
+}
+function activateParentLanding(){
+ if(landingScheduled)return;
+ landingScheduled=true;
+ setTimeout(()=>{
+  landingScheduled=false;
+  if(!document.body.classList.contains('parent-role')||!document.getElementById('authGate')?.classList.contains('off'))return;
+  if(!document.getElementById('homeScreen')?.classList.contains('visible'))return;
+  if(document.body.classList.contains('sd52-open')||document.getElementById('sd52')?.hidden===false)return;
+  restoreParentView('');
+ },85);
+}
+window.SDFamilyCenter877={restore:restoreParentView,showHome:activateParentLanding,back:returnToCenter,active:()=>active};
 async function openView(view){
  if(!center)return;active=view||'';
+ center.dataset.view=active||'root';
  $('sd876Menu').hidden=!!view;$('sd876Back').hidden=!view;
  $('sd876Title').hidden=!view;
+ const logShortcut=$('sd877LogShortcut');if(logShortcut)logShortcut.hidden=!!view;
+ const exit=$('sd877ChangeProfile');if(exit)exit.hidden=!!view;
  if(view)$('sd876Title').textContent=titles[view];
  for(const key of Object.keys(titles))pane(key).hidden=key!==view;
  const notice=$('sd876Notice');notice.hidden=true;notice.textContent='';
  center.classList.toggle('sd876-detail-open',!!view);
  if(view==='devices'||view==='visibility'){
-  if(!parentReady()){showCloudPrompt(view==='devices'?'sd876DeviceTools':'sd876Visibility');return}
-  await refreshData(view,true);
+  if(!parentReady()){showCloudPrompt(view==='devices'?'sd876DeviceTools':'sd876Visibility')}
+  else await refreshData(view,true);
  }
  if(view==='results')renderResults();
  updateCloud();
- center.scrollIntoView({block:'start',behavior:'instant'});
+ const layer=document.getElementById('authAdmin');
+ if(layer)layer.scrollTop=0;
 }
 function showCloudPrompt(id){
  const dest=$(id);if(!dest)return;dest.replaceChildren();
@@ -462,11 +510,37 @@ async function pollChild(){
 function boot(){
  extractLink();
  shell();childUI();updateCloud();
+ activateParentLanding();
  pendingSecret=sessionStorage.getItem('sd876_parent_request')||'';
  if(pendingSecret&&parentReady())openView('devices');
  $('sd866Login')?.addEventListener('click',()=>setTimeout(()=>{updateCloud();if(parentReady()&&pendingSecret)openView('devices');else if(parentReady()&&active)refreshData(active,true);else if(parentReady())getData().catch(()=>{})},1800));
  window.addEventListener('school-account',()=>setTimeout(()=>{updateCloud();renderResults();if(parentReady()&&pendingSecret)openView('devices');else if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active,true);else if(parentReady())getData().catch(()=>{})},400));
  window.addEventListener('sd866-updated',renderResults);
+ window.addEventListener('school-resume-login',activateParentLanding);
+ window.addEventListener('pageshow',activateParentLanding);
+ // Starší moduly při návratu z výuky rodiči zavíraly panel. Obnovíme rodičovské centrum.
+ document.addEventListener('click',e=>{
+  if(e.target.closest('[data-home],#sd54-admin-open'))setTimeout(activateParentLanding,100);
+ },false);
+ // Staré tlačítko nesmí rodiče posílat na předměty namísto zpět do centra.
+ document.addEventListener('click',e=>{
+  if(!document.body.classList.contains('parent-role'))return;
+  const legacy=e.target.closest('#sd54-admin-close');
+  if(!legacy)return;
+  e.preventDefault();e.stopImmediatePropagation();
+  if(active)returnToCenter();
+  else document.getElementById('authExit')?.click();
+ },true);
+ // Po opuštění obrazovky škol zůstává rodičovské centrum výchozí stránkou.
+ const parentObserver=new MutationObserver(()=>{
+  if(!document.body.classList.contains('parent-role')||document.body.classList.contains('sd54-admin-open'))return;
+  setTimeout(()=>{
+   if(!document.body.classList.contains('parent-role')||document.body.classList.contains('sd54-admin-open'))return;
+   if(document.body.classList.contains('sd52-open'))return;
+   if(document.getElementById('homeScreen')?.classList.contains('visible'))activateParentLanding();
+  },120);
+ });
+ parentObserver.observe(document.body,{attributes:true,attributeFilter:['class']});
  window.addEventListener('online',()=>{pollChild();if(parentReady()&&active)refreshData(active,true)});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){pollChild();if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active,true)}});
  setInterval(()=>{pollChild();if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active)},11000);
