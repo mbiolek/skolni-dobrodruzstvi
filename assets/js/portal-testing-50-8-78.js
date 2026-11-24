@@ -19,10 +19,18 @@ function snapshot(pid){
  }
  return {version:1,profileId:pid,storage:rows};
 }
-function open(pid,name){
+async function open(pid,name){
  if(!document.body.classList.contains('parent-role'))return;
- let packet;try{packet=JSON.stringify(snapshot(pid))}catch(e){alert(e.message);return}
- if(packet.length>900000){alert('Testovací kopie je příliš velká.');return}
+ let packet;try{packet=snapshot(pid)}catch(e){alert(e.message);return}
+ const cloud=window.SDCloud866;
+ if(cloud?.isReady?.()){
+  try{
+   const lessons=await cloud.requestParent('/rest/v1/sd_878_curriculum?status=eq.published&select=*');
+   packet.storage.push(['sd878_catalog_snapshot',JSON.stringify(lessons)]);
+  }catch(err){console.warn('Testovací kopie: učivo není dostupné',err.message)}
+ }
+ const payload=JSON.stringify(packet);
+ if(payload.length>900000){alert('Testovací kopie je příliš velká.');return}
  document.getElementById('sd878PreviewWindow')?.remove();
  const overlay=el(document.body,'div',undefined,'sd878-preview-window');overlay.id='sd878PreviewWindow';
  const header=el(overlay,'header',undefined,'sd878-preview-bar');
@@ -31,7 +39,7 @@ function open(pid,name){
  btn(header,'Zavřít',()=>overlay.remove(),'sd878-danger');
  const frame=el(overlay,'iframe');frame.title='Testovací náhled '+name;
  frame.setAttribute('sandbox','allow-scripts allow-forms allow-downloads');
- frame.name=packet;
+ frame.name=payload;
  el(overlay,'p','Načítám izolovanou kopii aplikace…','sd878-preview-loading');
  fetch('./index.html',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Nelze načíst aplikaci');return r.text()}).then(html=>{
   frame.srcdoc=html;
