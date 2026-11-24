@@ -100,6 +100,10 @@ function shell(){
  move('#sd874TabProfiles',pane('profiles'));move('#sd874TabSchools',pane('schools'));
  const study=move('#sd874TabStudy',pane('results'));
  const tools=study?.querySelector('.sd875-tools');if(tools)move('.sd875-tools',pane('settings'));
+ // Rodičovský PIN patří do Nastavení, ne mezi dětské profily.
+ for(const detail of [...(pane('profiles')?.querySelectorAll('details.sd872-auth-details')||[])]){
+  if(detail.querySelector('summary')?.textContent.includes('rodičovského PINu'))pane('settings').prepend(detail);
+ }
  move('#sd866Cloud',pane('settings'));
  // Legacy controls preserved, but now live inside the dedicated sections.
  const cloudEl=$('sd866Cloud');
@@ -408,8 +412,8 @@ function boot(){
  shell();childUI();updateCloud();
  pendingSecret=sessionStorage.getItem('sd876_parent_request')||'';
  if(pendingSecret&&parentReady())openView('devices');
- $('sd866Login')?.addEventListener('click',()=>setTimeout(()=>{updateCloud();if(parentReady()&&pendingSecret)openView('devices');else if(parentReady())refreshData(active,true)},1800));
- window.addEventListener('school-account',()=>setTimeout(()=>{updateCloud();renderResults();if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active,true);if(parentReady()&&pendingSecret)openView('devices')},400));
+ $('sd866Login')?.addEventListener('click',()=>setTimeout(()=>{updateCloud();if(parentReady()&&pendingSecret)openView('devices');else if(parentReady()&&active)refreshData(active,true);else if(parentReady())getData().catch(()=>{})},1800));
+ window.addEventListener('school-account',()=>setTimeout(()=>{updateCloud();renderResults();if(parentReady()&&pendingSecret)openView('devices');else if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active,true);else if(parentReady())getData().catch(()=>{})},400));
  window.addEventListener('sd866-updated',renderResults);
  window.addEventListener('online',()=>{pollChild();if(parentReady()&&active)refreshData(active,true)});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){pollChild();if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active,true)}});
