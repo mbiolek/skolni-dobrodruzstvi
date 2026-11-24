@@ -12,7 +12,7 @@ const localDel=k=>{try{localStorage.removeItem(k)}catch{}};
 const titles={testing:'Testovací rozhraní',profiles:'Profily dětí',schools:'Školy a učivo',map:'Mapa postupu',devices:'Zařízení a párování',settings:'Nastavení',visibility:'Viditelnost profilů',results:'Výsledky dětí'};
 const mainViews=['testing','profiles','schools','map','devices','settings'];
 const icons={testing:'🧪',profiles:'👨‍👧‍👦',schools:'🏫',map:'🗺️',devices:'📱',settings:'⚙️',visibility:'👁',results:'📊'};
-let center=null,active='',data={accounts:[],profiles:[],access:[],pending:[],syncDevices:[]};
+let center=null,active='',data={accounts:[],profiles:[],access:[],pending:[],syncDevices:[],details:[]};
 let parentBusy=false,pendingSecret='',inviteToken='',childBusy=false;
 let landingScheduled=false;
 const notify=(text,error=false,id='sd876Notice')=>{const el=$(id);if(el){el.hidden=!text;el.textContent=String(text||'');el.classList.toggle('error',!!error)}};
@@ -48,14 +48,15 @@ async function getData(){
  const f=await REST('sd_families?select=id&limit=1');
  if(!f.length)throw Error('Rodina zatím není připojená.');
  const id=encodeURIComponent(f[0].id);
- const [accounts,profiles,access,pending,syncDevices]=await Promise.all([
+ const [accounts,profiles,access,pending,syncDevices,details]=await Promise.all([
   REST('sd_child_accounts?family_id=eq.'+id+'&select=auth_user_id,profile_id,device_name,created_at&order=created_at.asc'),
   REST('sd_profiles?family_id=eq.'+id+'&deleted_at=is.null&select=id,display_name&order=created_at.asc'),
   REST('sd_device_profile_access?family_id=eq.'+id+'&select=auth_user_id,profile_id'),
   RPC('sd_876_pending_requests'),
-  RPC('sd_876_parent_sync_devices')
+  RPC('sd_876_parent_sync_devices'),
+  RPC('sd_878_parent_devices').catch(()=>[])
  ]);
- data={accounts,profiles,access,pending:Array.isArray(pending)?pending:[],syncDevices:Array.isArray(syncDevices)?syncDevices:[]};
+ data={accounts,profiles,access,pending:Array.isArray(pending)?pending:[],syncDevices:Array.isArray(syncDevices)?syncDevices:[],details:Array.isArray(details)?details:[]};
  updateBadge();return data;
 }
 function updateBadge(){
@@ -323,11 +324,20 @@ function renderDevices(){
  if(!data.accounts.length)add(host,'p','sd876-empty','Dosud není spárované žádné zařízení.');
  data.accounts.forEach((a,i)=>{
   const card=add(host,'article','sd876-device');
-  const title=add(card,'div','sd876-device-title');add(title,'span','sd876-symbol','📱');
+  const d=data.details.find(x=>x.auth_user_id===a.auth_user_id);
+  const hint=window.SDDevice878?.parseAgent?.(d?.user_agent||'')||{};
+  const kind=d?.kind||hint.kind||'Neurčeno',platform=d?.platform||hint.platform||'Neznámý systém';
+  const browser=d?.browser||hint.browser||'Prohlížeč neurčen';
+  const model=d?.model||hint.model||'Přesný model není dostupný';
+  const title=add(card,'div','sd876-device-title');add(title,'span','sd876-symbol',/počítač|Windows|macOS/i.test(kind+' '+platform)?'💻':/tablet|iPad/i.test(kind+' '+platform)?'📱':'📱');
   const label=add(title,'div','');
   add(label,'strong','',a.device_name||'Zařízení '+(i+1));
   const profile=data.profiles.find(p=>p.id===a.profile_id);
   add(label,'small','','Hlavní profil: '+(profile?.display_name||'neurčen'));
+  add(card,'p','sd878-device-spec','Typ: '+kind+' · Systém: '+platform+' · Prohlížeč: '+browser);
+  add(card,'p','sd878-device-spec','Model: '+model);
+  if(d?.last_seen_at)add(card,'small','sd878-last-seen','Poslední známé spojení: '+new Date(d.last_seen_at).toLocaleString('cs-CZ'));
+  if(hint.uncertain&&!d?.kind)add(card,'small','sd878-uncertain','Typ není jednoznačně rozpoznaný. Může jít o tablet nebo prohlížeč v režimu PC.');
   const row=add(card,'div','sd876-action-row');
   row.append(ctl('Přejmenovat',()=>renameDevice(a),'sd876-secondary'));
   row.append(ctl('Odpojit',()=>disconnectDevice(a),'sd876-warning'));
