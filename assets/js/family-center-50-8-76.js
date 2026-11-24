@@ -427,21 +427,27 @@ function updateCloud(){
 function childUI(){
  const gate=$('authGate')?.querySelector('.authbox');if(!gate||$('sd876ChildPair'))return;
  const root=make('section','sd876-childpair');root.id='sd876ChildPair';gate.append(root);
- root.append(ctl('Požádat o připojení k rodině',()=>{const p=$('sd876ChildForm');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({block:'nearest'})},'sd876-primary'));
+ root.append(ctl('Požádat rodiče o připojení',()=>{const p=$('sd876ChildForm');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({block:'nearest'})},'sd876-primary'));
  const form=add(root,'div','sd876-child-form');form.id='sd876ChildForm';form.hidden=true;
- add(form,'p','','Připoj své zařízení bez opisování dlouhého kódu. Rodič žádost schválí.');
+ add(form,'p','','Zadej e-mail, kterým se rodič přihlašuje ke cloudu. Žádost se mu zobrazí přímo v rodičovské správě. Bez QR a opisování kódů.');
  const label=add(form,'label','sd876-field','Název zařízení');
  const input=add(label,'input','sd876-input');input.id='sd876ChildName';input.maxLength=60;input.placeholder='Například Martinův iPhone';
  input.value=/iPhone|iPad/i.test(navigator.userAgent)?'iPhone':/Android/i.test(navigator.userAgent)?'Telefon Android':'Nové zařízení';
+ const emailLabel=add(form,'label','sd876-field','E-mail rodiče');
+ const parentEmail=add(emailLabel,'input','sd876-input');
+ parentEmail.id='sd878ParentEmail';parentEmail.type='email';parentEmail.autocomplete='email';parentEmail.inputMode='email';
+ parentEmail.placeholder='rodic@priklad.cz';parentEmail.value=local('sd878_last_parent_email')||'';
  const buttons=add(form,'div','sd876-action-row');
- buttons.append(ctl('Odeslat žádost',startRequest,'sd876-primary'));
+ buttons.append(ctl('Odeslat žádost rodiči',startRequest,'sd876-primary'));
  const response=add(form,'div','sd876-child-response');response.id='sd876ChildResponse';response.hidden=true;
  add(response,'p','sd876-child-state','').id='sd876ChildState';
- const short=add(response,'strong','sd876-shortcode','');short.id='sd876ShortCode';
- add(response,'p','sd876-hint','Šestimístný kód je jen záložní možnost. Odkaz má přednost.');
- response.append(ctl('Poslat žádost rodiči',shareRequest,'sd876-primary'));
- response.append(ctl('Zobrazit QR pro rodiče',showChildQR,'sd876-secondary'));
- const qr=add(response,'div','sd876-qr-panel');qr.id='sd876ChildQR';qr.hidden=true;
+ const fallback=add(response,'details','sd878-pair-fallback');
+ add(fallback,'summary','','Záložní párování (odkaz, QR nebo kód)');
+ const short=add(fallback,'strong','sd876-shortcode','');short.id='sd876ShortCode';
+ add(fallback,'p','sd876-hint','Tyto možnosti použij pouze když se přímá žádost rodiči nezobrazí.');
+ fallback.append(ctl('Poslat odkaz rodiči',shareRequest,'sd876-secondary'));
+ fallback.append(ctl('Zobrazit QR pro rodiče',showChildQR,'sd876-secondary'));
+ const qr=add(fallback,'div','sd876-qr-panel');qr.id='sd876ChildQR';qr.hidden=true;
  const waiting=add(form,'p','sd876-child-message','');waiting.id='sd876ChildMessage';waiting.setAttribute('role','status');
  const invite=sessionStorage.getItem('sd876_child_invite');
  const pending=local('sd876_pending_secret');
@@ -454,12 +460,17 @@ async function startRequest(){
  try{
   await cloud().ensureChildIdentity();
   const invite=sessionStorage.getItem('sd876_child_invite')||null;
-  const res=await childRPC('sd_876_begin_request',{p_device_name:$('sd876ChildName').value.trim(),p_invite:invite});
+  const parentEmail=$('sd878ParentEmail')?.value?.trim()||'';
+  if(!invite&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parentEmail))throw Error('Zadej e-mail rodiče.');
+  const res=invite
+   ?await childRPC('sd_876_begin_request',{p_device_name:$('sd876ChildName').value.trim(),p_invite:invite})
+   :await childRPC('sd_878_begin_direct_request',{p_device_name:$('sd876ChildName').value.trim(),p_parent_email:parentEmail});
   if(invite)sessionStorage.removeItem('sd876_child_invite');
+  else localSet('sd878_last_parent_email',parentEmail);
   localSet('sd876_pending_secret',res.secret);
   localSet('sd876_pending_code',res.short_code);
   localSet('sd876_pending_expires',res.expires_at);
-  showChildPending(res.secret,res.short_code,res.family_request);
+  showChildPending(res.secret,res.short_code,true);
  }catch(err){notify(err.message||String(err),true,'sd876ChildMessage')}
  finally{childBusy=false}
 }
@@ -467,13 +478,13 @@ function showChildPending(secret,code,associated){
  const box=$('sd876ChildResponse');if(!box)return;box.hidden=false;
  $('sd876ShortCode').textContent=code||'';
  $('sd876ChildState').textContent=associated
-  ?'Žádost odeslána. Čeká na schválení v rodičovské správě.'
+  ?'Žádost vytvořena. Pokud byl rodičovský e-mail správný, zobrazí se v rodičovské správě v části Žádosti o připojení.'
   :'Žádost je připravená. Pošli odkaz rodiči, aby ji mohl schválit.';
- notify('Připojení se automaticky ověří po schválení rodičem.',false,'sd876ChildMessage');
+ notify('Po schválení rodičem se toto zařízení připojí automaticky. Kódy nemusíš nikam opisovat.',false,'sd876ChildMessage');
 }
 function loadPendingChild(secret){
  const code=local('sd876_pending_code')||'';
- showChildPending(secret,code,false);
+ showChildPending(secret,code,true);
 }
 function showChildQR(){
  const secret=local('sd876_pending_secret'),panel=$('sd876ChildQR');
@@ -543,7 +554,14 @@ function boot(){
  parentObserver.observe(document.body,{attributes:true,attributeFilter:['class']});
  window.addEventListener('online',()=>{pollChild();if(parentReady()&&active)refreshData(active,true)});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){pollChild();if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active,true)}});
- setInterval(()=>{pollChild();if(parentReady()&&(active==='devices'||active==='visibility'))refreshData(active)},11000);
+ setInterval(()=>{
+  pollChild();
+  if(!parentReady()||document.hidden||!navigator.onLine)return;
+  if(active==='devices'||active==='visibility')refreshData(active);
+  else if(!active)RPC('sd_876_pending_requests').then(rows=>{
+   if(Array.isArray(rows)){data.pending=rows;updateBadge();}
+  }).catch(e=>console.warn('Nové žádosti o párování:',e.message));
+ },11000);
  pollChild();if(parentReady())getData().catch(()=>{});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,1150),{once:true});
