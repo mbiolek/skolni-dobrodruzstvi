@@ -26,7 +26,21 @@ function show(){
  }
  const cloud=host.parentElement?.querySelector('.sd876-cloud-details');
  if(cloud){const sum=cloud.querySelector('summary');if(sum)sum.textContent='Centrální databáze Supabase a synchronizace';}
- const info=el(host,'p','Rodičovský PIN můžeš změnit v části „Změnit rodičovský PIN“. Heslo cloudového účtu je od PINu oddělené.','sd878-description');
+ el(host,'p','Rodičovský PIN se mění v původní části „Změnit rodičovský PIN“. Heslo ke cloudovému účtu je od PINu oddělené.','sd878-description');
+ const change=el(host,'details',undefined,'sd878-theme-panel');
+ el(change,'summary','Změnit heslo rodinného cloudu');
+ el(change,'p','Heslo použiješ jen pro přihlášení rodiče k centrální databázi. Není to PIN dítěte.','sd878-description');
+ const a=el(change,'label','Nové cloudové heslo (min. 10 znaků)','sd878-field');
+ const pass=el(a,'input');pass.type='password';pass.autocomplete='new-password';pass.minLength=10;
+ const b=el(change,'label','Zopakovat nové heslo','sd878-field');
+ const again=el(b,'input');again.type='password';again.autocomplete='new-password';
+ const result=el(change,'p','','sd878-description');
+ btn(change,'Uložit nové cloudové heslo',async()=>{
+  if(pass.value.length<10){result.textContent='Zadej alespoň 10 znaků.';return}
+  if(pass.value!==again.value){result.textContent='Hesla se neshodují.';return}
+  try{await window.SDCloud866?.changeCloudPassword?.(pass.value);result.textContent='Cloudové heslo bylo změněno.';pass.value='';again.value='';}
+  catch(e){result.textContent='Heslo se nepodařilo změnit: '+e.message}
+ },'sd878-primary');
  const logs=el(host,'div',undefined,'sd878-ctl-row');
  btn(logs,'Uložit diagnostický log (TXT)',()=>document.getElementById('diag456Export')?.click(),'sd878-primary');
  const wallpaper=document.getElementById('sd876Wallpaper');
