@@ -1,0 +1,27 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.77
+24. listopadu 2026 — rodičovská úvodní obrazovka, Zpět a log
+
+OPRAVY PODLE UŽIVATELSKÝCH SNÍMKŮ:
+1. Po přihlášení do rodičovského profilu se automaticky otevře nové rodičovské centrum se šesti kartami. Původní domovská obrazovka s předměty není rodičovou výchozí stránkou.
+2. Hlavní centrum obsahuje přímé tlačítko „Změnit profil“, které otevře výběr profilů.
+3. V každé podsekci je stále viditelné tlačítko „← Zpět do rodičovského centra“. Staré „Zpět na předměty“ se v rodičovském centru nezobrazuje.
+4. Android gesto Zpět a tlačítko Zpět používají historii navigace aplikace: z podsekce se vracejí na šest hlavních karet, nikoli na obrazovku předmětů.
+5. Při návratu z původního učiva se rodiči znovu otevře rodičovské centrum.
+6. Na hlavní stránce rodičovského centra je nově viditelné „Uložit diagnostický log (TXT)“; stejné uložení je dostupné v Nastavení.
+7. Výsledný diagnostický log se stahuje jako textový soubor do zařízení. Původní logování neukládá PINy.
+
+TECHNICKÉ ZMĚNY:
+- assets/js/family-center-50-8-76.js: návrat, přihlášení rodiče, export logu, obnovení rodičovské domovské obrazovky.
+- assets/js/part-23.js: propojení výchozího rodičovského centra s historii navigace a gestem telefonu.
+- assets/css/parent-home-nav-50-8-77.css: vždy dostupné navigační tlačítko, vzhled exportu a skrytí zastaralé navigace.
+- assets/js/app-version.js, index.html, sw.js: číslo 50.8.77 a nová PWA cache.
+
+BEZPEČNOST:
+- Stávající profily, přiřazení, oprávnění, uložené výsledky a cloud zůstávají beze změn.
+- V této verzi se nemění SQL ani tabulky Supabase.
+- Neodinstalovávat aplikaci ani nemazat uložená data.
+
+OVĚŘENÍ:
+- Syntaktická kontrola JavaScriptu a dohledání všech souborů v GitHub větvi.
+- Kontrola správného načtení skriptů, stylů a PWA cache.
+- Chování při reálném přihlášení, Android gestu a exportu logu musí být potvrzeno na cílovém telefonu.
