@@ -10,8 +10,8 @@ const button=(host,text,cb,cls='')=>{const b=q(host,'button',text,'sd878-ctl '+c
 const msg=(host,text,bad=false)=>{const el=q(host,'p',text,bad?'sd878-error':'sd878-note');return el};
 const request=async(path,opts={})=>cloud().requestParent('/rest/v1/'+path,opts);
 const childRequest=async(path,opts={})=>cloud().requestCloud('/rest/v1/'+path,opts);
-let familyId=null;
-async function getFamily(){if(familyId)return familyId;if(!isParent())throw Error('Pro úpravu učiva nejprve přihlas rodičovský cloud v Nastavení.');const a=await request('sd_families?select=id&limit=1');if(!a[0])throw Error('Rodina není připojená');familyId=a[0].id;return familyId}
+let familyId=null,ownerId=null;
+async function getFamily(){if(familyId)return familyId;if(!isParent())throw Error('Pro úpravu učiva nejprve přihlas rodičovský cloud v Nastavení.');const a=await request('sd_families?select=id,owner_id&limit=1');if(!a[0])throw Error('Rodina není připojená');familyId=a[0].id;ownerId=a[0].owner_id;return familyId}
 function safeRows(str,kind){
  const lines=str.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
  if(kind==='vocabulary'){
@@ -113,8 +113,7 @@ function mountEditor(host,school,grade,subject){
    if(editId){result=await request('sd_878_curriculum?id=eq.'+editId+'&updated_at=eq.'+encodeURIComponent(editDate),{method:'PATCH',headers:{Prefer:'return=representation'},body:patch});if(!result.length)throw Error('Lekce byla upravena jinde. Načti ji znovu.')}
    else{
     const familyId=await getFamily();
-    const user=await cloud().requestParent('/auth/v1/user');
-    result=await request('sd_878_curriculum',{method:'POST',headers:{Prefer:'return=representation'},body:{...patch,family_id:familyId,school_id:school.id,grade,subject,created_by:user.id}});
+    result=await request('sd_878_curriculum',{method:'POST',headers:{Prefer:'return=representation'},body:{...patch,family_id:familyId,school_id:school.id,grade,subject,created_by:ownerId}});
    }
    editId=null;editDate=null;form.reset();help();await refresh();status.textContent='Návrh uložen. Před zveřejněním si jej prohlédni.';
   }catch(err){alert('Učivo se neuložilo: '+err.message)}
