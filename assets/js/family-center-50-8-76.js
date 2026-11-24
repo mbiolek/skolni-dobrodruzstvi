@@ -63,6 +63,27 @@ function updateBadge(){
  const n=data.pending.length,count=$('sd876PendingCount');
  if(count){count.textContent=n?String(n)+' žádostí čeká na schválení':'Žádné čekající žádosti';count.hidden=!parentReady()||n===0}
  const dot=$('sd876PendingDot');if(dot){dot.hidden=!n;dot.textContent=n}
+ renderHomeRequests();
+}
+function renderHomeRequests(){
+ const host=$('sd878QuickRequests');if(!host)return;
+ host.replaceChildren();host.hidden=!data.pending.length||!parentReady()||!!active;
+ if(host.hidden)return;
+ add(host,'h3','sd878-pending-title','Žádosti o připojení čekají na schválení');
+ for(const req of data.pending.slice(0,4)){
+  const card=add(host,'article','sd878-quick-request');
+  add(card,'strong','',req.device_name||'Nové zařízení');
+  const hint=window.SDDevice878?.parseAgent?.(req.user_agent||'')||{};
+  add(card,'small','',hint.kind&&hint.platform?'Typ: '+hint.kind+' · '+hint.platform:'Typ zařízení nebyl rozpoznán');
+  const select=profileChoice();card.append(select);
+  const row=add(card,'div','sd876-action-row');
+  row.append(ctl('Schválit',async()=>{
+   if(!select.value){notify('Vyber dítě, ke kterému se má zařízení připojit.',true);return}
+   await approve({p_request_id:req.id,p_profile_id:select.value});
+  },'sd876-primary'));
+  row.append(ctl('Zamítnout',()=>reject({p_request_id:req.id}),'sd876-secondary'));
+ }
+ if(data.pending.length>4)host.append(ctl('Zobrazit všechny žádosti',()=>openView('devices')));
 }
 function shell(){
  const admin=$('authAdmin');if(!admin||$('sd876Center'))return;
@@ -100,6 +121,7 @@ function shell(){
   if(id==='devices'){const dot=add(b,'span','sd876-count');dot.id='sd876PendingDot';dot.hidden=true}
   b.addEventListener('click',()=>openView(id));menu.append(b);
  }
+ const quick=add(center,'section','sd878-quick-requests');quick.id='sd878QuickRequests';quick.hidden=true;
  const back=ctl('← Zpět do rodičovského centra',returnToCenter,'sd876-back');
  back.id='sd876Back';back.hidden=true;center.append(back);
  const heading2=add(center,'h3','sd876-section-title');heading2.id='sd876Title';heading2.hidden=true;
@@ -194,6 +216,7 @@ async function openView(view){
  $('sd876Menu').hidden=!!view;$('sd876Back').hidden=!view;
  $('sd876Title').hidden=!view;
  const logShortcut=$('sd877LogShortcut');if(logShortcut)logShortcut.hidden=!!view;
+ const quick=$('sd878QuickRequests');if(quick)quick.hidden=!!view||!data.pending.length;
  const exit=$('sd877ChangeProfile');if(exit)exit.hidden=!!view;
  if(view)$('sd876Title').textContent=titles[view];
  for(const key of Object.keys(titles))pane(key).hidden=key!==view;
@@ -274,6 +297,8 @@ function renderPending(){
   const card=add(host,'article','sd876-request');
   add(card,'strong','',req.device_name||'Nové zařízení');
   add(card,'small','', 'Žádost do '+new Date(req.expires_at).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'}));
+  const parsed=window.SDDevice878?.parseAgent?.(req.user_agent||'');
+  if(parsed?.platform)add(card,'small','sd878-device-spec','Typ: '+parsed.kind+' · '+parsed.platform+' · '+parsed.browser);
   const select=profileChoice();card.append(select);
   const row=add(card,'div','sd876-action-row');
   row.append(ctl('Schválit',async()=>{if(!select.value){notify('Nejdřív vyber profil.',true);return}await approve({p_request_id:req.id,p_profile_id:select.value})},'sd876-primary'));
