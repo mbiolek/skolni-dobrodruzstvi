@@ -28,7 +28,7 @@ function show(){
    const subjects=school.vocational?{vocational:SUBJECTS.vocational}:{math:SUBJECTS.math,czech:SUBJECTS.czech,english:SUBJECTS.english,nature:SUBJECTS.nature,geography:SUBJECTS.geography};
    const grid=el(item,'div',undefined,'sd878-subject-grid');
    for(const [subject,[label,icon]] of Object.entries(subjects)){
-    const stored=Object.entries(db.plans||{}).filter(([k,topics])=>k.startsWith(school.id+'|')&&k.includes('|'+subject+'|')&&Array.isArray(topics));
+    const stored=Object.entries(db.plans||{}).filter(([k,topics])=>k.startsWith(school.id+'|')&&k.includes('|'+subject+'|')&&Array.isArray(topics)&&(k.includes('|r'+grade+'|')||(grade===5&&!/\|r\d+\|/.test(k))));
     const existing=stored.reduce((n,[,topics])=>n+topics.length,0);
     btn(grid,icon+' '+label+' · '+existing+' témat',()=>{
      const pane=document.getElementById('sd878SubjectEditor');pane.hidden=false;pane.replaceChildren();
