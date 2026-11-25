@@ -107,7 +107,21 @@ const obs=new MutationObserver(()=>{if(role==='parent'&&$('homeScreen').classLis
 // A backgrounded PWA may be reloaded by Android or the service worker. Reuse only
 // this tab's authenticated session; a fresh tab still requires the child's PIN.
 // Cold launch always requires PIN. A live same-tab session is valid only within the configured timeout.
-try{authRead();const live=sessionStorage.getItem(LIVE),at=Number(sessionStorage.getItem(STAMP)||0);const valid=id=>id&&(id==='parent'||Boolean(read()[id]))&&Boolean(config[id]);if(valid(live)&&at&&Date.now()-at<timeout())enter(live);else gate(true)}catch{gate(true)}
+try{
+ authRead();
+ if(window.__SD878Preview){
+  // Isolated parent's sandbox: child screen is displayed directly, without
+  // showing the login or pairing gate. The entire storage is in-memory only.
+  const previewId=window.__SD878PreviewProfile;
+  if(!previewId||!read()[previewId])throw Error('Testovací profil nelze načíst');
+  enter(previewId);
+  window.schoolDiagnostic?.('parent-preview','opened '+previewId);
+ }else{
+  const live=sessionStorage.getItem(LIVE),at=Number(sessionStorage.getItem(STAMP)||0);
+  const valid=id=>id&&(id==='parent'||Boolean(read()[id]))&&Boolean(config[id]);
+  if(valid(live)&&at&&Date.now()-at<timeout())enter(live);else gate(true);
+ }
+}catch(err){console.warn('Školní dobrodružství: náhled profilu',err);gate(true)}
 // Lock after background inactivity without destroying the last-page snapshot.
 document.addEventListener('visibilitychange',()=>{if(document.hidden){backgroundAt=Date.now();if(role)stamp()}else if(role){if(backgroundAt&&Date.now()-backgroundAt>=timeout())gate(true);else stamp();backgroundAt=0}});
 window.addEventListener('pageshow',()=>{if(role){const at=Number(sessionStorage.getItem(STAMP)||0);if(at&&Date.now()-at>=timeout())gate(true)}});

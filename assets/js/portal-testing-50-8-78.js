@@ -39,10 +39,17 @@ async function open(pid,name){
  btn(header,'Zavřít',()=>overlay.remove(),'sd878-danger');
  const frame=el(overlay,'iframe');frame.title='Testovací náhled '+name;
  frame.setAttribute('sandbox','allow-scripts allow-forms allow-downloads');
- frame.name=payload;
+ // srcdoc běží v sandboxu s vlastní neprůhlednou origin. Přenos přes
+ // window.name se na některých mobilech z bezpečnostních důvodů vymaže.
+ // Předáme kopii dat inline PŘED prvním externím skriptem, bez oprávnění
+ // ke cloudu a bez zápisu do skutečného localStorage rodiče.
+ frame.name='sd878-isolated-preview';
  el(overlay,'p','Načítám izolovanou kopii aplikace…','sd878-preview-loading');
  fetch('./index.html',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Nelze načíst aplikaci');return r.text()}).then(html=>{
-  frame.srcdoc=html;
+  const inlinePacket=payload.replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
+  const inject='<script>window.__SD878Packet='+inlinePacket+';<\\/script>'.replace('<\\/script>','</script>');
+  if(!/<head>/i.test(html))throw Error('Chybí hlavička aplikace pro testovací režim');
+  frame.srcdoc=html.replace(/<head>/i,'<head>'+inject);
   overlay.querySelector('.sd878-preview-loading')?.remove();
  }).catch(err=>{
   overlay.querySelector('.sd878-preview-loading').textContent='Testovací náhled se nepodařilo načíst: '+err.message;

@@ -478,6 +478,7 @@ function updateCloud(){
  status.classList.toggle('online',parentReady());
 }
 function childUI(){
+ if(window.__SD878Preview)return; // Rodičovský test nesmí nikdy vyžadovat párování dítěte.
  const gate=$('authGate')?.querySelector('.authbox');if(!gate||$('sd876ChildPair'))return;
  const root=make('section','sd876-childpair');root.id='sd876ChildPair';gate.append(root);
  root.append(ctl('Požádat rodiče o připojení',()=>{const p=$('sd876ChildForm');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({block:'nearest'})},'sd876-primary'));

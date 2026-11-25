@@ -1,12 +1,19 @@
 /* 50.8.78 – izolovaný rodičovský testovací náhled. Spouští se před ostatními skripty. */
 (()=>{'use strict';
 const params=new URLSearchParams(location.search);
-if(!params.has('sd878preview')&&!window.name?.includes('"version":1'))return;
-let packet=null;
-try{packet=JSON.parse(window.name||'null')}catch{}
+if(!window.__SD878Packet&&!params.has('sd878preview')&&!window.name?.includes('"version":1'))return;
+let packet=window.__SD878Packet||null;
+if(!packet){try{packet=JSON.parse(window.name||'null')}catch{}}
 window.name='';
 if(!packet||packet.version!==1||(params.has('sd878preview')&&packet.profileId!==params.get('sd878preview'))||!Array.isArray(packet.storage)){
  document.documentElement.dataset.sd878Preview='invalid';
+ addEventListener('DOMContentLoaded',()=>{
+  document.body.replaceChildren();
+  const error=document.createElement('main');
+  error.style.cssText='margin:25px auto;max-width:650px;padding:25px;background:#fff;color:#173a55;border-radius:14px;font:18px/1.5 system-ui';
+  error.textContent='Testovací profil se nepodařilo bezpečně načíst. Zavři testovací náhled a otevři jej znovu z rodičovského centra. Žádné párování není potřeba.';
+  document.body.append(error);
+ });
  return;
 }
 function storage(entries){
@@ -39,6 +46,7 @@ try{
  Object.defineProperty(window,'sessionStorage',{configurable:true,get:()=>session});
 }catch(e){document.documentElement.dataset.sd878Preview='invalid';return}
 window.__SD878Preview=true;
+window.__SD878PreviewProfile=active;
 document.documentElement.dataset.sd878Preview='on';
 const fetchOrig=window.fetch.bind(window);
 window.fetch=(resource,init)=>{
