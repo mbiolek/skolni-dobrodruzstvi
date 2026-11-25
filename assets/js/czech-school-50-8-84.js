@@ -125,11 +125,14 @@ function isOlomouc(){return window.SDOlomoucEntry844?.isOlomouc?.()===true}
 function addEntry(){
  const hub=$('sdCzechHub5074');if(!hub)return;
  const grid=hub.querySelector('.sd-czech-cards');if(!grid||$('sd884CzechEntry'))return;
- const b=button(grid,'Školní písemky – předpony s-, z-, vz-',()=>choose('lesson'),'sd884-entry');
+ const b=button(grid,'Olomouc – předpony s-, z-, vz-',()=>{
+  if(!isOlomouc()){alert('Toto učivo patří ke škole Olomouc. Na úvodní obrazovce nejprve vyber Olomouc, potom znovu otevři Češtinu.');return}
+  choose('lesson');
+ },'sd884-entry');
  b.id='sd884CzechEntry';
  const hint=el(b,'small','Výuka · Procvičování · Diktát · Test');
  hint.setAttribute('aria-hidden','true');
- const update=()=>{b.hidden=!isOlomouc()};
+ const update=()=>{hint.textContent=isOlomouc()?'Výuka · Procvičování · Diktát · Test':'Vyber školu Olomouc a potom otevři lekci'};
  update();
  window.addEventListener('school-account',update);
  document.addEventListener('sd827-school-change',update);
