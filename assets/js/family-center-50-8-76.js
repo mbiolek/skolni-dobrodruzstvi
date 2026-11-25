@@ -250,24 +250,29 @@ async function refreshData(view,force=false){
 function renderDeviceTools(){
  const target=$('sd876DeviceTools');if(!target)return;
  target.replaceChildren();
- const row=add(target,'div','sd876-action-row');
- row.append(ctl('Zobrazit QR kód pro dítě',createInvite,'sd876-primary'));
+ const guide=add(target,'section','sd879-pair-guide');
+ add(guide,'h4','','Připojení nového tabletu nebo telefonu');
+ add(guide,'p','','Na novém zařízení otevři Školní dobrodružství, klepni na „Požádat rodiče o připojení“, napiš e-mail rodiče používaný pro cloud a stiskni „Odeslat žádost rodiči“.');
+ add(guide,'p','','Žádost se zobrazí níže a můžeš ji schválit po výběru dítěte. Platí 15 minut a tento seznam se při otevřené aplikaci sám obnovuje.');
+ target.append(ctl('Aktualizovat čekající žádosti',()=>refreshData('devices',true),'sd876-primary sd879-refresh'));
+ const linkPanel=add(target,'div','sd876-link-review');linkPanel.id='sd876LinkReview';
+ const advanced=add(target,'details','sd879-pair-alternatives');
+ add(advanced,'summary','','Další možnosti: rodinný QR kód, odkaz nebo šestimístný kód');
+ const row=add(advanced,'div','sd876-action-row');
+ row.append(ctl('Zobrazit QR kód',createInvite,'sd876-secondary'));
  row.append(ctl('Sdílet rodinnou pozvánku',async()=>{
   if(!inviteToken)await createInvite();
   if(inviteToken)await share('Připojit zařízení – Školní dobrodružství',appURL('sd876invite',inviteToken));
  }));
- row.append(ctl('Aktualizovat žádosti',()=>refreshData('devices',true),'sd876-secondary'));
- const qr=add(target,'div','sd876-qr-panel');qr.id='sd876QR';qr.hidden=true;
- add(target,'p','sd876-hint','Dítě naskenuje QR kód nebo otevře pozvánku. Potom odešle žádost a ty ji schválíš níže.');
- const linkPanel=add(target,'div','sd876-link-review');linkPanel.id='sd876LinkReview';
- const codePanel=add(target,'details','sd876-fallback');
- add(codePanel,'summary','','Záložní možnost: šestimístný kód');
- add(codePanel,'p','','Když nejde poslat odkaz ani použít QR, dítě ti nadiktuje šest číslic.');
+ const qr=add(advanced,'div','sd876-qr-panel');qr.id='sd876QR';qr.hidden=true;
+ const codePanel=add(advanced,'details','sd876-fallback');
+ add(codePanel,'summary','','Ruční schválení šestimístným kódem');
+ add(codePanel,'p','','Využij pouze pokud nefunguje přímá žádost nebo sdílený odkaz.');
  const input=add(codePanel,'input','sd876-input');input.id='sd876Code';input.placeholder='123456';input.maxLength=6;input.inputMode='numeric';
  const select=profileChoice();select.id='sd876CodeProfile';codePanel.append(select);
  codePanel.append(ctl('Schválit kód',async()=>{
   const code=$('sd876Code').value.trim(),pid=$('sd876CodeProfile').value;
-  if(!/^[0-9]{6}$/.test(code)||!pid){notify('Vyber profil a zadej právě šest číslic.',true);return}
+  if(!/^[0-9]{6}$/.test(code)||!pid){notify('Vyber profil a zadej šest číslic.',true);return}
   await approve({p_code:code,p_profile_id:pid});
  },'sd876-primary'));
  reviewIncoming();
@@ -292,7 +297,7 @@ async function createInvite(){
 function renderPending(){
  const host=$('sd876Requests');if(!host)return;
  host.replaceChildren();add(host,'h4','','Žádosti čekající na schválení');
- if(!data.pending.length)add(host,'p','sd876-empty','Zatím tu není žádná čekající žádost.');
+ if(!data.pending.length)add(host,'p','sd876-empty','Žádná platná žádost nyní nečeká. Na tabletu klepni na „Požádat rodiče o připojení“, zadej e-mail rodičovského cloudu a potvrď „Odeslat žádost rodiči“. Žádost pak bude vidět zde po dobu 15 minut.');
  for(const req of data.pending){
   const card=add(host,'article','sd876-request');
   add(card,'strong','',req.device_name||'Nové zařízení');
@@ -528,7 +533,8 @@ function showChildPending(secret,code,associated){
  $('sd876ChildState').textContent=associated
   ?'Žádost vytvořena. Pokud byl rodičovský e-mail správný, zobrazí se v rodičovské správě v části Žádosti o připojení.'
   :'Žádost je připravená. Pošli odkaz rodiči, aby ji mohl schválit.';
- notify('Po schválení rodičem se toto zařízení připojí automaticky. Kódy nemusíš nikam opisovat.',false,'sd876ChildMessage');
+ const expiry=Date.parse(local('sd876_pending_expires')||'');
+ notify('Po schválení rodičem se zařízení připojí automaticky. Kód opisovat nemusíš.'+(Number.isFinite(expiry)?' Žádost platí do '+new Date(expiry).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'})+'.':''),false,'sd876ChildMessage');
 }
 function loadPendingChild(secret){
  const code=local('sd876_pending_code')||'';
