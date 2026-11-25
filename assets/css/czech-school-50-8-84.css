@@ -1,0 +1,55 @@
+/* Školní dobrodružství 50.8.84 – škola Olomouc, čeština: předpony */
+#sd884CzechLessons[hidden]{display:none!important}
+#sd884CzechLessons{
+ position:fixed;inset:0;z-index:2147481000;
+ overflow-y:auto;overscroll-behavior:contain;
+ background:linear-gradient(175deg,#0e1f40ed,#1c3157e8),var(--sd88-scene,#102340);
+ background-position:center;background-size:cover;
+ color:#1a3957; padding:calc(12px + env(safe-area-inset-top)) 12px calc(45px + env(safe-area-inset-bottom));
+}
+#sd884CzechLessons *{box-sizing:border-box}
+#sd884CzechLessons .sd884-shell{margin:0 auto;max-width:750px;border:3px solid #cdb47a;border-radius:22px;background:#f2f7fff7;box-shadow:0 12px 34px #061326b8;overflow:hidden}
+#sd884CzechLessons .sd884-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:#193c5c;color:#fff3ca;font-weight:800}
+#sd884CzechLessons .sd884-head strong{color:#fff3ca}
+#sd884CzechLessons .sd884-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:14px 16px;background:#e4f0f8}
+#sd884CzechLessons .sd884-content{padding:clamp(15px,4vw,26px);color:#183852}
+#sd884CzechLessons .sd884-content :is(h3,h4){color:#153853;text-shadow:none;margin:8px 0 15px;line-height:1.3}
+#sd884CzechLessons .sd884-content h3{font-size:clamp(23px,5vw,31px)}
+#sd884CzechLessons .sd884-content h4{font-size:clamp(19px,4vw,24px)}
+#sd884CzechLessons .sd884-content p{line-height:1.6;color:#2d4c65;font-size:16px}
+#sd884CzechLessons .sd884-small{font-size:13px!important;color:#4c6578!important}
+#sd884CzechLessons .sd884-btn{
+ min-height:44px;padding:10px 15px;border:2px solid #91b2ca;border-bottom:5px solid #688ca6;
+ border-radius:14px;background:linear-gradient(160deg,#fffaf0,#d7e7f7);color:#1c4360;
+ font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 3px 10px #0b2a3c2b;
+ white-space:normal;text-align:center;touch-action:manipulation;
+}
+#sd884CzechLessons .sd884-btn:disabled{opacity:.58;cursor:default}
+#sd884CzechLessons .sd884-btn.sd884-primary{background:linear-gradient(#347e9c,#195174);border-color:#7db6ca;color:#fff}
+#sd884CzechLessons .sd884-btn.sd884-back{background:#fcefd9;border-color:#d5bc8c;color:#614321;flex:none}
+#sd884CzechLessons .sd884-rule{margin:13px 0;padding:14px 17px;border:1px solid #c4d6e5;border-radius:15px;background:#fff}
+#sd884CzechLessons .sd884-rule h4{font-size:21px;margin:0 0 8px;color:#27628b}
+#sd884CzechLessons .sd884-rule p{margin:7px 0;font-size:15px}
+#sd884CzechLessons .sd884-actions{display:flex;flex-wrap:wrap;gap:9px;margin:17px 0}
+#sd884CzechLessons .sd884-prompt{background:#e7f1fa;padding:18px;border-radius:15px;border:1px solid #b0cbdc;overflow-wrap:anywhere}
+#sd884CzechLessons .sd884-progress{font-weight:800}
+#sd884CzechLessons .sd884-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+#sd884CzechLessons .sd884-choices .sd884-btn{font-size:19px;min-height:58px}
+#sd884CzechLessons .sd884-choices input{grid-column:1/-1;width:100%;font-size:19px;min-height:54px;padding:12px;border:2px solid #93b7cc;border-radius:13px;background:#fff;color:#213e57}
+#sd884CzechLessons .sd884-choices input+.sd884-btn{grid-column:1/-1}
+#sd884CzechLessons .sd884-feedback{border-radius:13px;min-height:40px;padding:9px 12px;font-size:15px;line-height:1.5}
+#sd884CzechLessons .sd884-feedback.sd884-correct{background:#dbf5df;color:#195a30}
+#sd884CzechLessons .sd884-feedback.sd884-wrong{background:#fff0d9;color:#743d0f}
+#sd884CzechLessons .sd884-next{width:100%;background:linear-gradient(#f6dfa3,#e2bc71);color:#52350e;border-color:#b68d42}
+#sd884CzechLessons .sd884-next[hidden]{display:none!important}
+#sd884CzechLessons .sd884-result{font-size:24px!important;font-weight:900!important;color:#215c7a!important}
+#sdCzechHub5074 #sd884CzechEntry{
+ display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+ min-height:125px;padding:15px;max-width:100%;border:3px solid #c7a265;border-radius:20px;
+ background:linear-gradient(155deg,#15334d,#254c76 75%,#153650)!important;
+ color:#ffe6ad!important;box-shadow:inset 0 0 0 2px #4f79a3,0 6px 12px #09192c7d!important;
+ text-align:center;font-size:16px;font-weight:850;line-height:1.3;white-space:normal;cursor:pointer;
+}
+#sdCzechHub5074 #sd884CzechEntry[hidden]{display:none!important}
+#sdCzechHub5074 #sd884CzechEntry small{color:#fff2cf!important;font-size:13px;font-weight:600;line-height:1.4}
+@media(max-width:390px){#sd884CzechLessons{padding-left:6px;padding-right:6px}#sd884CzechLessons .sd884-head{padding:9px}#sd884CzechLessons .sd884-head strong{font-size:13px}#sd884CzechLessons .sd884-nav{padding:10px;gap:6px}#sd884CzechLessons .sd884-btn{font-size:13px;padding:9px 8px}}
