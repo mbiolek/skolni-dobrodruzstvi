@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img"><defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff5b8"/><stop offset=".45" stop-color="#edbf60"/><stop offset="1" stop-color="#9c5928"/></linearGradient>
+<linearGradient id="velvet" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#315d8b"/><stop offset=".55" stop-color="#272f65"/><stop offset="1" stop-color="#112b43"/></linearGradient>
+<linearGradient id="parch" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffedbe"/><stop offset="1" stop-color="#d2a56c"/></linearGradient>
+<linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8cf5e1"/><stop offset="1" stop-color="#3a75bc"/></linearGradient>
+<linearGradient id="gem" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d0ffff"/><stop offset=".5" stop-color="#48bbf0"/><stop offset="1" stop-color="#6758e4"/></linearGradient>
+<linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe4b4"/><stop offset="1" stop-color="#dba47e"/></linearGradient>
+</defs>
+<!-- The outside of the octagonal fantasy medallion is transparent. -->
+<path d="M80 7 134 26 153 80 134 134 80 153 26 134 7 80 26 26Z" fill="url(#gold)" stroke="#704a27" stroke-width="3"/>
+<path d="M80 15 128 32 145 80 128 128 80 145 32 128 15 80 32 32Z" fill="url(#velvet)" stroke="#ffedb1" stroke-width="3"/>
+<path d="M80 23 123 38 137 80 123 122 80 137 38 122 23 80 38 38Z" fill="none" stroke="#8bd6df" stroke-width="1.5" opacity=".75"/>
+<g fill="#ffe8a5" opacity=".9"><path d="m80 20 3 7-3 7-3-7z"/><path d="m80 126 3 7-3 7-3-7z"/><path d="m20 80 7-3 7 3-7 3z"/><path d="m126 80 7-3 7 3-7 3z"/></g>
+<g stroke="#ffe5ab" stroke-width="2" stroke-linecap="round"><path d="m31 45 6-6m-2 0 2 6"/><path d="m123 116 7 7m-7 0 7-7"/></g>
+<g stroke-linejoin="round" stroke-linecap="round"><path d="M78 37h14l4 12 11 5 12-5 10 10-6 12 5 11 13 3v13l-13 4-5 11 5 12-10 10-12-5-11 5-4 12H78l-4-12-11-5-12 5-10-10 6-12-5-11-13-4V85l13-3 5-11-6-12 10-10 12 5 11-5Z" fill="url(#gold)" stroke="#6e4522" stroke-width="4" transform="translate(-5 -7) scale(.94)"/><circle cx="80" cy="81" r="25" fill="#21496e" stroke="#f9e6ab" stroke-width="5"/><path d="M80 62l14 19-14 20-14-20Z" fill="url(#gem)" stroke="#d5fbff" stroke-width="3"/></g>
+</svg>

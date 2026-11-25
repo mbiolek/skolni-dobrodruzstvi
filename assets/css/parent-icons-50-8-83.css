@@ -1,0 +1,55 @@
+/* Školní dobrodružství 50.8.83 – šest jednotných fantasy ikon */
+html body.parent-role #authAdmin #sd876Center .sd876-menu .sd878-tile{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ justify-content:center!important;
+ min-height:179px!important;
+ gap:4px!important;
+}
+html body.parent-role #authAdmin #sd876Center .sd876-menu .sd878-tile img.sd878-tile-art{
+ display:block!important;
+ flex:0 0 auto!important;
+ width:88px!important;
+ height:88px!important;
+ max-width:56%!important;
+ max-height:88px!important;
+ margin:0 auto 5px!important;
+ padding:0!important;
+ border:0!important;
+ border-radius:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ filter:drop-shadow(0 3px 3px rgba(10,18,45,.34))!important;
+ opacity:1!important;
+ transform:none!important;
+}
+html body.parent-role #authAdmin #sd876Center .sd876-menu .sd878-tile :is(.sd876-tile-title,.sd876-tile-info){
+ flex:0 0 auto!important;
+ width:100%!important;
+ max-width:100%!important;
+ margin-left:0!important;
+ margin-right:0!important;
+ text-align:center!important;
+ line-height:1.23!important;
+ overflow-wrap:break-word!important;
+}
+html body.parent-role #authAdmin #sd876Center .sd876-menu .sd878-tile .sd876-tile-title{
+ font-size:clamp(15px,3.5vw,19px)!important;
+}
+html body.parent-role #authAdmin #sd876Center .sd876-menu .sd878-tile .sd876-tile-info{
+ font-size:clamp(11px,2.45vw,13px)!important;
+}
+@media(max-width:410px){
+ html body.parent-role #authAdmin #sd876Center .sd876-menu .sd878-tile{min-height:170px!important;gap:3px!important;padding:10px 6px!important}
+ html body.parent-role #authAdmin #sd876Center .sd876-menu .sd878-tile img.sd878-tile-art{
+   width:76px!important;height:76px!important;max-height:76px!important;margin-bottom:5px!important
+ }
+}
+@media(max-width:360px){
+ html body.parent-role #authAdmin #sd876Center .sd876-menu .sd878-tile img.sd878-tile-art{
+  width:68px!important;height:68px!important;max-height:68px!important
+ }
+}
