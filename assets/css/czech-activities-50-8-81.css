@@ -1,0 +1,59 @@
+/* 50.8.81 – Čeština: z výběru se opravdu přejde na výuku / cvičení. */
+#czechScreen.sd881-czech-activity main.app > .v29-panel:first-child{display:none!important}
+#czechScreen:not(.sd881-czech-activity) #sd881CzechActivityBack{display:none!important}
+#czechScreen #sd881CzechActivityBack{
+ display:block!important;
+ position:relative;
+ z-index:10;
+ width:fit-content;
+ max-width:calc(100% - 28px);
+ margin:14px 14px 10px;
+ padding:11px 15px;
+ border:2px solid #a8c7da!important;
+ border-bottom:4px solid #6589aa!important;
+ border-radius:14px!important;
+ background:linear-gradient(165deg,#f4faff,#d6eaf8)!important;
+ color:#153c59!important;
+ font-size:15px!important;
+ font-weight:850!important;
+ white-space:normal!important;
+ box-shadow:0 3px 9px #0b2f4b38!important;
+ cursor:pointer;
+ touch-action:manipulation;
+}
+#czechScreen #sd881CzechActivityBack[hidden]{display:none!important}
+#czechScreen .sd881-czech-status,
+#czechScreen .sd881-czech-load-warning{
+ border:1px solid #d9ae9d;
+ background:#fff3e9;
+ color:#7b351e!important;
+ padding:12px 14px;
+ margin:10px 13px;
+ border-radius:13px;
+ font-size:14px;
+ line-height:1.5;
+}
+#czechScreen .sd881-czech-status[hidden]{display:none!important}
+#czechScreen main.app > .v29-panel:first-child .v29-actions button{
+ pointer-events:auto!important;
+ touch-action:manipulation!important;
+ cursor:pointer!important;
+ position:relative!important;
+ z-index:3;
+}
+#czechScreen main.app > .v29-panel:first-child .v29-actions button > *,
+#czechScreen main.app > .v29-panel:first-child .v29-actions button::before,
+#czechScreen main.app > .v29-panel:first-child .v29-actions button::after{
+ pointer-events:none!important;
+}
+#czechScreen .sd881-czech-activity-back:focus-visible,
+#czechScreen main.app > .v29-panel:first-child .v29-actions button:focus-visible{
+ outline:3px solid #247bbd!important;
+ outline-offset:3px!important;
+}
+#czechScreen.sd881-czech-activity :is(#czGuide,#czExercise,#czNumbersPanel,#czDictPanel){
+ scroll-margin-top:10px;
+}
+@media(max-width:460px){
+ #czechScreen #sd881CzechActivityBack{font-size:14px!important;margin-left:10px;margin-right:10px;}
+}
