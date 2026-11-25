@@ -145,3 +145,65 @@ body.child-role #sd878ChildEntry{display:block;margin:14px auto;min-height:65px;
 #authAdmin #sd876Center .sd878-quick-request{min-width:0}
 #authAdmin #sd876Center .sd878-quick-request .sd876-action-row{flex-wrap:wrap}
 #authAdmin #sd876Center .sd878-quick-request .sd876-action-row button{flex:1 1 110px}
+
+/* 50.8.79 – stručné párování, čitelná mapa a malé tlačítko Zpět */
+#authAdmin #sd876Center #sd876Back{
+  display:inline-flex!important;
+  position:sticky!important;
+  top:calc(env(safe-area-inset-top) + 5px)!important;
+  z-index:52;
+  width:auto!important;
+  max-width:min(100%,360px)!important;
+  min-height:44px!important;
+  margin:2px 0 10px!important;
+  padding:8px 14px!important;
+  font-size:15px!important;
+  line-height:1.28!important;
+  font-weight:800!important;
+  white-space:normal!important;
+  border-radius:12px!important;
+  border-width:1px!important;
+  box-shadow:0 2px 0 #517b99,0 3px 9px #142b4820!important;
+}
+#authAdmin #sd876Center #sd876Back[hidden]{display:none!important}
+#authAdmin #sd876Center .sd879-pair-guide{
+ background:#eaf5fc;
+ border:1px solid #b0cddd;
+ border-radius:16px;
+ padding:14px 17px;
+ margin:0 0 12px;
+ box-shadow:0 2px 9px #0f2b4720;
+}
+#authAdmin #sd876Center .sd879-pair-guide h4{
+ font-size:17px!important;
+ color:#164363!important;
+ margin:0 0 10px!important;
+}
+#authAdmin #sd876Center .sd879-pair-guide p{
+ font-size:14px!important;line-height:1.55!important;
+ color:#254b64!important;opacity:1!important;
+ margin:8px 0!important;
+}
+#authAdmin #sd876Center .sd879-pair-alternatives{
+ border:1px solid #bed2df;border-radius:14px;
+ padding:12px;margin:14px 0;background:#f8fbff;
+}
+#authAdmin #sd876Center .sd879-pair-alternatives>summary{
+ font-size:14px!important;font-weight:750!important;
+ line-height:1.45!important;color:#244960!important;
+ cursor:pointer;
+}
+#authAdmin #sd876Center .sd879-refresh{margin:2px 0 10px!important}
+#authAdmin #sd876Center .sd878-map-node.sd879-has-progress{
+ outline:3px solid rgba(30,108,73,.85);
+ outline-offset:-3px;
+}
+#authAdmin #sd876Center .sd878-map-node.sd879-no-progress{
+ opacity:.94;
+}
+@media(max-width:390px){
+ #authAdmin #sd876Center #sd876Back{
+  max-width:100%!important;font-size:14px!important;
+  padding:7px 11px!important;
+ }
+}
