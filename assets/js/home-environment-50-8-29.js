@@ -7,6 +7,8 @@
  const WALLPAPERS={hrad:'hrad.webp',priroda:'priroda.webp',skola:'skola.webp',hradni:'hradni-styl.webp',noc1:'hrad-noc-1-5084.webp',noc2:'hrad-noc-2-5084.webp',noc3:'hrad-noc-3-5084.webp'};
  function style(){const s=document.body.dataset.cardStyle;return STYLES.has(s)?s:'guild'}
  function syncWallpaper(){
+  // Vlastni fotografie z IndexedDB nesmi byt prepsana prepinacem grafickeho stylu.
+  if(localStorage.getItem('sd876_wallpaper_enabled')==='1')return;
   // Respect the existing independent wallpaper picker and its persistent selection.
   let w=document.body.dataset.wallpaper;
   if(!WALLPAPERS[w])return;

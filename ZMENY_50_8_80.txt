@@ -1,0 +1,26 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.80 – VZHLED A PROSTŘEDÍ (25. 11. 2026)
+
+Oprava hlášené chyby: v rodičovském Nastavení změna vzhledu dříve ovlivňovala téměř jen barvu.
+
+1. Výběr grafiky karet
+- Nastavení → Grafický styl všech karet: pět skutečných stylů aplikace (Kouzelný krystal, Kamenné runy, Pergamen, Hradní cech, Dobrodružné předměty).
+- Výběr nyní používá původní SDCardThemes.set a nikoli starý čtyřbarevný themeSwitcher.
+- Každý styl má vlastní obrázkový náhled a výrazné označení právě zvoleného stylu.
+- Šest hlavních rodičovských karet má v každém stylu jinou obrázkovou texturu, materiál, rámeček a dekoraci, nejen jiný odstín.
+- Změna stylu nadále používá stávající grafické soubory dětských předmětových tlačítek, takže dětský profil a rodičovská správa sdílejí jednotnou volbu.
+
+2. Tapeta a pozadí
+- Samostatné obrázkové náhledy sedmi dostupných tapet.
+- Rodičovské centrum nyní skutečně zobrazuje vybranou tapetu jako pozadí pod kartami.
+- Zachována možnost vlastní fotografie pozadí, která zůstává lokálně na zařízení.
+- Opraveno přepsání lokální fotografie při změně grafického stylu.
+
+3. Technické
+- Změna čísla aplikace a PWA cache na 50.8.80.
+- Žádná úprava tabulek či dat Supabase.
+- Profily, XP, výsledky, PINy a párování zůstávají beze změn.
+- Nové CSS: assets/css/appearance-50-8-80.css
+- Upravený editor: assets/js/portal-settings-50-8-78.js
+- Opravený respekt k vlastní fotce: assets/js/home-environment-50-8-29.js
+
+Kontroly: syntaxe JS, odkazy na existující obrazové soubory, konzistence PWA cache a GitHub diff. Výsledek v telefonu je ještě nutné vyzkoušet po aktualizaci. Aplikaci neodinstalovávej ani nemaž její data.

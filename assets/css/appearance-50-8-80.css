@@ -1,0 +1,230 @@
+/* Školní dobrodružství 50.8.80: skutečná grafika podle 5 stylů, nejen přebarvení. */
+/* Rodičovská obrazovka ukazuje vybranou tapetu včetně vlastní fotografie. */
+html body.parent-role #authAdmin.on{
+ background-color:#0a1c36!important;
+ background-image:linear-gradient(#071b33aa,#0b223eaf),var(--sd88-scene)!important;
+ background-position:center center!important;
+ background-size:cover!important;
+ background-repeat:no-repeat!important;
+ background-attachment:fixed!important;
+}
+html body.parent-role #authAdmin.on #sd876Center .sd876-head{
+ background:#f5f9f5ee!important;
+ border:2px solid #c2d6df!important;
+ border-radius:18px!important;
+ padding:12px 14px!important;
+ box-shadow:0 7px 18px #071e3440!important;
+}
+html body.parent-role #authAdmin.on #sd876Center .sd876-pane{
+ background:#f7fbffef!important;
+ backdrop-filter:blur(4px);
+}
+html body.parent-role #authAdmin.on #sd876Center .sd876-section-title{color:#fff8e4!important;text-shadow:0 2px 5px #071a32!important}
+html body.parent-role #authAdmin.on #sd876Center #sd876Back{background:#f1f9fffa!important}
+html body.parent-role #authAdmin.on #sd876Center .sd877-log-shortcut{background:#f4f9ffef!important}
+/* Nastavení zobrazuje opravdové obrázkové náhledy, výrazně označenou volbu. */
+#authAdmin #sd876Center #sd878SettingsTop .sd880-theme-panel{
+ border:2px solid #b0cada!important;
+ border-radius:17px!important;
+ padding:14px!important;
+ background:#f1f7fce8!important;
+ margin:12px 0 18px!important;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-theme-panel h4{
+ margin:0 0 8px!important;
+ font-size:19px!important;
+ color:#163d5d!important;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-preview-grid,
+#authAdmin #sd876Center #sd878SettingsTop .sd880-wallpaper-grid{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:10px!important;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-preview-card{
+ position:relative!important;
+ min-width:0!important;
+ width:100%!important;
+ min-height:0!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:flex-start!important;
+ align-items:stretch!important;
+ text-align:center!important;
+ padding:6px 6px 10px!important;
+ margin:0!important;
+ white-space:normal!important;
+ border:3px solid #b4cada!important;
+ border-radius:15px!important;
+ background:#fff!important;
+ box-shadow:0 3px 0 #96b2c9,0 5px 11px #08284522!important;
+ color:#173a56!important;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-preview-card img{
+ width:100%!important;
+ height:120px!important;
+ border-radius:10px!important;
+ object-fit:cover!important;
+ object-position:center!important;
+ display:block!important;
+ background:#d5e5f0;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-preview-card strong{
+ color:#163b5b!important;
+ font-size:15px!important;
+ line-height:1.3!important;
+ margin:8px 3px 0!important;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-preview-card small{
+ font-size:12px!important;
+ line-height:1.32!important;
+ color:#42647f!important;
+ margin:4px 2px 2px!important;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-preview-card.is-selected{
+ border-color:#c47718!important;
+ background:#fff4d5!important;
+ box-shadow:0 0 0 3px #ffc765,0 5px 0 #a97529,0 8px 12px #241b092d!important;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-preview-card.is-selected::after{
+ content:"✓ Zvoleno";
+ position:absolute;right:7px;top:7px;
+ padding:4px 7px;
+ background:#155b46;color:#fff;
+ font-size:12px;font-weight:850;border-radius:8px;
+ box-shadow:0 2px 4px #102c31a0;
+}
+#authAdmin #sd876Center #sd878SettingsTop .sd880-status{
+ min-height:21px;
+ font-size:14px!important;
+ font-weight:800!important;
+ color:#22506d!important;
+ margin:12px 2px 3px!important;
+}
+@media(min-width:650px){
+ #authAdmin #sd876Center #sd878SettingsTop .sd880-preview-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ #authAdmin #sd876Center #sd878SettingsTop .sd880-wallpaper-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+/* Společná konstrukce: šest prostorových karet rodiče s reálným materiálem. */
+html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile{
+ position:relative!important;
+ isolation:isolate!important;
+ overflow:hidden!important;
+ min-height:176px!important;
+ padding:13px 8px!important;
+ gap:5px!important;
+ border-width:3px!important;
+ border-bottom-width:7px!important;
+ box-shadow:inset 0 1px 1px #fff9,0 8px 17px #040f28ac!important;
+ background-size:cover!important;
+ background-position:center!important;
+ background-repeat:no-repeat!important;
+ transform:translateY(0)!important;
+ transition:transform .12s,box-shadow .12s!important;
+}
+html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile:active{
+ transform:translateY(4px)!important;
+ border-bottom-width:3px!important;
+ box-shadow:inset 0 1px 4px #020a1a8a,0 3px 5px #040f2877!important;
+}
+html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile img.sd878-tile-art{
+ position:relative!important;
+ z-index:1;
+ width:76px!important;
+ height:76px!important;
+ max-width:52%!important;
+ object-fit:contain!important;
+ border-radius:12px!important;
+ background:#ffffff18;
+ filter:drop-shadow(0 3px 4px #0009)!important;
+}
+html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile :is(.sd876-tile-title,.sd876-tile-info){
+ position:relative!important;z-index:1;
+ text-shadow:0 2px 3px #060b1cc7!important;
+ line-height:1.22!important;
+}
+html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile .sd876-tile-title{font-size:clamp(15px,3.7vw,19px)!important}
+html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile .sd876-tile-info{font-size:clamp(11px,2.5vw,13px)!important}
+html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile::after{
+ position:absolute;right:8px;bottom:5px;
+ z-index:0;pointer-events:none;
+ font-size:20px;line-height:1;
+ opacity:.9;
+}
+/* Magické sklo – výrazně průsvitná, prosvětlená ornamentální textura. */
+html body[data-card-style="glass"] #authAdmin #sd876Center .sd876-menu button.sd878-tile{
+ background-image:linear-gradient(145deg,#0e1c6580,#382e6cbc 65%,#142951ad),url('../karty/styly/glass-nahled.webp')!important;
+ background-color:#3c4e99!important;
+ color:#f9f4ff!important;
+ border-color:#d8cbff!important;
+ border-radius:27px!important;
+ box-shadow:inset 0 2px 5px #fff8,0 0 18px #9cc9ff88,0 7px 16px #061023af!important;
+}
+html body[data-card-style="glass"] #authAdmin #sd876Center .sd876-menu button.sd878-tile :is(.sd876-tile-title,.sd876-tile-info){color:#fffaff!important}
+html body[data-card-style="glass"] #authAdmin #sd876Center .sd876-menu button.sd878-tile::after{content:"✧";color:#e9e3ff}
+/* Kamenné runy – ostrá rytá kamenná deska s měděnou hranou. */
+html body[data-card-style="stone"] #authAdmin #sd876Center .sd876-menu button.sd878-tile{
+ background-image:linear-gradient(145deg,#1513238c,#252a46c7),url('../karty/styly/stone-nahled.webp')!important;
+ background-color:#24283a!important;
+ color:#ffe4b5!important;
+ border-color:#d7aa68!important;
+ border-radius:11px!important;
+ box-shadow:inset 0 0 0 2px #7b6849,inset 0 0 15px #03040a,0 7px 14px #060710ba!important;
+}
+html body[data-card-style="stone"] #authAdmin #sd876Center .sd876-menu button.sd878-tile :is(.sd876-tile-title,.sd876-tile-info){color:#ffe7bb!important}
+html body[data-card-style="stone"] #authAdmin #sd876Center .sd876-menu button.sd878-tile::after{content:"ᚱ";color:#ebbb67}
+/* Pergamen – skutečná kresba pergamenu, přírodní písmo a pečeť. */
+html body[data-card-style="parchment"] #authAdmin #sd876Center .sd876-menu button.sd878-tile{
+ background-image:linear-gradient(145deg,#fff1c5bc,#dfc28cb0),url('../karty/styly/parchment-nahled.webp')!important;
+ background-color:#e4c69b!important;
+ color:#452612!important;
+ border-color:#8b5a2a!important;
+ border-radius:12px!important;
+ box-shadow:inset 0 0 0 4px #ffedc3,inset 0 0 0 6px #9e7643,0 7px 12px #190d09aa!important;
+}
+html body[data-card-style="parchment"] #authAdmin #sd876Center .sd876-menu button.sd878-tile :is(.sd876-tile-title,.sd876-tile-info){
+ color:#321b0b!important;
+ text-shadow:0 1px 0 #fff5d4!important;
+}
+html body[data-card-style="parchment"] #authAdmin #sd876Center .sd876-menu button.sd878-tile::after{content:"◆";color:#ab3420;font-size:15px}
+/* Hradní cech – zdobené štíty, dřevo a zlato. */
+html body[data-card-style="guild"] #authAdmin #sd876Center .sd876-menu button.sd878-tile{
+ background-image:linear-gradient(145deg,#3e28148c,#14273bc4),url('../karty/styly/guild-nahled.webp')!important;
+ background-color:#4c362a!important;
+ color:#fff0c8!important;
+ border-color:#edc073!important;
+ border-radius:16px!important;
+ box-shadow:inset 0 0 0 2px #7b4c23,inset 0 2px 4px #ffda8a7d,0 7px 13px #080b15af!important;
+}
+html body[data-card-style="guild"] #authAdmin #sd876Center .sd876-menu button.sd878-tile :is(.sd876-tile-title,.sd876-tile-info){color:#fff0c9!important}
+html body[data-card-style="guild"] #authAdmin #sd876Center .sd876-menu button.sd878-tile::after{content:"⚜";color:#ffd17f}
+/* Dobrodružné předměty – ilustrovaná mapa, hluboký námořnický kontrast. */
+html body[data-card-style="adventure"] #authAdmin #sd876Center .sd876-menu button.sd878-tile{
+ background-image:linear-gradient(150deg,#1729469c,#0d3952cb),url('../ikony/cards-clean-50-8-50/mapa-dobrodruzstvi.webp')!important;
+ background-color:#1b435a!important;
+ color:#fff0cf!important;
+ border-color:#d4ac73!important;
+ border-radius:18px!important;
+ box-shadow:inset 0 0 0 2px #a77b49,inset 0 0 16px #0d1e31a8,0 7px 14px #071321c2!important;
+}
+html body[data-card-style="adventure"] #authAdmin #sd876Center .sd876-menu button.sd878-tile :is(.sd876-tile-title,.sd876-tile-info){color:#fff4d5!important}
+html body[data-card-style="adventure"] #authAdmin #sd876Center .sd876-menu button.sd878-tile::after{content:"✦";color:#ffd78b}
+/* Vnitřní karty rodičovské správy reagují jemně na stejný styl; obsah zůstane čitelný. */
+html body[data-card-style] #authAdmin #sd876Center{--sd880-surface:#fff;--sd880-stroke:#9bb8cd;--sd880-ink:#193f5d}
+html body[data-card-style="glass"] #authAdmin #sd876Center{--sd880-surface:#f0f4fff0;--sd880-stroke:#8e9bdb;--sd880-ink:#26366e}
+html body[data-card-style="stone"] #authAdmin #sd876Center{--sd880-surface:#f0ece6f5;--sd880-stroke:#89766b;--sd880-ink:#37303a}
+html body[data-card-style="parchment"] #authAdmin #sd876Center{--sd880-surface:#fbefdaf5;--sd880-stroke:#b38a57;--sd880-ink:#563b23}
+html body[data-card-style="guild"] #authAdmin #sd876Center{--sd880-surface:#f8efddf5;--sd880-stroke:#b28f5e;--sd880-ink:#63452a}
+html body[data-card-style="adventure"] #authAdmin #sd876Center{--sd880-surface:#eaf5f6f5;--sd880-stroke:#7baba9;--sd880-ink:#234e59}
+html body[data-card-style] #authAdmin #sd876Center :is(.sd878-person-card,.sd878-tree-school,.sd876-device,.sd878-school-assignment){
+ background:var(--sd880-surface)!important;
+ border-color:var(--sd880-stroke)!important;
+ box-shadow:0 3px 9px #0e273824!important;
+}
+html body[data-card-style] #authAdmin #sd876Center :is(.sd878-person-card,.sd878-tree-school,.sd876-device) strong{color:var(--sd880-ink)!important}
+@media(max-width:390px){
+ html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile{min-height:156px!important;padding:10px 5px!important}
+ html body[data-card-style] #authAdmin #sd876Center .sd876-menu button.sd878-tile img.sd878-tile-art{width:66px!important;height:66px!important}
+ #authAdmin #sd876Center #sd878SettingsTop .sd880-preview-card img{height:94px!important}
+ #authAdmin #sd876Center #sd878SettingsTop .sd880-preview-card strong{font-size:13px!important}
+}
