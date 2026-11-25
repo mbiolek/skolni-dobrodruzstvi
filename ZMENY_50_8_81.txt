@@ -1,0 +1,21 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.81 – OPRAVA ČEŠTINY
+25. 11. 2026
+
+PROBLÉM
+Na telefonu se zobrazila stránka „Slovní druhy“ s pěti ilustrovanými kartami, ale po kliknutí na karty nebylo vidět nic nového. V původní aplikaci zůstával obsah lekcí až pod velmi dlouhou mřížkou těchto karet; uživatel na ni nemusel být automaticky přesunut.
+
+OPRAVA
+- Pět voleb (Vysvětlení 10 druhů, Procvičování, Test 15 otázek, Čísla slovních druhů, Pravopis a diktáty) nyní otevře vlastní viditelnou činnost.
+- Úvodní obrázkové karty se při otevřené činnosti skryjí; výukový obsah a odpovědi se objeví nahoře.
+- Nové tlačítko „Zpět na výběr činností“.
+- Vybrané režimy se navzájem neschovávají pod sebou.
+- Oprava klikací oblasti: texty a dekorativní grafické vrstvy nesmí zachytávat dotyk.
+- Jestliže se původní výukový obsah nenačte, zobrazí se vysvětlení namísto tiché nečinnosti.
+- Do exportované diagnostiky přibývají položky czech-activity (výběr činnosti a případný prázdný panel).
+- Původní otázky, vysvětlení, režimy procvičování a ukládání výsledků zůstávají zachované.
+
+BEZPEČNOST
+Nedochází k žádným změnám v Supabase, účtech, párování nebo školních datech. Aplikaci neodinstalovávat a nemaž její data.
+
+TESTY
+Kontrola souborů a syntaxe JavaScriptu; ruční zkouška na uživatelském Samsungu je ještě nutná.
