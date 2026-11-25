@@ -1,7 +1,7 @@
 /* Školní dobrodružství 50.8.84 – škola Olomouc, čeština: předpony */
 #sd884CzechLessons[hidden]{display:none!important}
 #sd884CzechLessons{
- position:fixed;inset:0;z-index:2147481000;
+ position:fixed;inset:0;z-index:2147483000;
  overflow-y:auto;overscroll-behavior:contain;
  background:linear-gradient(175deg,#0e1f40ed,#1c3157e8),var(--sd88-scene,#102340);
  background-position:center;background-size:cover;
@@ -43,13 +43,33 @@
 #sd884CzechLessons .sd884-next{width:100%;background:linear-gradient(#f6dfa3,#e2bc71);color:#52350e;border-color:#b68d42}
 #sd884CzechLessons .sd884-next[hidden]{display:none!important}
 #sd884CzechLessons .sd884-result{font-size:24px!important;font-weight:900!important;color:#215c7a!important}
-#sdCzechHub5074 #sd884CzechEntry{
- display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:8px;
- min-height:125px;padding:15px;max-width:100%;border:3px solid #c7a265;border-radius:20px;
- background:linear-gradient(155deg,#15334d,#254c76 75%,#153650)!important;
- color:#ffe6ad!important;box-shadow:inset 0 0 0 2px #4f79a3,0 6px 12px #09192c7d!important;
- text-align:center;font-size:16px;font-weight:850;line-height:1.3;white-space:normal;cursor:pointer;
+/* Použijeme stejné vrstvené fantasy karty jako zbytek češtiny.
+   Nevykreslujeme vlastní button přes hotový obrázek a nezdvojujeme popisky. */
+#sdCzechHub5074 #sd884CzechEntry.sd884-native-card{
+ min-width:0!important;
+ width:100%!important;
+ box-sizing:border-box!important;
+ padding:0!important;
+ min-height:156px!important;
+ margin:0!important;
+ overflow:hidden!important;
+ cursor:pointer!important;
+ touch-action:manipulation!important;
 }
-#sdCzechHub5074 #sd884CzechEntry[hidden]{display:none!important}
-#sdCzechHub5074 #sd884CzechEntry small{color:#fff2cf!important;font-size:13px;font-weight:600;line-height:1.4}
+#sdCzechHub5074 #sd884CzechEntry.sd884-native-card .sd-layer-caption{
+ max-width:100%!important;
+ overflow:hidden!important;
+}
+#sdCzechHub5074 #sd884CzechEntry.sd884-native-card .sd-ui-card__title{
+ white-space:normal!important;
+ overflow-wrap:break-word!important;
+ word-break:normal!important;
+ font-size:clamp(15px,3.4vw,20px)!important;
+ line-height:1.12!important;
+}
+#sdCzechHub5074 #sd884CzechEntry.sd884-native-card .sd-ui-card__desc{
+ white-space:normal!important;
+ font-size:clamp(11px,2.4vw,13px)!important;
+ line-height:1.15!important;
+}
 @media(max-width:390px){#sd884CzechLessons{padding-left:6px;padding-right:6px}#sd884CzechLessons .sd884-head{padding:9px}#sd884CzechLessons .sd884-head strong{font-size:13px}#sd884CzechLessons .sd884-nav{padding:10px;gap:6px}#sd884CzechLessons .sd884-btn{font-size:13px;padding:9px 8px}}
