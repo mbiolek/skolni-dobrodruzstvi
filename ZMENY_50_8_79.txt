@@ -1,0 +1,9 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.79 (25. 11. 2026)
+
+Mapa postupu: opravena chybějící statistika násobilky a dělení ze skutečných uložených výsledků v profilu dítěte. Matyáš má v databázi 55 procvičených příkladů a 55 správných odpovědí; nyní je uvidíš v matematice. Ostatní předměty zůstávají bez vymyšlených výsledků.
+
+Párování: přednost má přímá žádost z tabletu nebo telefonu pomocí rodičovského e-mailu. V rodičovské správě jsou nové instrukce a obnovení žádostí, QR a ruční kód jsou sbalené záložní možnosti. U žádosti se zobrazuje její konec platnosti (15 minut).
+
+Vzhled: menší, méně rušivé tlačítko Zpět, zvýraznění míst mapy se záznamy.
+
+Nedochází k mazání profilů, XP, škol, PINů ani spárovaných zařízení. Přímé párování bylo ověřeno testovací SQL transakcí s rollbackem. Chování na skutečném tabletu je ještě nutné otestovat.
