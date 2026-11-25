@@ -39,6 +39,7 @@ try{
  Object.defineProperty(window,'sessionStorage',{configurable:true,get:()=>session});
 }catch(e){document.documentElement.dataset.sd878Preview='invalid';return}
 window.__SD878Preview=true;
+window.__SD878PreviewProfile=active;
 document.documentElement.dataset.sd878Preview='on';
 const fetchOrig=window.fetch.bind(window);
 window.fetch=(resource,init)=>{
