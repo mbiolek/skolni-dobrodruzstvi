@@ -1,0 +1,16 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.82 – OPRAVA RODIČOVSKÉHO TESTOVACÍHO NÁHLEDU
+25. listopadu 2026
+
+Zjištěný problém:
+Po kliknutí na „Testovat jako Matyáš“ se otevřelo běžné přihlašovací okno s žádostí o párování. Rodič už je přitom přihlášený a pro izolované testování není další párování potřeba.
+
+Co je opraveno:
+- Testovací kopie profilu se předává přímo izolované obrazovce pomocí vložených dat ještě před načtením aplikace. Nespoléhá již pouze na window.name, který může být v sandboxovaném iframu v mobilním prohlížeči vymazán.
+- Při spuštění testovací kopie se automaticky otevře vybraný dětský profil bez dalšího PINu a bez párování.
+- Běžný panel „Požádat rodiče o připojení“ je v izolovaném testovacím náhledu vypnutý.
+- Údaje dítěte jsou v samostatném paměťovém úložišti; cloudové volání je v izolovaném náhledu blokované.
+- Skutečné XP, výsledky dítěte, školy a nastavení zůstávají nezměněné.
+- Běžné dětské přihlášení na skutečném zařízení se nemění.
+
+Ověření: syntaktická kontrola a kontrola souborů PWA. Zobrazení na skutečném Samsungu je potřeba potvrdit po aktualizaci.
+Aplikaci neodinstalovávej ani nemaž uložená data.
