@@ -37,6 +37,7 @@ function start(){
   });
  }
  function returnToMenu(){
+  window.schoolDiagnostic?.('czech-activity','return to Czech activity menu');
   ++seq;
   screen.classList.remove('sd881-czech-activity');
   screen.dataset.sd881Mode='menu';
@@ -51,6 +52,7 @@ function start(){
   const source=$(action),target=$(targetId);
   if(!source||!target)continue;
   source.addEventListener('click',()=>{
+   window.schoolDiagnostic?.('czech-activity','open '+action);
    const ticket=++seq;
    queueMicrotask(()=>{
     if(ticket!==seq)return;
@@ -66,6 +68,7 @@ function start(){
     else if(action==='czDictations')ok=!!$('czDictChoices')?.children.length;
     else ok=!!$('czSentence')?.children.length && !!$('czChoices')?.children.length;
     if(!ok){
+     window.schoolDiagnostic?.('czech-activity-error','empty '+action+' panel');
      note.hidden=false;
      note.textContent='Obsah této činnosti se nenačetl. Použij „Exportovat diagnostický log“ a zkontroluj aktualizaci aplikace.';
     }
