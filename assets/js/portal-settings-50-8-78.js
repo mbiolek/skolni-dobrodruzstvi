@@ -6,24 +6,72 @@ function show(){
  const host=document.getElementById('sd878SettingsTop');if(!host)return;
  host.replaceChildren();
  el(host,'h3','Prostředí, avatary a zabezpečení');
- el(host,'p','Změny prostředí ovlivní také grafiku hlavních tlačítek rodičovského profilu.','sd878-description');
+ el(host,'p','Vyber grafický styl tlačítek a tapetu zvlášť. Změna se okamžitě projeví také na šesti hlavních rodičovských kartách.','sd878-description');
  const tools=el(host,'div',undefined,'sd878-ctl-row');
  btn(tools,'Vybrat avatara',()=>document.getElementById('v24-avatar-open')?.click(),'sd878-primary');
- const styles=el(host,'details',undefined,'sd878-theme-panel');
- el(styles,'summary','Vzhled tlačítek');
- const theme=el(styles,'div',undefined,'sd878-choice-grid');
- for(const [key,name] of [['a','Hrad'],['b','Příroda'],['c','Škola'],['d','Hradní styl']]){
-  btn(theme,name,()=>{
-   const original=document.querySelector('#themeSwitcher > button[data-theme="'+key+'"]');
-   if(original)original.click();else document.body.dataset.gameTheme=key;
-  });
+ const styles=el(host,'section',undefined,'sd878-theme-panel sd880-theme-panel');
+ el(styles,'h4','Grafický styl všech karet');
+ el(styles,'p','Tyto volby mění materiál, obrázky, rámečky a prostorové provedení tlačítek v dětské i rodičovské části.','sd878-description');
+ const theme=el(styles,'div',undefined,'sd880-preview-grid');
+ const stylesList=[
+  ['glass','Kouzelný krystal','Skleněné magické karty','./assets/karty/styly/glass-nahled.webp'],
+  ['stone','Kamenné runy','Ryté kameny a runové rámečky','./assets/karty/styly/stone-nahled.webp'],
+  ['parchment','Pergamen','Starý pergamen s pečetěmi','./assets/karty/styly/parchment-nahled.webp'],
+  ['guild','Hradní cech','Dřevěné a zlaté cechovní karty','./assets/karty/styly/guild-nahled.webp'],
+  ['adventure','Dobrodružné předměty','Ilustrované dobrodružství','./assets/ikony/home-50-8-21/adventure-matematika.webp']
+ ];
+ const cards=[];
+ const styleStatus=el(styles,'p','','sd880-status');
+ for(const [key,name,desc,art] of stylesList){
+  const button=btn(theme,'',()=>{if(!window.SDCardThemes?.set){styleStatus.textContent='Výběr grafického stylu není nyní dostupný. Zkus aktualizovat aplikaci.';return}
+   window.SDCardThemes.set(key);
+   refreshCards();
+   styleStatus.textContent='Zvolen vzhled: '+name+'. Ověř změnu také na hlavních kartách rodičovského centra.';
+  },'sd880-preview-card');
+  button.dataset.style=key;
+  const image=el(button,'img');image.src=art;image.alt='Ukázka vzhledu '+name;image.loading='lazy';
+  el(button,'strong',name);
+  el(button,'small',desc);
+  cards.push(button);
  }
- const background=el(host,'details',undefined,'sd878-theme-panel');
- el(background,'summary','Tapeta a pozadí');
- const bgGrid=el(background,'div',undefined,'sd878-choice-grid');
- for(const [id,name] of [['hrad','Hrad'],['priroda','Příroda'],['skola','Škola'],['hradni','Hradní'],['noc1','Noční hrad I'],['noc2','Noční hrad II'],['noc3','Noční hrad III']]){
-  btn(bgGrid,name,()=>window.SDEnvironment5088?.setWallpaper?.(id));
+ function refreshCards(){
+  const active=window.SDCardThemes?.get?.()||document.body.dataset.cardStyle||'guild';
+  for(const button of cards){const isActive=button.dataset.style===active;button.classList.toggle('is-selected',isActive);button.setAttribute('aria-pressed',String(isActive));}
  }
+ refreshCards();
+ document.addEventListener('sd-card-style-change',refreshCards);
+ const background=el(host,'section',undefined,'sd878-theme-panel sd880-theme-panel');
+ el(background,'h4','Tapeta a prostředí');
+ el(background,'p','Tapeta se změní na úvodní obrazovce, v rodičovském centru i v dalších podporovaných obrazovkách. Je nezávislá na grafickém stylu karet.','sd878-description');
+ const bgGrid=el(background,'div',undefined,'sd880-wallpaper-grid');
+ const wallpapers=[
+  ['hrad','Hrad','hrad.webp'],
+  ['priroda','Příroda','priroda.webp'],
+  ['skola','Škola','skola.webp'],
+  ['hradni','Hradní','hradni-styl.webp'],
+  ['noc1','Noční hrad I','hrad-noc-1-5084.webp'],
+  ['noc2','Noční hrad II','hrad-noc-2-5084.webp'],
+  ['noc3','Noční hrad III','hrad-noc-3-5084.webp']
+ ];
+ const wallpaperStatus=el(background,'p','','sd880-status');
+ const wallButtons=[];
+ for(const [key,name,file] of wallpapers){
+  const button=btn(bgGrid,'',()=>{
+   if(!window.SDEnvironment5088?.setWallpaper){wallpaperStatus.textContent='Tapetu nyní nelze změnit. Zkus aktualizovat aplikaci.';return}
+   window.SDEnvironment5088.setWallpaper(key);
+   updateWallpaper();
+   wallpaperStatus.textContent='Zvolené prostředí: '+name+'.';
+  },'sd880-preview-card');
+  button.dataset.wallpaper=key;
+  const thumb=el(button,'img');thumb.src='./assets/pozadi/'+file;thumb.alt='Tapeta '+name;thumb.loading='lazy';
+  el(button,'strong',name);wallButtons.push(button);
+ }
+ function updateWallpaper(){
+  const selected=window.SDEnvironment5088?.wallpaper?.()||document.body.dataset.wallpaper;
+  wallButtons.forEach(button=>{const isActive=button.dataset.wallpaper===selected;button.classList.toggle('is-selected',isActive);button.setAttribute('aria-pressed',String(isActive))});
+ }
+ updateWallpaper();
+ document.addEventListener('sd88-wallpaper-changed',updateWallpaper);
  const cloud=host.parentElement?.querySelector('.sd876-cloud-details');
  if(cloud){const sum=cloud.querySelector('summary');if(sum)sum.textContent='Centrální databáze Supabase a synchronizace';}
  el(host,'p','Rodičovský PIN se mění v původní části „Změnit rodičovský PIN“. Heslo ke cloudovému účtu je od PINu oddělené.','sd878-description');
