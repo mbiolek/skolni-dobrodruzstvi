@@ -1,0 +1,12 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.83 – SJEDNOCENÍ IKON RODIČOVSKÉHO CENTRA
+25. listopadu 2026
+
+Oprava podle snímku rodičovské úvodní obrazovky:
+- Šest originálních a jednotně stylizovaných fantasy ikon: Testovací rozhraní, Profily dětí, Školy a učivo, Mapa postupu, Zařízení a párování, Nastavení.
+- Všech šest obrázků je nově samostatný SVG s průhledným okolím, jednotným osmihranným medailonem, zlatým rámečkem a modrým podkladem.
+- Neobsahují žádné černé spodní pruhy, zabudované názvy ani obdélníkové miniatury.
+- U všech je nastavena stejná velikost, stejné zarovnání a shodné chování na mobilu i počítači.
+- Zachována původní funkce všech šesti tlačítek, nastavení pěti prostředí a vlastní pozadí.
+- Nevytváří se ani nemažou dětské profily, XP, škola, hesla, PIN ani spárovaná zařízení.
+
+Po aktualizaci zkontroluj šest ikon přímo na rodičovské úvodní stránce.
