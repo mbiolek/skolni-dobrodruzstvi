@@ -1,9 +1,9 @@
 /* 50.8.78 – izolovaný rodičovský testovací náhled. Spouští se před ostatními skripty. */
 (()=>{'use strict';
 const params=new URLSearchParams(location.search);
-if(!params.has('sd878preview')&&!window.name?.includes('"version":1'))return;
-let packet=null;
-try{packet=JSON.parse(window.name||'null')}catch{}
+if(!window.__SD878Packet&&!params.has('sd878preview')&&!window.name?.includes('"version":1'))return;
+let packet=window.__SD878Packet||null;
+if(!packet){try{packet=JSON.parse(window.name||'null')}catch{}}
 window.name='';
 if(!packet||packet.version!==1||(params.has('sd878preview')&&packet.profileId!==params.get('sd878preview'))||!Array.isArray(packet.storage)){
  document.documentElement.dataset.sd878Preview='invalid';
