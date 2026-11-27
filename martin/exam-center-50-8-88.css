@@ -1,0 +1,39 @@
+/* 50.8.88: moderní a přístupná příprava – bez zásahu do stávajících obrazovek */
+#sd888ExamCenter[hidden]{display:none!important}
+body.sd888-open{overflow:hidden}
+#sd888Launcher{margin:18px auto;padding:18px;border:2px solid #ddbc79;border-radius:20px;background:linear-gradient(140deg,#163451,#223d66);color:#f5edd6;box-shadow:0 5px 20px #0006}
+#sd888Launcher h2,#sd888Launcher p{color:#fff1cd;margin:0 0 12px}
+#sd888ExamCenter{position:fixed;inset:0;z-index:2147483000;overflow-y:auto;overscroll-behavior:contain;background:#08152ce9;padding:calc(8px + env(safe-area-inset-top)) 8px calc(20px + env(safe-area-inset-bottom));box-sizing:border-box;color:#193853}
+#sd888ExamCenter *{box-sizing:border-box}
+#sd888ExamCenter .sd888-shell{max-width:850px;margin:auto;min-height:85%;background:#f4f8ff;border:2px solid #d6b56e;border-radius:20px;box-shadow:0 15px 35px #0008;overflow:hidden}
+#sd888ExamCenter .sd888-head{background:#173657;color:#fff1cd;padding:12px 17px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+#sd888ExamCenter .sd888-head strong{color:#fff1cd;font-size:18px}
+#sd888ExamCenter .sd888-main{padding:clamp(14px,4vw,24px);color:#1d3c56}
+#sd888ExamCenter .sd888-main h2{font-size:clamp(22px,5vw,30px);color:#173d60;margin:0 0 12px}
+#sd888ExamCenter .sd888-main h3{color:#205277;font-size:19px;margin:0 0 10px}
+#sd888ExamCenter .sd888-main p{font-size:15px;line-height:1.6;color:#2c4c66}
+#sd888ExamCenter .sd888-card{background:#fff;border:1px solid #b9d2e1;border-radius:16px;margin:12px 0;padding:16px;box-shadow:0 3px 10px #06253e18}
+#sd888ExamCenter .sd888-desc{font-size:15px;color:#315675!important}
+#sd888ExamCenter .sd888-home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:10px}
+#sd888ExamCenter .sd888-home-grid .sd888-card{margin:0;display:flex;flex-direction:column}
+#sd888ExamCenter .sd888-home-grid .sd888-card .sd888-btn{margin-top:auto}
+#sd888ExamCenter .sd888-btn,#sd888Launcher .sd888-btn{border:2px solid #91b6cc;border-bottom:4px solid #6b8fa7;border-radius:13px;padding:10px 14px;min-height:44px;background:linear-gradient(#fff,#dcebf6);font:700 15px/1.3 system-ui;color:#1c4767;cursor:pointer;white-space:normal;touch-action:manipulation}
+#sd888ExamCenter .sd888-btn.sd888-primary,#sd888Launcher .sd888-btn.sd888-primary{background:linear-gradient(#357f9d,#145271);border-color:#7ebbd3;color:#fff}
+#sd888ExamCenter .sd888-btn:disabled{opacity:.55;cursor:default}
+#sd888ExamCenter .sd888-btn.sd888-answer{text-align:left;min-height:57px}
+#sd888ExamCenter .sd888-btn.sd888-close{background:#fff1d7;color:#69421b;flex-shrink:0}
+#sd888ExamCenter .sd888-oral-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:20px 0}
+#sd888ExamCenter .sd888-oral-grid .sd888-btn{text-align:left}
+#sd888ExamCenter .sd888-diagram{display:block;max-width:100%;max-height:350px;object-fit:contain;margin:20px auto}
+#sd888ExamCenter .sd888-actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+#sd888ExamCenter select{display:block;width:100%;max-width:100%;font:600 17px system-ui;padding:12px;background:#fff;border:2px solid #9abaca;border-radius:10px;color:#1b3d56}
+#sd888ExamCenter .sd888-answer-grid{display:grid;grid-template-columns:1fr;gap:11px;margin:20px 0}
+#sd888ExamCenter .sd888-hint{padding:12px;background:#f0f8e8;border-radius:12px;margin:12px 0}
+#sd888ExamCenter .sd888-hint[hidden],#sd888ExamCenter .sd888-btn[hidden],#sd888ExamCenter .sd888-feedback[hidden]{display:none!important}
+#sd888ExamCenter .sd888-feedback{font-size:16px;font-weight:700;padding:12px;border-radius:12px}
+#sd888ExamCenter .sd888-correct{background:#e0f5e2;color:#195e31}
+#sd888ExamCenter .sd888-wrong{background:#ffefd8;color:#8b4014}
+#sd888ExamCenter .sd888-score{font-size:26px!important;font-weight:850;color:#14547c!important}
+#sd888ExamCenter .sd888-note{padding:14px;border:1px solid #b2cbda;border-radius:12px;background:#e7f0f7;margin:16px 0}
+#sd888ExamCenter .sd888-note p{margin-bottom:0}
+@media(max-width:460px){#sd888ExamCenter{padding-left:3px;padding-right:3px}#sd888ExamCenter .sd888-head{padding:10px;font-size:14px}#sd888ExamCenter .sd888-head strong{font-size:14px}#sd888ExamCenter .sd888-home-grid{grid-template-columns:1fr}#sd888ExamCenter .sd888-oral-grid{grid-template-columns:1fr}}
