@@ -15,7 +15,7 @@ function clearTimer(){if(timer){clearInterval(timer);timer=null}}
 function clear(){clearTimer();main.replaceChildren();main.scrollTop=0;locked=false}
 function heading(title,desc){if(section!=='home'){const nav=el(main,'div',undefined,'sd889-nav');button(nav,'← Zpět',back,'sd888-back')}el(main,'h2',title);if(desc)el(main,'p',desc,'sd888-desc')}
 function footerHome(){button(main,'← Přehled zkoušek',home,'sd888-back')}
-function armBack(){history.pushState({...history.state,sd888Exam:true},'',location.href);historyGuard=true}
+function armBack(){try{history.pushState({...history.state,sd888Exam:true},'');historyGuard=true}catch(err){historyGuard=false;console.warn('Historie testovacího náhledu není dostupná:',err)}}
 function open(){if(!modal)mount();if(modal.hidden){modal.hidden=false;document.body.classList.add('sd888-open');home();armBack()}}
 function closeDirect(){clearTimer();activeTest=null;if(modal)modal.hidden=true;document.body.classList.remove('sd888-open')}
 function close(){if(!modal||modal.hidden)return;closeDirect();if(historyGuard){historyGuard=false;history.back()}}
