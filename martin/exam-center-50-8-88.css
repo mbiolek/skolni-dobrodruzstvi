@@ -70,3 +70,12 @@ body.sd888-open{overflow:hidden}
 #sd888ExamCenter .sd888-feedback.sd888-correct{background:#d8f5df!important;color:#14532d!important}
 #sd888ExamCenter .sd891-review-choice{padding:12px;border:2px solid #a7bac7;border-radius:12px;background:#f4f8fc;color:#1c4767;overflow-wrap:anywhere}
 #sd888ExamCenter .sd888-card>.sd888-btn{margin:5px 8px 5px 0}
+
+/* 50.8.92 – adaptive question flags. */
+#sd888ExamCenter .sd892-flags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 8px}
+#sd888ExamCenter .sd892-flags p{width:100%;margin:0;font-size:13px}
+#sd888ExamCenter .sd892-flags button{flex:1 1 180px;font-size:14px}
+#sd888ExamCenter .sd892-easy[aria-pressed="true"]{background:#d8f5df!important;color:#14532d!important;border-color:#218343!important}
+#sd888ExamCenter .sd892-hard[aria-pressed="true"]{background:#fff0cf!important;color:#783d12!important;border-color:#b87523!important}
+#sd888ExamCenter .sd892-check{display:flex;align-items:center;gap:10px;margin:14px 0;color:#1b3d56;font-weight:600;cursor:pointer}
+#sd888ExamCenter .sd892-check input{width:22px;height:22px;flex-shrink:0}
