@@ -1,0 +1,35 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ – DOPLNĚK 50.8.88
+
+Zdrojem otázkového banku je uživatelem dříve poslaný soubor
+"Autoelektrikář test abc.zip" (sedm textových sad, Windows CP1250).
+Otázky, tři varianty odpovědí a značky správných odpovědí jsou
+převzaty ze souborů. Zdroj nabízí A/B/C, nikoli D.
+
+1. ročník: 40; 2. ročník: 100; Automobily: 200; Diagnostika: 200;
+Elektropohony: 100; Elektropříslušenství: 193; Elektrotechnika: 300.
+CELKEM 1 133 úplných otázek.
+Soubor pro elektropříslušenství má v názvu "200 otázek", ale obsahuje
+jen 193 kompletních záznamů s odpovědí. Žádné další nejsou domyšlené.
+
+NOVÁ SEKCE V MARTINOVĚ STUDIJNÍM PLÁNU
+  Výuka: 25 školních ústních okruhů, podklady a schémata.
+  Procvičování: nahlas odpovídat na ústní kontrolní otázky; odkrýt
+    nápovědu, pokud je potřeba.
+  Původní testy A/B/C: sedm kategorií, 20/40/všechny otázky,
+    buď trénink se zpětnou vazbou, nebo test nanečisto
+    s vyhodnocením na konci.
+  Historie testů: výsledky ve vlastním profilu v tomto zařízení.
+
+Režimy jsou vzdělávací podpora, ne potvrzení zadání závěrečné zkoušky 2027.
+Původní Martinovy obrazovky, skripta, CERMAT a profil se nemažou.
+
+NASAZENÍ PŘES TERMUX
+  cd ~/skolni-github
+  unzip -o ~/storage/downloads/Skolni_dobrodruzstvi_50_8_88_MARTIN_ORIGINALNI_TESTY_ABC.zip
+  sh tools/apply_50_8_88.sh
+  git add -A
+  git commit -m "50.8.88 - Martin originalni testy ABC a prehledna priprava"
+  git push origin main
+
+Zkontroluj, že není rozpracovaná jiná změna. Neodinstalovávej PWA
+ani nemaž její úložiště. Před prvním použitím je nutné ji aktualizovat.
