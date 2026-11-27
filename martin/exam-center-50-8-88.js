@@ -199,7 +199,7 @@ function launch(){
  if(!oral)return;
  const actions=oral.querySelector('.sd65-actions');if(!actions)return;
  actions.replaceChildren();
- button(actions,'Otevřít výuku, procvičování a původní testy A/B/C',open,'sd888-primary sd889-center-entry');
+ button(actions,'Otevřít výuku, procvičování a původní testy A/B/C',open,'sd65-action sd888-primary sd889-center-entry');
  const paragraph=oral.querySelector('.sd65-foot');
  if(paragraph)paragraph.textContent='25 ústních okruhů školy a původní testy A/B/C jsou oddělené režimy. Testy ze staršího ZIPu nejsou potvrzeným zadáním závěrečné zkoušky 2027.';
 }
