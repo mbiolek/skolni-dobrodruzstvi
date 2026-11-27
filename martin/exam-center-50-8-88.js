@@ -173,6 +173,29 @@ function complete(early=false){
    button(card,'Vysvětlit správnou odpověď',()=>{if(explanation.hidden)showExplanation(explanation,a.q,a.selected);else explanation.hidden=true},'sd888-secondary');
   }
  }else el(main,'p','Všechny zodpovězené otázky byly správně.');
+ const correctAnswers=t.answers.filter(a=>a.q.correct===a.selected);
+ if(correctAnswers.length){
+  const group=el(main,'section',undefined,'sd888-card');
+  el(group,'h3','Správné odpovědi – proč platí?');
+  el(group,'p','Můžeš si přečíst výklad i u otázek, které jsi zodpověděl správně.');
+  const list=el(group,'div',undefined,'sd890-correct-review');
+  let shown=0;
+  const loadMore=button(group,'Zobrazit další správné odpovědi',()=>{
+   const take=Math.min(shown+25,correctAnswers.length);
+   for(let i=shown;i<take;i++){
+    const a=correctAnswers[i],card=el(list,'section',undefined,'sd888-card');
+    el(card,'strong',a.q.q);
+    const out=el(card,'div',undefined,'sd888-hint sd889-explanation');out.hidden=true;
+    button(card,'Vysvětlit odborný princip',()=>{
+     if(out.hidden)showExplanation(out,a.q,a.selected);
+     else out.hidden=true;
+    },'sd888-secondary');
+   }
+   shown=take;
+   if(shown===correctAnswers.length)loadMore.hidden=true;
+   else loadMore.textContent='Zobrazit další správné odpovědi ('+(correctAnswers.length-shown)+')';
+  },'sd888-secondary');
+ }
  const btns=el(main,'div',undefined,'sd888-actions');
  button(btns,'Zkusit další test',()=>{activeTest=null;testIndex()},'sd888-primary');
  button(btns,'← Přehled zkoušek',()=>{activeTest=null;home()});
