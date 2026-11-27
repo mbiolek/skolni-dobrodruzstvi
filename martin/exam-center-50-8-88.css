@@ -37,3 +37,28 @@ body.sd888-open{overflow:hidden}
 #sd888ExamCenter .sd888-note{padding:14px;border:1px solid #b2cbda;border-radius:12px;background:#e7f0f7;margin:16px 0}
 #sd888ExamCenter .sd888-note p{margin-bottom:0}
 @media(max-width:460px){#sd888ExamCenter{padding-left:3px;padding-right:3px}#sd888ExamCenter .sd888-head{padding:10px;font-size:14px}#sd888ExamCenter .sd888-head strong{font-size:14px}#sd888ExamCenter .sd888-home-grid{grid-template-columns:1fr}#sd888ExamCenter .sd888-oral-grid{grid-template-columns:1fr}}
+
+/* 50.8.89 – jednotný vstup, jasná navigace a skutečně viditelné ovládání testu. */
+.sd65-section .sd65-actions button.sd889-center-entry{
+  display:block;width:100%;min-height:56px;
+  font-size:clamp(15px,3.4vw,19px);font-weight:800;
+  color:#fff!important;background:linear-gradient(135deg,#327e9b,#195371)!important;
+  border:2px solid #8bc2da!important;border-bottom:5px solid #2e6b89!important;
+  border-radius:14px!important;
+  padding:14px 16px!important;
+  box-shadow:0 4px 12px #0004;cursor:pointer;
+}
+#sd888ExamCenter .sd889-nav{margin:0 0 14px;display:flex;justify-content:flex-start}
+#sd888ExamCenter .sd889-nav .sd888-back{background:#f7ecd8;border-color:#ddbe80;color:#553e19}
+#sd888ExamCenter .sd889-exit{width:100%;margin:20px 0 6px;background:#fff1e7;color:#873c25;border-color:#cb9c83}
+#sd888ExamCenter .sd889-exit-confirm{
+  border:2px solid #d3a17d!important;
+  background:#fff5ea!important;
+}
+#sd888ExamCenter .sd889-exit-confirm .sd888-actions{margin-bottom:0}
+#sd888ExamCenter .sd889-explanation{
+  background:#f2f8ff!important;border:1px solid #acc6dc;
+  margin:12px 0;padding:14px;border-radius:12px;
+}
+#sd888ExamCenter .sd889-explanation strong{color:#165779}
+#sd888ExamCenter .sd889-explanation p{overflow-wrap:anywhere}

@@ -10,13 +10,44 @@ const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floo
 const live=()=>{try{return sessionStorage.getItem('skolni-live-v441')||''}catch{return ''}};
 const resultsKey=()=>`sd888_martin_abc_results_${live()}`;
 const testing=()=>!!window.__SD878Preview||new URLSearchParams(location.search).get('test')==='parent';
-let modal, main, section='home', activeTest=null, locked=false, timer=null;
+let modal, main, section='home', activeTest=null, locked=false, timer=null,historyGuard=false;
 function clearTimer(){if(timer){clearInterval(timer);timer=null}}
 function clear(){clearTimer();main.replaceChildren();main.scrollTop=0;locked=false}
-function heading(title,desc){el(main,'h2',title);if(desc)el(main,'p',desc,'sd888-desc')}
+function heading(title,desc){if(section!=='home'){const nav=el(main,'div',undefined,'sd889-nav');button(nav,'← Zpět',back,'sd888-back')}el(main,'h2',title);if(desc)el(main,'p',desc,'sd888-desc')}
 function footerHome(){button(main,'← Přehled zkoušek',home,'sd888-back')}
-function open(){if(!modal){mount()}modal.hidden=false;document.body.classList.add('sd888-open');home()}
-function close(){clearTimer();if(modal)modal.hidden=true;document.body.classList.remove('sd888-open')}
+function armBack(){try{history.pushState({...history.state,sd888Exam:true},'');historyGuard=true}catch(err){historyGuard=false;console.warn('Historie testovacího náhledu není dostupná:',err)}}
+function open(){if(!modal)mount();if(modal.hidden){modal.hidden=false;document.body.classList.add('sd888-open');home();armBack()}}
+function closeDirect(){clearTimer();activeTest=null;if(modal)modal.hidden=true;document.body.classList.remove('sd888-open')}
+function close(){if(!modal||modal.hidden)return;closeDirect();if(historyGuard){historyGuard=false;history.back()}}
+function askExit(){
+ clearTimer();
+ if(!activeTest){testIndex();return}
+ // Browser confirm() may be suppressed inside the isolated parent test iframe.
+ // A real in-page prompt always allows the user to complete the action.
+ const existing=main.querySelector('#sd889ExitConfirm');if(existing){existing.remove();return}
+ const box=el(main,'section',undefined,'sd888-card sd889-exit-confirm');box.id='sd889ExitConfirm';
+ box.setAttribute('role','group');box.setAttribute('aria-label','Ukončení testu');
+ el(box,'h3','Ukončit tento pokus?');
+ el(box,'p','Dosavadní odpovědi můžeš vyhodnotit, nebo se vrátit k otázce.');
+ const choices=el(box,'div',undefined,'sd888-actions');
+ button(choices,'Ano, ukončit a vyhodnotit',()=>{if(!activeTest?.answers.length){activeTest=null;testIndex()}else complete(true)},'sd888-primary');
+ button(choices,'Pokračovat v testu',()=>box.remove(),'sd888-secondary');
+ box.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function back(){
+ if(section==='test'){askExit();return}
+ if(section==='results'){activeTest=null;testIndex();return}
+ if(section==='learn-detail'){learnIndex();return}
+ if(section==='practice-detail'){practiceIndex();return}
+ if(section==='learn'||section==='practice'||section==='test-index'||section==='history'){home();return}
+ closeDirect();
+}
+window.addEventListener('popstate',()=>{
+ if(!modal||modal.hidden)return;
+ historyGuard=false;
+ back();
+ if(modal&&!modal.hidden)armBack();
+});
 function home(){section='home';clear();heading('Příprava k výuční zkoušce – Autoelektrikář','Tři samostatné způsoby přípravy. Ústní okruhy vycházejí z původního školního seznamu 2026. Písemné testy A/B/C jsou z dodaného ZIP archivu. Nejde o potvrzené zadání zkoušky 2027.');
  const grid=el(main,'div',undefined,'sd888-home-grid');
  const cards=[['Výuka – 25 ústních okruhů','Nejdřív se naučit principy, prohlédnout schéma a projít původní školní zadání.',learnIndex],['Procvičování ústní odpovědi','Bez výkladu zkusit vlastními slovy vysvětlit otázku. Teprve potom zobrazit nápovědu.',practiceIndex],['Původní testy A/B/C','1 133 úplných otázek ze sedmi dodaných souborů. Trénink nebo zkušební test.',testIndex]];
@@ -56,33 +87,100 @@ function testIndex(){section='test-index';clear();heading('Originální testy A/
  const actions=el(main,'div',undefined,'sd888-actions');
  button(actions,'Procvičovací test – správnost ihned',()=>startTest(select.value,count.value,'training'),'sd888-primary');
  button(actions,'Test nanečisto – vyhodnocení na konci',()=>startTest(select.value,count.value,'exam'));
- el(main,'p','U zdrojových otázek nepřidávám domyšlené odpovědi ani vysvětlení. Po vyhodnocení uvidíš správnou variantu podle souboru.','sd888-muted');footerHome();
+ el(main,'p','Původní ZIP obsahuje otázky a vyznačené správné možnosti, nikoli hotový výklad. U vybraných principů najdeš doplněné vysvětlení, u ostatních alespoň rozbor zadání a správnou odpověď.','sd888-muted');footerHome();
 }
 function startTest(category,amount,mode){let pool=category==='all'?BANK.categories.flatMap((c,i)=>c.questions.map(q=>({...q,subject:c.name,cat:i}))):BANK.categories[Number(category)]?.questions.map(q=>({...q,subject:BANK.categories[Number(category)].name,cat:Number(category)}));
  if(!pool?.length){testIndex();return}const size=amount==='all'?pool.length:Math.min(Number(amount)||20,pool.length);
  activeTest={name:category==='all'?'Všechny oblasti':BANK.categories[Number(category)].name,mode,items:shuffle(pool).slice(0,size),pos:0,answers:[],started:Date.now()};
  section='test';renderQuestion();
 }
-function renderQuestion(){clear();const t=activeTest;if(!t)return testIndex();if(t.pos>=t.items.length)return complete();
- const q=t.items[t.pos];heading((t.mode==='exam'?'Test nanečisto':'Procvičovací test')+' – '+t.name,'Otázka '+(t.pos+1)+' z '+t.items.length+' • '+q.subject);
- const card=el(main,'section',undefined,'sd888-card');el(card,'h3',q.q);const feedback=el(card,'p','','sd888-feedback');feedback.hidden=true;
- const answers=el(card,'div',undefined,'sd888-answer-grid');const next=button(card,t.pos===t.items.length-1?'Vyhodnotit':'Další otázka',()=>{t.pos++;renderQuestion()},'sd888-primary');next.hidden=true;
- q.a.forEach((text,i)=>{const b=button(answers,String.fromCharCode(65+i)+') '+text,()=>{
-  if(locked)return;locked=true;t.answers.push({q,selected:i});
+/* Vysvětlení rozlišuje údaje z originálního ZIPu a nově doplněné studijní komentáře. */
+function explain(q){
+ const question=String(q.q||'');const answer=String(q.a?.[q.correct]||'');
+ const norm=(question+' '+answer).toLocaleLowerCase('cs-CZ');
+ const patterns=[
+  [/ohmov|i\s*=\s*u\s*\/\s*r|výpočet odporu|napětí na rezistoru/i,'Ohmův zákon spojuje napětí U, proud I a odpor R. Platí U = R × I, tedy I = U / R a R = U / I. Vždy kontroluj jednotky: volt, ampér a ohm.'],
+  [/rezistor.*séri|odpory.*séri|zapojen.*séri|séri.*odpor/i,'Při sériovém zapojení prochází součástkami stejný proud a odpory se sčítají: R = R1 + R2 + …. Například 5 Ω + 5 Ω = 10 Ω.'],
+  [/rezistor.*paralel|odpory.*paralel|paraleln.*odpor/i,'U paralelních odporů je na větvích stejné napětí. Platí 1/R = 1/R1 + 1/R2; pro dva stejné odpory je výsledný odpor poloviční.'],
+  [/účinnost/i,'Účinnost je poměr užitečného výkonu a příkonu: η = Pužitečný / Ppříkon. Při vyjádření v procentech násobíme 100. Nemůže přesáhnout 100 %, protože existují ztráty.'],
+  [/magnetick.*pole|průchodu.*proudu.*vodič/i,'Elektrický proud ve vodiči vytváří kolem vodiče magnetické pole. Směr magnetického pole souvisí se směrem proudu.'],
+  [/reaktanc.*cívk|střídav.*napětí na cívce/i,'Ideální cívka má indukční reaktanci XL = 2πfL. S rostoucí frekvencí reaktance roste; u ideální cívky napětí předbíhá proud o 90°.'],
+  [/bateri.*séri|články.*séri/i,'Při sériovém spojení článků se sčítají jejich napětí i vnitřní odpory. Výsledný odpor tedy není průměr jednotlivých odporů.'],
+  [/wolfram|žárovk.*vlákn/i,'Kovové vlákno běžné žárovky se vyrábí z wolframu, protože má velmi vysokou teplotu tání a může žhnout bez roztavení.'],
+  [/voltmetr.*vnitřním odpor/i,'Voltmetr se připojuje paralelně k měřenému prvku. Vysoký vnitřní odpor odebírá menší proud a méně ovlivňuje měřený obvod.'],
+  [/teplot.*odpor.*kov|odpor kovov.*teplot/i,'U běžných kovových vodičů odpor s rostoucí teplotou obvykle roste; zvýšené kmitání krystalové mřížky znesnadňuje pohyb elektronů.']
+ ];
+ const hit=patterns.find(([re])=>re.test(norm));
+ return hit?{kind:'Doplněné odborné vysvětlení (není součástí ZIPu)',text:hit[1]}:{kind:'Rozbor podle původního testu',text:'Úkolem je rozpoznat, která z nabízených možností odpovídá zadání. Zdrojový archiv uvádí správnou variantu, ale neobsahuje zdůvodnění. Podrobný odborný výklad této konkrétní otázky zatím není doplněn.'};
+}
+function showExplanation(container,q,selected){
+ container.replaceChildren();
+ const h=el(container,'h3','Vysvětlení otázky a odpovědi');
+ el(container,'p','Otázka: '+q.q);
+ el(container,'p','Správně podle původního ZIPu: '+String.fromCharCode(65+q.correct)+') '+q.a[q.correct]);
+ if(Number.isInteger(selected))el(container,'p','Tvoje odpověď: '+String.fromCharCode(65+selected)+') '+q.a[selected]);
+ const e=explain(q);el(container,'strong',e.kind);el(container,'p',e.text);
+ container.hidden=false;
+}
+function renderQuestion(){
+ clear();const t=activeTest;if(!t)return testIndex();if(t.pos>=t.items.length)return complete(false);
+ const q=t.items[t.pos];
+ heading((t.mode==='exam'?'Test nanečisto':'Procvičovací test')+' – '+t.name,'Otázka '+(t.pos+1)+' z '+t.items.length+' • '+q.subject);
+ const card=el(main,'section',undefined,'sd888-card');
+ el(card,'h3',q.q);
+ const feedback=el(card,'p','','sd888-feedback');feedback.hidden=true;
+ const answers=el(card,'div',undefined,'sd888-answer-grid');
+ const explanation=el(card,'div',undefined,'sd888-hint sd889-explanation');explanation.hidden=true;
+ const explainBtn=button(card,'Vysvětlit otázku a odpověď',()=>{
+  const answered=t.answers.find(a=>a.index===t.pos);
+  if(t.mode==='exam'&&!answered){
+   feedback.hidden=false;feedback.textContent='V testu nanečisto se správná odpověď ukáže až při závěrečném vyhodnocení.';
+   return;
+  }
+  showExplanation(explanation,q,answered?.selected);
+ },'sd888-secondary');
+ explainBtn.hidden=t.mode==='exam';
+ const next=button(card,t.pos===t.items.length-1?'Vyhodnotit':'Další otázka',()=>{t.pos++;renderQuestion()},'sd888-primary');
+ next.hidden=true;
+ q.a.forEach((value,i)=>button(answers,String.fromCharCode(65+i)+') '+value,()=>{
+  if(locked)return;locked=true;t.answers.push({q,selected:i,index:t.pos});
   for(const x of answers.querySelectorAll('button'))x.disabled=true;
-  if(t.mode==='training'){feedback.hidden=false;feedback.textContent=i===q.correct?'Správně.':'Nesprávně. Podle původního testu je správně '+String.fromCharCode(65+q.correct)+') '+q.a[q.correct];feedback.className='sd888-feedback '+(i===q.correct?'sd888-correct':'sd888-wrong')}
+  if(t.mode==='training'){
+   feedback.hidden=false;
+   feedback.textContent=i===q.correct?'Správně.':'Nesprávně. Podle původního testu je správně '+String.fromCharCode(65+q.correct)+') '+q.a[q.correct];
+   feedback.className='sd888-feedback '+(i===q.correct?'sd888-correct':'sd888-wrong');
+   explainBtn.hidden=false;
+  }
   next.hidden=false;
-  if(t.mode==='training'&&i===q.correct){timer=setTimeout(()=>{t.pos++;renderQuestion()},1200)}
- },'sd888-answer')});
- button(main,'Ukončit tento pokus',()=>{if(confirm('Ukončit test a zobrazit dosavadní výsledky?'))complete()},'sd888-secondary');
+  // Allow enough time to read the answer; a manual next button is always available.
+  // No automatic skipping when explanation is requested.
+  if(t.mode==='training'&&i===q.correct){
+   timer=setTimeout(()=>{if(explanation.hidden&&activeTest===t&&t.pos<t.items.length){t.pos++;renderQuestion()}},2500);
+  }
+ },'sd888-answer'));
+ button(main,'Ukončit tento pokus',askExit,'sd888-secondary sd889-exit');
 }
 function saveTest(t,correct){try{if(testing())return;const key=resultsKey();const prev=JSON.parse(localStorage.getItem(key)||'[]');prev.unshift({date:new Date().toISOString(),topic:t.name,mode:t.mode,correct,total:t.answers.length});localStorage.setItem(key,JSON.stringify(prev.slice(0,40)))}catch{}}
-function complete(){clearTimer();const t=activeTest;if(!t)return testIndex();section='results';clear();const score=t.answers.reduce((n,a)=>n+(a.q.correct===a.selected),0);
- heading('Výsledek testu',t.name+' • '+(t.mode==='exam'?'Test nanečisto':'Procvičovací režim'));
+function complete(early=false){
+ clearTimer();const t=activeTest;if(!t)return testIndex();
+ section='results';clear();const score=t.answers.reduce((n,a)=>n+(a.q.correct===a.selected),0);
+ heading(early?'Předčasně ukončený test':'Výsledek testu',t.name+' • '+(t.mode==='exam'?'Test nanečisto':'Procvičovací režim'));
  el(main,'p',score+' z '+t.answers.length+' správně ('+(t.answers.length?Math.round(score/t.answers.length*100):0)+' %).','sd888-score');
- saveTest(t,score);
- const wrong=t.answers.filter(a=>a.q.correct!==a.selected);if(wrong.length){el(main,'h3','Chybné odpovědi – zopakuj si');for(const a of wrong){const card=el(main,'section',undefined,'sd888-card');el(card,'strong',a.q.q);el(card,'p','Tvoje volba: '+String.fromCharCode(65+a.selected)+') '+a.q.a[a.selected]);el(card,'p','Správná volba podle archivu: '+String.fromCharCode(65+a.q.correct)+') '+a.q.a[a.q.correct])}}else el(main,'p','Všechny zodpovězené otázky byly správně.');
- const btns=el(main,'div',undefined,'sd888-actions');button(btns,'Zkusit další test',testIndex,'sd888-primary');button(btns,'← Přehled zkoušek',home);
+ if(!t.saved){saveTest(t,score);t.saved=true}
+ const wrong=t.answers.filter(a=>a.q.correct!==a.selected);
+ if(wrong.length){
+  el(main,'h3','Chybné odpovědi – zopakuj si');
+  for(const a of wrong){
+   const card=el(main,'section',undefined,'sd888-card');
+   el(card,'strong',a.q.q);
+   el(card,'p','Tvoje volba: '+String.fromCharCode(65+a.selected)+') '+a.q.a[a.selected]);
+   const explanation=el(card,'div',undefined,'sd888-hint');explanation.hidden=true;
+   button(card,'Vysvětlit správnou odpověď',()=>{if(explanation.hidden)showExplanation(explanation,a.q,a.selected);else explanation.hidden=true},'sd888-secondary');
+  }
+ }else el(main,'p','Všechny zodpovězené otázky byly správně.');
+ const btns=el(main,'div',undefined,'sd888-actions');
+ button(btns,'Zkusit další test',()=>{activeTest=null;testIndex()},'sd888-primary');
+ button(btns,'← Přehled zkoušek',()=>{activeTest=null;home()});
 }
 function showResults(){section='history';clear();heading('Historie testů','Uložené pouze pro právě přihlášený profil a toto zařízení. V rodičovském náhledu se výsledky nepřenášejí dítěti.');
  let arr=[];try{arr=JSON.parse(localStorage.getItem(resultsKey())||'[]')}catch{}if(!arr.length)el(main,'p','Zatím žádný uložený test.');
@@ -92,12 +190,21 @@ function mount(){modal=el(document.body,'section',undefined,'sd888-modal');modal
  const shell=el(modal,'div',undefined,'sd888-shell');const head=el(shell,'header',undefined,'sd888-head');el(head,'strong','Autoelektrikář • výuční zkoušky');button(head,'Zavřít',close,'sd888-close');main=el(shell,'main',undefined,'sd888-main');
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)close()});
 }
-function launch(){const target=$('#app .shell');if(!target||$('#sd888Launcher'))return;
- // Home and oral screens are rebuilt by martin.js. Re-add the launcher after each render.
- const block=document.createElement('section');block.id='sd888Launcher';block.className='sd888-launcher';const h=el(block,'h2','Výuční zkoušky – přehledně');el(block,'p','Výuka 25 ústních okruhů • samostatné procvičování • originální testy A/B/C ze zaslaného ZIPu.');button(block,'Otevřít přípravu na výuční zkoušky',open,'sd888-primary');
- const first=target.querySelector('.sd65-head');if(first)first.insertAdjacentElement('afterend',block);else target.prepend(block);
+function launch(){
+ const target=$('#app .shell');if(!target)return;
+ // The original screen already has a numbered '2 • Závěrečné zkoušky'.
+ // Replace its duplicate actions with one clear entry into the new center.
+ const existing=target.querySelector('#sd888Launcher');if(existing)existing.remove();
+ const sections=[...target.querySelectorAll('.sd65-section')];
+ const oral=sections.find(v=>v.querySelector('.sd65-no')?.textContent.trim()==='2');
+ if(!oral)return;
+ const actions=oral.querySelector('.sd65-actions');if(!actions)return;
+ actions.replaceChildren();
+ button(actions,'Otevřít výuku, procvičování a původní testy A/B/C',open,'sd65-action sd888-primary sd889-center-entry');
+ const paragraph=oral.querySelector('.sd65-foot');
+ if(paragraph)paragraph.textContent='25 ústních okruhů školy a původní testy A/B/C jsou oddělené režimy. Testy ze staršího ZIPu nejsou potvrzeným zadáním závěrečné zkoušky 2027.';
 }
-function init(){mount();const app=$('#app');if(!app)return;launch();const observer=new MutationObserver(()=>{if(modal.hidden&&!$('#sd888Launcher'))launch()});observer.observe(app,{childList:true});}
+function init(){mount();const app=$('#app');if(!app)return;launch();const observer=new MutationObserver(()=>{if(modal.hidden){const a=app.querySelector('.sd65-section .sd889-center-entry');if(!a)launch()}});observer.observe(app,{childList:true});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 window.MartinExamCenter88={open,close};
 })();
