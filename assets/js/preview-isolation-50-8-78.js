@@ -54,6 +54,11 @@ document.documentElement.dataset.sd878Preview='on';
 document.addEventListener('click',e=>{
  const link=e.target.closest?.('a[href]');if(!link)return;
  let pathname='';try{pathname=new URL(link.getAttribute('href'),document.baseURI).pathname}catch{return}
+ if(document.querySelector('main#app')&&/\/index\.html$/.test(pathname)&&!pathname.includes('/martin/')){
+  e.preventDefault();e.stopImmediatePropagation();
+  window.parent.postMessage({type:'sd878-preview-back-martin',profileId:active},'*');
+  return;
+ }
  if(!/\/martin\/index\.html$/.test(pathname))return;
  e.preventDefault();e.stopImmediatePropagation();
  window.parent.postMessage({type:'sd878-preview-open-martin',profileId:active},'*');
