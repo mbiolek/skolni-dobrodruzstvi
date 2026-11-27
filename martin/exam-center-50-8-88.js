@@ -94,32 +94,26 @@ function startTest(category,amount,mode){let pool=category==='all'?BANK.categori
  activeTest={name:category==='all'?'Všechny oblasti':BANK.categories[Number(category)].name,mode,items:shuffle(pool).slice(0,size),pos:0,answers:[],started:Date.now()};
  section='test';renderQuestion();
 }
-/* Vysvětlení rozlišuje údaje z originálního ZIPu a nově doplněné studijní komentáře. */
-function explain(q){
- const question=String(q.q||'');const answer=String(q.a?.[q.correct]||'');
- const norm=(question+' '+answer).toLocaleLowerCase('cs-CZ');
- const patterns=[
-  [/ohmov|i\s*=\s*u\s*\/\s*r|výpočet odporu|napětí na rezistoru/i,'Ohmův zákon spojuje napětí U, proud I a odpor R. Platí U = R × I, tedy I = U / R a R = U / I. Vždy kontroluj jednotky: volt, ampér a ohm.'],
-  [/rezistor.*séri|odpory.*séri|zapojen.*séri|séri.*odpor/i,'Při sériovém zapojení prochází součástkami stejný proud a odpory se sčítají: R = R1 + R2 + …. Například 5 Ω + 5 Ω = 10 Ω.'],
-  [/rezistor.*paralel|odpory.*paralel|paraleln.*odpor/i,'U paralelních odporů je na větvích stejné napětí. Platí 1/R = 1/R1 + 1/R2; pro dva stejné odpory je výsledný odpor poloviční.'],
-  [/účinnost/i,'Účinnost je poměr užitečného výkonu a příkonu: η = Pužitečný / Ppříkon. Při vyjádření v procentech násobíme 100. Nemůže přesáhnout 100 %, protože existují ztráty.'],
-  [/magnetick.*pole|průchodu.*proudu.*vodič/i,'Elektrický proud ve vodiči vytváří kolem vodiče magnetické pole. Směr magnetického pole souvisí se směrem proudu.'],
-  [/reaktanc.*cívk|střídav.*napětí na cívce/i,'Ideální cívka má indukční reaktanci XL = 2πfL. S rostoucí frekvencí reaktance roste; u ideální cívky napětí předbíhá proud o 90°.'],
-  [/bateri.*séri|články.*séri/i,'Při sériovém spojení článků se sčítají jejich napětí i vnitřní odpory. Výsledný odpor tedy není průměr jednotlivých odporů.'],
-  [/wolfram|žárovk.*vlákn/i,'Kovové vlákno běžné žárovky se vyrábí z wolframu, protože má velmi vysokou teplotu tání a může žhnout bez roztavení.'],
-  [/voltmetr.*vnitřním odpor/i,'Voltmetr se připojuje paralelně k měřenému prvku. Vysoký vnitřní odpor odebírá menší proud a méně ovlivňuje měřený obvod.'],
-  [/teplot.*odpor.*kov|odpor kovov.*teplot/i,'U běžných kovových vodičů odpor s rostoucí teplotou obvykle roste; zvýšené kmitání krystalové mřížky znesnadňuje pohyb elektronů.']
- ];
- const hit=patterns.find(([re])=>re.test(norm));
- return hit?{kind:'Doplněné odborné vysvětlení (není součástí ZIPu)',text:hit[1]}:{kind:'Rozbor podle původního testu',text:'Úkolem je rozpoznat, která z nabízených možností odpovídá zadání. Zdrojový archiv uvádí správnou variantu, ale neobsahuje zdůvodnění. Podrobný odborný výklad této konkrétní otázky zatím není doplněn.'};
-}
+/* Zachováno původní znění A/B/C; vysvětlení je oddělená nová učební vrstva. */
 function showExplanation(container,q,selected){
  container.replaceChildren();
- const h=el(container,'h3','Vysvětlení otázky a odpovědi');
+ el(container,'h3','Proč je tato odpověď správná?');
  el(container,'p','Otázka: '+q.q);
- el(container,'p','Správně podle původního ZIPu: '+String.fromCharCode(65+q.correct)+') '+q.a[q.correct]);
- if(Number.isInteger(selected))el(container,'p','Tvoje odpověď: '+String.fromCharCode(65+selected)+') '+q.a[selected]);
- const e=explain(q);el(container,'strong',e.kind);el(container,'p',e.text);
+ const original=el(container,'p','Označeno správně v původním ZIPu: '+String.fromCharCode(65+q.correct)+') '+q.a[q.correct]);
+ original.className='sd890-source-answer';
+ if(Number.isInteger(selected)){
+  const your=el(container,'p','Tvoje odpověď: '+String.fromCharCode(65+selected)+') '+q.a[selected]);
+  if(selected!==q.correct)your.className='sd890-different-answer';
+ }
+ const e=window.MartinABCExplanations90?.get(q);
+ if(e){
+  el(container,'strong',e.topic);
+  el(container,'p',e.text);
+  const note=el(container,'p',e.kind==='Vysvětlení odborného principu'?'Výklad je učební doplněk k původní otázce, ne doslovný text z archivu.':'Tuto otázku je nutné ještě odborně rozpracovat.');
+  note.className='sd888-muted';
+ }else{
+  el(container,'p','Vysvětlení se nepodařilo načíst. Původní odpověď z archivu zůstává zachovaná.');
+ }
  container.hidden=false;
 }
 function renderQuestion(){
@@ -132,6 +126,7 @@ function renderQuestion(){
  const answers=el(card,'div',undefined,'sd888-answer-grid');
  const explanation=el(card,'div',undefined,'sd888-hint sd889-explanation');explanation.hidden=true;
  const explainBtn=button(card,'Vysvětlit otázku a odpověď',()=>{
+  clearTimer(); // výklad se nesmí zavřít automatickým přechodem na další otázku
   const answered=t.answers.find(a=>a.index===t.pos);
   if(t.mode==='exam'&&!answered){
    feedback.hidden=false;feedback.textContent='V testu nanečisto se správná odpověď ukáže až při závěrečném vyhodnocení.';
@@ -178,6 +173,29 @@ function complete(early=false){
    button(card,'Vysvětlit správnou odpověď',()=>{if(explanation.hidden)showExplanation(explanation,a.q,a.selected);else explanation.hidden=true},'sd888-secondary');
   }
  }else el(main,'p','Všechny zodpovězené otázky byly správně.');
+ const correctAnswers=t.answers.filter(a=>a.q.correct===a.selected);
+ if(correctAnswers.length){
+  const group=el(main,'section',undefined,'sd888-card');
+  el(group,'h3','Správné odpovědi – proč platí?');
+  el(group,'p','Můžeš si přečíst výklad i u otázek, které jsi zodpověděl správně.');
+  const list=el(group,'div',undefined,'sd890-correct-review');
+  let shown=0;
+  const loadMore=button(group,'Zobrazit další správné odpovědi',()=>{
+   const take=Math.min(shown+25,correctAnswers.length);
+   for(let i=shown;i<take;i++){
+    const a=correctAnswers[i],card=el(list,'section',undefined,'sd888-card');
+    el(card,'strong',a.q.q);
+    const out=el(card,'div',undefined,'sd888-hint sd889-explanation');out.hidden=true;
+    button(card,'Vysvětlit odborný princip',()=>{
+     if(out.hidden)showExplanation(out,a.q,a.selected);
+     else out.hidden=true;
+    },'sd888-secondary');
+   }
+   shown=take;
+   if(shown===correctAnswers.length)loadMore.hidden=true;
+   else loadMore.textContent='Zobrazit další správné odpovědi ('+(correctAnswers.length-shown)+')';
+  },'sd888-secondary');
+ }
  const btns=el(main,'div',undefined,'sd888-actions');
  button(btns,'Zkusit další test',()=>{activeTest=null;testIndex()},'sd888-primary');
  button(btns,'← Přehled zkoušek',()=>{activeTest=null;home()});
