@@ -48,6 +48,16 @@ try{
 window.__SD878Preview=true;
 window.__SD878PreviewProfile=active;
 document.documentElement.dataset.sd878Preview='on';
+// Martin's study plan is a separate HTML document. Normal navigation would
+// lose this isolated memory profile and demand a fresh login. Ask the parent
+// testing window to open an isolated copy of the Martin page instead.
+document.addEventListener('click',e=>{
+ const link=e.target.closest?.('a[href]');if(!link)return;
+ let pathname='';try{pathname=new URL(link.getAttribute('href'),document.baseURI).pathname}catch{return}
+ if(!/\/martin\/index\.html$/.test(pathname))return;
+ e.preventDefault();e.stopImmediatePropagation();
+ window.parent.postMessage({type:'sd878-preview-open-martin',profileId:active},'*');
+},true);
 const fetchOrig=window.fetch.bind(window);
 window.fetch=(resource,init)=>{
  const url=typeof resource==='string'?resource:resource?.url||'';
