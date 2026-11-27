@@ -44,6 +44,55 @@ async function open(pid,name){
  // Předáme kopii dat inline PŘED prvním externím skriptem, bez oprávnění
  // ke cloudu a bez zápisu do skutečného localStorage rodiče.
  frame.name='sd878-isolated-preview';
+ // Keep the main child preview alive while an isolated Martin study-plan
+ // document is opened. Martin's independent HTML page cannot inherit
+ // sessionStorage from a regular sandboxed navigation.
+ let martinFrame=null;
+ const originalFrame=frame;
+ const onMessage=async event=>{
+  const msg=event.data;
+  if(!msg||typeof msg!=='object')return;
+  if(msg.type==='sd878-preview-open-martin'){
+   if(event.source!==originalFrame.contentWindow||msg.profileId!==pid||martinFrame)return;
+   if(!/^martin(?:\\s|$)/i.test(String(name).normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')))return;
+   let child=null;
+   try{
+    const response=await fetch('./martin/index.html',{cache:'no-store'});
+    if(!response.ok)throw Error('Martinův studijní plán není dostupný');
+    const page=await response.text();
+    if(!/<head>/i.test(page))throw Error('Neplatná hlavička Martinova studijního plánu');
+    if(!overlay.isConnected)return;
+    const base=new URL('./martin/',location.href).href;
+    const safePacket=payload.replace(/</g,'\\u003c').replace(/\\u2028/g,'\\u2028').replace(/\\u2029/g,'\\u2029');
+    const safeBase=base.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    const inject='<base href="'+safeBase+'"><script>window.__SD878Packet='+safePacket+';<\\/script><script src="../assets/js/preview-isolation-50-8-78.js?v=50887"><\\/script>'
+      .replaceAll('<\\/script>','</script>');
+    child=document.createElement('iframe');
+    child.title='Martinův studijní plán – test rodiče';
+    child.setAttribute('sandbox','allow-scripts allow-forms allow-downloads');
+    child.className=originalFrame.className;
+    child.name='sd878-martin-preview';
+    child.srcdoc=page.replace(/<head>/i,'<head>'+inject);
+    originalFrame.hidden=true;
+    originalFrame.insertAdjacentElement('afterend',child);
+    martinFrame=child;
+    window.schoolDiagnostic?.('parent-preview','Martinuv plan otevren v izolovanem nahledu');
+   }catch(err){
+    child?.remove();originalFrame.hidden=false;
+    window.schoolDiagnostic?.('parent-preview-error',String(err.message));
+    alert('Martinův studijní plán se nepodařilo otevřít: '+err.message);
+   }
+  }
+  if(msg.type==='sd878-preview-back-martin'&&martinFrame&&event.source===martinFrame.contentWindow){
+   martinFrame.remove();martinFrame=null;originalFrame.hidden=false;
+  }
+ };
+ window.addEventListener('message',onMessage);
+ const closePreview=()=>{
+  window.removeEventListener('message',onMessage);
+  overlay.remove();
+ };
+ header.querySelector('.sd878-danger').onclick=closePreview;
  el(overlay,'p','Načítám izolovanou kopii aplikace…','sd878-preview-loading');
  fetch('./index.html',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Nelze načíst aplikaci');return r.text()}).then(html=>{
   const inlinePacket=payload.replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
