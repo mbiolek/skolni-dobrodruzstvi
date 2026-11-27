@@ -54,7 +54,7 @@ async function open(pid,name){
   if(!msg||typeof msg!=='object')return;
   if(msg.type==='sd878-preview-open-martin'){
    if(event.source!==originalFrame.contentWindow||msg.profileId!==pid||martinFrame)return;
-   if(!/^martin(?:\\s|$)/i.test(String(name).normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')))return;
+   if(!/^martin(?:\s|$)/i.test(String(name).normalize('NFD').replace(/[\u0300-\u036f]/g,'')))return;
    let child=null;
    try{
     const response=await fetch('./martin/index.html',{cache:'no-store'});
@@ -73,18 +73,18 @@ async function open(pid,name){
     child.className=originalFrame.className;
     child.name='sd878-martin-preview';
     child.srcdoc=page.replace(/<head>/i,'<head>'+inject);
-    originalFrame.hidden=true;
+    originalFrame.hidden=true;originalFrame.style.display='none';
     originalFrame.insertAdjacentElement('afterend',child);
     martinFrame=child;
     window.schoolDiagnostic?.('parent-preview','Martinuv plan otevren v izolovanem nahledu');
    }catch(err){
-    child?.remove();originalFrame.hidden=false;
+    child?.remove();originalFrame.hidden=false;originalFrame.style.display='';
     window.schoolDiagnostic?.('parent-preview-error',String(err.message));
     alert('Martinův studijní plán se nepodařilo otevřít: '+err.message);
    }
   }
   if(msg.type==='sd878-preview-back-martin'&&martinFrame&&event.source===martinFrame.contentWindow){
-   martinFrame.remove();martinFrame=null;originalFrame.hidden=false;
+   martinFrame.remove();martinFrame=null;originalFrame.hidden=false;originalFrame.style.display='';
   }
  };
  window.addEventListener('message',onMessage);
