@@ -1,0 +1,29 @@
+ŠKOLNÍ DOBRODRUŽSTVÍ 50.8.90 – VYSVĚTLENÍ MARTINOVÝCH TESTŮ A/B/C
+27. 11. 2026
+
+DŮVOD
+V původním archivu Autoelektrikář test abc.zip jsou otázky a označené správné možnosti A, B, C, ale chybí odborné zdůvodnění. Sedmnáctiletému autoelektrikáři nestačí naučit se písmenko zpaměti.
+
+NOVÝ MODUL
+- martin/abc-explanations-50-8-90.js obsahuje 243 autorsky připravených odborných principů vysvětlených krátce, srozumitelně a často na příkladu z praxe.
+- Každá z 1 133 úplných otázek sedmi tematických souborů má přiřazeno vysvětlení souvisejícího odborného principu.
+- Nejde o 1 133 individuálně recenzovaných výkladů. Texty se sdílejí mezi tematicky blízkými otázkami a mapování je pravidlové. Je nutné pokračovat v odborné kontrole zejména u specifických číselných a historických otázek.
+- Původní správné varianty A/B/C i úplné znění zůstávají beze změny.
+
+JAK SE VÝKLAD POUŽÍVÁ
+- Martin → Závěrečné zkoušky → Původní testy A/B/C → Procvičovací test → Vysvětlit otázku a odpověď.
+- Tlačítko otevře správnou možnost ze zdroje a odpovídající odborné vysvětlení, včetně typického vzorce nebo praktického příkladu.
+- Při otevření vysvětlení se zastaví automatický přechod na další otázku.
+- Po dokončení testu lze rozebrat chybné odpovědi a po dávkách otevřít vysvětlení také těch správných.
+- Test nanečisto dále zobrazí správné odpovědi až po závěrečném vyhodnocení.
+
+UPOZORNĚNÍ
+- Některé původní otázky obsahují zastaralé předpisy nebo hodnoty. Například vyhlášku 50/1978 Sb. nahradily předpisy účinné od roku 2022, zejména NV č. 194/2022 Sb.
+- Vysvětlení jsou nově napsaná učební pomůcka, nikoli součást původního testového souboru ani potvrzené zadání závěrečné zkoušky 2027.
+- Změna nezasahuje profily, PINy, školy ani uložené dětské výsledky.
+- Ověřeno syntakticky a proti 1 133 původním otázkám; skutečné vykreslení na Samsungu je třeba otestovat.
+
+ZÁKLADNÍ TECHNICKÁ KONTROLA
+- 243 konceptů / 1 133 přiřazených otázek
+- Původní testová databáze abc-bank-50-8-88.js beze změn
+- Nová PWA verze 50.8.90
