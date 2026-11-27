@@ -10,6 +10,28 @@ const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floo
 const live=()=>{try{return sessionStorage.getItem('skolni-live-v441')||''}catch{return ''}};
 const resultsKey=()=>`sd888_martin_abc_results_${live()}`;
 const testing=()=>!!window.__SD878Preview||new URLSearchParams(location.search).get('test')==='parent';
+// 50.8.91 – independent training, exam and mistake review.
+const allQuestions=()=>BANK.categories.flatMap((c,cat)=>c.questions.map((q,idx)=>({...q,subject:c.name,cat,reviewKey:cat+':'+idx})));
+const wrongKey=()=>`sd891_martin_wrong_${live()}`;
+let previewMistakes=new Set(), volatileMistakes=new Map();
+function readMistakes(){
+ if(testing()||!live())return new Set(previewMistakes);
+ if(volatileMistakes.has(wrongKey()))return new Set(volatileMistakes.get(wrongKey()));
+ try{const value=JSON.parse(localStorage.getItem(wrongKey())||'[]');return new Set(Array.isArray(value)?value.filter(v=>typeof v==='string'):[])}catch{return new Set()}
+}
+function writeMistake(q,selected){
+ const wrong=readMistakes();
+ if(selected===q.correct)wrong.delete(q.reviewKey);else wrong.add(q.reviewKey);
+ if(testing()||!live()){previewMistakes=wrong;return}
+ try{localStorage.setItem(wrongKey(),JSON.stringify([...wrong]));volatileMistakes.delete(wrongKey())}catch{volatileMistakes.set(wrongKey(),wrong)}
+}
+function pendingQuestions(){const wrong=readMistakes();return allQuestions().filter(q=>wrong.has(q.reviewKey))}
+function startWrong(items=pendingQuestions()){
+ if(!items.length){testIndex();return}
+ activeTest={name:'Chybné otázky',mode:'review',items:shuffle(items),pos:0,answers:[],started:Date.now()};
+ section='test';renderQuestion();
+}
+function modeLabel(mode){return mode==='exam'?'Test nanečisto':mode==='review'?'Opakování chybných otázek':'Procvičovací test'}
 let modal, main, section='home', activeTest=null, locked=false, timer=null,historyGuard=false;
 function clearTimer(){if(timer){clearInterval(timer);timer=null}}
 function clear(){clearTimer();main.replaceChildren();main.scrollTop=0;locked=false}
@@ -53,6 +75,7 @@ function home(){section='home';clear();heading('Příprava k výuční zkoušce 
  const cards=[['Výuka – 25 ústních okruhů','Nejdřív se naučit principy, prohlédnout schéma a projít původní školní zadání.',learnIndex],['Procvičování ústní odpovědi','Bez výkladu zkusit vlastními slovy vysvětlit otázku. Teprve potom zobrazit nápovědu.',practiceIndex],['Původní testy A/B/C','1 133 úplných otázek ze sedmi dodaných souborů. Trénink nebo zkušební test.',testIndex]];
  for(const [name,desc,act] of cards){const card=el(grid,'section',undefined,'sd888-card');el(card,'h3',name);el(card,'p',desc);button(card,'Otevřít',act,'sd888-primary')}
  const note=el(main,'section',undefined,'sd888-note');el(note,'strong','Rozdíl mezi režimy');el(note,'p','Výuka obsahuje vysvětlení, procvičování ověřuje samostatné vybavení znalostí a test vyhodnocuje skutečné možnosti A, B, C z původního archivu.');
+ button(main,'Procvičit chybné otázky ('+pendingQuestions().length+')',()=>startWrong(),'sd888-primary').disabled=!pendingQuestions().length;
  button(main,'Historie testů',showResults);
 }
 function chooseOral(action){clear();heading(action==='learn'?'Výuka – vyber ústní okruh':'Procvičování – vyber ústní okruh','25 dvojic podle školního seznamu. Elektrotechnická a automobilová část zůstávají oddělené.');
@@ -87,9 +110,12 @@ function testIndex(){section='test-index';clear();heading('Originální testy A/
  const actions=el(main,'div',undefined,'sd888-actions');
  button(actions,'Procvičovací test – správnost ihned',()=>startTest(select.value,count.value,'training'),'sd888-primary');
  button(actions,'Test nanečisto – vyhodnocení na konci',()=>startTest(select.value,count.value,'exam'));
+ const pending=pendingQuestions();
+ button(actions,'Procvičit chybné otázky ('+pending.length+')',()=>startWrong(),'sd888-primary').disabled=!pending.length;
+ el(main,'p','Procvičování: další otázku otevřeš ručně. Test nanečisto: po výběru se automaticky přejde dál, správnost se ukáže až na konci. Chyby se ukládají pro tento profil na tomto zařízení.','sd888-muted');
  el(main,'p','Původní ZIP obsahuje otázky a vyznačené správné možnosti, nikoli hotový výklad. U vybraných principů najdeš doplněné vysvětlení, u ostatních alespoň rozbor zadání a správnou odpověď.','sd888-muted');footerHome();
 }
-function startTest(category,amount,mode){let pool=category==='all'?BANK.categories.flatMap((c,i)=>c.questions.map(q=>({...q,subject:c.name,cat:i}))):BANK.categories[Number(category)]?.questions.map(q=>({...q,subject:BANK.categories[Number(category)].name,cat:Number(category)}));
+function startTest(category,amount,mode){let pool=allQuestions().filter(q=>category==='all'||q.cat===Number(category));
  if(!pool?.length){testIndex();return}const size=amount==='all'?pool.length:Math.min(Number(amount)||20,pool.length);
  activeTest={name:category==='all'?'Všechny oblasti':BANK.categories[Number(category)].name,mode,items:shuffle(pool).slice(0,size),pos:0,answers:[],started:Date.now()};
  section='test';renderQuestion();
@@ -116,42 +142,45 @@ function showExplanation(container,q,selected){
  }
  container.hidden=false;
 }
+function markAnswers(answers,q,selected){
+ [...answers.querySelectorAll('button')].forEach((b,i)=>{
+  b.disabled=true;
+  if(i===q.correct){b.classList.add('sd891-right');b.textContent+=' ✓ Správná odpověď'}
+  else if(i===selected){b.classList.add('sd891-wrong');b.textContent+=' ✗ Tvoje chybná odpověď'}
+ });
+}
+function reviewChoices(card,q,selected){
+ const rows=el(card,'div',undefined,'sd888-answer-grid');
+ q.a.forEach((value,i)=>{
+  const row=el(rows,'div',String.fromCharCode(65+i)+') '+value,'sd891-review-choice');
+  if(i===q.correct){row.classList.add('sd891-right');row.textContent+=' ✓ Správná odpověď'}
+  else if(i===selected){row.classList.add('sd891-wrong');row.textContent+=' ✗ Tvoje chybná odpověď'}
+ });
+}
 function renderQuestion(){
  clear();const t=activeTest;if(!t)return testIndex();if(t.pos>=t.items.length)return complete(false);
  const q=t.items[t.pos];
- heading((t.mode==='exam'?'Test nanečisto':'Procvičovací test')+' – '+t.name,'Otázka '+(t.pos+1)+' z '+t.items.length+' • '+q.subject);
- const card=el(main,'section',undefined,'sd888-card');
- el(card,'h3',q.q);
- const feedback=el(card,'p','','sd888-feedback');feedback.hidden=true;
+ heading(modeLabel(t.mode)+' – '+t.name,'Otázka '+(t.pos+1)+' z '+t.items.length+' • '+q.subject);
+ const card=el(main,'section',undefined,'sd888-card');el(card,'h3',q.q);
+ const feedback=el(card,'p','','sd888-feedback');feedback.hidden=true;feedback.setAttribute('role','status');
  const answers=el(card,'div',undefined,'sd888-answer-grid');
  const explanation=el(card,'div',undefined,'sd888-hint sd889-explanation');explanation.hidden=true;
  const explainBtn=button(card,'Vysvětlit otázku a odpověď',()=>{
-  clearTimer(); // výklad se nesmí zavřít automatickým přechodem na další otázku
   const answered=t.answers.find(a=>a.index===t.pos);
-  if(t.mode==='exam'&&!answered){
-   feedback.hidden=false;feedback.textContent='V testu nanečisto se správná odpověď ukáže až při závěrečném vyhodnocení.';
-   return;
-  }
-  showExplanation(explanation,q,answered?.selected);
- },'sd888-secondary');
- explainBtn.hidden=t.mode==='exam';
- const next=button(card,t.pos===t.items.length-1?'Vyhodnotit':'Další otázka',()=>{t.pos++;renderQuestion()},'sd888-primary');
- next.hidden=true;
+  if(!answered||t.mode==='exam')return;
+  if(explanation.hidden)showExplanation(explanation,q,answered.selected);else explanation.hidden=true;
+ },'sd888-secondary');explainBtn.hidden=true;
+ const pos=t.pos;
+ const advance=()=>{if(activeTest!==t||section!=='test'||!locked||t.pos!==pos)return;t.pos++;renderQuestion()};
+ const next=button(card,t.pos===t.items.length-1?'Vyhodnotit':'Další otázka',advance,'sd888-primary');next.hidden=true;
  q.a.forEach((value,i)=>button(answers,String.fromCharCode(65+i)+') '+value,()=>{
-  if(locked)return;locked=true;t.answers.push({q,selected:i,index:t.pos});
-  for(const x of answers.querySelectorAll('button'))x.disabled=true;
-  if(t.mode==='training'){
-   feedback.hidden=false;
-   feedback.textContent=i===q.correct?'Správně.':'Nesprávně. Podle původního testu je správně '+String.fromCharCode(65+q.correct)+') '+q.a[q.correct];
-   feedback.className='sd888-feedback '+(i===q.correct?'sd888-correct':'sd888-wrong');
-   explainBtn.hidden=false;
-  }
-  next.hidden=false;
-  // Allow enough time to read the answer; a manual next button is always available.
-  // No automatic skipping when explanation is requested.
-  if(t.mode==='training'&&i===q.correct){
-   timer=setTimeout(()=>{if(explanation.hidden&&activeTest===t&&t.pos<t.items.length){t.pos++;renderQuestion()}},2500);
-  }
+  if(locked||activeTest!==t||section!=='test'||t.pos!==pos)return;
+  locked=true;t.answers.push({q,selected:i,index:t.pos});writeMistake(q,i);
+  if(t.mode==='exam'){for(const b of answers.querySelectorAll('button'))b.disabled=true;advance();return}
+  markAnswers(answers,q,i);feedback.hidden=false;
+  feedback.textContent=i===q.correct?'Správně.':'Nesprávně. Správná odpověď je '+String.fromCharCode(65+q.correct)+') '+q.a[q.correct];
+  feedback.className='sd888-feedback '+(i===q.correct?'sd888-correct':'sd888-wrong');
+  explainBtn.hidden=false;next.hidden=false;
  },'sd888-answer'));
  button(main,'Ukončit tento pokus',askExit,'sd888-secondary sd889-exit');
 }
@@ -159,16 +188,17 @@ function saveTest(t,correct){try{if(testing())return;const key=resultsKey();cons
 function complete(early=false){
  clearTimer();const t=activeTest;if(!t)return testIndex();
  section='results';clear();const score=t.answers.reduce((n,a)=>n+(a.q.correct===a.selected),0);
- heading(early?'Předčasně ukončený test':'Výsledek testu',t.name+' • '+(t.mode==='exam'?'Test nanečisto':'Procvičovací režim'));
+ heading(early?'Předčasně ukončený test':'Výsledek testu',t.name+' • '+modeLabel(t.mode));
  el(main,'p',score+' z '+t.answers.length+' správně ('+(t.answers.length?Math.round(score/t.answers.length*100):0)+' %).','sd888-score');
  if(!t.saved){saveTest(t,score);t.saved=true}
  const wrong=t.answers.filter(a=>a.q.correct!==a.selected);
  if(wrong.length){
   el(main,'h3','Chybné odpovědi – zopakuj si');
+  button(main,'Znovu procvičit chybné otázky ('+wrong.length+')',()=>startWrong(wrong.map(a=>a.q)),'sd888-primary');
   for(const a of wrong){
    const card=el(main,'section',undefined,'sd888-card');
    el(card,'strong',a.q.q);
-   el(card,'p','Tvoje volba: '+String.fromCharCode(65+a.selected)+') '+a.q.a[a.selected]);
+   reviewChoices(card,a.q,a.selected);
    const explanation=el(card,'div',undefined,'sd888-hint');explanation.hidden=true;
    button(card,'Vysvětlit správnou odpověď',()=>{if(explanation.hidden)showExplanation(explanation,a.q,a.selected);else explanation.hidden=true},'sd888-secondary');
   }
@@ -185,6 +215,7 @@ function complete(early=false){
    for(let i=shown;i<take;i++){
     const a=correctAnswers[i],card=el(list,'section',undefined,'sd888-card');
     el(card,'strong',a.q.q);
+    reviewChoices(card,a.q,a.selected);
     const out=el(card,'div',undefined,'sd888-hint sd889-explanation');out.hidden=true;
     button(card,'Vysvětlit odborný princip',()=>{
      if(out.hidden)showExplanation(out,a.q,a.selected);
@@ -197,12 +228,15 @@ function complete(early=false){
   },'sd888-secondary');
  }
  const btns=el(main,'div',undefined,'sd888-actions');
+ const remaining=pendingQuestions();
+ if(remaining.length)button(btns,'Všechny neprocvičené chyby ('+remaining.length+')',()=>startWrong(),'sd888-primary');
+ else if(t.mode==='review')el(main,'p','Všechny uložené chyby jsou opravené.');
  button(btns,'Zkusit další test',()=>{activeTest=null;testIndex()},'sd888-primary');
  button(btns,'← Přehled zkoušek',()=>{activeTest=null;home()});
 }
 function showResults(){section='history';clear();heading('Historie testů','Uložené pouze pro právě přihlášený profil a toto zařízení. V rodičovském náhledu se výsledky nepřenášejí dítěti.');
  let arr=[];try{arr=JSON.parse(localStorage.getItem(resultsKey())||'[]')}catch{}if(!arr.length)el(main,'p','Zatím žádný uložený test.');
- for(const a of arr){const box=el(main,'section',undefined,'sd888-card');el(box,'strong',a.topic);el(box,'p',new Date(a.date).toLocaleString('cs-CZ')+' · '+a.correct+'/'+a.total+' správně · '+(a.mode==='exam'?'test nanečisto':'procvičování'))}footerHome();
+ for(const a of arr){const box=el(main,'section',undefined,'sd888-card');el(box,'strong',a.topic);el(box,'p',new Date(a.date).toLocaleString('cs-CZ')+' · '+a.correct+'/'+a.total+' správně · '+modeLabel(a.mode))}footerHome();
 }
 function mount(){modal=el(document.body,'section',undefined,'sd888-modal');modal.id='sd888ExamCenter';modal.hidden=true;modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-label','Příprava na výuční zkoušky');
  const shell=el(modal,'div',undefined,'sd888-shell');const head=el(shell,'header',undefined,'sd888-head');el(head,'strong','Autoelektrikář • výuční zkoušky');button(head,'Zavřít',close,'sd888-close');main=el(shell,'main',undefined,'sd888-main');

@@ -62,3 +62,11 @@ body.sd888-open{overflow:hidden}
 }
 #sd888ExamCenter .sd889-explanation strong{color:#165779}
 #sd888ExamCenter .sd889-explanation p{overflow-wrap:anywhere}
+
+/* 50.8.91 – visible states even when answer buttons are disabled. */
+#sd888ExamCenter .sd888-btn.sd888-answer.sd891-right,#sd888ExamCenter .sd891-review-choice.sd891-right{background:#d8f5df!important;color:#14532d!important;border-color:#218343!important;opacity:1!important;font-weight:750}
+#sd888ExamCenter .sd888-btn.sd888-answer.sd891-wrong,#sd888ExamCenter .sd891-review-choice.sd891-wrong{background:#ffe0e0!important;color:#881b1b!important;border-color:#c52d32!important;opacity:1!important;font-weight:750}
+#sd888ExamCenter .sd888-feedback.sd888-wrong{background:#ffe0e0!important;color:#881b1b!important}
+#sd888ExamCenter .sd888-feedback.sd888-correct{background:#d8f5df!important;color:#14532d!important}
+#sd888ExamCenter .sd891-review-choice{padding:12px;border:2px solid #a7bac7;border-radius:12px;background:#f4f8fc;color:#1c4767;overflow-wrap:anywhere}
+#sd888ExamCenter .sd888-card>.sd888-btn{margin:5px 8px 5px 0}
