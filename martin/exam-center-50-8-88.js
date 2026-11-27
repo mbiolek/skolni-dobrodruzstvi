@@ -20,6 +20,7 @@ function open(){if(!modal)mount();if(modal.hidden){modal.hidden=false;document.b
 function closeDirect(){clearTimer();activeTest=null;if(modal)modal.hidden=true;document.body.classList.remove('sd888-open')}
 function close(){if(!modal||modal.hidden)return;closeDirect();if(historyGuard){historyGuard=false;history.back()}}
 function askExit(){
+ clearTimer();
  if(!activeTest){testIndex();return}
  // Browser confirm() may be suppressed inside the isolated parent test iframe.
  // A real in-page prompt always allows the user to complete the action.
